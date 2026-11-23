@@ -19,7 +19,8 @@
     "db:push": "supabase db push",
     "test": "vitest run",
     "seed": "node --env-file-if-exists=.env.local scripts/seed.ts",
-    "ebag:bootstrap": "node --env-file-if-exists=.env.local scripts/ebag_bootstrap.ts"
+    "ebag:bootstrap": "node --env-file-if-exists=.env.local scripts/ebag_bootstrap.ts",
+    "icons": "node scripts/make_icons.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.2",

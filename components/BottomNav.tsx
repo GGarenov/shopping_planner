@@ -15,7 +15,7 @@ export function BottomNav() {
   const pathname = usePathname();
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-10 border-t border-border bg-background/95 backdrop-blur"
+      className="fixed inset-x-0 bottom-0 z-10 border-t border-border bg-white/95 backdrop-blur"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       <ul className="mx-auto flex max-w-md">
@@ -26,7 +26,7 @@ export function BottomNav() {
               <Link
                 href={it.href}
                 aria-current={active ? "page" : undefined}
-                className={`flex min-h-14 flex-col items-center justify-center gap-0.5 text-xs ${active ? "font-semibold text-accent" : "opacity-70"}`}
+                className={`flex min-h-14 flex-col items-center justify-center gap-0.5 text-xs ${active ? "font-extrabold text-accent" : "opacity-60"}`}
               >
                 <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
                   <path d={it.icon} />

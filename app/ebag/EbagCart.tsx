@@ -136,7 +136,7 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
                     {it.regularPrice != null && (
                       <>
                         {" "}
-                        <s>{eur(it.regularPrice)}</s> <span className="rounded-full bg-accent-soft px-1.5 font-semibold">Промо</span>
+                        <s>{eur(it.regularPrice)}</s> <span className="badge-promo">Промо</span>
                       </>
                     )}
                   </span>

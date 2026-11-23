@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Hero } from "@/components/Hero";
 import Link from "next/link";
 import { BottomNav } from "@/components/BottomNav";
 import { getConnectionRow } from "@/lib/ebag/oauth";
@@ -32,10 +33,9 @@ export default async function EbagPage({ searchParams }: { searchParams: Promise
   return (
     <>
       <main className="page pb-24">
-        <header className="flex flex-col gap-2">
-          <h1 className="text-2xl font-bold">eBag количка</h1>
-          <p className="opacity-80">Пращаме списъка за седмицата в твоята количка в eBag. Поръчваш и плащаш сам в eBag — ние не можем да поръчваме.</p>
-        </header>
+        <Hero title="eBag количка">
+          <p className="text-white/90">Пращаме списъка за седмицата в твоята количка в eBag. Поръчваш и плащаш сам в eBag — ние не можем да поръчваме.</p>
+        </Hero>
 
         {q.connected && <p className="rounded-xl bg-accent-soft px-4 py-3 text-sm" role="status">eBag профилът ти е свързан.</p>}
         {q.disconnected && <p className="rounded-xl border border-border px-4 py-3 text-sm" role="status">Връзката с eBag е прекъсната.</p>}

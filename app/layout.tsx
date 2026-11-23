@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from "next";
+import { Nunito } from "next/font/google";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 import "./globals.css";
+
+// Rounded, friendly face with full Cyrillic; self-hosted by Next at build time.
+const nunito = Nunito({ subsets: ["latin", "cyrillic"], weight: ["500", "600", "700", "800"], variable: "--font-nunito", display: "swap" });
 
 export const metadata: Metadata = {
   title: "Пазарен план",
@@ -21,16 +25,14 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
-  ],
+  themeColor: "#0b7d86", // status bar matches the turquoise header
+  colorScheme: "light",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="bg">
-      <body className="min-h-dvh antialiased">
+    <html lang="bg" className={nunito.variable}>
+      <body className="min-h-dvh font-sans antialiased">
         {children}
         <ServiceWorkerRegister />
       </body>

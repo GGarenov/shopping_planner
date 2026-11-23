@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Hero } from "@/components/Hero";
 import Link from "next/link";
 import { BottomNav } from "@/components/BottomNav";
 import { getConnectionRow } from "@/lib/ebag/oauth";
@@ -37,10 +38,9 @@ export default async function ProfilePage() {
   return (
     <>
       <main className="page pb-24">
-        <header className="flex flex-col gap-1">
-          <h1 className="text-2xl font-bold">Профил</h1>
-          <p className="text-sm break-all opacity-70">{user.email}</p>
-        </header>
+        <Hero title="Профил">
+          <p className="text-sm break-all text-white/85">{user.email}</p>
+        </Hero>
 
         <section className="flex flex-col gap-2">
           <Link href="/targets" className="card flex items-center justify-between gap-3">

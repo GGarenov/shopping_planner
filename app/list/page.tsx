@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Hero } from "@/components/Hero";
 import Link from "next/link";
 import { BottomNav } from "@/components/BottomNav";
 import { PricesNotice } from "@/components/PricesNotice";
@@ -25,7 +26,7 @@ export default async function ListPage({ searchParams }: { searchParams: Promise
     return (
       <>
         <main className="page pb-24">
-          <h1 className="text-2xl font-bold">Списък за пазаруване</h1>
+          <Hero title="Списък за пазаруване" />
           <p className="opacity-80">Списъкът се прави заедно с плана. Първо създай седмичен план.</p>
           <Link href="/plan" className="btn-primary">
             Към плана
@@ -47,12 +48,7 @@ export default async function ListPage({ searchParams }: { searchParams: Promise
   return (
     <>
       <main className="page pb-24">
-        <header className="flex flex-col gap-1">
-          <p className="text-sm opacity-70">
-            Седмица {shortDate(plan.week_start, 0)} – {shortDate(plan.week_start, days - 1)}
-          </p>
-          <h1 className="text-2xl font-bold">Списък за пазаруване</h1>
-        </header>
+        <Hero title="Списък за пазаруване" kicker={`${shortDate(plan.week_start, 0)} – ${shortDate(plan.week_start, days - 1)}`} />
 
         {isOld ? (
           <p className="rounded-xl border border-border px-4 py-3 text-sm" role="status">

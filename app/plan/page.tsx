@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Hero } from "@/components/Hero";
 import Link from "next/link";
 import { BottomNav } from "@/components/BottomNav";
 import { PricesNotice } from "@/components/PricesNotice";
@@ -26,13 +27,12 @@ export default async function PlanPage({ searchParams }: { searchParams: Promise
     return (
       <>
         <main className="page pb-24">
-          <header className="flex flex-col gap-2">
-            <h1 className="text-2xl font-bold">Седмичен план</h1>
-            <p className="opacity-80">
+          <Hero title="Седмичен план">
+            <p className="text-white/90">
               Още нямаш план. Ще изберем закуска, обяд, вечеря и междинно хранене за 7 дни — всеки ден в твоите калории и
               протеин, в рамките на бюджета ти.
             </p>
-          </header>
+          </Hero>
           <GeneratePlanButton />
         </main>
         <BottomNav />
@@ -46,12 +46,20 @@ export default async function PlanPage({ searchParams }: { searchParams: Promise
   return (
     <>
       <main className="page pb-24">
-        <header className="flex flex-col gap-1">
-          <p className="text-sm opacity-70">
-            Седмица {dates[0]} – {dates[dates.length - 1]}
-          </p>
-          <h1 className="text-2xl font-bold">Седмичен план</h1>
-        </header>
+        <Hero title="Седмичен план" kicker={`${dates[0]} – ${dates[dates.length - 1]}`}>
+          <section className="grid grid-cols-2 gap-2">
+            <div className="flex flex-col rounded-2xl bg-sun px-3 py-2.5 text-sun-fg">
+              <span className="text-xs font-semibold">Плащаш в eBag</span>
+              <span className="text-xl font-extrabold tabular-nums">{eur(plan.checkout_eur)}</span>
+              {budget != null && <span className="text-xs">бюджет {eur(budget)}</span>}
+            </div>
+            <div className="flex flex-col rounded-2xl bg-white/15 px-3 py-2.5">
+              <span className="text-xs font-semibold text-white/85">Изяждаш тази седмица</span>
+              <span className="text-xl font-extrabold tabular-nums">{eur(plan.eaten_eur)}</span>
+              <span className="text-xs text-white/80">остатъкът остава за после</span>
+            </div>
+          </section>
+        </Hero>
 
         {isOld ? (
           <p className="rounded-xl border border-border px-4 py-3 text-sm" role="status">
@@ -63,19 +71,6 @@ export default async function PlanPage({ searchParams }: { searchParams: Promise
         ) : (
           <PricesNotice planPricesDate={plan.solver.prices_date} latestPricesDate={sync.pricesDate} today={sofiaToday()} />
         )}
-
-        <section className="grid grid-cols-2 gap-3">
-          <div className="card flex flex-col">
-            <span className="text-sm opacity-70">Плащаш в eBag</span>
-            <span className="text-xl font-bold tabular-nums">{eur(plan.checkout_eur)}</span>
-            {budget != null && <span className="text-xs opacity-60">бюджет {eur(budget)}</span>}
-          </div>
-          <div className="card flex flex-col">
-            <span className="text-sm opacity-70">Изяждаш тази седмица</span>
-            <span className="text-xl font-bold tabular-nums">{eur(plan.eaten_eur)}</span>
-            <span className="text-xs opacity-60">остатъкът остава за после</span>
-          </div>
-        </section>
 
         <Link href={isOld ? `/list?id=${plan.id}` : "/list"} className="btn-primary">
           Списък за пазаруване

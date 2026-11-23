@@ -46,8 +46,8 @@ export function ShoppingList({
   return (
     <>
       <section className="grid grid-cols-2 gap-3">
-        <div className="card flex flex-col">
-          <span className="text-sm opacity-70">Плащаш в eBag</span>
+        <div className="flex flex-col rounded-2xl bg-sun p-4 text-sun-fg">
+          <span className="text-sm">Плащаш в eBag</span>
           <span className="text-xl font-bold tabular-nums">{eur(totals.checkout)}</span>
           <span className="text-xs opacity-60">{ids.length} продукта</span>
         </div>
@@ -108,7 +108,7 @@ export function ShoppingList({
                   </label>
                   <div className="flex shrink-0 flex-col items-end gap-1">
                     <span className="font-semibold tabular-nums">{eur(it.cost)}</span>
-                    {it.promo && <span className="rounded-full bg-accent-soft px-2 py-0.5 text-xs font-semibold">Промо</span>}
+                    {it.promo && <span className="badge-promo">Промо</span>}
                     <a
                       href={it.url}
                       target="_blank"

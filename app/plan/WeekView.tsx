@@ -40,7 +40,7 @@ export function WeekView({
             aria-label={`${d.day} ${dates[i]}`}
             onClick={() => setActive(i)}
             className={`flex min-h-14 flex-col items-center justify-center rounded-xl text-sm ${
-              i === active ? "bg-accent font-semibold text-accent-fg" : "bg-muted"
+              i === active ? "bg-accent font-extrabold text-accent-fg shadow-sm" : "border border-border bg-muted"
             }`}
           >
             <span>{DAY_SHORT[i]}</span>
@@ -64,8 +64,10 @@ export function WeekView({
           <li key={m.slot}>
             <Link href={`/plan/${planId}/${active}/${m.slot}`} className="card flex items-center gap-3 active:opacity-80">
               <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-                <span className="text-xs font-medium uppercase tracking-wide opacity-60">{SLOT_BG[m.slot]}</span>
-                <span className="font-medium leading-snug">{m.recipe}</span>
+                <span className="slot-tag" style={{ background: `var(--slot-${m.slot})`, color: `var(--slot-${m.slot}-fg)` }}>
+                  {SLOT_BG[m.slot]}
+                </span>
+                <span className="font-bold leading-snug">{m.recipe}</span>
                 <span className="text-sm opacity-70">
                   {Math.round(m.kcal)} kcal · {Math.round(m.protein_g)} г протеин
                 </span>

@@ -9,17 +9,19 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'public', 'icons');
 fs.mkdirSync(OUT, { recursive: true });
 
-// Basket with a leaf, white on green. `pad` shrinks the glyph for maskable icons (safe zone = 80 %).
+// Brand mark «Лагуна» (same drawing as components/Logo.tsx): plate + fork/knife + sunny check on turquoise.
+// `pad` shrinks the glyph for maskable icons (safe zone = 80 %).
 const svg = (pad = 0, rounded = true) => {
   const s = 1 - pad;
-  const t = (512 * pad) / 2;
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="${rounded ? 112 : 0}" fill="#15803d"/>
-  <g transform="translate(${t} ${t}) scale(${s})" fill="none" stroke="#fff" stroke-width="28" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M176 214 L226 128 M336 214 L286 128"/>
-    <path d="M96 214 H416 L384 392 Q379 416 354 416 H158 Q133 416 128 392 Z" fill="#fff" fill-opacity="0.12"/>
-    <path d="M204 274 V356 M256 274 V356 M308 274 V356"/>
-    <path d="M300 112 Q352 72 404 96 Q384 148 324 152 Q300 140 300 112 Z" fill="#bbf7d0" stroke="none"/>
+  const t = (64 * pad) / 2;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="${rounded ? 14 : 0}" fill="#0b8a91"/>
+  <g transform="translate(${t} ${t}) scale(${s})">
+    <circle cx="32" cy="34" r="17" fill="#ffffff"/>
+    <circle cx="32" cy="34" r="11" fill="none" stroke="#bfeceb" stroke-width="2"/>
+    <path d="M25 34 l5 5 l10 -11" stroke="#f0a800" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 16 v12 M9 16 v6 q0 3 3 3 q3 0 3 -3 v-6" stroke="#ffffff" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <path d="M52 16 v12 M52 16 q-4 2 -4 7 h4" stroke="#ffffff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 </svg>`;
 };

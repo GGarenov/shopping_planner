@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Hero } from "@/components/Hero";
 import Link from "next/link";
 import { computeTargets, explainTargets, resolveTargets, type BodyData } from "@/lib/planner/targets";
 import { requireCompleteProfile } from "@/lib/profile/load";
@@ -27,10 +28,7 @@ export default async function TargetsPage() {
   return (
     <>
     <main className="page pb-24">
-      <header className="flex flex-col gap-1">
-        <p className="text-sm opacity-70">Цел: {goal}</p>
-        <h1 className="text-2xl font-bold">Твоите дневни цели</h1>
-      </header>
+      <Hero title="Твоите дневни цели" kicker={`Цел: ${goal}`} />
 
       <section className="grid grid-cols-2 gap-3">
         <div className="card flex flex-col gap-1">
