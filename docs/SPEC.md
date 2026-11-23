@@ -273,8 +273,10 @@ Design: mobile-first, large touch targets, works at 360 px width, light/dark, no
 - [x] Hard wall-clock stop for every solve (40 s for the whole run), after one 190 s overrun of HiGHS's time_limit
 - Known: checkout varies ±€15 between plans — stage 1 prices per gram, packs are only priced in stage 2.
 
-### Phase 4 — Shopping list (1 day)
-- [ ] List screen grouped by aisle; promo badges; checkout vs eaten; checkboxes persisted in `shopping_checks`
+### Phase 4 — Shopping list (1 day) ✅ done
+- [x] List screen grouped by aisle; promo badges; checkout vs eaten; checkboxes persisted in `shopping_checks`
+  (/list + «Списък» tab; aisles in store-walk order with subtotals; «за рецептите: X г от Y г» per item; link to each
+  eBag product; «Махни отметките»; pantry items listed as not bought). Totals checked by test; RLS blocks other plans.
 - **Done when:** totals match the plan JSON; checks survive reload.
 
 ### Phase 5 — Daily sync in GitHub Actions (1–2 days)

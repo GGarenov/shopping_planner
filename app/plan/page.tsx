@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { BottomNav } from "@/components/BottomNav";
 import { shortDate, todayIndexInWeek } from "@/lib/planner/week";
 import { getLatestPlan } from "@/lib/plans/load";
@@ -59,6 +60,10 @@ export default async function PlanPage() {
             <span className="text-xs opacity-60">остатъкът остава за после</span>
           </div>
         </section>
+
+        <Link href="/list" className="btn-primary">
+          Списък за пазаруване
+        </Link>
 
         <WeekView
           planId={plan.id}
