@@ -1,0 +1,190 @@
+{
+  "section": "beef",
+  "recipes": [
+    {
+      "id": "teleshki_stek_kartofi_salata",
+      "name": "Телешки стек с картофи и салата",
+      "meal_types": ["lunch", "dinner"], "protein": "beef", "cuisine": "international",
+      "prep_min": 10, "cook_min": 35,
+      "ingredients": [
+        { "id": "beef_steak", "min_g": 150, "max_g": 250 },
+        { "id": "potato", "min_g": 150, "max_g": 300 },
+        { "id": "lettuce", "min_g": 50, "max_g": 100 },
+        { "id": "tomato", "min_g": 80, "max_g": 150 },
+        { "id": "cucumber", "min_g": 50, "max_g": 100 },
+        { "id": "olive_oil", "min_g": 5, "max_g": 10 },
+        { "id": "garlic", "g": 3 },
+        { "id": "lemon", "g": 10 },
+        { "id": "salt", "g": 2 },
+        { "id": "black_pepper", "g": 1 }
+      ],
+      "steps": [
+        "Загрейте фурната на 210°C. Нарежете картофите на резенки, разбъркайте ги с половината зехтин и сол и ги печете 30–35 минути.",
+        "Извадете стека от хладилника 20 минути преди печене и го подсушете с кухненска хартия.",
+        "Овкусете със сол и черен пипер и го изпечете на много силно загрят тиган по 3–4 минути от всяка страна (за средно изпечен).",
+        "Оставете месото да почине 5 минути, преди да го нарежете.",
+        "Направете салата от марулята, доматите и краставицата с останалия зехтин и лимонов сок."
+      ],
+      "tags": ["high_protein"]
+    },
+    {
+      "id": "teleshko_v_gyuvech_zelenchutsi",
+      "name": "Телешко в гювеч със зеленчуци",
+      "meal_types": ["lunch", "dinner"], "protein": "beef", "cuisine": "bulgarian",
+      "prep_min": 20, "cook_min": 120, "batch_servings": 4, "keeps_days": 3,
+      "ingredients": [
+        { "id": "beef_steak", "min_g": 120, "max_g": 220 },
+        { "id": "potato", "min_g": 100, "max_g": 250 },
+        { "id": "carrot", "min_g": 60, "max_g": 120 },
+        { "id": "pepper_sweet", "min_g": 80, "max_g": 150 },
+        { "id": "mushrooms", "min_g": 50, "max_g": 100 },
+        { "id": "onion", "g": 60 },
+        { "id": "tomatoes_canned", "min_g": 100, "max_g": 150 },
+        { "id": "sunflower_oil", "min_g": 5, "max_g": 10 },
+        { "id": "paprika", "g": 2 },
+        { "id": "black_pepper", "g": 0.5 },
+        { "id": "salt", "g": 1.5 }
+      ],
+      "steps": [
+        "Нарежете месото на кубчета и го запържете в олиото на силен огън 5–6 минути.",
+        "Добавете нарязания лук и морковите и задушете 5 минути, след това червения пипер.",
+        "Прехвърлете в гювеч, добавете картофите, чушките, гъбите, доматите, солта и черния пипер и налейте 1 чаша вода.",
+        "Покрийте и печете във фурна на 180°C около 1 час и 45 минути, докато месото омекне.",
+        "Махнете капака за последните 15 минути, за да се сгъсти сосът."
+      ],
+      "tags": ["family", "meal_prep"]
+    },
+    {
+      "id": "pasta_boloneze",
+      "name": "Паста болонезе",
+      "meal_types": ["lunch", "dinner"], "protein": "beef", "cuisine": "international",
+      "prep_min": 10, "cook_min": 35, "batch_servings": 4, "keeps_days": 3,
+      "ingredients": [
+        { "id": "pasta", "min_g": 60, "max_g": 110 },
+        { "id": "minced_beef", "min_g": 100, "max_g": 180 },
+        { "id": "tomatoes_canned", "min_g": 150, "max_g": 250 },
+        { "id": "onion", "g": 50 },
+        { "id": "carrot", "g": 40 },
+        { "id": "garlic", "g": 5 },
+        { "id": "olive_oil", "g": 5 },
+        { "id": "oregano", "g": 1 },
+        { "id": "parmesan", "min_g": 0, "max_g": 20 },
+        { "id": "salt", "g": 1.5 },
+        { "id": "black_pepper", "g": 0.5 }
+      ],
+      "steps": [
+        "Задушете ситно нарязания лук и настъргания морков в зехтина 5 минути.",
+        "Добавете каймата и я запържете, като я разбивате с лъжица, докато промени цвета си.",
+        "Добавете чесъна, доматите, ригана, солта и черния пипер и оставете соса да къкри на слаб огън 20–25 минути.",
+        "Сварете пастата в подсолена вода според указанията на опаковката.",
+        "Сервирайте пастата със соса и по желание поръсете с пармезан."
+      ],
+      "tags": ["high_protein", "family", "meal_prep"]
+    },
+    {
+      "id": "chili_kon_karne",
+      "name": "Чили кон карне",
+      "meal_types": ["lunch", "dinner"], "protein": "beef", "cuisine": "international",
+      "prep_min": 10, "cook_min": 35, "batch_servings": 4, "keeps_days": 4,
+      "ingredients": [
+        { "id": "minced_beef", "min_g": 100, "max_g": 180 },
+        { "id": "beans_canned", "min_g": 100, "max_g": 200 },
+        { "id": "tomatoes_canned", "min_g": 150, "max_g": 250 },
+        { "id": "pepper_sweet", "min_g": 60, "max_g": 120 },
+        { "id": "onion", "g": 60 },
+        { "id": "garlic", "g": 5 },
+        { "id": "corn_canned", "min_g": 0, "max_g": 60 },
+        { "id": "cumin", "g": 2 },
+        { "id": "paprika", "g": 3 },
+        { "id": "sunflower_oil", "g": 5 },
+        { "id": "salt", "g": 1.5 },
+        { "id": "rice_white", "min_g": 0, "max_g": 80, "note": "за сервиране" }
+      ],
+      "steps": [
+        "Задушете нарязания лук и чушките в олиото 5 минути.",
+        "Добавете каймата и я запържете, докато промени цвета си.",
+        "Добавете чесъна, кимиона и червения пипер и бъркайте 1 минута.",
+        "Добавете доматите, отцедения боб, царевицата и солта и гответе на слаб огън 20–25 минути.",
+        "Сервирайте самостоятелно или с ориз."
+      ],
+      "tags": ["high_protein", "meal_prep", "family"]
+    },
+    {
+      "id": "musaka",
+      "name": "Мусака",
+      "meal_types": ["lunch", "dinner"], "protein": "mixed_meat", "cuisine": "bulgarian",
+      "prep_min": 20, "cook_min": 60, "batch_servings": 6, "keeps_days": 3,
+      "ingredients": [
+        { "id": "minced_mixed", "min_g": 100, "max_g": 180 },
+        { "id": "potato", "min_g": 200, "max_g": 350 },
+        { "id": "onion", "g": 50 },
+        { "id": "tomato", "g": 80 },
+        { "id": "egg", "min_g": 30, "max_g": 60 },
+        { "id": "yogurt_whole", "min_g": 80, "max_g": 150 },
+        { "id": "sunflower_oil", "min_g": 5, "max_g": 10 },
+        { "id": "paprika", "g": 2 },
+        { "id": "black_pepper", "g": 1 },
+        { "id": "salt", "g": 2 }
+      ],
+      "steps": [
+        "Загрейте фурната на 200°C. Нарежете картофите на кубчета, а лука и доматите – ситно.",
+        "Задушете лука в олиото 4–5 минути, добавете каймата и я запържете, докато промени цвета си. Добавете доматите, червения пипер, черния пипер и солта.",
+        "Разбъркайте каймата с картофите в тава, налейте вода колкото да покрие наполовина и печете 40–45 минути.",
+        "Разбийте яйцата с киселото мляко и залейте мусаката.",
+        "Печете още 12–15 минути, докато заливката се зачерви. Оставете да почине 10 минути преди рязане."
+      ],
+      "tags": ["family", "meal_prep"]
+    },
+    {
+      "id": "kyufteta_na_furna_kartofi",
+      "name": "Кюфтета на фурна с картофи",
+      "meal_types": ["lunch", "dinner"], "protein": "mixed_meat", "cuisine": "bulgarian",
+      "prep_min": 20, "cook_min": 40, "batch_servings": 4, "keeps_days": 3,
+      "ingredients": [
+        { "id": "minced_mixed", "min_g": 120, "max_g": 200 },
+        { "id": "potato", "min_g": 150, "max_g": 300 },
+        { "id": "onion", "g": 40 },
+        { "id": "egg", "g": 15 },
+        { "id": "oats_rolled", "min_g": 10, "max_g": 20 },
+        { "id": "parsley", "g": 5 },
+        { "id": "cumin", "g": 1 },
+        { "id": "sunflower_oil", "min_g": 5, "max_g": 10 },
+        { "id": "salt", "g": 2 },
+        { "id": "black_pepper", "g": 1 }
+      ],
+      "steps": [
+        "Загрейте фурната на 200°C. Нарежете картофите на резени, разбъркайте ги с олиото и половината сол и ги наредете в тава.",
+        "Смесете каймата с настъргания лук, яйцето, овесените ядки, магданоза, кимиона, черния пипер и останалата сол. Омесете добре и оставете 10 минути.",
+        "Оформете кюфтета с мокри ръце и ги наредете върху картофите.",
+        "Печете 35–40 минути, като обърнете кюфтетата по средата."
+      ],
+      "tags": ["family", "meal_prep"]
+    },
+    {
+      "id": "palneni_chushki_kayma_oriz",
+      "name": "Пълнени чушки с кайма и ориз",
+      "meal_types": ["lunch", "dinner"], "protein": "mixed_meat", "cuisine": "bulgarian",
+      "prep_min": 25, "cook_min": 60, "batch_servings": 4, "keeps_days": 3,
+      "ingredients": [
+        { "id": "pepper_sweet", "min_g": 150, "max_g": 250 },
+        { "id": "minced_mixed", "min_g": 80, "max_g": 150 },
+        { "id": "rice_white", "min_g": 20, "max_g": 40 },
+        { "id": "onion", "g": 40 },
+        { "id": "tomato", "g": 60 },
+        { "id": "parsley", "g": 5 },
+        { "id": "paprika", "g": 2 },
+        { "id": "sunflower_oil", "g": 5 },
+        { "id": "salt", "g": 1.5 },
+        { "id": "yogurt_whole", "min_g": 50, "max_g": 100, "note": "за сервиране" }
+      ],
+      "steps": [
+        "Изрежете дръжките на чушките и почистете семките.",
+        "Задушете нарязания лук в олиото, добавете каймата и я запържете. Добавете ориза, настъргания домат, червения пипер, солта и магданоза и бъркайте 2 минути.",
+        "Напълнете чушките с плънката до около 3/4 и ги наредете изправени в тава.",
+        "Налейте гореща вода до половината на чушките, покрийте с фолио и печете на 180°C около 50 минути. Махнете фолиото за последните 10 минути.",
+        "Сервирайте с кисело мляко."
+      ],
+      "tags": ["family", "meal_prep"]
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "section": "chicken",
+  "recipes": [
+    {
+      "id": "pileshko_oriz_brokoli",
+      "name": "Пилешко филе с ориз и броколи",
+      "meal_types": ["lunch", "dinner"], "protein": "chicken", "cuisine": "fitness",
+      "prep_min": 10, "cook_min": 20, "batch_servings": 1, "keeps_days": 3,
+      "ingredients": [
+        { "id": "chicken_breast", "min_g": 120, "max_g": 250 },
+        { "id": "rice_white", "min_g": 40, "max_g": 100 },
+        { "id": "broccoli_frozen", "min_g": 100, "max_g": 250 },
+        { "id": "olive_oil", "min_g": 5, "max_g": 10 },
+        { "id": "garlic", "g": 3 },
+        { "id": "lemon", "g": 10 },
+        { "id": "paprika", "g": 1 },
+        { "id": "salt", "g": 1.5 },
+        { "id": "black_pepper", "g": 0.5 }
+      ],
+      "steps": [
+        "Сварете ориза в подсолена вода според указанията на опаковката (около 15 минути).",
+        "Нарежете пилешкото филе на хапки и го овкусете със сол, черен и червен пипер.",
+        "Запържете пилешкото в зехтина на силен огън 6–8 минути, докато се зачерви и е изпечено отвътре.",
+        "Сварете или задушете броколите на пара 5–6 минути.",
+        "Сервирайте пилешкото с ориза и броколите, полейте с лимонов сок и поръсете със ситно нарязан чесън."
+      ],
+      "tags": ["high_protein", "meal_prep"]
+    },
+    {
+      "id": "pile_s_oriz_na_furna",
+      "name": "Пиле с ориз на фурна",
+      "meal_types": ["lunch", "dinner"], "protein": "chicken", "cuisine": "bulgarian",
+      "prep_min": 15, "cook_min": 50, "batch_servings": 4, "keeps_days": 3,
+      "ingredients": [
+        { "id": "chicken_thigh", "min_g": 150, "max_g": 280, "note": "обезкостено месо" },
+        { "id": "rice_white", "min_g": 50, "max_g": 100 },
+        { "id": "onion", "g": 50 },
+        { "id": "carrot", "min_g": 50, "max_g": 100 },
+        { "id": "sunflower_oil", "min_g": 5, "max_g": 10 },
+        { "id": "paprika", "g": 2 },
+        { "id": "black_pepper", "g": 0.5 },
+        { "id": "salt", "g": 2 }
+      ],
+      "steps": [
+        "Загрейте фурната на 200°C.",
+        "Задушете нарязания лук и морковите в олиото за 5 минути, добавете ориза и червения пипер и бъркайте 1–2 минути.",
+        "Изсипете ориза в тава, залейте с гореща вода (2,5 пъти обема на ориза) и посолете.",
+        "Наредете отгоре парчетата пилешко месо, овкусени със сол и черен пипер.",
+        "Печете 45–50 минути, докато оризът поеме водата и пилето се зачерви."
+      ],
+      "tags": ["meal_prep", "family"]
+    },
+    {
+      "id": "pecheni_pileshki_butcheta_kartofi",
+      "name": "Печени пилешки бутчета с картофи",
+      "meal_types": ["lunch", "dinner"], "protein": "chicken", "cuisine": "bulgarian",
+      "prep_min": 10, "cook_min": 50, "batch_servings": 2, "keeps_days": 3,
+      "ingredients": [
+        { "id": "chicken_thigh", "min_g": 150, "max_g": 300, "note": "месо без кост" },
+        { "id": "potato", "min_g": 150, "max_g": 350 },
+        { "id": "onion", "g": 40 },
+        { "id": "garlic", "g": 5 },
+        { "id": "olive_oil", "min_g": 5, "max_g": 10 },
+        { "id": "paprika", "g": 2 },
+        { "id": "oregano", "g": 1 },
+        { "id": "black_pepper", "g": 0.5 },
+        { "id": "salt", "g": 2 }
+      ],
+      "steps": [
+        "Загрейте фурната на 200°C.",
+        "Нарежете картофите на резени или четвъртинки, а лука – на едри парчета.",
+        "Разбъркайте картофите, лука, бутчетата, зехтина, чесъна и подправките в тава.",
+        "Печете 45–50 минути, като обърнете веднъж по средата, докато бутчетата се зачервят."
+      ],
+      "tags": ["family", "one_pan"]
+    },
+    {
+      "id": "pileshko_kari_oriz",
+      "name": "Пилешко къри с ориз",
+      "meal_types": ["lunch", "dinner"], "protein": "chicken", "cuisine": "international",
+      "prep_min": 10, "cook_min": 25, "batch_servings": 2, "keeps_days": 3,
+      "ingredients": [
+        { "id": "chicken_breast", "min_g": 120, "max_g": 250 },
+        { "id": "rice_white", "min_g": 40, "max_g": 100 },
+        { "id": "onion", "g": 60 },
+        { "id": "garlic", "g": 5 },
+        { "id": "ginger", "g": 5 },
+        { "id": "tomatoes_canned", "min_g": 100, "max_g": 150 },
+        { "id": "yogurt_whole", "min_g": 50, "max_g": 100 },
+        { "id": "curry_powder", "g": 4 },
+        { "id": "sunflower_oil", "min_g": 5, "max_g": 10 },
+        { "id": "salt", "g": 1.5 }
+      ],
+      "steps": [
+        "Сварете ориза според указанията на опаковката.",
+        "Задушете ситно нарязания лук в олиото 5 минути, добавете настъргания джинджифил, чесъна и кърито и бъркайте 1 минута.",
+        "Добавете нарязаното на хапки пилешко и гответе 5 минути.",
+        "Добавете доматите и солта и оставете да къкри 10 минути.",
+        "Махнете от огъня и вмъкнете киселото мляко. Сервирайте с ориза."
+      ],
+      "tags": ["high_protein", "meal_prep"]
+    },
+    {
+      "id": "pileshki_suvlaki_dzadziki_bulgur",
+      "name": "Пилешки сувлаки с дзадзики и булгур",
+      "meal_types": ["lunch", "dinner"], "protein": "chicken", "cuisine": "international",
+      "prep_min": 20, "cook_min": 20, "keeps_days": 2,
+      "ingredients": [
+        { "id": "chicken_breast", "min_g": 120, "max_g": 250 },
+        { "id": "bulgur", "min_g": 40, "max_g": 90 },
+        { "id": "greek_yogurt", "min_g": 60, "max_g": 120 },
+        { "id": "cucumber", "min_g": 60, "max_g": 100 },
+        { "id": "tomato", "min_g": 80, "max_g": 150 },
+        { "id": "onion", "g": 20 },
+        { "id": "garlic", "g": 4 },
+        { "id": "dill", "g": 3 },
+        { "id": "lemon", "g": 10 },
+        { "id": "olive_oil", "min_g": 5, "max_g": 10 },
+        { "id": "oregano", "g": 1 },
+        { "id": "salt", "g": 1.5 }
+      ],
+      "steps": [
+        "Нарежете пилешкото на кубчета и го мариновайте поне 15 минути в половината зехтин, лимонов сок, риган, сол и половината чесън.",
+        "Залейте булгура с двойно количество вряща подсолена вода, покрийте и оставете 15 минути.",
+        "За дзадзикито настържете краставицата, изстискайте водата и я смесете с гръцкия йогурт, останалия чесън и копъра.",
+        "Нанижете месото на шишчета (или го пържете направо) и печете на грил тиган 8–10 минути, като въртите.",
+        "Сервирайте с булгура, дзадзикито и нарязан домат и лук."
+      ],
+      "tags": ["high_protein"]
+    },
+    {
+      "id": "pasta_pileshko_spanak",
+      "name": "Паста с пилешко и спанак",
+      "meal_types": ["lunch", "dinner"], "protein": "chicken", "cuisine": "international",
+      "prep_min": 10, "cook_min": 20, "keeps_days": 2,
+      "ingredients": [
+        { "id": "pasta", "min_g": 60, "max_g": 110 },
+        { "id": "chicken_breast", "min_g": 100, "max_g": 200 },
+        { "id": "spinach_fresh", "min_g": 60, "max_g": 120 },
+        { "id": "milk_low_fat", "min_g": 60, "max_g": 120 },
+        { "id": "parmesan", "min_g": 10, "max_g": 20 },
+        { "id": "garlic", "g": 5 },
+        { "id": "olive_oil", "min_g": 5, "max_g": 10 },
+        { "id": "salt", "g": 1 },
+        { "id": "black_pepper", "g": 0.5 }
+      ],
+      "steps": [
+        "Сварете пастата в подсолена вода според указанията на опаковката.",
+        "Запържете нарязаното на хапки пилешко в зехтина 6–7 минути.",
+        "Добавете чесъна и спанака и бъркайте, докато спанакът омекне.",
+        "Налейте млякото, добавете настъргания пармезан и черния пипер и оставете соса да се сгъсти 2–3 минути.",
+        "Разбъркайте с отцедената паста и сервирайте."
+      ],
+      "tags": ["high_protein"]
+    },
+    {
+      "id": "tortila_pile_zelenchutsi",
+      "name": "Тортила с пиле и зеленчуци",
+      "meal_types": ["lunch", "dinner"], "protein": "chicken", "cuisine": "international",
+      "prep_min": 10, "cook_min": 12,
+      "ingredients": [
+        { "id": "tortilla", "min_g": 60, "max_g": 120, "step_g": 60 },
+        { "id": "chicken_breast", "min_g": 100, "max_g": 200 },
+        { "id": "pepper_sweet", "min_g": 60, "max_g": 120 },
+        { "id": "onion", "g": 30 },
+        { "id": "lettuce", "min_g": 30, "max_g": 60 },
+        { "id": "tomato", "min_g": 50, "max_g": 100 },
+        { "id": "greek_yogurt", "min_g": 30, "max_g": 60 },
+        { "id": "paprika", "g": 1 },
+        { "id": "cumin", "g": 1 },
+        { "id": "olive_oil", "g": 5 },
+        { "id": "salt", "g": 1 }
+      ],
+      "steps": [
+        "Нарежете пилешкото, чушките и лука на тънки ивици.",
+        "Запържете ги в зехтина на силен огън 7–8 минути с червения пипер, кимиона и солта.",
+        "Затоплете тортилите на сух тиган по 20 секунди от всяка страна.",
+        "Намажете тортилите с гръцки йогурт, добавете марулята, доматите и пилешкото и ги завийте."
+      ],
+      "tags": ["high_protein", "quick"]
+    },
+    {
+      "id": "pueshko_bulgur_pecheni_zelenchutsi",
+      "name": "Пуешко филе с булгур и печени зеленчуци",
+      "meal_types": ["lunch", "dinner"], "protein": "turkey", "cuisine": "fitness",
+      "prep_min": 15, "cook_min": 30, "keeps_days": 3,
+      "ingredients": [
+        { "id": "turkey_breast", "min_g": 120, "max_g": 250 },
+        { "id": "bulgur", "min_g": 40, "max_g": 90 },
+        { "id": "zucchini", "min_g": 100, "max_g": 200 },
+        { "id": "pepper_sweet", "min_g": 80, "max_g": 150 },
+        { "id": "onion", "g": 40 },
+        { "id": "garlic", "g": 3 },
+        { "id": "olive_oil", "min_g": 5, "max_g": 10 },
+        { "id": "oregano", "g": 1 },
+        { "id": "salt", "g": 1.5 },
+        { "id": "black_pepper", "g": 0.5 }
+      ],
+      "steps": [
+        "Загрейте фурната на 210°C. Нарежете тиквичките, чушките и лука на едри парчета, разбъркайте ги с половината зехтин, риган и сол и ги печете 25 минути.",
+        "Залейте булгура с двойно количество вряща подсолена вода, покрийте и оставете 15 минути.",
+        "Овкусете пуешкото филе със сол, черен пипер и чесън и го изпечете на тиган с останалия зехтин по 4–5 минути от всяка страна.",
+        "Оставете месото да почине 3 минути, нарежете го и сервирайте с булгура и зеленчуците."
+      ],
+      "tags": ["high_protein", "meal_prep"]
+    }
+  ]
+}

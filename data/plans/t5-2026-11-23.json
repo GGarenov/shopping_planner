@@ -1,0 +1,2625 @@
+{
+  "created": "2026-11-23T09:50:42.065Z",
+  "profile": "t5",
+  "targets": {
+    "bmr": 1895,
+    "tdee": 2606,
+    "kcal": 2085,
+    "kcal_min": 1985,
+    "kcal_max": 2185,
+    "protein_min": 155,
+    "ref_weight": 77.4,
+    "formula": "Mifflin-St Jeor BMR x 1.375 (light) - 20% (max 750); protein 2 g x 77 kg (weight at BMI 25 or less)"
+  },
+  "budget_eur": 100,
+  "checkout_eur": 83.21,
+  "eaten_eur": 51.52,
+  "solver": {
+    "stage1": {
+      "status": "Time limit reached",
+      "seconds": 10.078
+    },
+    "stage2": {
+      "status": "Optimal",
+      "seconds": 2.022,
+      "kcal_window_widened_by": 0
+    },
+    "total_seconds": 12.184
+  },
+  "pantry": [
+    "salt",
+    "black_pepper",
+    "paprika",
+    "sunflower_oil",
+    "vinegar",
+    "sugar"
+  ],
+  "plan": [
+    {
+      "day": "Понеделник",
+      "meals": [
+        {
+          "slot": "breakfast",
+          "recipe_id": "ovesena_kasha_banan",
+          "recipe": "Овесена каша с банан и кисело мляко",
+          "items": [
+            {
+              "id": "oats_rolled",
+              "name": "Овесени ядки",
+              "grams": 90
+            },
+            {
+              "id": "yogurt_whole",
+              "name": "Кисело мляко 3-4,5%",
+              "grams": 100
+            },
+            {
+              "id": "banana",
+              "name": "Банани",
+              "grams": 120
+            },
+            {
+              "id": "cinnamon",
+              "name": "Канела",
+              "grams": 1
+            }
+          ],
+          "kcal": 520.4,
+          "protein_g": 19.7,
+          "fat_g": 10.2,
+          "carbs_g": 91.8
+        },
+        {
+          "slot": "lunch",
+          "recipe_id": "krem_supa_chervena_leshta",
+          "recipe": "Крем супа от червена леща",
+          "items": [
+            {
+              "id": "lentils_red",
+              "name": "Червена леща",
+              "grams": 90
+            },
+            {
+              "id": "carrot",
+              "name": "Моркови",
+              "grams": 100
+            },
+            {
+              "id": "onion",
+              "name": "Лук",
+              "grams": 50
+            },
+            {
+              "id": "garlic",
+              "name": "Чесън",
+              "grams": 3
+            },
+            {
+              "id": "olive_oil",
+              "name": "Зехтин",
+              "grams": 5
+            },
+            {
+              "id": "cumin",
+              "name": "Кимион",
+              "grams": 1
+            },
+            {
+              "id": "paprika",
+              "name": "Червен пипер",
+              "grams": 1
+            },
+            {
+              "id": "lemon",
+              "name": "Лимони",
+              "grams": 10
+            },
+            {
+              "id": "salt",
+              "name": "Сол",
+              "grams": 2
+            },
+            {
+              "id": "bread_wholewheat",
+              "name": "Пълнозърнест хляб",
+              "grams": 35
+            }
+          ],
+          "kcal": 563.7,
+          "protein_g": 27,
+          "fat_g": 6.9,
+          "carbs_g": 93.8
+        },
+        {
+          "slot": "dinner",
+          "recipe_id": "svinsko_gabi_oriz",
+          "recipe": "Свинско с гъби и ориз",
+          "items": [
+            {
+              "id": "pork_tenderloin",
+              "name": "Свинско филе / бонфиле",
+              "grams": 202
+            },
+            {
+              "id": "mushrooms",
+              "name": "Печурки / гъби",
+              "grams": 200
+            },
+            {
+              "id": "onion",
+              "name": "Лук",
+              "grams": 50
+            },
+            {
+              "id": "rice_white",
+              "name": "Ориз бял",
+              "grams": 90
+            },
+            {
+              "id": "milk_low_fat",
+              "name": "Прясно мляко 0,1-2%",
+              "grams": 100
+            },
+            {
+              "id": "garlic",
+              "name": "Чесън",
+              "grams": 3
+            },
+            {
+              "id": "sunflower_oil",
+              "name": "Слънчогледово олио",
+              "grams": 5
+            },
+            {
+              "id": "parsley",
+              "name": "Магданоз",
+              "grams": 5
+            },
+            {
+              "id": "salt",
+              "name": "Сол",
+              "grams": 2
+            },
+            {
+              "id": "black_pepper",
+              "name": "Черен пипер",
+              "grams": 1
+            }
+          ],
+          "kcal": 709.7,
+          "protein_g": 58.9,
+          "fat_g": 12.3,
+          "carbs_g": 89.8
+        },
+        {
+          "slot": "snack",
+          "recipe_id": "izvara_med_gorski_plodove",
+          "recipe": "Извара с мед и горски плодове",
+          "items": [
+            {
+              "id": "cottage_cheese_lowfat",
+              "name": "Извара",
+              "grams": 300
+            },
+            {
+              "id": "berries_frozen",
+              "name": "Горски плодове / боровинки / малини",
+              "grams": 150
+            },
+            {
+              "id": "honey",
+              "name": "Пчелен мед",
+              "grams": 15
+            }
+          ],
+          "kcal": 349.5,
+          "protein_g": 49.4,
+          "fat_g": 3.7,
+          "carbs_g": 37.4
+        }
+      ],
+      "kcal": 2143,
+      "protein_g": 155,
+      "fat_g": 33,
+      "carbs_g": 313
+    },
+    {
+      "day": "Вторник",
+      "meals": [
+        {
+          "slot": "breakfast",
+          "recipe_id": "yaitsa_po_panagyurski",
+          "recipe": "Яйца по панагюрски (лека версия)",
+          "items": [
+            {
+              "id": "egg",
+              "name": "Яйца",
+              "grams": 180
+            },
+            {
+              "id": "yogurt_whole",
+              "name": "Кисело мляко 3-4,5%",
+              "grams": 100
+            },
+            {
+              "id": "garlic",
+              "name": "Чесън",
+              "grams": 3
+            },
+            {
+              "id": "butter",
+              "name": "Краве масло",
+              "grams": 5
+            },
+            {
+              "id": "paprika",
+              "name": "Червен пипер",
+              "grams": 1
+            },
+            {
+              "id": "vinegar",
+              "name": "Оцет",
+              "grams": 5
+            },
+            {
+              "id": "salt",
+              "name": "Сол",
+              "grams": 1
+            },
+            {
+              "id": "bread_wholewheat",
+              "name": "Пълнозърнест хляб",
+              "grams": 70
+            }
+          ],
+          "kcal": 539,
+          "protein_g": 34.9,
+          "fat_g": 27.4,
+          "carbs_g": 36.7
+        },
+        {
+          "slot": "lunch",
+          "recipe_id": "kyufteta_na_furna_kartofi",
+          "recipe": "Кюфтета на фурна с картофи",
+          "items": [
+            {
+              "id": "minced_mixed",
+              "name": "Кайма смес (свинско и телешко)",
+              "grams": 200
+            },
+            {
+              "id": "potato",
+              "name": "Картофи",
+              "grams": 150
+            },
+            {
+              "id": "onion",
+              "name": "Лук",
+              "grams": 40
+            },
+            {
+              "id": "egg",
+              "name": "Яйца",
+              "grams": 15
+            },
+            {
+              "id": "oats_rolled",
+              "name": "Овесени ядки",
+              "grams": 20
+            },
+            {
+              "id": "parsley",
+              "name": "Магданоз",
+              "grams": 5
+            },
+            {
+              "id": "cumin",
+              "name": "Кимион",
+              "grams": 1
+            },
+            {
+              "id": "sunflower_oil",
+              "name": "Слънчогледово олио",
+              "grams": 5
+            },
+            {
+              "id": "salt",
+              "name": "Сол",
+              "grams": 2
+            },
+            {
+              "id": "black_pepper",
+              "name": "Черен пипер",
+              "grams": 1
+            }
+          ],
+          "kcal": 809,
+          "protein_g": 43,
+          "fat_g": 50.7,
+          "carbs_g": 44.7
+        },
+        {
+          "slot": "dinner",
+          "recipe_id": "svinsko_file_sladki_kartofi",
+          "recipe": "Свинско филе със сладки картофи",
+          "items": [
+            {
+              "id": "pork_tenderloin",
+              "name": "Свинско филе / бонфиле",
+              "grams": 145
+            },
+            {
+              "id": "sweet_potato",
+              "name": "Сладки картофи",
+              "grams": 172
+            },
+            {
+              "id": "green_beans_frozen",
+              "name": "Зелен боб замразен",
+              "grams": 150
+            },
+            {
+              "id": "olive_oil",
+              "name": "Зехтин",
+              "grams": 5
+            },
+            {
+              "id": "mustard",
+              "name": "Горчица",
+              "grams": 5
+            },
+            {
+              "id": "garlic",
+              "name": "Чесън",
+              "grams": 3
+            },
+            {
+              "id": "paprika",
+              "name": "Червен пипер",
+              "grams": 1
+            },
+            {
+              "id": "salt",
+              "name": "Сол",
+              "grams": 2
+            },
+            {
+              "id": "black_pepper",
+              "name": "Черен пипер",
+              "grams": 1
+            }
+          ],
+          "kcal": 412.5,
+          "protein_g": 36.4,
+          "fat_g": 8.9,
+          "carbs_g": 48.4
+        },
+        {
+          "slot": "snack",
+          "recipe_id": "filiya_izvara_domat",
+          "recipe": "Филия с извара, домат и краставица",
+          "items": [
+            {
+              "id": "bread_wholewheat",
+              "name": "Пълнозърнест хляб",
+              "grams": 105
+            },
+            {
+              "id": "cottage_cheese_lowfat",
+              "name": "Извара",
+              "grams": 153
+            },
+            {
+              "id": "tomato",
+              "name": "Домати",
+              "grams": 150
+            },
+            {
+              "id": "cucumber",
+              "name": "Краставици",
+              "grams": 130
+            },
+            {
+              "id": "dill",
+              "name": "Копър",
+              "grams": 3
+            },
+            {
+              "id": "salt",
+              "name": "Сол",
+              "grams": 1
+            }
+          ],
+          "kcal": 426.2,
+          "protein_g": 40.9,
+          "fat_g": 5.5,
+          "carbs_g": 58.5
+        }
+      ],
+      "kcal": 2187,
+      "protein_g": 155,
+      "fat_g": 93,
+      "carbs_g": 188
+    },
+    {
+      "day": "Сряда",
+      "meals": [
+        {
+          "slot": "breakfast",
+          "recipe_id": "overnight_oats_grucki_yogurt",
+          "recipe": "Овесена каша за през нощта с гръцки йогурт и мед",
+          "items": [
+            {
+              "id": "oats_rolled",
+              "name": "Овесени ядки",
+              "grams": 80
+            },
+            {
+              "id": "greek_yogurt",
+              "name": "Гръцки йогурт",
+              "grams": 200
+            },
+            {
+              "id": "milk_low_fat",
+              "name": "Прясно мляко 0,1-2%",
+              "grams": 150
+            },
+            {
+              "id": "honey",
+              "name": "Пчелен мед",
+              "grams": 5
+            }
+          ],
+          "kcal": 540.4,
+          "protein_g": 28.1,
+          "fat_g": 16.8,
+          "carbs_g": 70.3
+        },
+        {
+          "slot": "lunch",
+          "recipe_id": "pasta_skaridi_chesan",
+          "recipe": "Паста със скариди и чесън",
+          "items": [
+            {
+              "id": "pasta",
+              "name": "Паста / спагети / макарони",
+              "grams": 110
+            },
+            {
+              "id": "shrimp",
+              "name": "Скариди",
+              "grams": 200
+            },
+            {
+              "id": "garlic",
+              "name": "Чесън",
+              "grams": 8
+            },
+            {
+              "id": "olive_oil",
+              "name": "Зехтин",
+              "grams": 8
+            },
+            {
+              "id": "tomato",
+              "name": "Домати",
+              "grams": 100
+            },
+            {
+              "id": "lemon",
+              "name": "Лимони",
+              "grams": 10
+            },
+            {
+              "id": "parsley",
+              "name": "Магданоз",
+              "grams": 5
+            },
+            {
+              "id": "salt",
+              "name": "Сол",
+              "grams": 1
+            }
+          ],
+          "kcal": 683.4,
+          "protein_g": 56.2,
+          "fat_g": 11,
+          "carbs_g": 89.9
+        },
+        {
+          "slot": "dinner",
+          "recipe_id": "pecheni_pileshki_butcheta_kartofi",
+          "recipe": "Печени пилешки бутчета с картофи",
+          "items": [
+            {
+              "id": "chicken_thigh",
+              "name": "Пилешки бут",
+              "grams": 294
+            },
+            {
+              "id": "potato",
+              "name": "Картофи",
+              "grams": 287
+            },
+            {
+              "id": "onion",
+              "name": "Лук",
+              "grams": 40
+            },
+            {
+              "id": "garlic",
+              "name": "Чесън",
+              "grams": 5
+            },
+            {
+              "id": "olive_oil",
+              "name": "Зехтин",
+              "grams": 5
+            },
+            {
+              "id": "paprika",
+              "name": "Червен пипер",
+              "grams": 2
+            },
+            {
+              "id": "oregano",
+              "name": "Риган",
+              "grams": 1
+            },
+            {
+              "id": "black_pepper",
+              "name": "Черен пипер",
+              "grams": 1
+            },
+            {
+              "id": "salt",
+              "name": "Сол",
+              "grams": 2
+            }
+          ],
+          "kcal": 722.8,
+          "protein_g": 61.8,
+          "fat_g": 28.9,
+          "carbs_g": 58
+        },
+        {
+          "slot": "snack",
+          "recipe_id": "bananovi_biskvitki_ovesni",
+          "recipe": "Бананови бисквитки с овесени ядки",
+          "items": [
+            {
+              "id": "banana",
+              "name": "Банани",
+              "grams": 50
+            },
+            {
+              "id": "oats_rolled",
+              "name": "Овесени ядки",
+              "grams": 50
+            },
+            {
+              "id": "cinnamon",
+              "name": "Канела",
+              "grams": 1
+            }
+          ],
+          "kcal": 241.5,
+          "protein_g": 9,
+          "fat_g": 3.6,
+          "carbs_g": 45.4
+        }
+      ],
+      "kcal": 2188,
+      "protein_g": 155,
+      "fat_g": 60,
+      "carbs_g": 264
+    },
+    {
+      "day": "Четвъртък",
+      "meals": [
+        {
+          "slot": "breakfast",
+          "recipe_id": "filiya_izvara_domat",
+          "recipe": "Филия с извара, домат и краставица",
+          "items": [
+            {
+              "id": "bread_wholewheat",
+              "name": "Пълнозърнест хляб",
+              "grams": 105
+            },
+            {
+              "id": "cottage_cheese_lowfat",
+              "name": "Извара",
+              "grams": 152
+            },
+            {
+              "id": "tomato",
+              "name": "Домати",
+              "grams": 150
+            },
+            {
+              "id": "cucumber",
+              "name": "Краставици",
+              "grams": 150
+            },
+            {
+              "id": "dill",
+              "name": "Копър",
+              "grams": 3
+            },
+            {
+              "id": "salt",
+              "name": "Сол",
+              "grams": 1
+            }
+          ],
+          "kcal": 441.8,
+          "protein_g": 38,
+          "fat_g": 6.2,
+          "carbs_g": 61.5
+        },
+        {
+          "slot": "lunch",
+          "recipe_id": "kyufteta_na_furna_kartofi",
+          "recipe": "Кюфтета на фурна с картофи",
+          "items": [
+            {
+              "id": "minced_mixed",
+              "name": "Кайма смес (свинско и телешко)",
+              "grams": 200
+            },
+            {
+              "id": "potato",
+              "name": "Картофи",
+              "grams": 213
+            },
+            {
+              "id": "onion",
+              "name": "Лук",
+              "grams": 40
+            },
+            {
+              "id": "egg",
+              "name": "Яйца",
+              "grams": 15
+            },
+            {
+              "id": "oats_rolled",
+              "name": "Овесени ядки",
+              "grams": 20
+            },
+            {
+              "id": "parsley",
+              "name": "Магданоз",
+              "grams": 5
+            },
+            {
+              "id": "cumin",
+              "name": "Кимион",
+              "grams": 1
+            },
+            {
+              "id": "sunflower_oil",
+              "name": "Слънчогледово олио",
+              "grams": 5
+            },
+            {
+              "id": "salt",
+              "name": "Сол",
+              "grams": 2
+            },
+            {
+              "id": "black_pepper",
+              "name": "Черен пипер",
+              "grams": 1
+            }
+          ],
+          "kcal": 857.5,
+          "protein_g": 44.3,
+          "fat_g": 50.7,
+          "carbs_g": 55.8
+        },
+        {
+          "slot": "dinner",
+          "recipe_id": "pile_s_oriz_na_furna",
+          "recipe": "Пиле с ориз на фурна",
+          "items": [
+            {
+              "id": "chicken_thigh",
+              "name": "Пилешки бут",
+              "grams": 150
+            },
+            {
+              "id": "rice_white",
+              "name": "Ориз бял",
+              "grams": 86
+            },
+            {
+              "id": "onion",
+              "name": "Лук",
+              "grams": 50
+            },
+            {
+              "id": "carrot",
+              "name": "Моркови",
+              "grams": 50
+            },
+            {
+              "id": "sunflower_oil",
+              "name": "Слънчогледово олио",
+              "grams": 5
+            },
+            {
+              "id": "paprika",
+              "name": "Червен пипер",
+              "grams": 2
+            },
+            {
+              "id": "black_pepper",
+              "name": "Черен пипер",
+              "grams": 1
+            },
+            {
+              "id": "salt",
+              "name": "Сол",
+              "grams": 2
+            }
+          ],
+          "kcal": 622.8,
+          "protein_g": 35.4,
+          "fat_g": 17.9,
+          "carbs_g": 79.9
+        },
+        {
+          "slot": "snack",
+          "recipe_id": "izvara_yabalka_kanela",
+          "recipe": "Извара с ябълка и канела",
+          "items": [
+            {
+              "id": "cottage_cheese_lowfat",
+              "name": "Извара",
+              "grams": 250
+            },
+            {
+              "id": "apple",
+              "name": "Ябълки",
+              "grams": 100
+            },
+            {
+              "id": "cinnamon",
+              "name": "Канела",
+              "grams": 1
+            }
+          ],
+          "kcal": 262.3,
+          "protein_g": 37.3,
+          "fat_g": 3.6,
+          "carbs_g": 23.1
+        }
+      ],
+      "kcal": 2184,
+      "protein_g": 155,
+      "fat_g": 78,
+      "carbs_g": 220
+    },
+    {
+      "day": "Петък",
+      "meals": [
+        {
+          "slot": "breakfast",
+          "recipe_id": "yaitsa_po_panagyurski",
+          "recipe": "Яйца по панагюрски (лека версия)",
+          "items": [
+            {
+              "id": "egg",
+              "name": "Яйца",
+              "grams": 180
+            },
+            {
+              "id": "yogurt_whole",
+              "name": "Кисело мляко 3-4,5%",
+              "grams": 100
+            },
+            {
+              "id": "garlic",
+              "name": "Чесън",
+              "grams": 3
+            },
+            {
+              "id": "butter",
+              "name": "Краве масло",
+              "grams": 8
+            },
+            {
+              "id": "paprika",
+              "name": "Червен пипер",
+              "grams": 1
+            },
+            {
+              "id": "vinegar",
+              "name": "Оцет",
+              "grams": 5
+            },
+            {
+              "id": "salt",
+              "name": "Сол",
+              "grams": 1
+            },
+            {
+              "id": "bread_wholewheat",
+              "name": "Пълнозърнест хляб",
+              "grams": 70
+            }
+          ],
+          "kcal": 560.5,
+          "protein_g": 34.9,
+          "fat_g": 29.8,
+          "carbs_g": 36.7
+        },
+        {
+          "slot": "lunch",
+          "recipe_id": "svinsko_gabi_oriz",
+          "recipe": "Свинско с гъби и ориз",
+          "items": [
+            {
+              "id": "pork_tenderloin",
+              "name": "Свинско филе / бонфиле",
+              "grams": 137
+            },
+            {
+              "id": "mushrooms",
+              "name": "Печурки / гъби",
+              "grams": 200
+            },
+            {
+              "id": "onion",
+              "name": "Лук",
+              "grams": 50
+            },
+            {
+              "id": "rice_white",
+              "name": "Ориз бял",
+              "grams": 90
+            },
+            {
+              "id": "milk_low_fat",
+              "name": "Прясно мляко 0,1-2%",
+              "grams": 100
+            },
+            {
+              "id": "garlic",
+              "name": "Чесън",
+              "grams": 3
+            },
+            {
+              "id": "sunflower_oil",
+              "name": "Слънчогледово олио",
+              "grams": 5
+            },
+            {
+              "id": "parsley",
+              "name": "Магданоз",
+              "grams": 5
+            },
+            {
+              "id": "salt",
+              "name": "Сол",
+              "grams": 2
+            },
+            {
+              "id": "black_pepper",
+              "name": "Черен пипер",
+              "grams": 1
+            }
+          ],
+          "kcal": 638.8,
+          "protein_g": 45.3,
+          "fat_g": 10.9,
+          "carbs_g": 89.8
+        },
+        {
+          "slot": "dinner",
+          "recipe_id": "krem_supa_chervena_leshta",
+          "recipe": "Крем супа от червена леща",
+          "items": [
+            {
+              "id": "lentils_red",
+              "name": "Червена леща",
+              "grams": 90
+            },
+            {
+              "id": "carrot",
+              "name": "Моркови",
+              "grams": 100
+            },
+            {
+              "id": "onion",
+              "name": "Лук",
+              "grams": 50
+            },
+            {
+              "id": "garlic",
+              "name": "Чесън",
+              "grams": 3
+            },
+            {
+              "id": "olive_oil",
+              "name": "Зехтин",
+              "grams": 5
+            },
+            {
+              "id": "cumin",
+              "name": "Кимион",
+              "grams": 1
+            },
+            {
+              "id": "paprika",
+              "name": "Червен пипер",
+              "grams": 1
+            },
+            {
+              "id": "lemon",
+              "name": "Лимони",
+              "grams": 10
+            },
+            {
+              "id": "salt",
+              "name": "Сол",
+              "grams": 2
+            },
+            {
+              "id": "bread_wholewheat",
+              "name": "Пълнозърнест хляб",
+              "grams": 70
+            }
+          ],
+          "kcal": 651.9,
+          "protein_g": 31.3,
+          "fat_g": 8.1,
+          "carbs_g": 108.8
+        },
+        {
+          "slot": "snack",
+          "recipe_id": "izvara_med_gorski_plodove",
+          "recipe": "Извара с мед и горски плодове",
+          "items": [
+            {
+              "id": "cottage_cheese_lowfat",
+              "name": "Извара",
+              "grams": 300
+            },
+            {
+              "id": "berries_frozen",
+              "name": "Горски плодове / боровинки / малини",
+              "grams": 150
+            },
+            {
+              "id": "honey",
+              "name": "Пчелен мед",
+              "grams": 5
+            }
+          ],
+          "kcal": 337.7,
+          "protein_g": 43.6,
+          "fat_g": 4,
+          "carbs_g": 33.8
+        }
+      ],
+      "kcal": 2189,
+      "protein_g": 155,
+      "fat_g": 53,
+      "carbs_g": 269
+    },
+    {
+      "day": "Събота",
+      "meals": [
+        {
+          "slot": "breakfast",
+          "recipe_id": "overnight_oats_grucki_yogurt",
+          "recipe": "Овесена каша за през нощта с гръцки йогурт и мед",
+          "items": [
+            {
+              "id": "oats_rolled",
+              "name": "Овесени ядки",
+              "grams": 80
+            },
+            {
+              "id": "greek_yogurt",
+              "name": "Гръцки йогурт",
+              "grams": 200
+            },
+            {
+              "id": "milk_low_fat",
+              "name": "Прясно мляко 0,1-2%",
+              "grams": 150
+            },
+            {
+              "id": "honey",
+              "name": "Пчелен мед",
+              "grams": 5
+            }
+          ],
+          "kcal": 540.4,
+          "protein_g": 28.1,
+          "fat_g": 16.8,
+          "carbs_g": 70.3
+        },
+        {
+          "slot": "lunch",
+          "recipe_id": "pecheni_pileshki_butcheta_kartofi",
+          "recipe": "Печени пилешки бутчета с картофи",
+          "items": [
+            {
+              "id": "chicken_thigh",
+              "name": "Пилешки бут",
+              "grams": 300
+            },
+            {
+              "id": "potato",
+              "name": "Картофи",
+              "grams": 350
+            },
+            {
+              "id": "onion",
+              "name": "Лук",
+              "grams": 40
+            },
+            {
+              "id": "garlic",
+              "name": "Чесън",
+              "grams": 5
+            },
+            {
+              "id": "olive_oil",
+              "name": "Зехтин",
+              "grams": 5
+            },
+            {
+              "id": "paprika",
+              "name": "Червен пипер",
+              "grams": 2
+            },
+            {
+              "id": "oregano",
+              "name": "Риган",
+              "grams": 1
+            },
+            {
+              "id": "black_pepper",
+              "name": "Черен пипер",
+              "grams": 1
+            },
+            {
+              "id": "salt",
+              "name": "Сол",
+              "grams": 2
+            }
+          ],
+          "kcal": 780,
+          "protein_g": 64.2,
+          "fat_g": 29.5,
+          "carbs_g": 69
+        },
+        {
+          "slot": "dinner",
+          "recipe_id": "svinsko_file_sladki_kartofi",
+          "recipe": "Свинско филе със сладки картофи",
+          "items": [
+            {
+              "id": "pork_tenderloin",
+              "name": "Свинско филе / бонфиле",
+              "grams": 217
+            },
+            {
+              "id": "sweet_potato",
+              "name": "Сладки картофи",
+              "grams": 300
+            },
+            {
+              "id": "green_beans_frozen",
+              "name": "Зелен боб замразен",
+              "grams": 150
+            },
+            {
+              "id": "olive_oil",
+              "name": "Зехтин",
+              "grams": 5
+            },
+            {
+              "id": "mustard",
+              "name": "Горчица",
+              "grams": 5
+            },
+            {
+              "id": "garlic",
+              "name": "Чесън",
+              "grams": 3
+            },
+            {
+              "id": "paprika",
+              "name": "Червен пипер",
+              "grams": 1
+            },
+            {
+              "id": "salt",
+              "name": "Сол",
+              "grams": 2
+            },
+            {
+              "id": "black_pepper",
+              "name": "Черен пипер",
+              "grams": 1
+            }
+          ],
+          "kcal": 601,
+          "protein_g": 53.5,
+          "fat_g": 10.5,
+          "carbs_g": 74.1
+        },
+        {
+          "slot": "snack",
+          "recipe_id": "bananovi_biskvitki_ovesni",
+          "recipe": "Бананови бисквитки с овесени ядки",
+          "items": [
+            {
+              "id": "banana",
+              "name": "Банани",
+              "grams": 79
+            },
+            {
+              "id": "oats_rolled",
+              "name": "Овесени ядки",
+              "grams": 50
+            },
+            {
+              "id": "cinnamon",
+              "name": "Канела",
+              "grams": 1
+            }
+          ],
+          "kcal": 267.3,
+          "protein_g": 9.3,
+          "fat_g": 3.7,
+          "carbs_g": 52
+        }
+      ],
+      "kcal": 2189,
+      "protein_g": 155,
+      "fat_g": 61,
+      "carbs_g": 265
+    },
+    {
+      "day": "Неделя",
+      "meals": [
+        {
+          "slot": "breakfast",
+          "recipe_id": "ovesena_kasha_banan",
+          "recipe": "Овесена каша с банан и кисело мляко",
+          "items": [
+            {
+              "id": "oats_rolled",
+              "name": "Овесени ядки",
+              "grams": 90
+            },
+            {
+              "id": "yogurt_whole",
+              "name": "Кисело мляко 3-4,5%",
+              "grams": 100
+            },
+            {
+              "id": "banana",
+              "name": "Банани",
+              "grams": 63
+            },
+            {
+              "id": "cinnamon",
+              "name": "Канела",
+              "grams": 1
+            }
+          ],
+          "kcal": 469.6,
+          "protein_g": 19.1,
+          "fat_g": 10,
+          "carbs_g": 78.7
+        },
+        {
+          "slot": "lunch",
+          "recipe_id": "pile_s_oriz_na_furna",
+          "recipe": "Пиле с ориз на фурна",
+          "items": [
+            {
+              "id": "chicken_thigh",
+              "name": "Пилешки бут",
+              "grams": 194
+            },
+            {
+              "id": "rice_white",
+              "name": "Ориз бял",
+              "grams": 100
+            },
+            {
+              "id": "onion",
+              "name": "Лук",
+              "grams": 50
+            },
+            {
+              "id": "carrot",
+              "name": "Моркови",
+              "grams": 100
+            },
+            {
+              "id": "sunflower_oil",
+              "name": "Слънчогледово олио",
+              "grams": 5
+            },
+            {
+              "id": "paprika",
+              "name": "Червен пипер",
+              "grams": 2
+            },
+            {
+              "id": "black_pepper",
+              "name": "Черен пипер",
+              "grams": 1
+            },
+            {
+              "id": "salt",
+              "name": "Сол",
+              "grams": 2
+            }
+          ],
+          "kcal": 757.7,
+          "protein_g": 45.1,
+          "fat_g": 21.6,
+          "carbs_g": 95.9
+        },
+        {
+          "slot": "dinner",
+          "recipe_id": "pasta_skaridi_chesan",
+          "recipe": "Паста със скариди и чесън",
+          "items": [
+            {
+              "id": "pasta",
+              "name": "Паста / спагети / макарони",
+              "grams": 110
+            },
+            {
+              "id": "shrimp",
+              "name": "Скариди",
+              "grams": 200
+            },
+            {
+              "id": "garlic",
+              "name": "Чесън",
+              "grams": 8
+            },
+            {
+              "id": "olive_oil",
+              "name": "Зехтин",
+              "grams": 8
+            },
+            {
+              "id": "tomato",
+              "name": "Домати",
+              "grams": 100
+            },
+            {
+              "id": "lemon",
+              "name": "Лимони",
+              "grams": 10
+            },
+            {
+              "id": "parsley",
+              "name": "Магданоз",
+              "grams": 5
+            },
+            {
+              "id": "salt",
+              "name": "Сол",
+              "grams": 1
+            }
+          ],
+          "kcal": 683.4,
+          "protein_g": 56.2,
+          "fat_g": 11,
+          "carbs_g": 89.9
+        },
+        {
+          "slot": "snack",
+          "recipe_id": "izvara_yabalka_kanela",
+          "recipe": "Извара с ябълка и канела",
+          "items": [
+            {
+              "id": "cottage_cheese_lowfat",
+              "name": "Извара",
+              "grams": 245
+            },
+            {
+              "id": "apple",
+              "name": "Ябълки",
+              "grams": 100
+            },
+            {
+              "id": "cinnamon",
+              "name": "Канела",
+              "grams": 1
+            }
+          ],
+          "kcal": 275,
+          "protein_g": 34.6,
+          "fat_g": 5.1,
+          "carbs_g": 24.4
+        }
+      ],
+      "kcal": 2186,
+      "protein_g": 155,
+      "fat_g": 48,
+      "carbs_g": 289
+    }
+  ],
+  "shopping": [
+    {
+      "aisle": "bakery",
+      "ingredient_id": "bread_wholewheat",
+      "ingredient": "Пълнозърнест хляб",
+      "product": "Хляб Добруджански Пълнозърнест Трапезен с 5 Брашна Нарязан",
+      "ebag_id": 11938,
+      "url": "https://ebag.bg/khliab-dobrudzhanski-plnozrnest-trapezen-s-5-brashna-nariazan/11938",
+      "unit": "pcs",
+      "pack": "500 г",
+      "packs": 1,
+      "price_each": 1.16,
+      "promo": false,
+      "cost": 1.16,
+      "used_edible_g": 455,
+      "usable_g": 500,
+      "eaten_cost": 1.06,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 11952,
+          "name": "Хляб Симид Пълнозърнест Нарязан",
+          "price": 1.32,
+          "usable_g": 700,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 11953,
+          "name": "Хляб Симид Пълнозърнест Тост Нарязан",
+          "price": 1.32,
+          "usable_g": 550,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "dairy",
+      "ingredient_id": "greek_yogurt",
+      "ingredient": "Гръцки йогурт",
+      "product": "Йогурт Гръцки Стил Meggle 4,5%",
+      "ebag_id": 644564,
+      "url": "https://ebag.bg/iogurt-grtski-stil-meggle-45/644564",
+      "unit": "pcs",
+      "pack": "400 г",
+      "packs": 1,
+      "price_each": 1.78,
+      "promo": false,
+      "cost": 1.78,
+      "used_edible_g": 400,
+      "usable_g": 400,
+      "eaten_cost": 1.78,
+      "macros_source": "label",
+      "alternatives": [
+        {
+          "ebag_id": 634563,
+          "name": "Цедено Кисело Мляко Саяна 10%",
+          "price": 4.59,
+          "usable_g": 1500,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 643815,
+          "name": "Цеден Гръцки Йогурт Kri Kri 10%",
+          "price": 7.14,
+          "usable_g": 2000,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "dairy",
+      "ingredient_id": "cottage_cheese_lowfat",
+      "ingredient": "Извара",
+      "product": "Извара от Ферма Бредас Нискомаслена",
+      "ebag_id": 609066,
+      "url": "https://ebag.bg/izvara-ot-ferma-bredas-niskomaslena/609066",
+      "unit": "pcs",
+      "pack": "500 г",
+      "packs": 1,
+      "price_each": 2.19,
+      "promo": false,
+      "cost": 2.19,
+      "used_edible_g": 500,
+      "usable_g": 500,
+      "eaten_cost": 2.19,
+      "macros_source": "label",
+      "alternatives": [
+        {
+          "ebag_id": 14505,
+          "name": "Извара Olympus Нискомаслена",
+          "price": 1.79,
+          "usable_g": 400,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 587366,
+          "name": "Извара от Фермата на Добрев Нискомаслена, Високопротеинова",
+          "price": 2.35,
+          "usable_g": 500,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "dairy",
+      "ingredient_id": "cottage_cheese_lowfat",
+      "ingredient": "Извара",
+      "product": "Извара Olympus Нискомаслена",
+      "ebag_id": 14505,
+      "url": "https://ebag.bg/izvara-olympus-niskomaslena/14505",
+      "unit": "pcs",
+      "pack": "400 г",
+      "packs": 1,
+      "price_each": 1.79,
+      "promo": true,
+      "cost": 1.79,
+      "used_edible_g": 400,
+      "usable_g": 400,
+      "eaten_cost": 1.79,
+      "macros_source": "label",
+      "alternatives": [
+        {
+          "ebag_id": 609066,
+          "name": "Извара от Ферма Бредас Нискомаслена",
+          "price": 2.19,
+          "usable_g": 500,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 587366,
+          "name": "Извара от Фермата на Добрев Нискомаслена, Високопротеинова",
+          "price": 2.35,
+          "usable_g": 500,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "dairy",
+      "ingredient_id": "cottage_cheese_lowfat",
+      "ingredient": "Извара",
+      "product": "Извара от Фермата на Добрев Нискомаслена, Високопротеинова",
+      "ebag_id": 587366,
+      "url": "https://ebag.bg/izvara-ot-fermata-na-dobrev-niskomaslena-visokoproteinova/587366",
+      "unit": "pcs",
+      "pack": "~ 500 г / бр",
+      "packs": 1,
+      "price_each": 2.35,
+      "promo": false,
+      "cost": 2.35,
+      "used_edible_g": 500,
+      "usable_g": 500,
+      "eaten_cost": 2.35,
+      "macros_source": "label",
+      "alternatives": [
+        {
+          "ebag_id": 609066,
+          "name": "Извара от Ферма Бредас Нискомаслена",
+          "price": 2.19,
+          "usable_g": 500,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 14505,
+          "name": "Извара Olympus Нискомаслена",
+          "price": 1.79,
+          "usable_g": 400,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "dairy",
+      "ingredient_id": "yogurt_whole",
+      "ingredient": "Кисело мляко 3-4,5%",
+      "product": "Краве Кисело Мляко Olympus 3,6%",
+      "ebag_id": 9193,
+      "url": "https://ebag.bg/krave-kiselo-mliako-olympus-36/9193",
+      "unit": "pcs",
+      "pack": "400 г",
+      "packs": 1,
+      "price_each": 0.7,
+      "promo": true,
+      "cost": 0.7,
+      "used_edible_g": 400,
+      "usable_g": 400,
+      "eaten_cost": 0.7,
+      "macros_source": "label",
+      "alternatives": [
+        {
+          "ebag_id": 633754,
+          "name": "Краве Кисело Мляко Мургаш ЗНП 3,6%",
+          "price": 4.56,
+          "usable_g": 2400,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 9175,
+          "name": "Краве Кисело Мляко Домлян 3,6%",
+          "price": 0.97,
+          "usable_g": 500,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "dairy",
+      "ingredient_id": "butter",
+      "ingredient": "Краве масло",
+      "product": "Краве Масло Deutsche Markenbutter Немско 82%",
+      "ebag_id": 616256,
+      "url": "https://ebag.bg/krave-maslo-deutsche-markenbutter-nemsko-82/616256",
+      "unit": "pcs",
+      "pack": "2 x 250 г",
+      "packs": 1,
+      "price_each": 3.78,
+      "promo": false,
+      "cost": 3.78,
+      "used_edible_g": 13,
+      "usable_g": 500,
+      "eaten_cost": 0.1,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 634111,
+          "name": "Краве Масло Deutsche Markenbutter Краварката Немско 82%",
+          "price": 4.9,
+          "usable_g": 500,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 616171,
+          "name": "Краве Масло Безсолно Monarch Френско 82%",
+          "price": 5.4,
+          "usable_g": 500,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "dairy",
+      "ingredient_id": "milk_low_fat",
+      "ingredient": "Прясно мляко 0,1-2%",
+      "product": "Краве Мляко Mizo 1,5% UHT",
+      "ebag_id": 644920,
+      "url": "https://ebag.bg/krave-mliako-mizo-15-uht/644920",
+      "unit": "pcs",
+      "pack": "1 л",
+      "packs": 1,
+      "price_each": 1.35,
+      "promo": false,
+      "cost": 1.35,
+      "used_edible_g": 500,
+      "usable_g": 1000,
+      "eaten_cost": 0.68,
+      "macros_source": "label",
+      "alternatives": [
+        {
+          "ebag_id": 644930,
+          "name": "Краве Мляко Mizo 1,5% UHT",
+          "price": 2.24,
+          "usable_g": 2000,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 644932,
+          "name": "Прясно Мляко Mizo 1,5%",
+          "price": 2.58,
+          "usable_g": 2000,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "dairy",
+      "ingredient_id": "egg",
+      "ingredient": "Яйца",
+      "product": "Яйца Happy Eggs от Клетъчно Отглеждани Кокошки Размер M Кафяви",
+      "ebag_id": 608768,
+      "url": "https://ebag.bg/iaitsa-happy-eggs-ot-kletchno-otglezhdani-kokoshki-razmer-m-kafiavi/608768",
+      "unit": "pcs",
+      "pack": "10 бр.",
+      "packs": 1,
+      "price_each": 3.47,
+      "promo": false,
+      "cost": 3.47,
+      "used_edible_g": 390,
+      "usable_g": 528,
+      "eaten_cost": 2.56,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 610417,
+          "name": "Яйца Happy Eggs от Клетъчно Отглеждани Кокошки Кора Размер М Кафяви",
+          "price": 9.05,
+          "usable_g": 1584,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 610418,
+          "name": "Яйца Happy Eggs от Клетъчно Отглеждани Кокошки Кора Размер L Кафяви",
+          "price": 9.87,
+          "usable_g": 1584,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "fish",
+      "ingredient_id": "shrimp",
+      "ingredient": "Скариди",
+      "product": "Скариди Бланширани 60/80",
+      "ebag_id": 535624,
+      "url": "https://ebag.bg/skaridi-blanshirani-6080/535624",
+      "unit": "pcs",
+      "pack": "~ 420 г / бр",
+      "packs": 1,
+      "price_each": 5.8,
+      "promo": false,
+      "cost": 5.8,
+      "used_edible_g": 400,
+      "usable_g": 420,
+      "eaten_cost": 5.52,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 577231,
+          "name": "Коктейлни Скариди Белени Замразени 60/80",
+          "price": 6.39,
+          "usable_g": 500,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 595474,
+          "name": "Скариди Ванамей 40/60 Охладени",
+          "price": 6.9,
+          "usable_g": 450,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "frozen",
+      "ingredient_id": "green_beans_frozen",
+      "ingredient": "Зелен боб замразен",
+      "product": "Фасул Ardo Зелен",
+      "ebag_id": 607595,
+      "url": "https://ebag.bg/fasul-ardo-zelen/607595",
+      "unit": "pcs",
+      "pack": "400 г",
+      "packs": 1,
+      "price_each": 1.38,
+      "promo": false,
+      "cost": 1.38,
+      "used_edible_g": 300,
+      "usable_g": 400,
+      "eaten_cost": 1.03,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 583232,
+          "name": "Зелен Фасул Магре Объл Цял Замразен",
+          "price": 1.89,
+          "usable_g": 450,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 352823,
+          "name": "Зелен Фасул Bonduelle Нарязан Замразен",
+          "price": 2.25,
+          "usable_g": 400,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "fruit",
+      "ingredient_id": "banana",
+      "ingredient": "Банани",
+      "product": "Банани",
+      "ebag_id": 531871,
+      "url": "https://ebag.bg/banani/531871",
+      "unit": "kg",
+      "pack": "1 кг",
+      "packs": 1,
+      "price_each": 1.86,
+      "promo": false,
+      "cost": 1.86,
+      "used_edible_g": 312,
+      "usable_g": 640,
+      "eaten_cost": 0.91,
+      "macros_source": "usda",
+      "alternatives": []
+    },
+    {
+      "aisle": "fruit",
+      "ingredient_id": "berries_frozen",
+      "ingredient": "Горски плодове / боровинки / малини",
+      "product": "Червени Боровинки Магре",
+      "ebag_id": 612158,
+      "url": "https://ebag.bg/cherveni-borovinki-magre/612158",
+      "unit": "pcs",
+      "pack": "400 г",
+      "packs": 1,
+      "price_each": 3.73,
+      "promo": false,
+      "cost": 3.73,
+      "used_edible_g": 300,
+      "usable_g": 400,
+      "eaten_cost": 2.8,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 595762,
+          "name": "Микс Pinguin Горски Плодове",
+          "price": 7.65,
+          "usable_g": 1000,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 612160,
+          "name": "Къпини Магре",
+          "price": 3.79,
+          "usable_g": 400,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "fruit",
+      "ingredient_id": "lemon",
+      "ingredient": "Лимони",
+      "product": "Лимони в мрежа",
+      "ebag_id": 583034,
+      "url": "https://ebag.bg/limoni-v-mrezha/583034",
+      "unit": "pcs",
+      "pack": "500 г",
+      "packs": 1,
+      "price_each": 0.85,
+      "promo": true,
+      "cost": 0.85,
+      "used_edible_g": 40,
+      "usable_g": 350,
+      "eaten_cost": 0.1,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 642442,
+          "name": "Лимони",
+          "price": 1.55,
+          "usable_g": 700,
+          "unit": "kg"
+        },
+        {
+          "ebag_id": 587973,
+          "name": "Лимони Нетретирани в мрежа",
+          "price": 2.49,
+          "usable_g": 350,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "fruit",
+      "ingredient_id": "apple",
+      "ingredient": "Ябълки",
+      "product": "Ябълки Джеромин от Ферма Мак Фреш Фрутс",
+      "ebag_id": 644201,
+      "url": "https://ebag.bg/iablki-dzheromin-ot-ferma-mak-fresh-fruts/644201",
+      "unit": "kg",
+      "pack": "1 кг",
+      "packs": 1,
+      "price_each": 1.59,
+      "promo": true,
+      "cost": 1.59,
+      "used_edible_g": 200,
+      "usable_g": 900,
+      "eaten_cost": 0.35,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 648718,
+          "name": "Ябълки Златна Превъзходна от Бул Ейпъл",
+          "price": 1.69,
+          "usable_g": 900,
+          "unit": "kg"
+        },
+        {
+          "ebag_id": 617260,
+          "name": "Ябълка Едри Грени Смит от Фрукталина",
+          "price": 1.79,
+          "usable_g": 900,
+          "unit": "kg"
+        }
+      ]
+    },
+    {
+      "aisle": "grains_legumes",
+      "ingredient_id": "oats_rolled",
+      "ingredient": "Овесени ядки",
+      "product": "Фини Овесени Ядки Dr. Keskin без Глутен",
+      "ebag_id": 643859,
+      "url": "https://ebag.bg/fini-oveseni-iadki-dr-keskin-bez-gluten/643859",
+      "unit": "pcs",
+      "pack": "500 г",
+      "packs": 1,
+      "price_each": 1.89,
+      "promo": false,
+      "cost": 1.89,
+      "used_edible_g": 480,
+      "usable_g": 500,
+      "eaten_cost": 1.81,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 643972,
+          "name": "Овесени Ядки Dr. Keskin Фини",
+          "price": 1.98,
+          "usable_g": 1000,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 643973,
+          "name": "Овесени Ядки Dr. Keskin Едри",
+          "price": 1.98,
+          "usable_g": 1000,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "grains_legumes",
+      "ingredient_id": "rice_white",
+      "ingredient": "Ориз бял",
+      "product": "Ориз Panino Екстра",
+      "ebag_id": 646809,
+      "url": "https://ebag.bg/oriz-panino-ekstra/646809",
+      "unit": "pcs",
+      "pack": "2 x 1 кг",
+      "packs": 1,
+      "price_each": 3.6,
+      "promo": false,
+      "cost": 3.6,
+      "used_edible_g": 366,
+      "usable_g": 2000,
+      "eaten_cost": 0.66,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 646179,
+          "name": "Ориз Krina Бял",
+          "price": 3.7,
+          "usable_g": 2000,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 648253,
+          "name": "Ориз Krina Перлен",
+          "price": 3.76,
+          "usable_g": 2000,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "grains_legumes",
+      "ingredient_id": "pasta",
+      "ingredient": "Паста / спагети / макарони",
+      "product": "Спагети Stella №10",
+      "ebag_id": 613293,
+      "url": "https://ebag.bg/spageti-stella-no-10/613293",
+      "unit": "pcs",
+      "pack": "1 кг",
+      "packs": 1,
+      "price_each": 1.68,
+      "promo": false,
+      "cost": 1.68,
+      "used_edible_g": 220,
+      "usable_g": 1000,
+      "eaten_cost": 0.37,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 641307,
+          "name": "Спагети Barilla №5",
+          "price": 2.29,
+          "usable_g": 1000,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 641308,
+          "name": "Пене Ригате Barilla №73",
+          "price": 2.29,
+          "usable_g": 1000,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "grains_legumes",
+      "ingredient_id": "lentils_red",
+      "ingredient": "Червена леща",
+      "product": "Био Леща Био Класа Червена",
+      "ebag_id": 12395,
+      "url": "https://ebag.bg/bio-leshcha-bio-klasa-chervena/12395",
+      "unit": "pcs",
+      "pack": "500 г",
+      "packs": 1,
+      "price_each": 2.86,
+      "promo": false,
+      "cost": 2.86,
+      "used_edible_g": 180,
+      "usable_g": 500,
+      "eaten_cost": 1.03,
+      "macros_source": "label",
+      "alternatives": [
+        {
+          "ebag_id": 638195,
+          "name": "Леща Червена Krina Фина",
+          "price": 3.26,
+          "usable_g": 1000,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "meat",
+      "ingredient_id": "minced_mixed",
+      "ingredient": "Кайма смес (свинско и телешко)",
+      "product": "Свинска Кайма от Месарница Партньори 1997 Без Консерванти",
+      "ebag_id": 597892,
+      "url": "https://ebag.bg/svinska-kaima-ot-mesarnitsa-partnori-1997-bez-konservanti/597892",
+      "unit": "pcs",
+      "pack": "~ 520 г / бр",
+      "packs": 1,
+      "price_each": 4.18,
+      "promo": false,
+      "cost": 4.18,
+      "used_edible_g": 400,
+      "usable_g": 520,
+      "eaten_cost": 3.22,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 597893,
+          "name": "Кайма Смес 60/40 от Месарница Партньори 1997 Без Консерванти",
+          "price": 4.27,
+          "usable_g": 480,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 583821,
+          "name": "Свинска Кайма от Ферма Бредас Без Консерванти",
+          "price": 5.62,
+          "usable_g": 500,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "meat",
+      "ingredient_id": "chicken_thigh",
+      "ingredient": "Пилешки бут",
+      "product": "Пилешко Бутче Градус с Част от Гърба",
+      "ebag_id": 573109,
+      "url": "https://ebag.bg/pileshko-butche-gradus-s-chast-ot-grba/573109",
+      "unit": "pcs",
+      "pack": "~ 670 г / бр",
+      "packs": 2,
+      "price_each": 2.84,
+      "promo": false,
+      "cost": 5.68,
+      "used_edible_g": 938,
+      "usable_g": 938,
+      "eaten_cost": 5.68,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 538435,
+          "name": "Пилешко Бутче Roso Охладено",
+          "price": 4.77,
+          "usable_g": 644,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 579057,
+          "name": "Пилешки Бут Sunny Farm от Пасищно Пиле",
+          "price": 20.81,
+          "usable_g": 763,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "meat",
+      "ingredient_id": "pork_tenderloin",
+      "ingredient": "Свинско филе / бонфиле",
+      "product": "Свинско Контрафиле Нарязано от Месокомбинат Добруджа",
+      "ebag_id": 648184,
+      "url": "https://ebag.bg/svinsko-kontrafile-nariazano-ot-mesokombinat-dobrudzha/648184",
+      "unit": "pcs",
+      "pack": "~ 700 г / бр",
+      "packs": 1,
+      "price_each": 4.68,
+      "promo": false,
+      "cost": 4.68,
+      "used_edible_g": 700,
+      "usable_g": 700,
+      "eaten_cost": 4.68,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 597700,
+          "name": "Свинско Контрафиле от Месарница Майстори Месари",
+          "price": 4.61,
+          "usable_g": 580,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 648185,
+          "name": "Свинско Бонфиле от Месокомбинат Добруджа",
+          "price": 5.11,
+          "usable_g": 550,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "oils_condiments",
+      "ingredient_id": "mustard",
+      "ingredient": "Горчица",
+      "product": "Горчица Олинеза Деликатесна",
+      "ebag_id": 617958,
+      "url": "https://ebag.bg/gorchitsa-olineza-delikatesna/617958",
+      "unit": "pcs",
+      "pack": "160 г",
+      "packs": 1,
+      "price_each": 1.17,
+      "promo": false,
+      "cost": 1.17,
+      "used_edible_g": 10,
+      "usable_g": 160,
+      "eaten_cost": 0.07,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 641174,
+          "name": "Горчица Chef is Дижонска без Добавена Захар",
+          "price": 3.56,
+          "usable_g": 740,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 641679,
+          "name": "Горчица Thomy",
+          "price": 1.59,
+          "usable_g": 200,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "oils_condiments",
+      "ingredient_id": "olive_oil",
+      "ingredient": "Зехтин",
+      "product": "Маслиново Масло Costa d'Oro Помас",
+      "ebag_id": 613967,
+      "url": "https://ebag.bg/maslinovo-maslo-costa-doro-pomas/613967",
+      "unit": "pcs",
+      "pack": "1 л",
+      "packs": 1,
+      "price_each": 5.59,
+      "promo": false,
+      "cost": 5.59,
+      "used_edible_g": 46,
+      "usable_g": 915,
+      "eaten_cost": 0.28,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 617412,
+          "name": "Маслиново Масло Basso Помас",
+          "price": 6.22,
+          "usable_g": 915,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 10043,
+          "name": "Маслиново Масло Costa d'Oro Екстра Върджин",
+          "price": 8.39,
+          "usable_g": 915,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "oils_condiments",
+      "ingredient_id": "honey",
+      "ingredient": "Пчелен мед",
+      "product": "Пчелен Мед Пчелинъ Натурален",
+      "ebag_id": 580645,
+      "url": "https://ebag.bg/pchelen-med-pchelin-naturalen/580645",
+      "unit": "pcs",
+      "pack": "450 г",
+      "packs": 1,
+      "price_each": 3.93,
+      "promo": false,
+      "cost": 3.93,
+      "used_edible_g": 30,
+      "usable_g": 450,
+      "eaten_cost": 0.26,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 640136,
+          "name": "Пчелен Мед Пчелинъ Натурален 2+1",
+          "price": 14.31,
+          "usable_g": 2700,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 580646,
+          "name": "Пчелен Мед Пчелинъ Натурален",
+          "price": 7.15,
+          "usable_g": 900,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "spices",
+      "ingredient_id": "cinnamon",
+      "ingredient": "Канела",
+      "product": "Канела Dolce Maestro Смляна",
+      "ebag_id": 616529,
+      "url": "https://ebag.bg/kanela-dolce-maestro-smliana/616529",
+      "unit": "pcs",
+      "pack": "10 г",
+      "packs": 1,
+      "price_each": 0.35,
+      "promo": false,
+      "cost": 0.35,
+      "used_edible_g": 5,
+      "usable_g": 10,
+      "eaten_cost": 0.18,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 580435,
+          "name": "Канела Nothing More Цейлонска на Прах Био",
+          "price": 1.53,
+          "usable_g": 40,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 9638,
+          "name": "Канела Kotanyi на Пръчици",
+          "price": 1.02,
+          "usable_g": 17,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "spices",
+      "ingredient_id": "cumin",
+      "ingredient": "Кимион",
+      "product": "Кимион Harmony Foods Смлян",
+      "ebag_id": 616533,
+      "url": "https://ebag.bg/kimion-harmony-foods-smlian/616533",
+      "unit": "pcs",
+      "pack": "13 г",
+      "packs": 1,
+      "price_each": 0.69,
+      "promo": false,
+      "cost": 0.69,
+      "used_edible_g": 4,
+      "usable_g": 13,
+      "eaten_cost": 0.21,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 9635,
+          "name": "Кимион Kotanyi Млян",
+          "price": 1.02,
+          "usable_g": 20,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "spices",
+      "ingredient_id": "oregano",
+      "ingredient": "Риган",
+      "product": "Риган Harmony Foods",
+      "ebag_id": 616537,
+      "url": "https://ebag.bg/rigan-harmony-foods/616537",
+      "unit": "pcs",
+      "pack": "10 г",
+      "packs": 1,
+      "price_each": 0.51,
+      "promo": false,
+      "cost": 0.51,
+      "used_edible_g": 2,
+      "usable_g": 10,
+      "eaten_cost": 0.1,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 575758,
+          "name": "Риган",
+          "price": 1.49,
+          "usable_g": 20,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 16947,
+          "name": "Риган Kotanyi Ронен",
+          "price": 0.92,
+          "usable_g": 8,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "vegetables",
+      "ingredient_id": "tomato",
+      "ingredient": "Домати",
+      "product": "Домати Чери Коктейлни",
+      "ebag_id": 590383,
+      "url": "https://ebag.bg/domati-cheri-kokteilni/590383",
+      "unit": "pcs",
+      "pack": "500 г",
+      "packs": 1,
+      "price_each": 2.29,
+      "promo": true,
+      "cost": 2.29,
+      "used_edible_g": 500,
+      "usable_g": 500,
+      "eaten_cost": 2.29,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 641713,
+          "name": "Домати Розови в тарелка",
+          "price": 4.49,
+          "usable_g": 1000,
+          "unit": "kg"
+        },
+        {
+          "ebag_id": 648912,
+          "name": "Домати Рома",
+          "price": 2.49,
+          "usable_g": 500,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "vegetables",
+      "ingredient_id": "potato",
+      "ingredient": "Картофи",
+      "product": "Картофи Четкани",
+      "ebag_id": 642323,
+      "url": "https://ebag.bg/kartofi-chetkani/642323",
+      "unit": "kg",
+      "pack": "1 кг",
+      "packs": 1,
+      "price_each": 0.79,
+      "promo": false,
+      "cost": 0.79,
+      "used_edible_g": 1000,
+      "usable_g": 1000,
+      "eaten_cost": 0.79,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 595214,
+          "name": "Картофи Френски Мити",
+          "price": 1.19,
+          "usable_g": 1000,
+          "unit": "kg"
+        },
+        {
+          "ebag_id": 577494,
+          "name": "Био Картофи от Ферма Моравско Село",
+          "price": 2.35,
+          "usable_g": 1000,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "vegetables",
+      "ingredient_id": "dill",
+      "ingredient": "Копър",
+      "product": "Копър връзка",
+      "ebag_id": 641958,
+      "url": "https://ebag.bg/kopr-vrzka/641958",
+      "unit": "pcs",
+      "pack": "1 бр.",
+      "packs": 1,
+      "price_each": 0.69,
+      "promo": false,
+      "cost": 0.69,
+      "used_edible_g": 6,
+      "usable_g": 45,
+      "eaten_cost": 0.09,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 585176,
+          "name": "Копър Магре Връхчета Нарязан",
+          "price": 1.32,
+          "usable_g": 135,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 646967,
+          "name": "Копър от Зелена Градина",
+          "price": 0.99,
+          "usable_g": 72,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "vegetables",
+      "ingredient_id": "cucumber",
+      "ingredient": "Краставици",
+      "product": "Краставица фолирана",
+      "ebag_id": 648917,
+      "url": "https://ebag.bg/krastavitsa-folirana/648917",
+      "unit": "pcs",
+      "pack": "1 бр.",
+      "packs": 1,
+      "price_each": 0.99,
+      "promo": false,
+      "cost": 0.99,
+      "used_edible_g": 280,
+      "usable_g": 280,
+      "eaten_cost": 0.99,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 638886,
+          "name": "Краставици от ЗП Андон Станков",
+          "price": 3.49,
+          "usable_g": 1000,
+          "unit": "kg"
+        },
+        {
+          "ebag_id": 591376,
+          "name": "Био Краставица от Bio Greeny 200-250 г",
+          "price": 1.65,
+          "usable_g": 225,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "vegetables",
+      "ingredient_id": "onion",
+      "ingredient": "Лук",
+      "product": "Лук Кромид",
+      "ebag_id": 642322,
+      "url": "https://ebag.bg/luk-kromid/642322",
+      "unit": "kg",
+      "pack": "1 кг",
+      "packs": 1,
+      "price_each": 0.79,
+      "promo": false,
+      "cost": 0.79,
+      "used_edible_g": 460,
+      "usable_g": 900,
+      "eaten_cost": 0.4,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 638726,
+          "name": "Лук Червен",
+          "price": 1.19,
+          "usable_g": 900,
+          "unit": "kg"
+        },
+        {
+          "ebag_id": 580812,
+          "name": "Лук Бял",
+          "price": 1.79,
+          "usable_g": 900,
+          "unit": "kg"
+        }
+      ]
+    },
+    {
+      "aisle": "vegetables",
+      "ingredient_id": "parsley",
+      "ingredient": "Магданоз",
+      "product": "Магданоз връзка",
+      "ebag_id": 641959,
+      "url": "https://ebag.bg/magdanoz-vrzka/641959",
+      "unit": "pcs",
+      "pack": "1 бр.",
+      "packs": 1,
+      "price_each": 0.69,
+      "promo": false,
+      "cost": 0.69,
+      "used_edible_g": 30,
+      "usable_g": 45,
+      "eaten_cost": 0.46,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 585175,
+          "name": "Магданоз Листа Нарязан",
+          "price": 1.22,
+          "usable_g": 135,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 646968,
+          "name": "Магданоз от Зелена Градина",
+          "price": 0.99,
+          "usable_g": 72,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "vegetables",
+      "ingredient_id": "carrot",
+      "ingredient": "Моркови",
+      "product": "Моркови от Даринка Агро",
+      "ebag_id": 585403,
+      "url": "https://ebag.bg/morkovi-ot-darinka-agro/585403",
+      "unit": "kg",
+      "pack": "1 кг",
+      "packs": 1,
+      "price_each": 0.99,
+      "promo": false,
+      "cost": 0.99,
+      "used_edible_g": 350,
+      "usable_g": 900,
+      "eaten_cost": 0.39,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 648932,
+          "name": "Моркови",
+          "price": 1.19,
+          "usable_g": 900,
+          "unit": "kg"
+        },
+        {
+          "ebag_id": 582597,
+          "name": "Моркови от Зелена Градина пакетирани",
+          "price": 1.49,
+          "usable_g": 540,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "vegetables",
+      "ingredient_id": "mushrooms",
+      "ingredient": "Печурки / гъби",
+      "product": "Гъби Печурки Бели в тарелка",
+      "ebag_id": 575652,
+      "url": "https://ebag.bg/gbi-pechurki-beli-v-tarelka/575652",
+      "unit": "pcs",
+      "pack": "500 г",
+      "packs": 1,
+      "price_each": 2.55,
+      "promo": false,
+      "cost": 2.55,
+      "used_edible_g": 400,
+      "usable_g": 485,
+      "eaten_cost": 2.1,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 606353,
+          "name": "Микс Pinguin Горски Гъби Манатарки, Кладница Шийтаке",
+          "price": 4.99,
+          "usable_g": 970,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 597429,
+          "name": "Гъби Печурки Кафяви в тарелка",
+          "price": 2.78,
+          "usable_g": 485,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "aisle": "vegetables",
+      "ingredient_id": "sweet_potato",
+      "ingredient": "Сладки картофи",
+      "product": "Картофи Сладки",
+      "ebag_id": 532296,
+      "url": "https://ebag.bg/kartofi-sladki/532296",
+      "unit": "kg",
+      "pack": "1 кг",
+      "packs": 1,
+      "price_each": 1.85,
+      "promo": false,
+      "cost": 1.85,
+      "used_edible_g": 472,
+      "usable_g": 900,
+      "eaten_cost": 0.97,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 586592,
+          "name": "Картофи Сладки Едри",
+          "price": 2.29,
+          "usable_g": 900,
+          "unit": "kg"
+        },
+        {
+          "ebag_id": 582668,
+          "name": "Картофи Сладки Червени",
+          "price": 4.98,
+          "usable_g": 900,
+          "unit": "kg"
+        }
+      ]
+    },
+    {
+      "aisle": "vegetables",
+      "ingredient_id": "garlic",
+      "ingredient": "Чесън",
+      "product": "Чесън",
+      "ebag_id": 536845,
+      "url": "https://ebag.bg/chesn/536845",
+      "unit": "pcs",
+      "pack": "100 г",
+      "packs": 1,
+      "price_each": 0.99,
+      "promo": false,
+      "cost": 0.99,
+      "used_edible_g": 50,
+      "usable_g": 87,
+      "eaten_cost": 0.57,
+      "macros_source": "usda",
+      "alternatives": [
+        {
+          "ebag_id": 644966,
+          "name": "Чесън от Зелена Градина",
+          "price": 1.99,
+          "usable_g": 218,
+          "unit": "pcs"
+        },
+        {
+          "ebag_id": 585177,
+          "name": "Чесън на Кубчета 4х4 мм",
+          "price": 1.53,
+          "usable_g": 131,
+          "unit": "pcs"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "_about": "Manual fixes for the eBag sync. exclude: product ids never linked. link: { \"<ebag_id>\": \"<ingredient_id>\" } forces a link.",
+  "exclude": [
+    386456,
+    11590,
+    620673
+  ],
+  "link": {},
+  "notes": {
+    "11590": "Подсладител Суитли Стевия: no pack weight available, excluded.",
+    "386456": "Stevia tablets (200 pcs): cannot be converted to grams of sweetener.",
+    "620673": "Haya Labs 100% Pure All Natural Whey Protein/stevia: no pack weight available, excluded."
+  }
+}

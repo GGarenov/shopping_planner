@@ -1,0 +1,261 @@
+{
+  "section": "breakfast",
+  "recipes": [
+    {
+      "id": "ovesena_kasha_banan",
+      "name": "Овесена каша с банан и кисело мляко",
+      "meal_types": ["breakfast"], "protein": "dairy", "cuisine": "fitness",
+      "prep_min": 3, "cook_min": 5,
+      "ingredients": [
+        { "id": "oats_rolled", "min_g": 40, "max_g": 90 },
+        { "id": "yogurt_whole", "min_g": 100, "max_g": 250 },
+        { "id": "banana", "min_g": 60, "max_g": 120 },
+        { "id": "cinnamon", "g": 1 }
+      ],
+      "steps": [
+        "Сварете овесените ядки в двойно количество вода за 3–5 минути, като разбърквате.",
+        "Оставете кашата да поизстине 2–3 минути.",
+        "Добавете киселото мляко и нарязания на кръгчета банан.",
+        "Поръсете с канела и сервирайте."
+      ],
+      "tags": ["quick", "sweet"]
+    },
+    {
+      "id": "ovesena_kasha_yabalka_orehi",
+      "name": "Овесена каша с ябълка, канела и орехи",
+      "meal_types": ["breakfast"], "protein": "dairy", "cuisine": "fitness",
+      "prep_min": 5, "cook_min": 6,
+      "ingredients": [
+        { "id": "oats_rolled", "min_g": 40, "max_g": 90 },
+        { "id": "milk_low_fat", "min_g": 150, "max_g": 250 },
+        { "id": "apple", "min_g": 100, "max_g": 180 },
+        { "id": "walnuts", "min_g": 10, "max_g": 25 },
+        { "id": "cinnamon", "g": 1.5 },
+        { "id": "honey", "min_g": 0, "max_g": 10 }
+      ],
+      "steps": [
+        "Настържете или нарежете ябълката на ситно.",
+        "Сложете овесените ядки, млякото и ябълката в малка тенджера и варете 5–6 минути на слаб огън, като разбърквате.",
+        "Добавете канелата и разбъркайте.",
+        "Сервирайте с натрошени орехи и по желание малко мед."
+      ],
+      "tags": ["quick", "sweet"]
+    },
+    {
+      "id": "overnight_oats_grucki_yogurt",
+      "name": "Овесена каша за през нощта с гръцки йогурт и мед",
+      "meal_types": ["breakfast"], "protein": "dairy", "cuisine": "fitness",
+      "prep_min": 5, "cook_min": 0,
+      "ingredients": [
+        { "id": "oats_rolled", "min_g": 40, "max_g": 80 },
+        { "id": "greek_yogurt", "min_g": 100, "max_g": 200 },
+        { "id": "milk_low_fat", "min_g": 80, "max_g": 150 },
+        { "id": "honey", "min_g": 5, "max_g": 10 },
+        { "id": "chia_seeds", "min_g": 0, "max_g": 10 },
+        { "id": "berries_frozen", "min_g": 0, "max_g": 100 }
+      ],
+      "steps": [
+        "Вечерта смесете в буркан или купа овесените ядки, гръцкия йогурт, млякото, меда и чията.",
+        "Покрийте и оставете в хладилника поне 6 часа или за през нощта.",
+        "Сутринта разбъркайте и добавете горските плодове отгоре."
+      ],
+      "tags": ["no_cook", "meal_prep", "sweet"]
+    },
+    {
+      "id": "izvara_med_gorski_plodove",
+      "name": "Извара с мед и горски плодове",
+      "meal_types": ["breakfast", "snack"], "protein": "dairy", "cuisine": "fitness",
+      "prep_min": 3, "cook_min": 0,
+      "ingredients": [
+        { "id": "cottage_cheese_lowfat", "min_g": 150, "max_g": 300 },
+        { "id": "berries_frozen", "min_g": 80, "max_g": 150 },
+        { "id": "honey", "min_g": 5, "max_g": 15 }
+      ],
+      "steps": [
+        "Ако плодовете са замразени, размразете ги предварително или за 1 минута в микровълнова.",
+        "Сложете изварата в купа, добавете плодовете и полейте с мед."
+      ],
+      "tags": ["no_cook", "quick", "sweet", "high_protein"]
+    },
+    {
+      "id": "skir_yagodi_bademi",
+      "name": "Скир с ягоди и бадеми",
+      "meal_types": ["breakfast", "snack"], "protein": "dairy", "cuisine": "fitness",
+      "prep_min": 3, "cook_min": 0,
+      "ingredients": [
+        { "id": "skyr", "min_g": 150, "max_g": 300 },
+        { "id": "strawberries", "min_g": 100, "max_g": 200 },
+        { "id": "almonds", "min_g": 10, "max_g": 25 }
+      ],
+      "steps": [
+        "Измийте и нарежете ягодите.",
+        "Сложете скира в купа, добавете ягодите и поръсете с нарязаните бадеми."
+      ],
+      "tags": ["no_cook", "quick", "sweet", "high_protein"]
+    },
+    {
+      "id": "mishmash",
+      "name": "Мишмаш",
+      "meal_types": ["breakfast", "dinner"], "protein": "eggs", "cuisine": "bulgarian",
+      "prep_min": 8, "cook_min": 12,
+      "ingredients": [
+        { "id": "egg", "min_g": 120, "max_g": 240, "step_g": 60 },
+        { "id": "pepper_sweet", "min_g": 80, "max_g": 150 },
+        { "id": "tomato", "min_g": 80, "max_g": 150 },
+        { "id": "onion", "g": 30 },
+        { "id": "feta_cheese", "min_g": 30, "max_g": 60 },
+        { "id": "sunflower_oil", "g": 5 },
+        { "id": "parsley", "g": 5 },
+        { "id": "black_pepper", "g": 0.5 },
+        { "id": "bread_wholewheat", "min_g": 0, "max_g": 70, "step_g": 35, "note": "за сервиране" }
+      ],
+      "steps": [
+        "Нарежете лука, чушките и доматите на кубчета.",
+        "Задушете лука и чушките в олиото за 5–6 минути, след това добавете доматите и гответе още 3–4 минути.",
+        "Разбийте яйцата с натрошеното сирене и ги изсипете в тигана.",
+        "Бъркайте на слаб огън, докато яйцата се стегнат, но останат сочни.",
+        "Поръсете с черен пипер и нарязан магданоз."
+      ],
+      "tags": ["high_protein", "one_pan"]
+    },
+    {
+      "id": "yaitsa_po_panagyurski",
+      "name": "Яйца по панагюрски (лека версия)",
+      "meal_types": ["breakfast"], "protein": "eggs", "cuisine": "bulgarian",
+      "prep_min": 5, "cook_min": 10,
+      "ingredients": [
+        { "id": "egg", "min_g": 120, "max_g": 180, "step_g": 60 },
+        { "id": "yogurt_whole", "min_g": 100, "max_g": 200 },
+        { "id": "garlic", "g": 3 },
+        { "id": "butter", "min_g": 5, "max_g": 10 },
+        { "id": "paprika", "g": 1 },
+        { "id": "vinegar", "g": 5 },
+        { "id": "salt", "g": 1 },
+        { "id": "bread_wholewheat", "min_g": 0, "max_g": 70, "step_g": 35, "note": "за сервиране" }
+      ],
+      "steps": [
+        "Смесете киселото мляко със смачкания чесън и щипка сол и разпределете в чиния.",
+        "Кипнете вода в широка тенджера, добавете оцета и намалете огъня, докато водата само леко ври.",
+        "Счупете всяко яйце в купичка и го пуснете внимателно във водата. Варете 3 минути, докато белтъкът се стегне.",
+        "Извадете яйцата с решетъчна лъжица и ги наредете върху киселото мляко.",
+        "Разтопете маслото, добавете червения пипер за няколко секунди и полейте яйцата."
+      ],
+      "tags": ["high_protein"]
+    },
+    {
+      "id": "omlet_spanak_sirene",
+      "name": "Омлет със спанак и сирене",
+      "meal_types": ["breakfast", "dinner"], "protein": "eggs", "cuisine": "international",
+      "prep_min": 5, "cook_min": 8,
+      "ingredients": [
+        { "id": "egg", "min_g": 120, "max_g": 240, "step_g": 60 },
+        { "id": "spinach_fresh", "min_g": 50, "max_g": 120 },
+        { "id": "feta_cheese", "min_g": 30, "max_g": 60 },
+        { "id": "olive_oil", "g": 5 },
+        { "id": "black_pepper", "g": 0.5 },
+        { "id": "bread_wholewheat", "min_g": 0, "max_g": 70, "step_g": 35, "note": "за сервиране" }
+      ],
+      "steps": [
+        "Загрейте зехтина в тиган и задушете спанака за 1–2 минути, докато омекне.",
+        "Разбийте яйцата с черния пипер и ги изсипете върху спанака.",
+        "Поръсете с натрошеното сирене и гответе на слаб огън под капак 4–5 минути.",
+        "Прегънете омлета на две и сервирайте."
+      ],
+      "tags": ["high_protein", "quick", "one_pan", "low_carb_friendly"]
+    },
+    {
+      "id": "tost_yaitse_avokado",
+      "name": "Пълнозърнест тост с яйце и авокадо",
+      "meal_types": ["breakfast"], "protein": "eggs", "cuisine": "international",
+      "prep_min": 5, "cook_min": 5,
+      "ingredients": [
+        { "id": "bread_wholewheat", "min_g": 35, "max_g": 105, "step_g": 35 },
+        { "id": "egg", "min_g": 60, "max_g": 180, "step_g": 60 },
+        { "id": "avocado", "min_g": 40, "max_g": 100 },
+        { "id": "lemon", "g": 5 },
+        { "id": "tomato", "min_g": 0, "max_g": 80 },
+        { "id": "salt", "g": 0.5 },
+        { "id": "black_pepper", "g": 0.5 }
+      ],
+      "steps": [
+        "Препечете филиите хляб.",
+        "Намачкайте авокадото с вилица, лимонов сок, сол и черен пипер.",
+        "Изпържете яйцата на тиган без мазнина (или ги сварете за 7 минути).",
+        "Намажете филиите с авокадото, добавете яйцата и по желание резени домат."
+      ],
+      "tags": ["quick"]
+    },
+    {
+      "id": "filiya_izvara_domat",
+      "name": "Филия с извара, домат и краставица",
+      "meal_types": ["breakfast", "snack"], "protein": "dairy", "cuisine": "bulgarian",
+      "prep_min": 5, "cook_min": 0,
+      "ingredients": [
+        { "id": "bread_wholewheat", "min_g": 35, "max_g": 105, "step_g": 35 },
+        { "id": "cottage_cheese_lowfat", "min_g": 100, "max_g": 200 },
+        { "id": "tomato", "min_g": 80, "max_g": 150 },
+        { "id": "cucumber", "min_g": 50, "max_g": 150 },
+        { "id": "dill", "g": 3 },
+        { "id": "salt", "g": 0.5 }
+      ],
+      "steps": [
+        "Смесете изварата с нарязания копър и щипка сол.",
+        "Намажете филиите с изварата.",
+        "Сервирайте с нарязан домат и краставица."
+      ],
+      "tags": ["no_cook", "quick", "high_protein"]
+    },
+    {
+      "id": "proteinovi_palachinki_izvara",
+      "name": "Протеинови палачинки с извара",
+      "meal_types": ["breakfast"], "protein": "dairy", "cuisine": "fitness",
+      "prep_min": 5, "cook_min": 12,
+      "ingredients": [
+        { "id": "oats_rolled", "min_g": 30, "max_g": 60 },
+        { "id": "egg", "min_g": 60, "max_g": 120, "step_g": 60 },
+        { "id": "cottage_cheese_lowfat", "min_g": 100, "max_g": 200 },
+        { "id": "milk_low_fat", "min_g": 50, "max_g": 100 },
+        { "id": "baking_powder", "g": 2 },
+        { "id": "vanilla", "g": 1 },
+        { "id": "sunflower_oil", "g": 3 },
+        { "id": "berries_frozen", "min_g": 50, "max_g": 100, "note": "за сервиране" },
+        { "id": "honey", "min_g": 0, "max_g": 10 }
+      ],
+      "steps": [
+        "Пасирайте овесените ядки, яйцата, изварата, млякото, бакпулвера и ванилията до гладка смес.",
+        "Намажете тиган с малко олио (с кърпа) и го загрейте на среден огън.",
+        "Изсипвайте по 2–3 супени лъжици от сместа и печете по 1–2 минути от всяка страна.",
+        "Сервирайте с горски плодове и по желание мед."
+      ],
+      "tags": ["high_protein", "sweet"]
+    },
+    {
+      "id": "shakshuka",
+      "name": "Шакшука",
+      "meal_types": ["breakfast", "dinner"], "protein": "eggs", "cuisine": "international",
+      "prep_min": 8, "cook_min": 20,
+      "ingredients": [
+        { "id": "egg", "min_g": 120, "max_g": 180, "step_g": 60 },
+        { "id": "tomatoes_canned", "min_g": 150, "max_g": 250 },
+        { "id": "pepper_sweet", "min_g": 80, "max_g": 150 },
+        { "id": "onion", "g": 50 },
+        { "id": "garlic", "g": 5 },
+        { "id": "olive_oil", "min_g": 5, "max_g": 10 },
+        { "id": "cumin", "g": 1 },
+        { "id": "paprika", "g": 1 },
+        { "id": "salt", "g": 1 },
+        { "id": "feta_cheese", "min_g": 0, "max_g": 40 },
+        { "id": "parsley", "g": 5 },
+        { "id": "bread_wholewheat", "min_g": 0, "max_g": 70, "step_g": 35, "note": "за сервиране" }
+      ],
+      "steps": [
+        "Нарежете лука и чушките на ивици и ги задушете в зехтина за 6–7 минути.",
+        "Добавете чесъна, кимиона и червения пипер и бъркайте 30 секунди.",
+        "Добавете доматите и солта и варете 8–10 минути, докато сосът се сгъсти.",
+        "Направете вдлъбнатини в соса и счупете яйцата в тях. Гответе под капак 5–6 минути, докато белтъците се стегнат.",
+        "Поръсете с натрошено сирене и магданоз и сервирайте направо в тигана."
+      ],
+      "tags": ["high_protein", "one_pan"]
+    }
+  ]
+}

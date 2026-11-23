@@ -1,0 +1,34 @@
+# dependencies
+node_modules/
+
+# secrets — never commit
+.secrets/
+.env
+.env*.local
+.env.development
+.env.production
+*.pem
+
+# local logs / temp
+logs/
+*.tmp
+*.log
+
+# Next.js / Vercel build output
+.next/
+out/
+build/
+.vercel/
+next-env.d.ts
+*.tsbuildinfo
+
+# Supabase CLI local state
+supabase/.branches/
+supabase/.temp/
+
+# raw USDA downloads (54 MB, re-downloadable; usda_macros.csv is committed)
+data/usda/raw/
+
+# OS / editor
+.DS_Store
+Thumbs.db

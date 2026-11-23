@@ -1,0 +1,148 @@
+{
+  "section": "fish",
+  "recipes": [
+    {
+      "id": "syomga_kartofi_brokoli",
+      "name": "Сьомга с картофи и броколи",
+      "meal_types": ["lunch", "dinner"], "protein": "fish", "cuisine": "fitness",
+      "prep_min": 10, "cook_min": 30, "keeps_days": 2,
+      "ingredients": [
+        { "id": "salmon", "min_g": 120, "max_g": 200 },
+        { "id": "potato", "min_g": 150, "max_g": 300 },
+        { "id": "broccoli_frozen", "min_g": 100, "max_g": 200 },
+        { "id": "olive_oil", "g": 5 },
+        { "id": "lemon", "g": 15 },
+        { "id": "dill", "g": 3 },
+        { "id": "salt", "g": 1.5 },
+        { "id": "black_pepper", "g": 0.5 }
+      ],
+      "steps": [
+        "Загрейте фурната на 200°C. Нарежете картофите на кубчета, разбъркайте ги със зехтина и малко сол и ги печете 15 минути.",
+        "Добавете в тавата броколите и сьомгата, овкусена със сол, черен пипер и лимонов сок.",
+        "Печете още 12–15 минути, докато рибата лесно се разделя с вилица.",
+        "Поръсете с копър и сервирайте с резен лимон."
+      ],
+      "tags": ["high_protein", "one_pan", "omega3"]
+    },
+    {
+      "id": "byala_riba_na_furna_zelenchutsi",
+      "name": "Бяла риба на фурна със зеленчуци",
+      "meal_types": ["lunch", "dinner"], "protein": "fish", "cuisine": "international",
+      "prep_min": 15, "cook_min": 30, "keeps_days": 2,
+      "ingredients": [
+        { "id": "white_fish", "min_g": 150, "max_g": 250 },
+        { "id": "zucchini", "min_g": 100, "max_g": 200 },
+        { "id": "pepper_sweet", "min_g": 80, "max_g": 150 },
+        { "id": "tomato", "min_g": 80, "max_g": 150 },
+        { "id": "onion", "g": 40 },
+        { "id": "potato", "min_g": 0, "max_g": 250 },
+        { "id": "olive_oil", "min_g": 5, "max_g": 10 },
+        { "id": "lemon", "g": 15 },
+        { "id": "garlic", "g": 3 },
+        { "id": "parsley", "g": 5 },
+        { "id": "salt", "g": 1.5 }
+      ],
+      "steps": [
+        "Загрейте фурната на 200°C. Нарежете картофите (ако използвате) на тънки резени и ги печете 15 минути с половината зехтин.",
+        "Нарежете тиквичките, чушките, доматите и лука и ги разпределете в тавата.",
+        "Сложете отгоре филетата риба, овкусени със сол, чесън и лимонов сок, и полейте с останалия зехтин.",
+        "Печете 18–20 минути. Поръсете с магданоз преди сервиране."
+      ],
+      "tags": ["high_protein", "one_pan", "low_carb_friendly"]
+    },
+    {
+      "id": "skumriya_na_furna_kartofi",
+      "name": "Скумрия на фурна с картофи",
+      "meal_types": ["lunch", "dinner"], "protein": "fish", "cuisine": "bulgarian",
+      "prep_min": 15, "cook_min": 40,
+      "ingredients": [
+        { "id": "mackerel", "min_g": 150, "max_g": 250, "note": "филе или почистена риба" },
+        { "id": "potato", "min_g": 150, "max_g": 300 },
+        { "id": "onion", "g": 40 },
+        { "id": "lemon", "g": 15 },
+        { "id": "sunflower_oil", "g": 5 },
+        { "id": "paprika", "g": 1 },
+        { "id": "parsley", "g": 5 },
+        { "id": "salt", "g": 2 },
+        { "id": "cabbage", "min_g": 80, "max_g": 150, "note": "за салата" },
+        { "id": "vinegar", "g": 5 }
+      ],
+      "steps": [
+        "Загрейте фурната на 200°C. Нарежете картофите на резени, а лука – на кръгчета, разбъркайте с олиото и половината сол и ги печете 20 минути.",
+        "Почистете скумрията, посолете я отвътре и отвън, поръсете с червен пипер и сложете резен лимон и магданоз в коремчето.",
+        "Наредете рибата върху картофите и печете още 18–20 минути.",
+        "Направете салата от ситно нарязаното зеле с оцет и щипка сол и сервирайте заедно."
+      ],
+      "tags": ["omega3"]
+    },
+    {
+      "id": "pastarva_limon_kartofi",
+      "name": "Пъстърва с лимон и картофи",
+      "meal_types": ["lunch", "dinner"], "protein": "fish", "cuisine": "bulgarian",
+      "prep_min": 10, "cook_min": 30,
+      "ingredients": [
+        { "id": "trout", "min_g": 150, "max_g": 250 },
+        { "id": "potato", "min_g": 150, "max_g": 300 },
+        { "id": "butter", "min_g": 5, "max_g": 10 },
+        { "id": "lemon", "g": 20 },
+        { "id": "garlic", "g": 3 },
+        { "id": "dill", "g": 3 },
+        { "id": "salt", "g": 1.5 },
+        { "id": "lettuce", "min_g": 50, "max_g": 100 }
+      ],
+      "steps": [
+        "Сварете картофите в подсолена вода 15–20 минути и ги нарежете.",
+        "Посолете пъстървата и я изпечете на тиган с маслото по 4–5 минути от всяка страна.",
+        "Към края добавете в тигана чесъна и лимоновия сок и полейте рибата с получения сос.",
+        "Поръсете картофите с копър и сервирайте с рибата и зелена салата."
+      ],
+      "tags": ["high_protein", "omega3"]
+    },
+    {
+      "id": "pasta_skaridi_chesan",
+      "name": "Паста със скариди и чесън",
+      "meal_types": ["lunch", "dinner"], "protein": "seafood", "cuisine": "international",
+      "prep_min": 10, "cook_min": 15,
+      "ingredients": [
+        { "id": "pasta", "min_g": 60, "max_g": 110 },
+        { "id": "shrimp", "min_g": 100, "max_g": 200, "note": "обелени" },
+        { "id": "garlic", "g": 8 },
+        { "id": "olive_oil", "min_g": 8, "max_g": 15 },
+        { "id": "tomato", "min_g": 0, "max_g": 100 },
+        { "id": "lemon", "g": 10 },
+        { "id": "parsley", "g": 5 },
+        { "id": "salt", "g": 1 }
+      ],
+      "steps": [
+        "Сварете пастата в подсолена вода според указанията на опаковката. Запазете половин чаша от водата.",
+        "Загрейте зехтина и запържете нарязания чесън за 30 секунди, без да покафенява.",
+        "Добавете скаридите (и по желание нарязаните домати) и гответе 3–4 минути, докато порозовеят.",
+        "Добавете пастата, малко от водата, лимоновия сок и магданоза и разбъркайте."
+      ],
+      "tags": ["high_protein", "quick"]
+    },
+    {
+      "id": "poke_riba_ton_oriz",
+      "name": "Купа с риба тон, ориз и зеленчуци (поке)",
+      "meal_types": ["lunch", "dinner"], "protein": "fish", "cuisine": "international",
+      "prep_min": 15, "cook_min": 15, "keeps_days": 1,
+      "ingredients": [
+        { "id": "rice_white", "min_g": 50, "max_g": 100 },
+        { "id": "tuna_canned_water", "min_g": 100, "max_g": 180, "note": "отцедена" },
+        { "id": "cucumber", "min_g": 60, "max_g": 120 },
+        { "id": "carrot", "min_g": 40, "max_g": 80 },
+        { "id": "avocado", "min_g": 30, "max_g": 70 },
+        { "id": "corn_canned", "min_g": 30, "max_g": 60 },
+        { "id": "soy_sauce", "g": 10 },
+        { "id": "lemon", "g": 10 }
+      ],
+      "steps": [
+        "Сварете ориза и го оставете да изстине.",
+        "Нарежете краставицата и авокадото на кубчета, а морковите настържете.",
+        "Разпределете ориза в купа и наредете отгоре рибата тон, зеленчуците и царевицата.",
+        "Полейте със соев сос и лимонов сок."
+      ],
+      "tags": ["high_protein", "no_cook_protein"]
+    }
+  ]
+}

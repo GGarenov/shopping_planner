@@ -1,0 +1,7108 @@
+{
+  "_about": {
+    "description": "Recipes for the planner, in Bulgarian. Built from data/recipes_src by scripts/build_recipes.mjs — edit the sources, not this file.",
+    "updated": "2026-11-23",
+    "amounts": "Grams per serving of raw, edible ingredient (peeled, without bone). min_g/max_g = range the solver may choose; g = fixed; min_g 0 = optional; step_g = whole pieces only (eggs 60 g each).",
+    "batch_servings": "Smallest sensible batch to cook at once (e.g. a tray of brownies = 8). Leftovers keep for keeps_days.",
+    "diets": "Derived: a diet fits if all required ingredients fit it. low_carb = 20 g carbs or less per serving at mid amounts.",
+    "nutrition_per_serving": "Macros with every ingredient at its min and at its max amount (USDA or manual values from ingredients.json).",
+    "count": 76
+  },
+  "recipes": [
+    {
+      "id": "ovesena_kasha_banan",
+      "name": "Овесена каша с банан и кисело мляко",
+      "meal_types": [
+        "breakfast"
+      ],
+      "protein": "dairy",
+      "cuisine": "fitness",
+      "prep_min": 3,
+      "cook_min": 5,
+      "ingredients": [
+        {
+          "id": "oats_rolled",
+          "min_g": 40,
+          "max_g": 90
+        },
+        {
+          "id": "yogurt_whole",
+          "min_g": 100,
+          "max_g": 250
+        },
+        {
+          "id": "banana",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "cinnamon",
+          "g": 1
+        }
+      ],
+      "steps": [
+        "Сварете овесените ядки в двойно количество вода за 3–5 минути, като разбърквате.",
+        "Оставете кашата да поизстине 2–3 минути.",
+        "Добавете киселото мляко и нарязания на кръгчета банан.",
+        "Поръсете с канела и сервирайте."
+      ],
+      "tags": [
+        "quick",
+        "sweet"
+      ],
+      "section": "breakfast",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 8,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "gluten"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 272.5,
+          "protein_g": 10.9,
+          "fat_g": 6.2,
+          "carbs_g": 45.7,
+          "fiber_g": 6.3
+        },
+        "max": {
+          "kcal": 611.9,
+          "protein_g": 25.2,
+          "fat_g": 14.7,
+          "carbs_g": 99.5,
+          "fiber_g": 13.2
+        }
+      }
+    },
+    {
+      "id": "ovesena_kasha_yabalka_orehi",
+      "name": "Овесена каша с ябълка, канела и орехи",
+      "meal_types": [
+        "breakfast"
+      ],
+      "protein": "dairy",
+      "cuisine": "fitness",
+      "prep_min": 5,
+      "cook_min": 6,
+      "ingredients": [
+        {
+          "id": "oats_rolled",
+          "min_g": 40,
+          "max_g": 90
+        },
+        {
+          "id": "milk_low_fat",
+          "min_g": 150,
+          "max_g": 250
+        },
+        {
+          "id": "apple",
+          "min_g": 100,
+          "max_g": 180
+        },
+        {
+          "id": "walnuts",
+          "min_g": 10,
+          "max_g": 25
+        },
+        {
+          "id": "cinnamon",
+          "g": 1.5
+        },
+        {
+          "id": "honey",
+          "min_g": 0,
+          "max_g": 10
+        }
+      ],
+      "steps": [
+        "Настържете или нарежете ябълката на ситно.",
+        "Сложете овесените ядки, млякото и ябълката в малка тенджера и варете 5–6 минути на слаб огън, като разбърквате.",
+        "Добавете канелата и разбъркайте.",
+        "Сервирайте с натрошени орехи и по желание малко мед."
+      ],
+      "tags": [
+        "quick",
+        "sweet"
+      ],
+      "section": "breakfast",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 11,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "gluten",
+        "milk",
+        "nuts"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "gluten",
+        "nuts"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 351.7,
+          "protein_g": 13.6,
+          "fat_g": 12.3,
+          "carbs_g": 50.2,
+          "fiber_g": 8.1
+        },
+        "max": {
+          "kcal": 766.3,
+          "protein_g": 28,
+          "fat_g": 27.6,
+          "carbs_g": 109.6,
+          "fiber_g": 16.4
+        }
+      }
+    },
+    {
+      "id": "overnight_oats_grucki_yogurt",
+      "name": "Овесена каша за през нощта с гръцки йогурт и мед",
+      "meal_types": [
+        "breakfast"
+      ],
+      "protein": "dairy",
+      "cuisine": "fitness",
+      "prep_min": 5,
+      "cook_min": 0,
+      "ingredients": [
+        {
+          "id": "oats_rolled",
+          "min_g": 40,
+          "max_g": 80
+        },
+        {
+          "id": "greek_yogurt",
+          "min_g": 100,
+          "max_g": 200
+        },
+        {
+          "id": "milk_low_fat",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "honey",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "chia_seeds",
+          "min_g": 0,
+          "max_g": 10
+        },
+        {
+          "id": "berries_frozen",
+          "min_g": 0,
+          "max_g": 100
+        }
+      ],
+      "steps": [
+        "Вечерта смесете в буркан или купа овесените ядки, гръцкия йогурт, млякото, меда и чията.",
+        "Покрийте и оставете в хладилника поне 6 часа или за през нощта.",
+        "Сутринта разбъркайте и добавете горските плодове отгоре."
+      ],
+      "tags": [
+        "no_cook",
+        "meal_prep",
+        "sweet"
+      ],
+      "section": "breakfast",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 5,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "gluten"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 307.8,
+          "protein_g": 18.5,
+          "fat_g": 9.3,
+          "carbs_g": 38.5,
+          "fiber_g": 4.3
+        },
+        "max": {
+          "kcal": 710.2,
+          "protein_g": 38.7,
+          "fat_g": 22.1,
+          "carbs_g": 92.9,
+          "fiber_g": 14.6
+        }
+      }
+    },
+    {
+      "id": "izvara_med_gorski_plodove",
+      "name": "Извара с мед и горски плодове",
+      "meal_types": [
+        "breakfast",
+        "snack"
+      ],
+      "protein": "dairy",
+      "cuisine": "fitness",
+      "prep_min": 3,
+      "cook_min": 0,
+      "ingredients": [
+        {
+          "id": "cottage_cheese_lowfat",
+          "min_g": 150,
+          "max_g": 300
+        },
+        {
+          "id": "berries_frozen",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "honey",
+          "min_g": 5,
+          "max_g": 15
+        }
+      ],
+      "steps": [
+        "Ако плодовете са замразени, размразете ги предварително или за 1 минута в микровълнова.",
+        "Сложете изварата в купа, добавете плодовете и полейте с мед."
+      ],
+      "tags": [
+        "no_cook",
+        "quick",
+        "sweet",
+        "high_protein"
+      ],
+      "section": "breakfast",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 3,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 164,
+          "protein_g": 18.9,
+          "fat_g": 2,
+          "carbs_g": 17.9,
+          "fiber_g": 2.2
+        },
+        "max": {
+          "kcal": 338.1,
+          "protein_g": 37.8,
+          "fat_g": 4,
+          "carbs_g": 38.8,
+          "fiber_g": 4.1
+        }
+      }
+    },
+    {
+      "id": "skir_yagodi_bademi",
+      "name": "Скир с ягоди и бадеми",
+      "meal_types": [
+        "breakfast",
+        "snack"
+      ],
+      "protein": "dairy",
+      "cuisine": "fitness",
+      "prep_min": 3,
+      "cook_min": 0,
+      "ingredients": [
+        {
+          "id": "skyr",
+          "min_g": 150,
+          "max_g": 300
+        },
+        {
+          "id": "strawberries",
+          "min_g": 100,
+          "max_g": 200
+        },
+        {
+          "id": "almonds",
+          "min_g": 10,
+          "max_g": 25
+        }
+      ],
+      "steps": [
+        "Измийте и нарежете ягодите.",
+        "Сложете скира в купа, добавете ягодите и поръсете с нарязаните бадеми."
+      ],
+      "tags": [
+        "no_cook",
+        "quick",
+        "sweet",
+        "high_protein"
+      ],
+      "section": "breakfast",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 3,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "milk",
+        "nuts"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "nuts"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 178.4,
+          "protein_g": 18.1,
+          "fat_g": 5.9,
+          "carbs_g": 15.2,
+          "fiber_g": 3.3
+        },
+        "max": {
+          "kcal": 385.8,
+          "protein_g": 37.2,
+          "fat_g": 14.3,
+          "carbs_g": 31.5,
+          "fiber_g": 7.1
+        }
+      }
+    },
+    {
+      "id": "mishmash",
+      "name": "Мишмаш",
+      "meal_types": [
+        "breakfast",
+        "dinner"
+      ],
+      "protein": "eggs",
+      "cuisine": "bulgarian",
+      "prep_min": 8,
+      "cook_min": 12,
+      "ingredients": [
+        {
+          "id": "egg",
+          "min_g": 120,
+          "max_g": 240,
+          "step_g": 60
+        },
+        {
+          "id": "pepper_sweet",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "tomato",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "onion",
+          "g": 30
+        },
+        {
+          "id": "feta_cheese",
+          "min_g": 30,
+          "max_g": 60
+        },
+        {
+          "id": "sunflower_oil",
+          "g": 5
+        },
+        {
+          "id": "parsley",
+          "g": 5
+        },
+        {
+          "id": "black_pepper",
+          "g": 0.5
+        },
+        {
+          "id": "bread_wholewheat",
+          "min_g": 0,
+          "max_g": 70,
+          "step_g": 35,
+          "note": "за сервиране"
+        }
+      ],
+      "steps": [
+        "Нарежете лука, чушките и доматите на кубчета.",
+        "Задушете лука и чушките в олиото за 5–6 минути, след това добавете доматите и гответе още 3–4 минути.",
+        "Разбийте яйцата с натрошеното сирене и ги изсипете в тигана.",
+        "Бъркайте на слаб огън, докато яйцата се стегнат, но останат сочни.",
+        "Поръсете с черен пипер и нарязан магданоз."
+      ],
+      "tags": [
+        "high_protein",
+        "one_pan"
+      ],
+      "section": "breakfast",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 20,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "eggs",
+        "milk"
+      ],
+      "allergens_optional": [
+        "gluten"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "eggs"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 345.6,
+          "protein_g": 21.4,
+          "fat_g": 23.3,
+          "carbs_g": 13.4,
+          "fiber_g": 3.4
+        },
+        "max": {
+          "kcal": 803.9,
+          "protein_g": 50.7,
+          "fat_g": 44,
+          "carbs_g": 52.3,
+          "fiber_g": 10
+        }
+      }
+    },
+    {
+      "id": "yaitsa_po_panagyurski",
+      "name": "Яйца по панагюрски (лека версия)",
+      "meal_types": [
+        "breakfast"
+      ],
+      "protein": "eggs",
+      "cuisine": "bulgarian",
+      "prep_min": 5,
+      "cook_min": 10,
+      "ingredients": [
+        {
+          "id": "egg",
+          "min_g": 120,
+          "max_g": 180,
+          "step_g": 60
+        },
+        {
+          "id": "yogurt_whole",
+          "min_g": 100,
+          "max_g": 200
+        },
+        {
+          "id": "garlic",
+          "g": 3
+        },
+        {
+          "id": "butter",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "paprika",
+          "g": 1
+        },
+        {
+          "id": "vinegar",
+          "g": 5
+        },
+        {
+          "id": "salt",
+          "g": 1
+        },
+        {
+          "id": "bread_wholewheat",
+          "min_g": 0,
+          "max_g": 70,
+          "step_g": 35,
+          "note": "за сервиране"
+        }
+      ],
+      "steps": [
+        "Смесете киселото мляко със смачкания чесън и щипка сол и разпределете в чиния.",
+        "Кипнете вода в широка тенджера, добавете оцета и намалете огъня, докато водата само леко ври.",
+        "Счупете всяко яйце в купичка и го пуснете внимателно във водата. Варете 3 минути, докато белтъкът се стегне.",
+        "Извадете яйцата с решетъчна лъжица и ги наредете върху киселото мляко.",
+        "Разтопете маслото, добавете червения пипер за няколко секунди и полейте яйцата."
+      ],
+      "tags": [
+        "high_protein"
+      ],
+      "section": "breakfast",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 15,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "eggs",
+        "milk",
+        "sulphites"
+      ],
+      "allergens_optional": [
+        "gluten"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "eggs"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 276.8,
+          "protein_g": 18.9,
+          "fat_g": 18.9,
+          "carbs_g": 7.1,
+          "fiber_g": 0.4
+        },
+        "max": {
+          "kcal": 635.8,
+          "protein_g": 38.7,
+          "fat_g": 34.3,
+          "carbs_g": 42.1,
+          "fiber_g": 4.6
+        }
+      }
+    },
+    {
+      "id": "omlet_spanak_sirene",
+      "name": "Омлет със спанак и сирене",
+      "meal_types": [
+        "breakfast",
+        "dinner"
+      ],
+      "protein": "eggs",
+      "cuisine": "international",
+      "prep_min": 5,
+      "cook_min": 8,
+      "ingredients": [
+        {
+          "id": "egg",
+          "min_g": 120,
+          "max_g": 240,
+          "step_g": 60
+        },
+        {
+          "id": "spinach_fresh",
+          "min_g": 50,
+          "max_g": 120
+        },
+        {
+          "id": "feta_cheese",
+          "min_g": 30,
+          "max_g": 60
+        },
+        {
+          "id": "olive_oil",
+          "g": 5
+        },
+        {
+          "id": "black_pepper",
+          "g": 0.5
+        },
+        {
+          "id": "bread_wholewheat",
+          "min_g": 0,
+          "max_g": 70,
+          "step_g": 35,
+          "note": "за сервиране"
+        }
+      ],
+      "steps": [
+        "Загрейте зехтина в тиган и задушете спанака за 1–2 минути, докато омекне.",
+        "Разбийте яйцата с черния пипер и ги изсипете върху спанака.",
+        "Поръсете с натрошеното сирене и гответе на слаб огън под капак 4–5 минути.",
+        "Прегънете омлета на две и сервирайте."
+      ],
+      "tags": [
+        "high_protein",
+        "quick",
+        "one_pan",
+        "low_carb_friendly"
+      ],
+      "section": "breakfast",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 13,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "eggs",
+        "milk"
+      ],
+      "allergens_optional": [
+        "gluten"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "eggs"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 308.1,
+          "protein_g": 20.8,
+          "fat_g": 23.1,
+          "carbs_g": 4.2,
+          "fiber_g": 1.2
+        },
+        "max": {
+          "kcal": 751.7,
+          "protein_g": 50.9,
+          "fat_g": 43.7,
+          "carbs_g": 38.6,
+          "fiber_g": 7
+        }
+      }
+    },
+    {
+      "id": "tost_yaitse_avokado",
+      "name": "Пълнозърнест тост с яйце и авокадо",
+      "meal_types": [
+        "breakfast"
+      ],
+      "protein": "eggs",
+      "cuisine": "international",
+      "prep_min": 5,
+      "cook_min": 5,
+      "ingredients": [
+        {
+          "id": "bread_wholewheat",
+          "min_g": 35,
+          "max_g": 105,
+          "step_g": 35
+        },
+        {
+          "id": "egg",
+          "min_g": 60,
+          "max_g": 180,
+          "step_g": 60
+        },
+        {
+          "id": "avocado",
+          "min_g": 40,
+          "max_g": 100
+        },
+        {
+          "id": "lemon",
+          "g": 5
+        },
+        {
+          "id": "tomato",
+          "min_g": 0,
+          "max_g": 80
+        },
+        {
+          "id": "salt",
+          "g": 0.5
+        },
+        {
+          "id": "black_pepper",
+          "g": 0.5
+        }
+      ],
+      "steps": [
+        "Препечете филиите хляб.",
+        "Намачкайте авокадото с вилица, лимонов сок, сол и черен пипер.",
+        "Изпържете яйцата на тиган без мазнина (или ги сварете за 7 минути).",
+        "Намажете филиите с авокадото, добавете яйцата и по желание резени домат."
+      ],
+      "tags": [
+        "quick"
+      ],
+      "section": "breakfast",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 10,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "eggs",
+        "gluten"
+      ],
+      "exclusion_tags": [
+        "eggs",
+        "gluten"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 240.7,
+          "protein_g": 12.8,
+          "fat_g": 12.8,
+          "carbs_g": 19.6,
+          "fiber_g": 5
+        },
+        "max": {
+          "kcal": 699.1,
+          "protein_g": 38.5,
+          "fat_g": 35.6,
+          "carbs_g": 58.6,
+          "fiber_g": 14.2
+        }
+      }
+    },
+    {
+      "id": "filiya_izvara_domat",
+      "name": "Филия с извара, домат и краставица",
+      "meal_types": [
+        "breakfast",
+        "snack"
+      ],
+      "protein": "dairy",
+      "cuisine": "bulgarian",
+      "prep_min": 5,
+      "cook_min": 0,
+      "ingredients": [
+        {
+          "id": "bread_wholewheat",
+          "min_g": 35,
+          "max_g": 105,
+          "step_g": 35
+        },
+        {
+          "id": "cottage_cheese_lowfat",
+          "min_g": 100,
+          "max_g": 200
+        },
+        {
+          "id": "tomato",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "cucumber",
+          "min_g": 50,
+          "max_g": 150
+        },
+        {
+          "id": "dill",
+          "g": 3
+        },
+        {
+          "id": "salt",
+          "g": 0.5
+        }
+      ],
+      "steps": [
+        "Смесете изварата с нарязания копър и щипка сол.",
+        "Намажете филиите с изварата.",
+        "Сервирайте с нарязан домат и краставица."
+      ],
+      "tags": [
+        "no_cook",
+        "quick",
+        "high_protein"
+      ],
+      "section": "breakfast",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 5,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "gluten"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 183.4,
+          "protein_g": 17.9,
+          "fat_g": 2.5,
+          "carbs_g": 22.8,
+          "fiber_g": 3.4
+        },
+        "max": {
+          "kcal": 459.4,
+          "protein_g": 40.3,
+          "fat_g": 6.2,
+          "carbs_g": 61.8,
+          "fiber_g": 8.9
+        }
+      }
+    },
+    {
+      "id": "proteinovi_palachinki_izvara",
+      "name": "Протеинови палачинки с извара",
+      "meal_types": [
+        "breakfast"
+      ],
+      "protein": "dairy",
+      "cuisine": "fitness",
+      "prep_min": 5,
+      "cook_min": 12,
+      "ingredients": [
+        {
+          "id": "oats_rolled",
+          "min_g": 30,
+          "max_g": 60
+        },
+        {
+          "id": "egg",
+          "min_g": 60,
+          "max_g": 120,
+          "step_g": 60
+        },
+        {
+          "id": "cottage_cheese_lowfat",
+          "min_g": 100,
+          "max_g": 200
+        },
+        {
+          "id": "milk_low_fat",
+          "min_g": 50,
+          "max_g": 100
+        },
+        {
+          "id": "baking_powder",
+          "g": 2
+        },
+        {
+          "id": "vanilla",
+          "g": 1
+        },
+        {
+          "id": "sunflower_oil",
+          "g": 3
+        },
+        {
+          "id": "berries_frozen",
+          "min_g": 50,
+          "max_g": 100,
+          "note": "за сервиране"
+        },
+        {
+          "id": "honey",
+          "min_g": 0,
+          "max_g": 10
+        }
+      ],
+      "steps": [
+        "Пасирайте овесените ядки, яйцата, изварата, млякото, бакпулвера и ванилията до гладка смес.",
+        "Намажете тиган с малко олио (с кърпа) и го загрейте на среден огън.",
+        "Изсипвайте по 2–3 супени лъжици от сместа и печете по 1–2 минути от всяка страна.",
+        "Сервирайте с горски плодове и по желание мед."
+      ],
+      "tags": [
+        "high_protein",
+        "sweet"
+      ],
+      "section": "breakfast",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 17,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "eggs",
+        "gluten",
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "eggs",
+        "gluten"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 355.5,
+          "protein_g": 26.9,
+          "fat_g": 13.1,
+          "carbs_g": 32.2,
+          "fiber_g": 4.5
+        },
+        "max": {
+          "kcal": 710.9,
+          "protein_g": 53.8,
+          "fat_g": 23.1,
+          "carbs_g": 72.1,
+          "fiber_g": 9.1
+        }
+      }
+    },
+    {
+      "id": "shakshuka",
+      "name": "Шакшука",
+      "meal_types": [
+        "breakfast",
+        "dinner"
+      ],
+      "protein": "eggs",
+      "cuisine": "international",
+      "prep_min": 8,
+      "cook_min": 20,
+      "ingredients": [
+        {
+          "id": "egg",
+          "min_g": 120,
+          "max_g": 180,
+          "step_g": 60
+        },
+        {
+          "id": "tomatoes_canned",
+          "min_g": 150,
+          "max_g": 250
+        },
+        {
+          "id": "pepper_sweet",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "onion",
+          "g": 50
+        },
+        {
+          "id": "garlic",
+          "g": 5
+        },
+        {
+          "id": "olive_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "cumin",
+          "g": 1
+        },
+        {
+          "id": "paprika",
+          "g": 1
+        },
+        {
+          "id": "salt",
+          "g": 1
+        },
+        {
+          "id": "feta_cheese",
+          "min_g": 0,
+          "max_g": 40
+        },
+        {
+          "id": "parsley",
+          "g": 5
+        },
+        {
+          "id": "bread_wholewheat",
+          "min_g": 0,
+          "max_g": 70,
+          "step_g": 35,
+          "note": "за сервиране"
+        }
+      ],
+      "steps": [
+        "Нарежете лука и чушките на ивици и ги задушете в зехтина за 6–7 минути.",
+        "Добавете чесъна, кимиона и червения пипер и бъркайте 30 секунди.",
+        "Добавете доматите и солта и варете 8–10 минути, докато сосът се сгъсти.",
+        "Направете вдлъбнатини в соса и счупете яйцата в тях. Гответе под капак 5–6 минути, докато белтъците се стегнат.",
+        "Поръсете с натрошено сирене и магданоз и сервирайте направо в тигана."
+      ],
+      "tags": [
+        "high_protein",
+        "one_pan"
+      ],
+      "section": "breakfast",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 28,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "eggs"
+      ],
+      "allergens_optional": [
+        "gluten",
+        "milk"
+      ],
+      "exclusion_tags": [
+        "eggs"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 296.4,
+          "protein_g": 18.4,
+          "fat_g": 17.5,
+          "carbs_g": 18.5,
+          "fiber_g": 6.1
+        },
+        "max": {
+          "kcal": 743,
+          "protein_g": 41.8,
+          "fat_g": 39.7,
+          "carbs_g": 58.1,
+          "fiber_g": 13.7
+        }
+      }
+    },
+    {
+      "id": "pileshko_oriz_brokoli",
+      "name": "Пилешко филе с ориз и броколи",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "chicken",
+      "cuisine": "fitness",
+      "prep_min": 10,
+      "cook_min": 20,
+      "batch_servings": 1,
+      "keeps_days": 3,
+      "ingredients": [
+        {
+          "id": "chicken_breast",
+          "min_g": 120,
+          "max_g": 250
+        },
+        {
+          "id": "rice_white",
+          "min_g": 40,
+          "max_g": 100
+        },
+        {
+          "id": "broccoli_frozen",
+          "min_g": 100,
+          "max_g": 250
+        },
+        {
+          "id": "olive_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "garlic",
+          "g": 3
+        },
+        {
+          "id": "lemon",
+          "g": 10
+        },
+        {
+          "id": "paprika",
+          "g": 1
+        },
+        {
+          "id": "salt",
+          "g": 1.5
+        },
+        {
+          "id": "black_pepper",
+          "g": 0.5
+        }
+      ],
+      "steps": [
+        "Сварете ориза в подсолена вода според указанията на опаковката (около 15 минути).",
+        "Нарежете пилешкото филе на хапки и го овкусете със сол, черен и червен пипер.",
+        "Запържете пилешкото в зехтина на силен огън 6–8 минути, докато се зачерви и е изпечено отвътре.",
+        "Сварете или задушете броколите на пара 5–6 минути.",
+        "Сервирайте пилешкото с ориза и броколите, полейте с лимонов сок и поръсете със ситно нарязан чесън."
+      ],
+      "tags": [
+        "high_protein",
+        "meal_prep"
+      ],
+      "section": "chicken",
+      "treat": false,
+      "total_min": 30,
+      "diets": [],
+      "allergens": [],
+      "exclusion_tags": [
+        "poultry"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 371.6,
+          "protein_g": 33.2,
+          "fat_g": 8.9,
+          "carbs_g": 39.5,
+          "fiber_g": 4.3
+        },
+        "max": {
+          "kcal": 829.8,
+          "protein_g": 70.9,
+          "fat_g": 18.1,
+          "carbs_g": 94.7,
+          "fiber_g": 9.6
+        }
+      }
+    },
+    {
+      "id": "pile_s_oriz_na_furna",
+      "name": "Пиле с ориз на фурна",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "chicken",
+      "cuisine": "bulgarian",
+      "prep_min": 15,
+      "cook_min": 50,
+      "batch_servings": 4,
+      "keeps_days": 3,
+      "ingredients": [
+        {
+          "id": "chicken_thigh",
+          "min_g": 150,
+          "max_g": 280,
+          "note": "обезкостено месо"
+        },
+        {
+          "id": "rice_white",
+          "min_g": 50,
+          "max_g": 100
+        },
+        {
+          "id": "onion",
+          "g": 50
+        },
+        {
+          "id": "carrot",
+          "min_g": 50,
+          "max_g": 100
+        },
+        {
+          "id": "sunflower_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "paprika",
+          "g": 2
+        },
+        {
+          "id": "black_pepper",
+          "g": 0.5
+        },
+        {
+          "id": "salt",
+          "g": 2
+        }
+      ],
+      "steps": [
+        "Загрейте фурната на 200°C.",
+        "Задушете нарязания лук и морковите в олиото за 5 минути, добавете ориза и червения пипер и бъркайте 1–2 минути.",
+        "Изсипете ориза в тава, залейте с гореща вода (2,5 пъти обема на ориза) и посолете.",
+        "Наредете отгоре парчетата пилешко месо, овкусени със сол и черен пипер.",
+        "Печете 45–50 минути, докато оризът поеме водата и пилето се зачерви."
+      ],
+      "tags": [
+        "meal_prep",
+        "family"
+      ],
+      "section": "chicken",
+      "treat": false,
+      "total_min": 65,
+      "diets": [],
+      "allergens": [],
+      "exclusion_tags": [
+        "poultry"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 490.1,
+          "protein_g": 32.8,
+          "fat_g": 17.7,
+          "carbs_g": 50.8,
+          "fiber_g": 3.7
+        },
+        "max": {
+          "kcal": 924.5,
+          "protein_g": 61,
+          "fat_g": 33.4,
+          "carbs_g": 95.6,
+          "fiber_g": 5.8
+        }
+      }
+    },
+    {
+      "id": "pecheni_pileshki_butcheta_kartofi",
+      "name": "Печени пилешки бутчета с картофи",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "chicken",
+      "cuisine": "bulgarian",
+      "prep_min": 10,
+      "cook_min": 50,
+      "batch_servings": 2,
+      "keeps_days": 3,
+      "ingredients": [
+        {
+          "id": "chicken_thigh",
+          "min_g": 150,
+          "max_g": 300,
+          "note": "месо без кост"
+        },
+        {
+          "id": "potato",
+          "min_g": 150,
+          "max_g": 350
+        },
+        {
+          "id": "onion",
+          "g": 40
+        },
+        {
+          "id": "garlic",
+          "g": 5
+        },
+        {
+          "id": "olive_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "paprika",
+          "g": 2
+        },
+        {
+          "id": "oregano",
+          "g": 1
+        },
+        {
+          "id": "black_pepper",
+          "g": 0.5
+        },
+        {
+          "id": "salt",
+          "g": 2
+        }
+      ],
+      "steps": [
+        "Загрейте фурната на 200°C.",
+        "Нарежете картофите на резени или четвъртинки, а лука – на едри парчета.",
+        "Разбъркайте картофите, лука, бутчетата, зехтина, чесъна и подправките в тава.",
+        "Печете 45–50 минути, като обърнете веднъж по средата, докато бутчетата се зачервят."
+      ],
+      "tags": [
+        "family",
+        "one_pan"
+      ],
+      "section": "chicken",
+      "treat": false,
+      "total_min": 60,
+      "diets": [],
+      "allergens": [],
+      "exclusion_tags": [
+        "poultry"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 408.7,
+          "protein_g": 32.2,
+          "fat_g": 17.4,
+          "carbs_g": 33.7,
+          "fiber_g": 5.2
+        },
+        "max": {
+          "kcal": 822.9,
+          "protein_g": 64.2,
+          "fat_g": 34.5,
+          "carbs_g": 68.7,
+          "fiber_g": 9.4
+        }
+      }
+    },
+    {
+      "id": "pileshko_kari_oriz",
+      "name": "Пилешко къри с ориз",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "chicken",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 25,
+      "batch_servings": 2,
+      "keeps_days": 3,
+      "ingredients": [
+        {
+          "id": "chicken_breast",
+          "min_g": 120,
+          "max_g": 250
+        },
+        {
+          "id": "rice_white",
+          "min_g": 40,
+          "max_g": 100
+        },
+        {
+          "id": "onion",
+          "g": 60
+        },
+        {
+          "id": "garlic",
+          "g": 5
+        },
+        {
+          "id": "ginger",
+          "g": 5
+        },
+        {
+          "id": "tomatoes_canned",
+          "min_g": 100,
+          "max_g": 150
+        },
+        {
+          "id": "yogurt_whole",
+          "min_g": 50,
+          "max_g": 100
+        },
+        {
+          "id": "curry_powder",
+          "g": 4
+        },
+        {
+          "id": "sunflower_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "salt",
+          "g": 1.5
+        }
+      ],
+      "steps": [
+        "Сварете ориза според указанията на опаковката.",
+        "Задушете ситно нарязания лук в олиото 5 минути, добавете настъргания джинджифил, чесъна и кърито и бъркайте 1 минута.",
+        "Добавете нарязаното на хапки пилешко и гответе 5 минути.",
+        "Добавете доматите и солта и оставете да къкри 10 минути.",
+        "Махнете от огъня и вмъкнете киселото мляко. Сервирайте с ориза."
+      ],
+      "tags": [
+        "high_protein",
+        "meal_prep"
+      ],
+      "section": "chicken",
+      "treat": false,
+      "total_min": 35,
+      "diets": [],
+      "allergens": [
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "poultry"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 429.2,
+          "protein_g": 34,
+          "fat_g": 11,
+          "carbs_g": 48.2,
+          "fiber_g": 5.8
+        },
+        "max": {
+          "kcal": 886.9,
+          "protein_g": 69.7,
+          "fat_g": 21.5,
+          "carbs_g": 100.2,
+          "fiber_g": 7.5
+        }
+      }
+    },
+    {
+      "id": "pileshki_suvlaki_dzadziki_bulgur",
+      "name": "Пилешки сувлаки с дзадзики и булгур",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "chicken",
+      "cuisine": "international",
+      "prep_min": 20,
+      "cook_min": 20,
+      "keeps_days": 2,
+      "ingredients": [
+        {
+          "id": "chicken_breast",
+          "min_g": 120,
+          "max_g": 250
+        },
+        {
+          "id": "bulgur",
+          "min_g": 40,
+          "max_g": 90
+        },
+        {
+          "id": "greek_yogurt",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "cucumber",
+          "min_g": 60,
+          "max_g": 100
+        },
+        {
+          "id": "tomato",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "onion",
+          "g": 20
+        },
+        {
+          "id": "garlic",
+          "g": 4
+        },
+        {
+          "id": "dill",
+          "g": 3
+        },
+        {
+          "id": "lemon",
+          "g": 10
+        },
+        {
+          "id": "olive_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "oregano",
+          "g": 1
+        },
+        {
+          "id": "salt",
+          "g": 1.5
+        }
+      ],
+      "steps": [
+        "Нарежете пилешкото на кубчета и го мариновайте поне 15 минути в половината зехтин, лимонов сок, риган, сол и половината чесън.",
+        "Залейте булгура с двойно количество вряща подсолена вода, покрийте и оставете 15 минути.",
+        "За дзадзикито настържете краставицата, изстискайте водата и я смесете с гръцкия йогурт, останалия чесън и копъра.",
+        "Нанижете месото на шишчета (или го пържете направо) и печете на грил тиган 8–10 минути, като въртите.",
+        "Сервирайте с булгура, дзадзикито и нарязан домат и лук."
+      ],
+      "tags": [
+        "high_protein"
+      ],
+      "section": "chicken",
+      "batch_servings": 1,
+      "treat": false,
+      "total_min": 40,
+      "diets": [],
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "gluten",
+        "poultry"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 427.4,
+          "protein_g": 39.2,
+          "fat_g": 12,
+          "carbs_g": 43,
+          "fiber_g": 7.5
+        },
+        "max": {
+          "kcal": 875.4,
+          "protein_g": 80.9,
+          "fat_g": 24.3,
+          "carbs_g": 87.5,
+          "fiber_g": 14.7
+        }
+      }
+    },
+    {
+      "id": "pasta_pileshko_spanak",
+      "name": "Паста с пилешко и спанак",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "chicken",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 20,
+      "keeps_days": 2,
+      "ingredients": [
+        {
+          "id": "pasta",
+          "min_g": 60,
+          "max_g": 110
+        },
+        {
+          "id": "chicken_breast",
+          "min_g": 100,
+          "max_g": 200
+        },
+        {
+          "id": "spinach_fresh",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "milk_low_fat",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "parmesan",
+          "min_g": 10,
+          "max_g": 20
+        },
+        {
+          "id": "garlic",
+          "g": 5
+        },
+        {
+          "id": "olive_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "salt",
+          "g": 1
+        },
+        {
+          "id": "black_pepper",
+          "g": 0.5
+        }
+      ],
+      "steps": [
+        "Сварете пастата в подсолена вода според указанията на опаковката.",
+        "Запържете нарязаното на хапки пилешко в зехтина 6–7 минути.",
+        "Добавете чесъна и спанака и бъркайте, докато спанакът омекне.",
+        "Налейте млякото, добавете настъргания пармезан и черния пипер и оставете соса да се сгъсти 2–3 минути.",
+        "Разбъркайте с отцедената паста и сервирайте."
+      ],
+      "tags": [
+        "high_protein"
+      ],
+      "section": "chicken",
+      "batch_servings": 1,
+      "treat": false,
+      "total_min": 30,
+      "diets": [],
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "gluten",
+        "poultry"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 481.3,
+          "protein_g": 37.3,
+          "fat_g": 12.7,
+          "carbs_g": 53.3,
+          "fiber_g": 3.5
+        },
+        "max": {
+          "kcal": 916.8,
+          "protein_g": 72.9,
+          "fat_g": 25.3,
+          "carbs_g": 97.1,
+          "fiber_g": 6.4
+        }
+      }
+    },
+    {
+      "id": "tortila_pile_zelenchutsi",
+      "name": "Тортила с пиле и зеленчуци",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "chicken",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 12,
+      "ingredients": [
+        {
+          "id": "tortilla",
+          "min_g": 60,
+          "max_g": 120,
+          "step_g": 60
+        },
+        {
+          "id": "chicken_breast",
+          "min_g": 100,
+          "max_g": 200
+        },
+        {
+          "id": "pepper_sweet",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "onion",
+          "g": 30
+        },
+        {
+          "id": "lettuce",
+          "min_g": 30,
+          "max_g": 60
+        },
+        {
+          "id": "tomato",
+          "min_g": 50,
+          "max_g": 100
+        },
+        {
+          "id": "greek_yogurt",
+          "min_g": 30,
+          "max_g": 60
+        },
+        {
+          "id": "paprika",
+          "g": 1
+        },
+        {
+          "id": "cumin",
+          "g": 1
+        },
+        {
+          "id": "olive_oil",
+          "g": 5
+        },
+        {
+          "id": "salt",
+          "g": 1
+        }
+      ],
+      "steps": [
+        "Нарежете пилешкото, чушките и лука на тънки ивици.",
+        "Запържете ги в зехтина на силен огън 7–8 минути с червения пипер, кимиона и солта.",
+        "Затоплете тортилите на сух тиган по 20 секунди от всяка страна.",
+        "Намажете тортилите с гръцки йогурт, добавете марулята, доматите и пилешкото и ги завийте."
+      ],
+      "tags": [
+        "high_protein",
+        "quick"
+      ],
+      "section": "chicken",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 22,
+      "diets": [],
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "gluten",
+        "poultry"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 418.9,
+          "protein_g": 32,
+          "fat_g": 14.4,
+          "carbs_g": 41,
+          "fiber_g": 4.6
+        },
+        "max": {
+          "kcal": 775,
+          "protein_g": 63.3,
+          "fat_g": 23.4,
+          "carbs_g": 78.2,
+          "fiber_g": 8.3
+        }
+      }
+    },
+    {
+      "id": "pueshko_bulgur_pecheni_zelenchutsi",
+      "name": "Пуешко филе с булгур и печени зеленчуци",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "turkey",
+      "cuisine": "fitness",
+      "prep_min": 15,
+      "cook_min": 30,
+      "keeps_days": 3,
+      "ingredients": [
+        {
+          "id": "turkey_breast",
+          "min_g": 120,
+          "max_g": 250
+        },
+        {
+          "id": "bulgur",
+          "min_g": 40,
+          "max_g": 90
+        },
+        {
+          "id": "zucchini",
+          "min_g": 100,
+          "max_g": 200
+        },
+        {
+          "id": "pepper_sweet",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "onion",
+          "g": 40
+        },
+        {
+          "id": "garlic",
+          "g": 3
+        },
+        {
+          "id": "olive_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "oregano",
+          "g": 1
+        },
+        {
+          "id": "salt",
+          "g": 1.5
+        },
+        {
+          "id": "black_pepper",
+          "g": 0.5
+        }
+      ],
+      "steps": [
+        "Загрейте фурната на 210°C. Нарежете тиквичките, чушките и лука на едри парчета, разбъркайте ги с половината зехтин, риган и сол и ги печете 25 минути.",
+        "Залейте булгура с двойно количество вряща подсолена вода, покрийте и оставете 15 минути.",
+        "Овкусете пуешкото филе със сол, черен пипер и чесън и го изпечете на тиган с останалия зехтин по 4–5 минути от всяка страна.",
+        "Оставете месото да почине 3 минути, нарежете го и сервирайте с булгура и зеленчуците."
+      ],
+      "tags": [
+        "high_protein",
+        "meal_prep"
+      ],
+      "section": "chicken",
+      "batch_servings": 1,
+      "treat": false,
+      "total_min": 45,
+      "diets": [],
+      "allergens": [
+        "gluten"
+      ],
+      "exclusion_tags": [
+        "gluten",
+        "poultry"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 380,
+          "protein_g": 35.7,
+          "fat_g": 9,
+          "carbs_g": 44,
+          "fiber_g": 9
+        },
+        "max": {
+          "kcal": 778.6,
+          "protein_g": 74.1,
+          "fat_g": 18.2,
+          "carbs_g": 89.3,
+          "fiber_g": 17.7
+        }
+      }
+    },
+    {
+      "id": "svinsko_file_sladki_kartofi",
+      "name": "Свинско филе със сладки картофи",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "pork",
+      "cuisine": "fitness",
+      "prep_min": 10,
+      "cook_min": 35,
+      "keeps_days": 3,
+      "ingredients": [
+        {
+          "id": "pork_tenderloin",
+          "min_g": 120,
+          "max_g": 250
+        },
+        {
+          "id": "sweet_potato",
+          "min_g": 150,
+          "max_g": 300
+        },
+        {
+          "id": "green_beans_frozen",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "olive_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "mustard",
+          "g": 5
+        },
+        {
+          "id": "garlic",
+          "g": 3
+        },
+        {
+          "id": "paprika",
+          "g": 1
+        },
+        {
+          "id": "salt",
+          "g": 1.5
+        },
+        {
+          "id": "black_pepper",
+          "g": 0.5
+        }
+      ],
+      "steps": [
+        "Загрейте фурната на 200°C. Нарежете сладките картофи на кубчета, разбъркайте ги с половината зехтин и сол и ги печете 25–30 минути.",
+        "Намажете свинското филе с горчица, чесън, червен и черен пипер и сол.",
+        "Запечатайте месото на сгорещен тиган с останалия зехтин по 2 минути от всяка страна, после го сложете във фурната за 12–15 минути.",
+        "Сварете зеления боб 5–6 минути в подсолена вода.",
+        "Оставете месото да почине 5 минути, нарежете го на медальони и сервирайте."
+      ],
+      "tags": [
+        "high_protein",
+        "meal_prep"
+      ],
+      "section": "pork",
+      "batch_servings": 1,
+      "treat": false,
+      "total_min": 45,
+      "diets": [],
+      "allergens": [
+        "mustard"
+      ],
+      "exclusion_tags": [
+        "pork",
+        "red_meat"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 341.9,
+          "protein_g": 29.5,
+          "fat_g": 8.2,
+          "carbs_g": 38.4,
+          "fiber_g": 7.3
+        },
+        "max": {
+          "kcal": 679.9,
+          "protein_g": 60.3,
+          "fat_g": 16.2,
+          "carbs_g": 73.8,
+          "fiber_g": 13.6
+        }
+      }
+    },
+    {
+      "id": "svinsko_gabi_oriz",
+      "name": "Свинско с гъби и ориз",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "pork",
+      "cuisine": "bulgarian",
+      "prep_min": 10,
+      "cook_min": 30,
+      "batch_servings": 2,
+      "keeps_days": 3,
+      "ingredients": [
+        {
+          "id": "pork_tenderloin",
+          "min_g": 120,
+          "max_g": 250
+        },
+        {
+          "id": "mushrooms",
+          "min_g": 100,
+          "max_g": 200
+        },
+        {
+          "id": "onion",
+          "g": 50
+        },
+        {
+          "id": "rice_white",
+          "min_g": 40,
+          "max_g": 90
+        },
+        {
+          "id": "milk_low_fat",
+          "min_g": 50,
+          "max_g": 100
+        },
+        {
+          "id": "garlic",
+          "g": 3
+        },
+        {
+          "id": "sunflower_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "parsley",
+          "g": 5
+        },
+        {
+          "id": "salt",
+          "g": 1.5
+        },
+        {
+          "id": "black_pepper",
+          "g": 0.5
+        }
+      ],
+      "steps": [
+        "Сварете ориза според указанията на опаковката.",
+        "Нарежете месото на тънки ивици и го запържете в олиото на силен огън 5 минути. Извадете го.",
+        "В същия тиган задушете лука и нарязаните гъби 6–7 минути, докато водата се изпари.",
+        "Върнете месото, добавете чесъна, млякото, солта и черния пипер и гответе 5 минути, докато сосът се сгъсти.",
+        "Поръсете с магданоз и сервирайте с ориза."
+      ],
+      "tags": [
+        "high_protein"
+      ],
+      "section": "pork",
+      "treat": false,
+      "total_min": 40,
+      "diets": [],
+      "allergens": [
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "pork",
+        "red_meat"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 395.5,
+          "protein_g": 33.7,
+          "fat_g": 9.3,
+          "carbs_g": 44,
+          "fiber_g": 2.7
+        },
+        "max": {
+          "kcal": 810.9,
+          "protein_g": 69.3,
+          "fat_g": 18.7,
+          "carbs_g": 89.7,
+          "fiber_g": 4.4
+        }
+      }
+    },
+    {
+      "id": "svinsko_stir_fry_oriz",
+      "name": "Свинско със зеленчуци по азиатски с ориз",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "pork",
+      "cuisine": "international",
+      "prep_min": 15,
+      "cook_min": 15,
+      "ingredients": [
+        {
+          "id": "pork_tenderloin",
+          "min_g": 120,
+          "max_g": 220
+        },
+        {
+          "id": "rice_white",
+          "min_g": 40,
+          "max_g": 90
+        },
+        {
+          "id": "pepper_sweet",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "carrot",
+          "min_g": 50,
+          "max_g": 100
+        },
+        {
+          "id": "broccoli_fresh",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "onion",
+          "g": 40
+        },
+        {
+          "id": "garlic",
+          "g": 5
+        },
+        {
+          "id": "ginger",
+          "g": 5
+        },
+        {
+          "id": "soy_sauce",
+          "g": 15
+        },
+        {
+          "id": "honey",
+          "min_g": 0,
+          "max_g": 5
+        },
+        {
+          "id": "sunflower_oil",
+          "min_g": 5,
+          "max_g": 10
+        }
+      ],
+      "steps": [
+        "Сварете ориза според указанията на опаковката.",
+        "Нарежете месото на тънки ивици, а зеленчуците – на ленти и малки розички.",
+        "Запържете месото в силно загрято олио 3–4 минути и го извадете.",
+        "Запържете зеленчуците 4–5 минути, като бъркате непрекъснато – трябва да останат хрупкави.",
+        "Върнете месото, добавете чесъна, настъргания джинджифил, соевия сос и меда и бъркайте още 1 минута. Сервирайте с ориза."
+      ],
+      "tags": [
+        "high_protein",
+        "quick"
+      ],
+      "section": "pork",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 30,
+      "diets": [],
+      "allergens": [
+        "gluten",
+        "soy"
+      ],
+      "exclusion_tags": [
+        "gluten",
+        "pork",
+        "red_meat"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 424.9,
+          "protein_g": 33.6,
+          "fat_g": 8.7,
+          "carbs_g": 53.9,
+          "fiber_g": 6.7
+        },
+        "max": {
+          "kcal": 838.3,
+          "protein_g": 61.2,
+          "fat_g": 16.8,
+          "carbs_g": 111.7,
+          "fiber_g": 12
+        }
+      }
+    },
+    {
+      "id": "svinski_parzholi_pecheni_zelenchutsi",
+      "name": "Свински пържоли с печени зеленчуци",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "pork",
+      "cuisine": "bulgarian",
+      "prep_min": 10,
+      "cook_min": 40,
+      "ingredients": [
+        {
+          "id": "pork_shoulder",
+          "min_g": 130,
+          "max_g": 220,
+          "note": "вратна пържола без кост"
+        },
+        {
+          "id": "potato",
+          "min_g": 150,
+          "max_g": 300
+        },
+        {
+          "id": "zucchini",
+          "min_g": 100,
+          "max_g": 200
+        },
+        {
+          "id": "pepper_sweet",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "olive_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "garlic",
+          "g": 3
+        },
+        {
+          "id": "paprika",
+          "g": 1
+        },
+        {
+          "id": "oregano",
+          "g": 1
+        },
+        {
+          "id": "salt",
+          "g": 2
+        },
+        {
+          "id": "black_pepper",
+          "g": 0.5
+        }
+      ],
+      "steps": [
+        "Загрейте фурната на 210°C. Нарежете картофите, тиквичките и чушките, разбъркайте ги със зехтина, ригана и половината сол и ги печете 35–40 минути.",
+        "Овкусете пържолите с чесън, червен и черен пипер и останалата сол.",
+        "Изпечете пържолите на сгорещен грил тиган по 4–5 минути от всяка страна.",
+        "Сервирайте с печените зеленчуци."
+      ],
+      "tags": [
+        "high_protein"
+      ],
+      "section": "pork",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 50,
+      "diets": [],
+      "allergens": [],
+      "exclusion_tags": [
+        "pork",
+        "red_meat"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 515.5,
+          "protein_g": 27.9,
+          "fat_g": 29.3,
+          "carbs_g": 36.7,
+          "fiber_g": 6.8
+        },
+        "max": {
+          "kcal": 922.8,
+          "protein_g": 48.3,
+          "fat_g": 51.1,
+          "carbs_g": 70.3,
+          "fiber_g": 12.4
+        }
+      }
+    },
+    {
+      "id": "svinsko_sas_zele",
+      "name": "Свинско със зеле",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "pork",
+      "cuisine": "bulgarian",
+      "prep_min": 15,
+      "cook_min": 90,
+      "batch_servings": 4,
+      "keeps_days": 4,
+      "ingredients": [
+        {
+          "id": "pork_shoulder",
+          "min_g": 120,
+          "max_g": 220
+        },
+        {
+          "id": "sauerkraut",
+          "min_g": 200,
+          "max_g": 350
+        },
+        {
+          "id": "onion",
+          "g": 40
+        },
+        {
+          "id": "sunflower_oil",
+          "g": 5
+        },
+        {
+          "id": "paprika",
+          "g": 2
+        },
+        {
+          "id": "black_pepper",
+          "g": 1
+        }
+      ],
+      "steps": [
+        "Нарежете месото на кубчета и го запържете в олиото в тенджера или гювеч 5–6 минути.",
+        "Добавете нарязания лук и задушете 3–4 минути, след това червения пипер.",
+        "Добавете нарязаното кисело зеле и черния пипер и налейте половин чаша вода.",
+        "Покрийте и печете във фурна на 180°C (или гответе на котлона на слаб огън) около 75–90 минути, докато месото омекне.",
+        "Сол обикновено не е нужна – киселото зеле е достатъчно солено."
+      ],
+      "tags": [
+        "family",
+        "meal_prep",
+        "low_carb_friendly"
+      ],
+      "section": "pork",
+      "treat": false,
+      "total_min": 105,
+      "diets": [
+        "low_carb"
+      ],
+      "allergens": [],
+      "exclusion_tags": [
+        "pork",
+        "red_meat"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 389.5,
+          "protein_g": 23.3,
+          "fat_g": 27.2,
+          "carbs_g": 14,
+          "fiber_g": 7.4
+        },
+        "max": {
+          "kcal": 654.1,
+          "protein_g": 41.8,
+          "fat_g": 45.4,
+          "carbs_g": 20.4,
+          "fiber_g": 11.8
+        }
+      }
+    },
+    {
+      "id": "teleshki_stek_kartofi_salata",
+      "name": "Телешки стек с картофи и салата",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "beef",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 35,
+      "ingredients": [
+        {
+          "id": "beef_steak",
+          "min_g": 150,
+          "max_g": 250
+        },
+        {
+          "id": "potato",
+          "min_g": 150,
+          "max_g": 300
+        },
+        {
+          "id": "lettuce",
+          "min_g": 50,
+          "max_g": 100
+        },
+        {
+          "id": "tomato",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "cucumber",
+          "min_g": 50,
+          "max_g": 100
+        },
+        {
+          "id": "olive_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "garlic",
+          "g": 3
+        },
+        {
+          "id": "lemon",
+          "g": 10
+        },
+        {
+          "id": "salt",
+          "g": 2
+        },
+        {
+          "id": "black_pepper",
+          "g": 1
+        }
+      ],
+      "steps": [
+        "Загрейте фурната на 210°C. Нарежете картофите на резенки, разбъркайте ги с половината зехтин и сол и ги печете 30–35 минути.",
+        "Извадете стека от хладилника 20 минути преди печене и го подсушете с кухненска хартия.",
+        "Овкусете със сол и черен пипер и го изпечете на много силно загрят тиган по 3–4 минути от всяка страна (за средно изпечен).",
+        "Оставете месото да почине 5 минути, преди да го нарежете.",
+        "Направете салата от марулята, доматите и краставицата с останалия зехтин и лимонов сок."
+      ],
+      "tags": [
+        "high_protein"
+      ],
+      "section": "beef",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 45,
+      "diets": [],
+      "allergens": [],
+      "exclusion_tags": [
+        "red_meat"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 447.5,
+          "protein_g": 38,
+          "fat_g": 17.4,
+          "carbs_g": 35.2,
+          "fiber_g": 5.6
+        },
+        "max": {
+          "kcal": 800.3,
+          "protein_g": 64.6,
+          "fat_g": 30.7,
+          "carbs_g": 67.5,
+          "fiber_g": 10.4
+        }
+      }
+    },
+    {
+      "id": "teleshko_v_gyuvech_zelenchutsi",
+      "name": "Телешко в гювеч със зеленчуци",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "beef",
+      "cuisine": "bulgarian",
+      "prep_min": 20,
+      "cook_min": 120,
+      "batch_servings": 4,
+      "keeps_days": 3,
+      "ingredients": [
+        {
+          "id": "beef_steak",
+          "min_g": 120,
+          "max_g": 220
+        },
+        {
+          "id": "potato",
+          "min_g": 100,
+          "max_g": 250
+        },
+        {
+          "id": "carrot",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "pepper_sweet",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "mushrooms",
+          "min_g": 50,
+          "max_g": 100
+        },
+        {
+          "id": "onion",
+          "g": 60
+        },
+        {
+          "id": "tomatoes_canned",
+          "min_g": 100,
+          "max_g": 150
+        },
+        {
+          "id": "sunflower_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "paprika",
+          "g": 2
+        },
+        {
+          "id": "black_pepper",
+          "g": 0.5
+        },
+        {
+          "id": "salt",
+          "g": 1.5
+        }
+      ],
+      "steps": [
+        "Нарежете месото на кубчета и го запържете в олиото на силен огън 5–6 минути.",
+        "Добавете нарязания лук и морковите и задушете 5 минути, след това червения пипер.",
+        "Прехвърлете в гювеч, добавете картофите, чушките, гъбите, доматите, солта и черния пипер и налейте 1 чаша вода.",
+        "Покрийте и печете във фурна на 180°C около 1 час и 45 минути, докато месото омекне.",
+        "Махнете капака за последните 15 минути, за да се сгъсти сосът."
+      ],
+      "tags": [
+        "family",
+        "meal_prep"
+      ],
+      "section": "beef",
+      "treat": false,
+      "total_min": 140,
+      "diets": [],
+      "allergens": [],
+      "exclusion_tags": [
+        "red_meat"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 423.7,
+          "protein_g": 33.2,
+          "fat_g": 15.7,
+          "carbs_g": 40.2,
+          "fiber_g": 9.7
+        },
+        "max": {
+          "kcal": 811.2,
+          "protein_g": 61.5,
+          "fat_g": 29.5,
+          "carbs_g": 79.7,
+          "fiber_g": 17.5
+        }
+      }
+    },
+    {
+      "id": "pasta_boloneze",
+      "name": "Паста болонезе",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "beef",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 35,
+      "batch_servings": 4,
+      "keeps_days": 3,
+      "ingredients": [
+        {
+          "id": "pasta",
+          "min_g": 60,
+          "max_g": 110
+        },
+        {
+          "id": "minced_beef",
+          "min_g": 100,
+          "max_g": 180
+        },
+        {
+          "id": "tomatoes_canned",
+          "min_g": 150,
+          "max_g": 250
+        },
+        {
+          "id": "onion",
+          "g": 50
+        },
+        {
+          "id": "carrot",
+          "g": 40
+        },
+        {
+          "id": "garlic",
+          "g": 5
+        },
+        {
+          "id": "olive_oil",
+          "g": 5
+        },
+        {
+          "id": "oregano",
+          "g": 1
+        },
+        {
+          "id": "parmesan",
+          "min_g": 0,
+          "max_g": 20
+        },
+        {
+          "id": "salt",
+          "g": 1.5
+        },
+        {
+          "id": "black_pepper",
+          "g": 0.5
+        }
+      ],
+      "steps": [
+        "Задушете ситно нарязания лук и настъргания морков в зехтина 5 минути.",
+        "Добавете каймата и я запържете, като я разбивате с лъжица, докато промени цвета си.",
+        "Добавете чесъна, доматите, ригана, солта и черния пипер и оставете соса да къкри на слаб огън 20–25 минути.",
+        "Сварете пастата в подсолена вода според указанията на опаковката.",
+        "Сервирайте пастата със соса и по желание поръсете с пармезан."
+      ],
+      "tags": [
+        "high_protein",
+        "family",
+        "meal_prep"
+      ],
+      "section": "beef",
+      "treat": false,
+      "total_min": 45,
+      "diets": [],
+      "allergens": [
+        "gluten"
+      ],
+      "allergens_optional": [
+        "milk"
+      ],
+      "exclusion_tags": [
+        "gluten",
+        "red_meat"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 553.6,
+          "protein_g": 29,
+          "fat_g": 21.5,
+          "carbs_g": 61.2,
+          "fiber_g": 7.4
+        },
+        "max": {
+          "kcal": 1011.1,
+          "protein_g": 56.8,
+          "fat_g": 40.1,
+          "carbs_g": 104.8,
+          "fiber_g": 10.9
+        }
+      }
+    },
+    {
+      "id": "chili_kon_karne",
+      "name": "Чили кон карне",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "beef",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 35,
+      "batch_servings": 4,
+      "keeps_days": 4,
+      "ingredients": [
+        {
+          "id": "minced_beef",
+          "min_g": 100,
+          "max_g": 180
+        },
+        {
+          "id": "beans_canned",
+          "min_g": 100,
+          "max_g": 200
+        },
+        {
+          "id": "tomatoes_canned",
+          "min_g": 150,
+          "max_g": 250
+        },
+        {
+          "id": "pepper_sweet",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "onion",
+          "g": 60
+        },
+        {
+          "id": "garlic",
+          "g": 5
+        },
+        {
+          "id": "corn_canned",
+          "min_g": 0,
+          "max_g": 60
+        },
+        {
+          "id": "cumin",
+          "g": 2
+        },
+        {
+          "id": "paprika",
+          "g": 3
+        },
+        {
+          "id": "sunflower_oil",
+          "g": 5
+        },
+        {
+          "id": "salt",
+          "g": 1.5
+        },
+        {
+          "id": "rice_white",
+          "min_g": 0,
+          "max_g": 80,
+          "note": "за сервиране"
+        }
+      ],
+      "steps": [
+        "Задушете нарязания лук и чушките в олиото 5 минути.",
+        "Добавете каймата и я запържете, докато промени цвета си.",
+        "Добавете чесъна, кимиона и червения пипер и бъркайте 1 минута.",
+        "Добавете доматите, отцедения боб, царевицата и солта и гответе на слаб огън 20–25 минути.",
+        "Сервирайте самостоятелно или с ориз."
+      ],
+      "tags": [
+        "high_protein",
+        "meal_prep",
+        "family"
+      ],
+      "section": "beef",
+      "treat": false,
+      "total_min": 45,
+      "diets": [],
+      "allergens": [],
+      "exclusion_tags": [
+        "red_meat"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 470.2,
+          "protein_g": 30.1,
+          "fat_g": 22.5,
+          "carbs_g": 40.1,
+          "fiber_g": 12
+        },
+        "max": {
+          "kcal": 1130,
+          "protein_g": 61.4,
+          "fat_g": 37.3,
+          "carbs_g": 141.2,
+          "fiber_g": 22.9
+        }
+      }
+    },
+    {
+      "id": "musaka",
+      "name": "Мусака",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "mixed_meat",
+      "cuisine": "bulgarian",
+      "prep_min": 20,
+      "cook_min": 60,
+      "batch_servings": 6,
+      "keeps_days": 3,
+      "ingredients": [
+        {
+          "id": "minced_mixed",
+          "min_g": 100,
+          "max_g": 180
+        },
+        {
+          "id": "potato",
+          "min_g": 200,
+          "max_g": 350
+        },
+        {
+          "id": "onion",
+          "g": 50
+        },
+        {
+          "id": "tomato",
+          "g": 80
+        },
+        {
+          "id": "egg",
+          "min_g": 30,
+          "max_g": 60
+        },
+        {
+          "id": "yogurt_whole",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "sunflower_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "paprika",
+          "g": 2
+        },
+        {
+          "id": "black_pepper",
+          "g": 1
+        },
+        {
+          "id": "salt",
+          "g": 2
+        }
+      ],
+      "steps": [
+        "Загрейте фурната на 200°C. Нарежете картофите на кубчета, а лука и доматите – ситно.",
+        "Задушете лука в олиото 4–5 минути, добавете каймата и я запържете, докато промени цвета си. Добавете доматите, червения пипер, черния пипер и солта.",
+        "Разбъркайте каймата с картофите в тава, налейте вода колкото да покрие наполовина и печете 40–45 минути.",
+        "Разбийте яйцата с киселото мляко и залейте мусаката.",
+        "Печете още 12–15 минути, докато заливката се зачерви. Оставете да почине 10 минути преди рязане."
+      ],
+      "tags": [
+        "family",
+        "meal_prep"
+      ],
+      "section": "beef",
+      "treat": false,
+      "total_min": 80,
+      "diets": [],
+      "allergens": [
+        "eggs",
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "eggs",
+        "pork",
+        "red_meat"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 595.4,
+          "protein_g": 29.2,
+          "fat_g": 32.3,
+          "carbs_g": 48.4,
+          "fiber_g": 7
+        },
+        "max": {
+          "kcal": 1051.2,
+          "protein_g": 51.9,
+          "fat_g": 59.5,
+          "carbs_g": 78.1,
+          "fiber_g": 10.1
+        }
+      }
+    },
+    {
+      "id": "kyufteta_na_furna_kartofi",
+      "name": "Кюфтета на фурна с картофи",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "mixed_meat",
+      "cuisine": "bulgarian",
+      "prep_min": 20,
+      "cook_min": 40,
+      "batch_servings": 4,
+      "keeps_days": 3,
+      "ingredients": [
+        {
+          "id": "minced_mixed",
+          "min_g": 120,
+          "max_g": 200
+        },
+        {
+          "id": "potato",
+          "min_g": 150,
+          "max_g": 300
+        },
+        {
+          "id": "onion",
+          "g": 40
+        },
+        {
+          "id": "egg",
+          "g": 15
+        },
+        {
+          "id": "oats_rolled",
+          "min_g": 10,
+          "max_g": 20
+        },
+        {
+          "id": "parsley",
+          "g": 5
+        },
+        {
+          "id": "cumin",
+          "g": 1
+        },
+        {
+          "id": "sunflower_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "salt",
+          "g": 2
+        },
+        {
+          "id": "black_pepper",
+          "g": 1
+        }
+      ],
+      "steps": [
+        "Загрейте фурната на 200°C. Нарежете картофите на резени, разбъркайте ги с олиото и половината сол и ги наредете в тава.",
+        "Смесете каймата с настъргания лук, яйцето, овесените ядки, магданоза, кимиона, черния пипер и останалата сол. Омесете добре и оставете 10 минути.",
+        "Оформете кюфтета с мокри ръце и ги наредете върху картофите.",
+        "Печете 35–40 минути, като обърнете кюфтетата по средата."
+      ],
+      "tags": [
+        "family",
+        "meal_prep"
+      ],
+      "section": "beef",
+      "treat": false,
+      "total_min": 60,
+      "diets": [],
+      "allergens": [
+        "eggs",
+        "gluten"
+      ],
+      "exclusion_tags": [
+        "eggs",
+        "gluten",
+        "pork",
+        "red_meat"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 559.7,
+          "protein_g": 27.8,
+          "fat_g": 33,
+          "carbs_g": 38.1,
+          "fiber_g": 5.4
+        },
+        "max": {
+          "kcal": 968.7,
+          "protein_g": 46,
+          "fat_g": 55.8,
+          "carbs_g": 71,
+          "fiber_g": 9.6
+        }
+      }
+    },
+    {
+      "id": "palneni_chushki_kayma_oriz",
+      "name": "Пълнени чушки с кайма и ориз",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "mixed_meat",
+      "cuisine": "bulgarian",
+      "prep_min": 25,
+      "cook_min": 60,
+      "batch_servings": 4,
+      "keeps_days": 3,
+      "ingredients": [
+        {
+          "id": "pepper_sweet",
+          "min_g": 150,
+          "max_g": 250
+        },
+        {
+          "id": "minced_mixed",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "rice_white",
+          "min_g": 20,
+          "max_g": 40
+        },
+        {
+          "id": "onion",
+          "g": 40
+        },
+        {
+          "id": "tomato",
+          "g": 60
+        },
+        {
+          "id": "parsley",
+          "g": 5
+        },
+        {
+          "id": "paprika",
+          "g": 2
+        },
+        {
+          "id": "sunflower_oil",
+          "g": 5
+        },
+        {
+          "id": "salt",
+          "g": 1.5
+        },
+        {
+          "id": "yogurt_whole",
+          "min_g": 50,
+          "max_g": 100,
+          "note": "за сервиране"
+        }
+      ],
+      "steps": [
+        "Изрежете дръжките на чушките и почистете семките.",
+        "Задушете нарязания лук в олиото, добавете каймата и я запържете. Добавете ориза, настъргания домат, червения пипер, солта и магданоза и бъркайте 2 минути.",
+        "Напълнете чушките с плънката до около 3/4 и ги наредете изправени в тава.",
+        "Налейте гореща вода до половината на чушките, покрийте с фолио и печете на 180°C около 50 минути. Махнете фолиото за последните 10 минути.",
+        "Сервирайте с кисело мляко."
+      ],
+      "tags": [
+        "family",
+        "meal_prep"
+      ],
+      "section": "beef",
+      "treat": false,
+      "total_min": 85,
+      "diets": [],
+      "allergens": [
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "pork",
+        "red_meat"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 431.3,
+          "protein_g": 19.5,
+          "fat_g": 24.6,
+          "carbs_g": 34.8,
+          "fiber_g": 5.7
+        },
+        "max": {
+          "kcal": 744.9,
+          "protein_g": 35.5,
+          "fat_g": 41.5,
+          "carbs_g": 59.2,
+          "fiber_g": 8
+        }
+      }
+    },
+    {
+      "id": "syomga_kartofi_brokoli",
+      "name": "Сьомга с картофи и броколи",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "fish",
+      "cuisine": "fitness",
+      "prep_min": 10,
+      "cook_min": 30,
+      "keeps_days": 2,
+      "ingredients": [
+        {
+          "id": "salmon",
+          "min_g": 120,
+          "max_g": 200
+        },
+        {
+          "id": "potato",
+          "min_g": 150,
+          "max_g": 300
+        },
+        {
+          "id": "broccoli_frozen",
+          "min_g": 100,
+          "max_g": 200
+        },
+        {
+          "id": "olive_oil",
+          "g": 5
+        },
+        {
+          "id": "lemon",
+          "g": 15
+        },
+        {
+          "id": "dill",
+          "g": 3
+        },
+        {
+          "id": "salt",
+          "g": 1.5
+        },
+        {
+          "id": "black_pepper",
+          "g": 0.5
+        }
+      ],
+      "steps": [
+        "Загрейте фурната на 200°C. Нарежете картофите на кубчета, разбъркайте ги със зехтина и малко сол и ги печете 15 минути.",
+        "Добавете в тавата броколите и сьомгата, овкусена със сол, черен пипер и лимонов сок.",
+        "Печете още 12–15 минути, докато рибата лесно се разделя с вилица.",
+        "Поръсете с копър и сервирайте с резен лимон."
+      ],
+      "tags": [
+        "high_protein",
+        "one_pan",
+        "omega3"
+      ],
+      "section": "fish",
+      "batch_servings": 1,
+      "treat": false,
+      "total_min": 40,
+      "diets": [
+        "pescatarian"
+      ],
+      "allergens": [
+        "fish"
+      ],
+      "exclusion_tags": [
+        "fish"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 442.2,
+          "protein_g": 30.7,
+          "fat_g": 21.6,
+          "carbs_g": 32.9,
+          "fiber_g": 6.8
+        },
+        "max": {
+          "kcal": 750.1,
+          "protein_g": 52.9,
+          "fat_g": 32.8,
+          "carbs_g": 64,
+          "fiber_g": 12.9
+        }
+      }
+    },
+    {
+      "id": "byala_riba_na_furna_zelenchutsi",
+      "name": "Бяла риба на фурна със зеленчуци",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "fish",
+      "cuisine": "international",
+      "prep_min": 15,
+      "cook_min": 30,
+      "keeps_days": 2,
+      "ingredients": [
+        {
+          "id": "white_fish",
+          "min_g": 150,
+          "max_g": 250
+        },
+        {
+          "id": "zucchini",
+          "min_g": 100,
+          "max_g": 200
+        },
+        {
+          "id": "pepper_sweet",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "tomato",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "onion",
+          "g": 40
+        },
+        {
+          "id": "potato",
+          "min_g": 0,
+          "max_g": 250
+        },
+        {
+          "id": "olive_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "lemon",
+          "g": 15
+        },
+        {
+          "id": "garlic",
+          "g": 3
+        },
+        {
+          "id": "parsley",
+          "g": 5
+        },
+        {
+          "id": "salt",
+          "g": 1.5
+        }
+      ],
+      "steps": [
+        "Загрейте фурната на 200°C. Нарежете картофите (ако използвате) на тънки резени и ги печете 15 минути с половината зехтин.",
+        "Нарежете тиквичките, чушките, доматите и лука и ги разпределете в тавата.",
+        "Сложете отгоре филетата риба, овкусени със сол, чесън и лимонов сок, и полейте с останалия зехтин.",
+        "Печете 18–20 минути. Поръсете с магданоз преди сервиране."
+      ],
+      "tags": [
+        "high_protein",
+        "one_pan",
+        "low_carb_friendly"
+      ],
+      "section": "fish",
+      "batch_servings": 1,
+      "treat": false,
+      "total_min": 45,
+      "diets": [
+        "pescatarian"
+      ],
+      "allergens": [
+        "fish"
+      ],
+      "exclusion_tags": [
+        "fish"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 246,
+          "protein_g": 30.4,
+          "fat_g": 6.9,
+          "carbs_g": 17.5,
+          "fiber_g": 5
+        },
+        "max": {
+          "kcal": 612.5,
+          "protein_g": 55.8,
+          "fat_g": 13.4,
+          "carbs_g": 71.3,
+          "fiber_g": 13.5
+        }
+      }
+    },
+    {
+      "id": "skumriya_na_furna_kartofi",
+      "name": "Скумрия на фурна с картофи",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "fish",
+      "cuisine": "bulgarian",
+      "prep_min": 15,
+      "cook_min": 40,
+      "ingredients": [
+        {
+          "id": "mackerel",
+          "min_g": 150,
+          "max_g": 250,
+          "note": "филе или почистена риба"
+        },
+        {
+          "id": "potato",
+          "min_g": 150,
+          "max_g": 300
+        },
+        {
+          "id": "onion",
+          "g": 40
+        },
+        {
+          "id": "lemon",
+          "g": 15
+        },
+        {
+          "id": "sunflower_oil",
+          "g": 5
+        },
+        {
+          "id": "paprika",
+          "g": 1
+        },
+        {
+          "id": "parsley",
+          "g": 5
+        },
+        {
+          "id": "salt",
+          "g": 2
+        },
+        {
+          "id": "cabbage",
+          "min_g": 80,
+          "max_g": 150,
+          "note": "за салата"
+        },
+        {
+          "id": "vinegar",
+          "g": 5
+        }
+      ],
+      "steps": [
+        "Загрейте фурната на 200°C. Нарежете картофите на резени, а лука – на кръгчета, разбъркайте с олиото и половината сол и ги печете 20 минути.",
+        "Почистете скумрията, посолете я отвътре и отвън, поръсете с червен пипер и сложете резен лимон и магданоз в коремчето.",
+        "Наредете рибата върху картофите и печете още 18–20 минути.",
+        "Направете салата от ситно нарязаното зеле с оцет и щипка сол и сервирайте заедно."
+      ],
+      "tags": [
+        "omega3"
+      ],
+      "section": "fish",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 55,
+      "diets": [
+        "pescatarian"
+      ],
+      "allergens": [
+        "fish",
+        "sulphites"
+      ],
+      "exclusion_tags": [
+        "fish"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 513.2,
+          "protein_g": 32.9,
+          "fat_g": 26.3,
+          "carbs_g": 36.9,
+          "fiber_g": 6.8
+        },
+        "max": {
+          "kcal": 851.2,
+          "protein_g": 55.5,
+          "fat_g": 40.4,
+          "carbs_g": 67.2,
+          "fiber_g": 11.7
+        }
+      }
+    },
+    {
+      "id": "pastarva_limon_kartofi",
+      "name": "Пъстърва с лимон и картофи",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "fish",
+      "cuisine": "bulgarian",
+      "prep_min": 10,
+      "cook_min": 30,
+      "ingredients": [
+        {
+          "id": "trout",
+          "min_g": 150,
+          "max_g": 250
+        },
+        {
+          "id": "potato",
+          "min_g": 150,
+          "max_g": 300
+        },
+        {
+          "id": "butter",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "lemon",
+          "g": 20
+        },
+        {
+          "id": "garlic",
+          "g": 3
+        },
+        {
+          "id": "dill",
+          "g": 3
+        },
+        {
+          "id": "salt",
+          "g": 1.5
+        },
+        {
+          "id": "lettuce",
+          "min_g": 50,
+          "max_g": 100
+        }
+      ],
+      "steps": [
+        "Сварете картофите в подсолена вода 15–20 минути и ги нарежете.",
+        "Посолете пъстървата и я изпечете на тиган с маслото по 4–5 минути от всяка страна.",
+        "Към края добавете в тигана чесъна и лимоновия сок и полейте рибата с получения сос.",
+        "Поръсете картофите с копър и сервирайте с рибата и зелена салата."
+      ],
+      "tags": [
+        "high_protein",
+        "omega3"
+      ],
+      "section": "fish",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 40,
+      "diets": [
+        "pescatarian"
+      ],
+      "allergens": [
+        "fish",
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "fish"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 381.4,
+          "protein_g": 34,
+          "fat_g": 13.6,
+          "carbs_g": 30.8,
+          "fiber_g": 4.4
+        },
+        "max": {
+          "kcal": 680.8,
+          "protein_g": 57.5,
+          "fat_g": 24.1,
+          "carbs_g": 58.5,
+          "fiber_g": 8.2
+        }
+      }
+    },
+    {
+      "id": "pasta_skaridi_chesan",
+      "name": "Паста със скариди и чесън",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "seafood",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 15,
+      "ingredients": [
+        {
+          "id": "pasta",
+          "min_g": 60,
+          "max_g": 110
+        },
+        {
+          "id": "shrimp",
+          "min_g": 100,
+          "max_g": 200,
+          "note": "обелени"
+        },
+        {
+          "id": "garlic",
+          "g": 8
+        },
+        {
+          "id": "olive_oil",
+          "min_g": 8,
+          "max_g": 15
+        },
+        {
+          "id": "tomato",
+          "min_g": 0,
+          "max_g": 100
+        },
+        {
+          "id": "lemon",
+          "g": 10
+        },
+        {
+          "id": "parsley",
+          "g": 5
+        },
+        {
+          "id": "salt",
+          "g": 1
+        }
+      ],
+      "steps": [
+        "Сварете пастата в подсолена вода според указанията на опаковката. Запазете половин чаша от водата.",
+        "Загрейте зехтина и запържете нарязания чесън за 30 секунди, без да покафенява.",
+        "Добавете скаридите (и по желание нарязаните домати) и гответе 3–4 минути, докато порозовеят.",
+        "Добавете пастата, малко от водата, лимоновия сок и магданоза и разбъркайте."
+      ],
+      "tags": [
+        "high_protein",
+        "quick"
+      ],
+      "section": "fish",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 25,
+      "diets": [
+        "pescatarian"
+      ],
+      "allergens": [
+        "crustaceans",
+        "gluten"
+      ],
+      "exclusion_tags": [
+        "gluten",
+        "seafood"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 394.9,
+          "protein_g": 28.7,
+          "fat_g": 9.5,
+          "carbs_g": 48.7,
+          "fiber_g": 2.5
+        },
+        "max": {
+          "kcal": 745.3,
+          "protein_g": 56.2,
+          "fat_g": 18,
+          "carbs_g": 89.9,
+          "fiber_g": 5.3
+        }
+      }
+    },
+    {
+      "id": "poke_riba_ton_oriz",
+      "name": "Купа с риба тон, ориз и зеленчуци (поке)",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "fish",
+      "cuisine": "international",
+      "prep_min": 15,
+      "cook_min": 15,
+      "keeps_days": 1,
+      "ingredients": [
+        {
+          "id": "rice_white",
+          "min_g": 50,
+          "max_g": 100
+        },
+        {
+          "id": "tuna_canned_water",
+          "min_g": 100,
+          "max_g": 180,
+          "note": "отцедена"
+        },
+        {
+          "id": "cucumber",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "carrot",
+          "min_g": 40,
+          "max_g": 80
+        },
+        {
+          "id": "avocado",
+          "min_g": 30,
+          "max_g": 70
+        },
+        {
+          "id": "corn_canned",
+          "min_g": 30,
+          "max_g": 60
+        },
+        {
+          "id": "soy_sauce",
+          "g": 10
+        },
+        {
+          "id": "lemon",
+          "g": 10
+        }
+      ],
+      "steps": [
+        "Сварете ориза и го оставете да изстине.",
+        "Нарежете краставицата и авокадото на кубчета, а морковите настържете.",
+        "Разпределете ориза в купа и наредете отгоре рибата тон, зеленчуците и царевицата.",
+        "Полейте със соев сос и лимонов сок."
+      ],
+      "tags": [
+        "high_protein",
+        "no_cook_protein"
+      ],
+      "section": "fish",
+      "batch_servings": 1,
+      "treat": false,
+      "total_min": 30,
+      "diets": [
+        "pescatarian"
+      ],
+      "allergens": [
+        "fish",
+        "gluten",
+        "soy"
+      ],
+      "exclusion_tags": [
+        "fish",
+        "gluten"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 370.2,
+          "protein_g": 26,
+          "fat_g": 6.3,
+          "carbs_g": 54.3,
+          "fiber_g": 5
+        },
+        "max": {
+          "kcal": 731,
+          "protein_g": 47.3,
+          "fat_g": 13.8,
+          "carbs_g": 108,
+          "fiber_g": 10.4
+        }
+      }
+    },
+    {
+      "id": "salata_riba_ton_bob_tsarevitsa",
+      "name": "Салата с риба тон, боб и царевица",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "fish",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 0,
+      "ingredients": [
+        {
+          "id": "tuna_canned_water",
+          "min_g": 100,
+          "max_g": 180,
+          "note": "отцедена"
+        },
+        {
+          "id": "beans_canned",
+          "min_g": 80,
+          "max_g": 150,
+          "note": "отцеден"
+        },
+        {
+          "id": "corn_canned",
+          "min_g": 40,
+          "max_g": 80
+        },
+        {
+          "id": "lettuce",
+          "min_g": 50,
+          "max_g": 100
+        },
+        {
+          "id": "tomato",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "onion",
+          "g": 20
+        },
+        {
+          "id": "olive_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "lemon",
+          "g": 10
+        },
+        {
+          "id": "salt",
+          "g": 1
+        }
+      ],
+      "steps": [
+        "Отцедете и изплакнете боба и царевицата.",
+        "Нарежете марулята, доматите и лука.",
+        "Смесете всичко в купа, добавете рибата тон на едри парчета.",
+        "Подправете със зехтин, лимонов сок и сол."
+      ],
+      "tags": [
+        "high_protein",
+        "no_cook",
+        "quick",
+        "meal_prep"
+      ],
+      "section": "main_salads",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 10,
+      "diets": [
+        "pescatarian"
+      ],
+      "allergens": [
+        "fish"
+      ],
+      "exclusion_tags": [
+        "fish"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 288.5,
+          "protein_g": 28.2,
+          "fat_g": 7.6,
+          "carbs_g": 30.3,
+          "fiber_g": 7.4
+        },
+        "max": {
+          "kcal": 534.7,
+          "protein_g": 51.3,
+          "fat_g": 14.8,
+          "carbs_g": 55.3,
+          "fiber_g": 13.5
+        }
+      }
+    },
+    {
+      "id": "salata_riba_ton_yaitse_kartofi",
+      "name": "Салата с риба тон, яйце и картофи",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "fish",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 20,
+      "keeps_days": 2,
+      "ingredients": [
+        {
+          "id": "tuna_canned_water",
+          "min_g": 100,
+          "max_g": 150,
+          "note": "отцедена"
+        },
+        {
+          "id": "egg",
+          "min_g": 60,
+          "max_g": 120,
+          "step_g": 60
+        },
+        {
+          "id": "potato",
+          "min_g": 100,
+          "max_g": 250
+        },
+        {
+          "id": "green_beans_frozen",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "tomato",
+          "min_g": 80,
+          "max_g": 120
+        },
+        {
+          "id": "lettuce",
+          "min_g": 40,
+          "max_g": 80
+        },
+        {
+          "id": "olive_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "mustard",
+          "g": 5
+        },
+        {
+          "id": "vinegar",
+          "g": 5
+        },
+        {
+          "id": "salt",
+          "g": 1
+        }
+      ],
+      "steps": [
+        "Сварете картофите 15–20 минути, а яйцата – 8 минути. Сварете зеления боб 5 минути.",
+        "Обелете и нарежете картофите и яйцата.",
+        "Разбъркайте зехтина, горчицата, оцета и солта за дресинг.",
+        "Наредете марулята, картофите, боба, доматите, яйцата и рибата тон в чиния и полейте с дресинга."
+      ],
+      "tags": [
+        "high_protein",
+        "meal_prep"
+      ],
+      "section": "main_salads",
+      "batch_servings": 1,
+      "treat": false,
+      "total_min": 30,
+      "diets": [
+        "pescatarian"
+      ],
+      "allergens": [
+        "eggs",
+        "fish",
+        "mustard",
+        "sulphites"
+      ],
+      "exclusion_tags": [
+        "eggs",
+        "fish"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 336.9,
+          "protein_g": 31.4,
+          "fat_g": 12.3,
+          "carbs_g": 27.1,
+          "fiber_g": 5.3
+        },
+        "max": {
+          "kcal": 658,
+          "protein_g": 53.5,
+          "fat_g": 23.8,
+          "carbs_g": 61,
+          "fiber_g": 11
+        }
+      }
+    },
+    {
+      "id": "tsezar_salata_pile",
+      "name": "Цезар салата с пиле",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "chicken",
+      "cuisine": "international",
+      "prep_min": 15,
+      "cook_min": 12,
+      "ingredients": [
+        {
+          "id": "chicken_breast",
+          "min_g": 120,
+          "max_g": 220
+        },
+        {
+          "id": "lettuce",
+          "min_g": 100,
+          "max_g": 150,
+          "note": "романа или айсберг"
+        },
+        {
+          "id": "bread_wholewheat",
+          "min_g": 20,
+          "max_g": 40,
+          "note": "за крутони"
+        },
+        {
+          "id": "parmesan",
+          "min_g": 10,
+          "max_g": 20
+        },
+        {
+          "id": "greek_yogurt",
+          "min_g": 40,
+          "max_g": 80
+        },
+        {
+          "id": "lemon",
+          "g": 10
+        },
+        {
+          "id": "mustard",
+          "g": 5
+        },
+        {
+          "id": "garlic",
+          "g": 2
+        },
+        {
+          "id": "olive_oil",
+          "g": 5
+        },
+        {
+          "id": "salt",
+          "g": 1
+        },
+        {
+          "id": "black_pepper",
+          "g": 0.5
+        }
+      ],
+      "steps": [
+        "Овкусете пилешкото със сол и черен пипер и го изпечете на грил тиган със зехтина по 5–6 минути от всяка страна.",
+        "Нарежете хляба на кубчета и го запечете на сух тиган или във фурна до хрупкавост.",
+        "За дресинга смесете гръцкия йогурт, лимоновия сок, горчицата, смачкания чесън и половината настърган пармезан.",
+        "Нарежете марулята, разбъркайте я с дресинга и наредете отгоре нарязаното пилешко, крутоните и останалия пармезан."
+      ],
+      "tags": [
+        "high_protein"
+      ],
+      "section": "main_salads",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 27,
+      "diets": [],
+      "allergens": [
+        "gluten",
+        "milk",
+        "mustard"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "gluten",
+        "poultry"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 343.5,
+          "protein_g": 37.3,
+          "fat_g": 14,
+          "carbs_g": 16.7,
+          "fiber_g": 3
+        },
+        "max": {
+          "kcal": 601.7,
+          "protein_g": 69.2,
+          "fat_g": 22.2,
+          "carbs_g": 29.7,
+          "fiber_g": 4.8
+        }
+      }
+    },
+    {
+      "id": "grutska_salata_pile",
+      "name": "Гръцка салата с пиле",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "chicken",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 12,
+      "ingredients": [
+        {
+          "id": "chicken_breast",
+          "min_g": 120,
+          "max_g": 220
+        },
+        {
+          "id": "tomato",
+          "min_g": 100,
+          "max_g": 200
+        },
+        {
+          "id": "cucumber",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "pepper_sweet",
+          "min_g": 50,
+          "max_g": 100
+        },
+        {
+          "id": "onion",
+          "g": 20
+        },
+        {
+          "id": "feta_cheese",
+          "min_g": 30,
+          "max_g": 60
+        },
+        {
+          "id": "olive_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "vinegar",
+          "g": 5
+        },
+        {
+          "id": "oregano",
+          "g": 1
+        },
+        {
+          "id": "salt",
+          "g": 1
+        }
+      ],
+      "steps": [
+        "Овкусете пилешкото със сол и риган и го изпечете на грил тиган по 5–6 минути от всяка страна.",
+        "Нарежете доматите, краставицата, чушката и лука на едри парчета.",
+        "Подредете зеленчуците в купа, сложете отгоре сиренето на парче и нарязаното пилешко.",
+        "Полейте със зехтин и оцет и поръсете с риган."
+      ],
+      "tags": [
+        "high_protein",
+        "low_carb_friendly"
+      ],
+      "section": "main_salads",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 22,
+      "diets": [
+        "low_carb"
+      ],
+      "allergens": [
+        "milk",
+        "sulphites"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "poultry"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 322.4,
+          "protein_g": 33.5,
+          "fat_g": 15.1,
+          "carbs_g": 13.6,
+          "fiber_g": 3.4
+        },
+        "max": {
+          "kcal": 607.6,
+          "protein_g": 62.1,
+          "fat_g": 29.6,
+          "carbs_g": 24.2,
+          "fiber_g": 6
+        }
+      }
+    },
+    {
+      "id": "salata_kinoa_pile",
+      "name": "Салата с киноа и пиле",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "chicken",
+      "cuisine": "fitness",
+      "prep_min": 15,
+      "cook_min": 15,
+      "keeps_days": 2,
+      "ingredients": [
+        {
+          "id": "quinoa",
+          "min_g": 40,
+          "max_g": 80
+        },
+        {
+          "id": "chicken_breast",
+          "min_g": 100,
+          "max_g": 200
+        },
+        {
+          "id": "cucumber",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "tomato",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "pepper_sweet",
+          "min_g": 50,
+          "max_g": 100
+        },
+        {
+          "id": "parsley",
+          "g": 5
+        },
+        {
+          "id": "lemon",
+          "g": 15
+        },
+        {
+          "id": "olive_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "salt",
+          "g": 1
+        }
+      ],
+      "steps": [
+        "Измийте киноата и я сварете в двойно количество подсолена вода 12–15 минути. Оставете да изстине.",
+        "Изпечете пилешкото на грил тиган и го нарежете на хапки.",
+        "Нарежете зеленчуците на малки кубчета и магданоза ситно.",
+        "Смесете всичко и подправете с лимонов сок, зехтин и сол."
+      ],
+      "tags": [
+        "high_protein",
+        "meal_prep"
+      ],
+      "section": "main_salads",
+      "batch_servings": 1,
+      "treat": false,
+      "total_min": 30,
+      "diets": [],
+      "allergens": [],
+      "exclusion_tags": [
+        "poultry"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 357,
+          "protein_g": 30.2,
+          "fat_g": 10.5,
+          "carbs_g": 36.4,
+          "fiber_g": 5.8
+        },
+        "max": {
+          "kcal": 704.4,
+          "protein_g": 59.9,
+          "fat_g": 20.9,
+          "carbs_g": 70.4,
+          "fiber_g": 10.8
+        }
+      }
+    },
+    {
+      "id": "salata_syomga_avokado",
+      "name": "Салата със сьомга и авокадо",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "fish",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 15,
+      "ingredients": [
+        {
+          "id": "salmon",
+          "min_g": 120,
+          "max_g": 200
+        },
+        {
+          "id": "avocado",
+          "min_g": 50,
+          "max_g": 100
+        },
+        {
+          "id": "lettuce",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "cucumber",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "tomato",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "pumpkin_seeds",
+          "min_g": 5,
+          "max_g": 15
+        },
+        {
+          "id": "lemon",
+          "g": 15
+        },
+        {
+          "id": "olive_oil",
+          "g": 5
+        },
+        {
+          "id": "salt",
+          "g": 1
+        }
+      ],
+      "steps": [
+        "Посолете сьомгата и я изпечете на фурна при 200°C за 12–15 минути или на тиган по 4 минути от всяка страна.",
+        "Нарежете марулята, краставицата, доматите и авокадото.",
+        "Наредете салатата, сложете отгоре сьомгата на парчета и поръсете с тиквените семки.",
+        "Полейте с лимонов сок и зехтин."
+      ],
+      "tags": [
+        "high_protein",
+        "omega3",
+        "low_carb_friendly"
+      ],
+      "section": "main_salads",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 25,
+      "diets": [
+        "pescatarian",
+        "low_carb"
+      ],
+      "allergens": [
+        "fish"
+      ],
+      "exclusion_tags": [
+        "fish"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 434.3,
+          "protein_g": 28.6,
+          "fat_g": 31.2,
+          "carbs_g": 12.5,
+          "fiber_g": 5.8
+        },
+        "max": {
+          "kcal": 764.8,
+          "protein_g": 50.5,
+          "fat_g": 54.4,
+          "carbs_g": 24.1,
+          "fiber_g": 11.5
+        }
+      }
+    },
+    {
+      "id": "salata_teleshko_rukola",
+      "name": "Салата с телешко и рукола",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "beef",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 10,
+      "ingredients": [
+        {
+          "id": "beef_steak",
+          "min_g": 120,
+          "max_g": 200
+        },
+        {
+          "id": "lettuce",
+          "min_g": 50,
+          "max_g": 100,
+          "note": "рукола"
+        },
+        {
+          "id": "tomato",
+          "min_g": 80,
+          "max_g": 150,
+          "note": "чери"
+        },
+        {
+          "id": "parmesan",
+          "min_g": 10,
+          "max_g": 20
+        },
+        {
+          "id": "olive_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "vinegar",
+          "g": 5,
+          "note": "балсамов"
+        },
+        {
+          "id": "salt",
+          "g": 1
+        },
+        {
+          "id": "black_pepper",
+          "g": 0.5
+        }
+      ],
+      "steps": [
+        "Овкусете месото със сол и черен пипер и го изпечете на много горещ тиган по 3 минути от всяка страна.",
+        "Оставете го да почине 5 минути и го нарежете на тънки ивици.",
+        "Наредете руколата и разполовените доматчета, сложете отгоре месото и пармезана на люспи.",
+        "Полейте със зехтин и балсамов оцет."
+      ],
+      "tags": [
+        "high_protein",
+        "low_carb_friendly",
+        "quick"
+      ],
+      "section": "main_salads",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 20,
+      "diets": [
+        "low_carb"
+      ],
+      "allergens": [
+        "milk",
+        "sulphites"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "red_meat"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 309.1,
+          "protein_g": 30.5,
+          "fat_g": 17.5,
+          "carbs_g": 6.4,
+          "fiber_g": 1.7
+        },
+        "max": {
+          "kcal": 547.7,
+          "protein_g": 52.1,
+          "fat_g": 31.9,
+          "carbs_g": 12,
+          "fiber_g": 3.1
+        }
+      }
+    },
+    {
+      "id": "salata_pueshko_yabalka_orehi",
+      "name": "Салата с пуешко, ябълка и орехи",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "turkey",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 12,
+      "ingredients": [
+        {
+          "id": "turkey_breast",
+          "min_g": 120,
+          "max_g": 200
+        },
+        {
+          "id": "lettuce",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "apple",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "walnuts",
+          "min_g": 10,
+          "max_g": 25
+        },
+        {
+          "id": "olive_oil",
+          "g": 5
+        },
+        {
+          "id": "mustard",
+          "g": 5
+        },
+        {
+          "id": "lemon",
+          "g": 10
+        },
+        {
+          "id": "honey",
+          "min_g": 0,
+          "max_g": 5
+        },
+        {
+          "id": "salt",
+          "g": 1
+        }
+      ],
+      "steps": [
+        "Посолете пуешкото и го изпечете на грил тиган по 5–6 минути от всяка страна. Нарежете го на ивици.",
+        "Нарежете ябълката на тънки резенчета и я полейте с малко лимонов сок.",
+        "Разбъркайте зехтина, горчицата, останалия лимонов сок и меда за дресинг.",
+        "Смесете марулята, ябълката и месото, полейте с дресинга и поръсете с натрошени орехи."
+      ],
+      "tags": [
+        "high_protein"
+      ],
+      "section": "main_salads",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 22,
+      "diets": [],
+      "allergens": [
+        "mustard",
+        "nuts"
+      ],
+      "exclusion_tags": [
+        "nuts",
+        "poultry"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 302.3,
+          "protein_g": 30.6,
+          "fat_g": 14.7,
+          "carbs_g": 15.4,
+          "fiber_g": 3.8
+        },
+        "max": {
+          "kcal": 551.6,
+          "protein_g": 52.3,
+          "fat_g": 26.6,
+          "carbs_g": 33.1,
+          "fiber_g": 7.2
+        }
+      }
+    },
+    {
+      "id": "salata_nahut_krastavitsa_domati",
+      "name": "Салата с нахут, краставица и домати",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "legumes",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 0,
+      "keeps_days": 2,
+      "ingredients": [
+        {
+          "id": "chickpeas_canned",
+          "min_g": 150,
+          "max_g": 260,
+          "note": "отцеден"
+        },
+        {
+          "id": "cucumber",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "tomato",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "pepper_sweet",
+          "min_g": 0,
+          "max_g": 80
+        },
+        {
+          "id": "pumpkin_seeds",
+          "min_g": 0,
+          "max_g": 20
+        },
+        {
+          "id": "onion",
+          "g": 20
+        },
+        {
+          "id": "parsley",
+          "g": 10
+        },
+        {
+          "id": "lemon",
+          "g": 15
+        },
+        {
+          "id": "olive_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "cumin",
+          "g": 1
+        },
+        {
+          "id": "salt",
+          "g": 1
+        }
+      ],
+      "steps": [
+        "Отцедете и изплакнете нахута.",
+        "Нарежете краставицата, доматите, чушката и лука на малки кубчета, а магданоза – ситно.",
+        "Смесете всичко и подправете с лимонов сок, зехтин, кимион и сол."
+      ],
+      "tags": [
+        "no_cook",
+        "quick",
+        "meal_prep"
+      ],
+      "section": "main_salads",
+      "batch_servings": 1,
+      "treat": false,
+      "total_min": 10,
+      "diets": [
+        "vegan",
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [],
+      "exclusion_tags": [],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 298.8,
+          "protein_g": 12.7,
+          "fat_g": 9.8,
+          "carbs_g": 44.2,
+          "fiber_g": 12.2
+        },
+        "max": {
+          "kcal": 651.6,
+          "protein_g": 28.3,
+          "fat_g": 28.1,
+          "carbs_g": 81.2,
+          "fiber_g": 23.3
+        }
+      }
+    },
+    {
+      "id": "krem_supa_chervena_leshta",
+      "name": "Крем супа от червена леща",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "legumes",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 25,
+      "batch_servings": 4,
+      "keeps_days": 3,
+      "ingredients": [
+        {
+          "id": "lentils_red",
+          "min_g": 50,
+          "max_g": 90
+        },
+        {
+          "id": "carrot",
+          "min_g": 60,
+          "max_g": 100
+        },
+        {
+          "id": "onion",
+          "g": 50
+        },
+        {
+          "id": "garlic",
+          "g": 3
+        },
+        {
+          "id": "olive_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "cumin",
+          "g": 1
+        },
+        {
+          "id": "paprika",
+          "g": 1
+        },
+        {
+          "id": "lemon",
+          "g": 10
+        },
+        {
+          "id": "salt",
+          "g": 1.5
+        },
+        {
+          "id": "bread_wholewheat",
+          "min_g": 0,
+          "max_g": 70,
+          "step_g": 35,
+          "note": "за сервиране"
+        }
+      ],
+      "steps": [
+        "Задушете нарязания лук и морковите в зехтина 5 минути, добавете чесъна, кимиона и червения пипер.",
+        "Добавете измитата леща и 3 пъти повече вода (по обем) и посолете.",
+        "Варете 18–20 минути, докато лещата се разпадне.",
+        "Пасирайте до гладка супа и добавете лимоновия сок. Ако е много гъста, разредете с малко гореща вода."
+      ],
+      "tags": [
+        "meal_prep",
+        "budget"
+      ],
+      "section": "vegetarian",
+      "treat": false,
+      "total_min": 35,
+      "diets": [
+        "vegan",
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [],
+      "allergens_optional": [
+        "gluten"
+      ],
+      "exclusion_tags": [],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 281.7,
+          "protein_g": 13.7,
+          "fat_g": 6.7,
+          "carbs_g": 44.9,
+          "fiber_g": 8.7
+        },
+        "max": {
+          "kcal": 661.9,
+          "protein_g": 32.3,
+          "fat_g": 15.1,
+          "carbs_g": 103.8,
+          "fiber_g": 18.4
+        }
+      }
+    },
+    {
+      "id": "kari_nahut_spanak",
+      "name": "Къри с нахут и спанак",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "legumes",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 20,
+      "batch_servings": 2,
+      "keeps_days": 3,
+      "ingredients": [
+        {
+          "id": "chickpeas_canned",
+          "min_g": 150,
+          "max_g": 250,
+          "note": "отцеден"
+        },
+        {
+          "id": "spinach_fresh",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "tomatoes_canned",
+          "min_g": 100,
+          "max_g": 200
+        },
+        {
+          "id": "onion",
+          "g": 50
+        },
+        {
+          "id": "garlic",
+          "g": 5
+        },
+        {
+          "id": "ginger",
+          "g": 5
+        },
+        {
+          "id": "curry_powder",
+          "g": 4
+        },
+        {
+          "id": "sunflower_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "salt",
+          "g": 1.5
+        },
+        {
+          "id": "rice_white",
+          "min_g": 0,
+          "max_g": 80,
+          "note": "за сервиране"
+        }
+      ],
+      "steps": [
+        "Задушете ситно нарязания лук в олиото 5 минути, добавете чесъна, настъргания джинджифил и кърито и бъркайте 1 минута.",
+        "Добавете доматите, отцедения нахут и солта и оставете да къкри 10 минути.",
+        "Добавете спанака и бъркайте, докато омекне.",
+        "Сервирайте самостоятелно или с ориз."
+      ],
+      "tags": [
+        "meal_prep",
+        "budget"
+      ],
+      "section": "vegetarian",
+      "treat": false,
+      "total_min": 30,
+      "diets": [
+        "vegan",
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [],
+      "exclusion_tags": [],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 327,
+          "protein_g": 14.6,
+          "fat_g": 10.3,
+          "carbs_g": 48.9,
+          "fiber_g": 16
+        },
+        "max": {
+          "kcal": 832,
+          "protein_g": 29.9,
+          "fat_g": 19.1,
+          "carbs_g": 141,
+          "fiber_g": 26.7
+        }
+      }
+    },
+    {
+      "id": "tofu_zelenchutsi_oriz",
+      "name": "Тофу със зеленчуци и ориз",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "tofu",
+      "cuisine": "international",
+      "prep_min": 15,
+      "cook_min": 15,
+      "ingredients": [
+        {
+          "id": "tofu",
+          "min_g": 120,
+          "max_g": 220
+        },
+        {
+          "id": "rice_white",
+          "min_g": 40,
+          "max_g": 90
+        },
+        {
+          "id": "broccoli_fresh",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "pepper_sweet",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "carrot",
+          "min_g": 40,
+          "max_g": 80
+        },
+        {
+          "id": "garlic",
+          "g": 5
+        },
+        {
+          "id": "ginger",
+          "g": 5
+        },
+        {
+          "id": "soy_sauce",
+          "g": 15
+        },
+        {
+          "id": "sunflower_oil",
+          "min_g": 5,
+          "max_g": 10
+        }
+      ],
+      "steps": [
+        "Сварете ориза според указанията на опаковката.",
+        "Подсушете тофуто с кухненска хартия и го нарежете на кубчета.",
+        "Запържете тофуто в половината олио, докато се зачерви от всички страни, и го извадете.",
+        "Запържете зеленчуците в останалото олио 4–5 минути, добавете чесъна, джинджифила, соевия сос и тофуто и разбъркайте. Сервирайте с ориза."
+      ],
+      "tags": [
+        "quick"
+      ],
+      "section": "vegetarian",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 30,
+      "diets": [
+        "vegan",
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "gluten",
+        "soy"
+      ],
+      "exclusion_tags": [
+        "gluten"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 441.6,
+          "protein_g": 28.4,
+          "fat_g": 16.4,
+          "carbs_g": 51.4,
+          "fiber_g": 8.1
+        },
+        "max": {
+          "kcal": 868.1,
+          "protein_g": 52.2,
+          "fat_g": 31,
+          "carbs_g": 106.2,
+          "fiber_g": 15.2
+        }
+      }
+    },
+    {
+      "id": "elda_gabi_yaitse",
+      "name": "Елда с гъби и яйце",
+      "meal_types": [
+        "lunch",
+        "dinner"
+      ],
+      "protein": "eggs",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 20,
+      "ingredients": [
+        {
+          "id": "buckwheat",
+          "min_g": 50,
+          "max_g": 90
+        },
+        {
+          "id": "mushrooms",
+          "min_g": 100,
+          "max_g": 200
+        },
+        {
+          "id": "onion",
+          "g": 40
+        },
+        {
+          "id": "egg",
+          "min_g": 60,
+          "max_g": 120,
+          "step_g": 60
+        },
+        {
+          "id": "butter",
+          "g": 5
+        },
+        {
+          "id": "parsley",
+          "g": 5
+        },
+        {
+          "id": "salt",
+          "g": 1.5
+        },
+        {
+          "id": "black_pepper",
+          "g": 0.5
+        }
+      ],
+      "steps": [
+        "Измийте елдата и я сварете в двойно количество подсолена вода 15 минути.",
+        "Задушете нарязания лук и гъбите в маслото 7–8 минути, докато водата се изпари.",
+        "Разбъркайте елдата с гъбите и черния пипер.",
+        "Изпържете или сварете яйцата и ги сервирайте отгоре. Поръсете с магданоз."
+      ],
+      "tags": [
+        "budget"
+      ],
+      "section": "vegetarian",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 30,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "eggs",
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "eggs"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 335.7,
+          "protein_g": 17.2,
+          "fat_g": 11.6,
+          "carbs_g": 45.5,
+          "fiber_g": 7.1
+        },
+        "max": {
+          "kcal": 581.9,
+          "protein_g": 32.5,
+          "fat_g": 18.7,
+          "carbs_g": 79.2,
+          "fiber_g": 12.2
+        }
+      }
+    },
+    {
+      "id": "fritata_zelenchutsi_sirene",
+      "name": "Фритата със зеленчуци и сирене",
+      "meal_types": [
+        "lunch",
+        "dinner",
+        "breakfast"
+      ],
+      "protein": "eggs",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 20,
+      "batch_servings": 2,
+      "keeps_days": 2,
+      "ingredients": [
+        {
+          "id": "egg",
+          "min_g": 120,
+          "max_g": 240,
+          "step_g": 60
+        },
+        {
+          "id": "zucchini",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "pepper_sweet",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "onion",
+          "g": 30
+        },
+        {
+          "id": "feta_cheese",
+          "min_g": 30,
+          "max_g": 60
+        },
+        {
+          "id": "olive_oil",
+          "g": 5
+        },
+        {
+          "id": "parsley",
+          "g": 5
+        },
+        {
+          "id": "salt",
+          "g": 0.5
+        },
+        {
+          "id": "black_pepper",
+          "g": 0.5
+        }
+      ],
+      "steps": [
+        "Загрейте фурната на 190°C.",
+        "Задушете нарязаните тиквички, чушки и лук в зехтина в тиган, подходящ за фурна, 5–6 минути.",
+        "Разбийте яйцата със солта, черния пипер и магданоза и ги изсипете върху зеленчуците. Натрошете отгоре сиренето.",
+        "Гответе на котлона 2 минути, после преместете във фурната за 12–15 минути, докато се стегне."
+      ],
+      "tags": [
+        "high_protein",
+        "low_carb_friendly",
+        "meal_prep"
+      ],
+      "section": "vegetarian",
+      "treat": false,
+      "total_min": 30,
+      "diets": [
+        "vegetarian",
+        "pescatarian",
+        "low_carb"
+      ],
+      "allergens": [
+        "eggs",
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "eggs"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 339.6,
+          "protein_g": 21.4,
+          "fat_g": 23.4,
+          "carbs_g": 11.6,
+          "fiber_g": 2.9
+        },
+        "max": {
+          "kcal": 618.2,
+          "protein_g": 42.2,
+          "fat_g": 41.6,
+          "carbs_g": 19.4,
+          "fiber_g": 4.8
+        }
+      }
+    },
+    {
+      "id": "shopska_salata",
+      "name": "Шопска салата",
+      "meal_types": [
+        "side"
+      ],
+      "protein": "dairy",
+      "cuisine": "bulgarian",
+      "prep_min": 10,
+      "cook_min": 0,
+      "ingredients": [
+        {
+          "id": "tomato",
+          "min_g": 120,
+          "max_g": 200
+        },
+        {
+          "id": "cucumber",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "pepper_sweet",
+          "min_g": 50,
+          "max_g": 100
+        },
+        {
+          "id": "onion",
+          "g": 20
+        },
+        {
+          "id": "feta_cheese",
+          "min_g": 30,
+          "max_g": 50
+        },
+        {
+          "id": "parsley",
+          "g": 5
+        },
+        {
+          "id": "sunflower_oil",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "vinegar",
+          "g": 5
+        },
+        {
+          "id": "salt",
+          "g": 1
+        }
+      ],
+      "steps": [
+        "Нарежете доматите, краставицата, чушката и лука на кубчета.",
+        "Подправете с олио, оцет и сол и разбъркайте.",
+        "Настържете отгоре сиренето и поръсете с магданоз."
+      ],
+      "tags": [
+        "no_cook",
+        "quick"
+      ],
+      "section": "side_salads_soups",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 10,
+      "diets": [
+        "vegetarian",
+        "pescatarian",
+        "low_carb"
+      ],
+      "allergens": [
+        "milk",
+        "sulphites"
+      ],
+      "exclusion_tags": [
+        "dairy"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 181.2,
+          "protein_g": 6.7,
+          "fat_g": 12,
+          "carbs_g": 14,
+          "fiber_g": 3.4
+        },
+        "max": {
+          "kcal": 316.3,
+          "protein_g": 11.2,
+          "fat_g": 21.7,
+          "carbs_g": 23.4,
+          "fiber_g": 5.8
+        }
+      }
+    },
+    {
+      "id": "snezhanka",
+      "name": "Снежанка",
+      "meal_types": [
+        "side",
+        "snack"
+      ],
+      "protein": "dairy",
+      "cuisine": "bulgarian",
+      "prep_min": 10,
+      "cook_min": 0,
+      "ingredients": [
+        {
+          "id": "greek_yogurt",
+          "min_g": 100,
+          "max_g": 200,
+          "note": "или цедено кисело мляко"
+        },
+        {
+          "id": "cucumber",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "garlic",
+          "g": 3
+        },
+        {
+          "id": "dill",
+          "g": 5
+        },
+        {
+          "id": "walnuts",
+          "min_g": 10,
+          "max_g": 20
+        },
+        {
+          "id": "olive_oil",
+          "g": 3
+        },
+        {
+          "id": "salt",
+          "g": 1
+        }
+      ],
+      "steps": [
+        "Нарежете краставицата на много малки кубчета или я настържете и изстискайте водата.",
+        "Смесете гръцкия йогурт с краставицата, смачкания чесън, копъра и солта.",
+        "Сервирайте поръсено с натрошени орехи и няколко капки зехтин."
+      ],
+      "tags": [
+        "no_cook",
+        "quick",
+        "high_protein"
+      ],
+      "section": "side_salads_soups",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 10,
+      "diets": [
+        "vegetarian",
+        "pescatarian",
+        "low_carb"
+      ],
+      "allergens": [
+        "milk",
+        "nuts"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "nuts"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 207.5,
+          "protein_g": 11.4,
+          "fat_g": 14.7,
+          "carbs_g": 9.6,
+          "fiber_g": 1.2
+        },
+        "max": {
+          "kcal": 380.4,
+          "protein_g": 22.4,
+          "fat_g": 26.3,
+          "carbs_g": 17.5,
+          "fiber_g": 2.3
+        }
+      }
+    },
+    {
+      "id": "tarator",
+      "name": "Таратор",
+      "meal_types": [
+        "side",
+        "lunch"
+      ],
+      "protein": "dairy",
+      "cuisine": "bulgarian",
+      "prep_min": 10,
+      "cook_min": 0,
+      "ingredients": [
+        {
+          "id": "yogurt_whole",
+          "min_g": 150,
+          "max_g": 250
+        },
+        {
+          "id": "cucumber",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "garlic",
+          "g": 3
+        },
+        {
+          "id": "dill",
+          "g": 5
+        },
+        {
+          "id": "walnuts",
+          "min_g": 10,
+          "max_g": 20
+        },
+        {
+          "id": "sunflower_oil",
+          "g": 5
+        },
+        {
+          "id": "salt",
+          "g": 1
+        }
+      ],
+      "steps": [
+        "Нарежете краставицата на малки кубчета.",
+        "Разбийте киселото мляко с толкова студена вода, колкото да получите желаната гъстота.",
+        "Добавете краставицата, смачкания чесън, копъра, олиото и солта.",
+        "Сервирайте студен, поръсен с натрошени орехи."
+      ],
+      "tags": [
+        "no_cook",
+        "quick",
+        "summer"
+      ],
+      "section": "side_salads_soups",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 10,
+      "diets": [
+        "vegetarian",
+        "pescatarian",
+        "low_carb"
+      ],
+      "allergens": [
+        "milk",
+        "nuts"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "nuts"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 219.7,
+          "protein_g": 7.6,
+          "fat_g": 16.6,
+          "carbs_g": 12.6,
+          "fiber_g": 1.2
+        },
+        "max": {
+          "kcal": 356.6,
+          "protein_g": 13.1,
+          "fat_g": 26.4,
+          "carbs_g": 21.2,
+          "fiber_g": 2.3
+        }
+      }
+    },
+    {
+      "id": "pileshka_supa_zastroyka",
+      "name": "Пилешка супа със застройка",
+      "meal_types": [
+        "side",
+        "lunch",
+        "dinner"
+      ],
+      "protein": "chicken",
+      "cuisine": "bulgarian",
+      "prep_min": 10,
+      "cook_min": 40,
+      "batch_servings": 4,
+      "keeps_days": 3,
+      "ingredients": [
+        {
+          "id": "chicken_breast",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "carrot",
+          "g": 40
+        },
+        {
+          "id": "onion",
+          "g": 30
+        },
+        {
+          "id": "pasta",
+          "min_g": 15,
+          "max_g": 30,
+          "note": "фиде"
+        },
+        {
+          "id": "egg",
+          "g": 15
+        },
+        {
+          "id": "yogurt_whole",
+          "min_g": 30,
+          "max_g": 50
+        },
+        {
+          "id": "lemon",
+          "g": 10
+        },
+        {
+          "id": "parsley",
+          "g": 5
+        },
+        {
+          "id": "salt",
+          "g": 1.5
+        }
+      ],
+      "steps": [
+        "Сложете пилешкото месо в тенджера със студена вода, кипнете и обирайте пяната. Варете 20 минути.",
+        "Извадете месото, добавете в бульона нарязаните моркови и лука и варете 10 минути.",
+        "Добавете фидето и солта и варете още 5 минути. Върнете накъсаното месо.",
+        "За застройката разбийте яйцата с киселото мляко и лимоновия сок, разредете с малко от бульона и я изсипете в супата при непрекъснато бъркане, без да кипва повече.",
+        "Поръсете с магданоз."
+      ],
+      "tags": [
+        "family",
+        "meal_prep"
+      ],
+      "section": "side_salads_soups",
+      "treat": false,
+      "total_min": 50,
+      "diets": [],
+      "allergens": [
+        "eggs",
+        "gluten",
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "eggs",
+        "gluten",
+        "poultry"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 200.5,
+          "protein_g": 19.3,
+          "fat_g": 4.4,
+          "carbs_g": 20.6,
+          "fiber_g": 2.6
+        },
+        "max": {
+          "kcal": 340.3,
+          "protein_g": 35.5,
+          "fat_g": 6.8,
+          "carbs_g": 32.7,
+          "fiber_g": 3
+        }
+      }
+    },
+    {
+      "id": "humus_zelenchukovi_prachitsi",
+      "name": "Хумус със зеленчукови пръчици",
+      "meal_types": [
+        "snack"
+      ],
+      "protein": "legumes",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 0,
+      "batch_servings": 4,
+      "keeps_days": 4,
+      "ingredients": [
+        {
+          "id": "chickpeas_canned",
+          "min_g": 80,
+          "max_g": 150,
+          "note": "отцеден"
+        },
+        {
+          "id": "tahini",
+          "min_g": 10,
+          "max_g": 20
+        },
+        {
+          "id": "lemon",
+          "g": 10
+        },
+        {
+          "id": "garlic",
+          "g": 2
+        },
+        {
+          "id": "olive_oil",
+          "g": 5
+        },
+        {
+          "id": "cumin",
+          "g": 0.5
+        },
+        {
+          "id": "salt",
+          "g": 0.5
+        },
+        {
+          "id": "carrot",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "cucumber",
+          "min_g": 60,
+          "max_g": 120
+        }
+      ],
+      "steps": [
+        "Пасирайте нахута, тахана, лимоновия сок, чесъна, кимиона и солта, като добавяте по малко студена вода, докато стане гладък крем.",
+        "Сервирайте хумуса, полят със зехтин, с моркови и краставица, нарязани на пръчици."
+      ],
+      "tags": [
+        "no_cook",
+        "meal_prep"
+      ],
+      "section": "snacks",
+      "treat": false,
+      "total_min": 10,
+      "diets": [
+        "vegan",
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "sesame"
+      ],
+      "exclusion_tags": [],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 256.3,
+          "protein_g": 8.6,
+          "fat_g": 13,
+          "carbs_g": 29.9,
+          "fiber_g": 8.4
+        },
+        "max": {
+          "kcal": 446.7,
+          "protein_g": 16.2,
+          "fat_g": 20.5,
+          "carbs_g": 55.7,
+          "fiber_g": 15.8
+        }
+      }
+    },
+    {
+      "id": "izvara_yabalka_kanela",
+      "name": "Извара с ябълка и канела",
+      "meal_types": [
+        "snack",
+        "breakfast"
+      ],
+      "protein": "dairy",
+      "cuisine": "fitness",
+      "prep_min": 5,
+      "cook_min": 0,
+      "ingredients": [
+        {
+          "id": "cottage_cheese_lowfat",
+          "min_g": 120,
+          "max_g": 250
+        },
+        {
+          "id": "apple",
+          "min_g": 100,
+          "max_g": 180
+        },
+        {
+          "id": "cinnamon",
+          "g": 1
+        },
+        {
+          "id": "honey",
+          "min_g": 0,
+          "max_g": 10
+        }
+      ],
+      "steps": [
+        "Настържете или нарежете ябълката на кубчета.",
+        "Смесете я с изварата, поръсете с канела и по желание добавете мед."
+      ],
+      "tags": [
+        "no_cook",
+        "quick",
+        "high_protein",
+        "sweet"
+      ],
+      "section": "snacks",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 5,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 140.9,
+          "protein_g": 15.2,
+          "fat_g": 1.4,
+          "carbs_g": 17.9,
+          "fiber_g": 2.9
+        },
+        "max": {
+          "kcal": 306.5,
+          "protein_g": 31.5,
+          "fat_g": 2.9,
+          "carbs_g": 40.7,
+          "fiber_g": 4.9
+        }
+      }
+    },
+    {
+      "id": "kiselo_mlyako_orehi_med",
+      "name": "Кисело мляко с орехи и мед",
+      "meal_types": [
+        "snack",
+        "breakfast"
+      ],
+      "protein": "dairy",
+      "cuisine": "bulgarian",
+      "prep_min": 2,
+      "cook_min": 0,
+      "ingredients": [
+        {
+          "id": "yogurt_whole",
+          "min_g": 150,
+          "max_g": 250
+        },
+        {
+          "id": "walnuts",
+          "min_g": 10,
+          "max_g": 25
+        },
+        {
+          "id": "honey",
+          "min_g": 5,
+          "max_g": 15
+        }
+      ],
+      "steps": [
+        "Сложете киселото мляко в купа, поръсете с натрошени орехи и полейте с мед."
+      ],
+      "tags": [
+        "no_cook",
+        "quick",
+        "sweet"
+      ],
+      "section": "snacks",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 2,
+      "diets": [
+        "vegetarian",
+        "pescatarian",
+        "low_carb"
+      ],
+      "allergens": [
+        "milk",
+        "nuts"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "nuts"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 172.1,
+          "protein_g": 6.7,
+          "fat_g": 11.4,
+          "carbs_g": 12.5,
+          "fiber_g": 0.7
+        },
+        "max": {
+          "kcal": 361.6,
+          "protein_g": 12.5,
+          "fat_g": 24.4,
+          "carbs_g": 27.4,
+          "fiber_g": 1.7
+        }
+      }
+    },
+    {
+      "id": "yabalka_fastacheno_maslo",
+      "name": "Ябълка с фъстъчено масло",
+      "meal_types": [
+        "snack"
+      ],
+      "protein": "legumes",
+      "cuisine": "fitness",
+      "prep_min": 2,
+      "cook_min": 0,
+      "ingredients": [
+        {
+          "id": "apple",
+          "min_g": 120,
+          "max_g": 200
+        },
+        {
+          "id": "peanut_butter",
+          "min_g": 10,
+          "max_g": 25
+        }
+      ],
+      "steps": [
+        "Нарежете ябълката на резени и ги намажете или потопете във фъстъченото масло."
+      ],
+      "tags": [
+        "no_cook",
+        "quick",
+        "sweet"
+      ],
+      "section": "snacks",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 2,
+      "diets": [
+        "vegan",
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "peanuts"
+      ],
+      "exclusion_tags": [],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 122.2,
+          "protein_g": 2.5,
+          "fat_g": 5.3,
+          "carbs_g": 18.8,
+          "fiber_g": 3.4
+        },
+        "max": {
+          "kcal": 253.5,
+          "protein_g": 6.1,
+          "fat_g": 13.2,
+          "carbs_g": 33.2,
+          "fiber_g": 6.1
+        }
+      }
+    },
+    {
+      "id": "orizovki_izvara_domat",
+      "name": "Оризовки с извара и домат",
+      "meal_types": [
+        "snack"
+      ],
+      "protein": "dairy",
+      "cuisine": "fitness",
+      "prep_min": 3,
+      "cook_min": 0,
+      "ingredients": [
+        {
+          "id": "rice_cakes",
+          "min_g": 18,
+          "max_g": 36,
+          "step_g": 9,
+          "note": "2–4 броя"
+        },
+        {
+          "id": "cottage_cheese_lowfat",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "tomato",
+          "min_g": 50,
+          "max_g": 100
+        },
+        {
+          "id": "salt",
+          "g": 0.5
+        },
+        {
+          "id": "black_pepper",
+          "g": 0.3
+        }
+      ],
+      "steps": [
+        "Намажете оризовките с изварата.",
+        "Сложете отгоре резени домат и поръсете със сол и черен пипер."
+      ],
+      "tags": [
+        "no_cook",
+        "quick",
+        "high_protein"
+      ],
+      "section": "snacks",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 3,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 137,
+          "protein_g": 11.9,
+          "fat_g": 1.4,
+          "carbs_g": 19,
+          "fiber_g": 1.4
+        },
+        "max": {
+          "kcal": 266.1,
+          "protein_g": 22.4,
+          "fat_g": 2.7,
+          "carbs_g": 37.5,
+          "fiber_g": 2.8
+        }
+      }
+    },
+    {
+      "id": "vareni_yaitsa_krastavitsa",
+      "name": "Варени яйца с краставица",
+      "meal_types": [
+        "snack"
+      ],
+      "protein": "eggs",
+      "cuisine": "fitness",
+      "prep_min": 2,
+      "cook_min": 9,
+      "keeps_days": 3,
+      "ingredients": [
+        {
+          "id": "egg",
+          "min_g": 60,
+          "max_g": 180,
+          "step_g": 60
+        },
+        {
+          "id": "cucumber",
+          "min_g": 100,
+          "max_g": 200
+        },
+        {
+          "id": "salt",
+          "g": 0.5
+        }
+      ],
+      "steps": [
+        "Сварете яйцата 8–9 минути от кипването и ги охладете в студена вода.",
+        "Обелете ги и ги сервирайте с нарязана краставица и щипка сол."
+      ],
+      "tags": [
+        "quick",
+        "high_protein",
+        "low_carb_friendly",
+        "meal_prep"
+      ],
+      "section": "snacks",
+      "batch_servings": 1,
+      "treat": false,
+      "total_min": 11,
+      "diets": [
+        "vegetarian",
+        "pescatarian",
+        "low_carb"
+      ],
+      "allergens": [
+        "eggs"
+      ],
+      "exclusion_tags": [
+        "eggs"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 100.8,
+          "protein_g": 8.2,
+          "fat_g": 5.8,
+          "carbs_g": 4.1,
+          "fiber_g": 0.5
+        },
+        "max": {
+          "kcal": 287.4,
+          "protein_g": 23.9,
+          "fat_g": 17.3,
+          "carbs_g": 8.6,
+          "fiber_g": 1
+        }
+      }
+    },
+    {
+      "id": "plodova_salata_kiselo_mlyako",
+      "name": "Плодова салата с кисело мляко",
+      "meal_types": [
+        "snack",
+        "breakfast",
+        "dessert"
+      ],
+      "protein": "dairy",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 0,
+      "ingredients": [
+        {
+          "id": "apple",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "banana",
+          "min_g": 50,
+          "max_g": 100
+        },
+        {
+          "id": "orange",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "kiwi",
+          "min_g": 0,
+          "max_g": 80
+        },
+        {
+          "id": "yogurt_low_fat",
+          "min_g": 100,
+          "max_g": 200
+        },
+        {
+          "id": "honey",
+          "min_g": 0,
+          "max_g": 10
+        },
+        {
+          "id": "walnuts",
+          "min_g": 0,
+          "max_g": 15
+        }
+      ],
+      "steps": [
+        "Нарежете плодовете на хапки.",
+        "Залейте ги с киселото мляко, по желание полейте с мед и поръсете с орехи."
+      ],
+      "tags": [
+        "no_cook",
+        "quick",
+        "sweet"
+      ],
+      "section": "snacks",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 10,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "milk"
+      ],
+      "allergens_optional": [
+        "nuts"
+      ],
+      "exclusion_tags": [
+        "dairy"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 166.9,
+          "protein_g": 6.5,
+          "fat_g": 1.9,
+          "carbs_g": 33.8,
+          "fiber_g": 4.2
+        },
+        "max": {
+          "kcal": 511.1,
+          "protein_g": 16.3,
+          "fat_g": 14,
+          "carbs_g": 89.6,
+          "fiber_g": 11.8
+        }
+      }
+    },
+    {
+      "id": "zelenchutsi_dip_kiselo_mlyako",
+      "name": "Моркови и чушки с дип от кисело мляко и копър",
+      "meal_types": [
+        "snack"
+      ],
+      "protein": "dairy",
+      "cuisine": "fitness",
+      "prep_min": 8,
+      "cook_min": 0,
+      "ingredients": [
+        {
+          "id": "carrot",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "pepper_sweet",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "cucumber",
+          "min_g": 60,
+          "max_g": 120
+        },
+        {
+          "id": "greek_yogurt",
+          "min_g": 80,
+          "max_g": 150
+        },
+        {
+          "id": "dill",
+          "g": 3
+        },
+        {
+          "id": "garlic",
+          "g": 2
+        },
+        {
+          "id": "salt",
+          "g": 0.5
+        }
+      ],
+      "steps": [
+        "Смесете гръцкия йогурт с нарязания копър, смачкания чесън и солта.",
+        "Нарежете морковите, чушките и краставицата на пръчици и ги сервирайте с дипа."
+      ],
+      "tags": [
+        "no_cook",
+        "quick",
+        "high_protein"
+      ],
+      "section": "snacks",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "treat": false,
+      "total_min": 8,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 131.1,
+          "protein_g": 9,
+          "fat_g": 4.4,
+          "carbs_g": 15.6,
+          "fiber_g": 3.3
+        },
+        "max": {
+          "kcal": 248.2,
+          "protein_g": 16.8,
+          "fat_g": 8.3,
+          "carbs_g": 29.9,
+          "fiber_g": 6.6
+        }
+      }
+    },
+    {
+      "id": "proteinovi_brauni",
+      "name": "Протеинови брауни",
+      "meal_types": [
+        "dessert",
+        "snack"
+      ],
+      "protein": "dairy",
+      "cuisine": "fitness",
+      "prep_min": 10,
+      "cook_min": 22,
+      "batch_servings": 8,
+      "keeps_days": 4,
+      "treat": true,
+      "ingredients": [
+        {
+          "id": "cottage_cheese_lowfat",
+          "min_g": 50,
+          "max_g": 80
+        },
+        {
+          "id": "egg",
+          "g": 30
+        },
+        {
+          "id": "oats_rolled",
+          "min_g": 20,
+          "max_g": 30
+        },
+        {
+          "id": "banana",
+          "min_g": 30,
+          "max_g": 50
+        },
+        {
+          "id": "cocoa_powder",
+          "min_g": 8,
+          "max_g": 12
+        },
+        {
+          "id": "whey_protein",
+          "min_g": 0,
+          "max_g": 15
+        },
+        {
+          "id": "sweetener",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "baking_powder",
+          "g": 1
+        },
+        {
+          "id": "vanilla",
+          "g": 1
+        },
+        {
+          "id": "dark_chocolate",
+          "min_g": 0,
+          "max_g": 10
+        }
+      ],
+      "steps": [
+        "Загрейте фурната на 180°C и постелете тава 20×20 см с хартия за печене.",
+        "Пасирайте изварата, яйцата, банана, овесените ядки, какаото, протеина, подсладителя, бакпулвера и ванилията до гладка смес.",
+        "Изсипете в тавата и поръсете с нарязания черен шоколад.",
+        "Печете 20–22 минути – средата трябва да остане леко влажна.",
+        "Оставете да изстинат напълно и нарежете на 8 парчета."
+      ],
+      "tags": [
+        "sweet",
+        "high_protein",
+        "meal_prep"
+      ],
+      "section": "healthy_desserts",
+      "total_min": 32,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "eggs",
+        "gluten",
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "eggs",
+        "gluten"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 205.1,
+          "protein_g": 15.2,
+          "fat_g": 5.9,
+          "carbs_g": 26.7,
+          "fiber_g": 5.9
+        },
+        "max": {
+          "kcal": 405.1,
+          "protein_g": 34.1,
+          "fat_g": 12,
+          "carbs_g": 46.6,
+          "fiber_g": 10.5
+        }
+      }
+    },
+    {
+      "id": "brauni_bob_kakao",
+      "name": "Брауни от боб и какао",
+      "meal_types": [
+        "dessert",
+        "snack"
+      ],
+      "protein": "legumes",
+      "cuisine": "fitness",
+      "prep_min": 10,
+      "cook_min": 22,
+      "batch_servings": 8,
+      "keeps_days": 4,
+      "treat": true,
+      "ingredients": [
+        {
+          "id": "beans_canned",
+          "min_g": 50,
+          "max_g": 80,
+          "note": "отцеден и изплакнат"
+        },
+        {
+          "id": "egg",
+          "g": 20
+        },
+        {
+          "id": "oats_rolled",
+          "min_g": 10,
+          "max_g": 15
+        },
+        {
+          "id": "cocoa_powder",
+          "min_g": 8,
+          "max_g": 12
+        },
+        {
+          "id": "peanut_butter",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "sweetener",
+          "min_g": 8,
+          "max_g": 12
+        },
+        {
+          "id": "baking_powder",
+          "g": 1
+        },
+        {
+          "id": "vanilla",
+          "g": 1
+        },
+        {
+          "id": "dark_chocolate",
+          "min_g": 0,
+          "max_g": 10
+        }
+      ],
+      "steps": [
+        "Загрейте фурната на 180°C и постелете тава 20×20 см с хартия за печене.",
+        "Пасирайте всички съставки без шоколада до напълно гладка смес – боб не бива да се усеща.",
+        "Изсипете в тавата, изравнете и поръсете с нарязания шоколад.",
+        "Печете 20–22 минути. Оставете да изстинат и нарежете на 8 парчета."
+      ],
+      "tags": [
+        "sweet",
+        "meal_prep",
+        "fiber"
+      ],
+      "section": "healthy_desserts",
+      "total_min": 32,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "eggs",
+        "gluten",
+        "peanuts"
+      ],
+      "exclusion_tags": [
+        "eggs",
+        "gluten"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 181.1,
+          "protein_g": 10.9,
+          "fat_g": 6.8,
+          "carbs_g": 23.7,
+          "fiber_g": 7
+        },
+        "max": {
+          "kcal": 336.5,
+          "protein_g": 16.8,
+          "fat_g": 14.8,
+          "carbs_g": 41.4,
+          "fiber_g": 12
+        }
+      }
+    },
+    {
+      "id": "brauni_tikvichki",
+      "name": "Брауни с тиквички",
+      "meal_types": [
+        "dessert",
+        "snack"
+      ],
+      "protein": "eggs",
+      "cuisine": "fitness",
+      "prep_min": 15,
+      "cook_min": 25,
+      "batch_servings": 8,
+      "keeps_days": 4,
+      "treat": true,
+      "ingredients": [
+        {
+          "id": "zucchini",
+          "min_g": 50,
+          "max_g": 80
+        },
+        {
+          "id": "oats_rolled",
+          "min_g": 20,
+          "max_g": 30
+        },
+        {
+          "id": "egg",
+          "g": 20
+        },
+        {
+          "id": "greek_yogurt",
+          "min_g": 20,
+          "max_g": 40
+        },
+        {
+          "id": "cocoa_powder",
+          "g": 8
+        },
+        {
+          "id": "sweetener",
+          "min_g": 8,
+          "max_g": 12
+        },
+        {
+          "id": "baking_powder",
+          "g": 1
+        },
+        {
+          "id": "dark_chocolate",
+          "min_g": 0,
+          "max_g": 10
+        }
+      ],
+      "steps": [
+        "Загрейте фурната на 180°C. Настържете тиквичките на ситно и изстискайте добре водата.",
+        "Смелете овесените ядки на брашно.",
+        "Разбийте яйцата с гръцкия йогурт и подсладителя, добавете овесеното брашно, какаото и бакпулвера, после тиквичките.",
+        "Изсипете в тава 20×20 см с хартия, поръсете с шоколад и печете 22–25 минути.",
+        "Оставете да изстинат и нарежете на 8 парчета."
+      ],
+      "tags": [
+        "sweet",
+        "meal_prep",
+        "hidden_veg"
+      ],
+      "section": "healthy_desserts",
+      "total_min": 40,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "eggs",
+        "gluten",
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "eggs",
+        "gluten"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 153.1,
+          "protein_g": 9.9,
+          "fat_g": 5.5,
+          "carbs_g": 20.7,
+          "fiber_g": 5.6
+        },
+        "max": {
+          "kcal": 276.3,
+          "protein_g": 14.5,
+          "fat_g": 11.6,
+          "carbs_g": 33.6,
+          "fiber_g": 8
+        }
+      }
+    },
+    {
+      "id": "cheesecake_izvara_v_chashi",
+      "name": "Чийзкейк от извара без печене (в чаши)",
+      "meal_types": [
+        "dessert",
+        "snack"
+      ],
+      "protein": "dairy",
+      "cuisine": "fitness",
+      "prep_min": 15,
+      "cook_min": 0,
+      "batch_servings": 2,
+      "keeps_days": 2,
+      "treat": true,
+      "ingredients": [
+        {
+          "id": "cottage_cheese_lowfat",
+          "min_g": 100,
+          "max_g": 150
+        },
+        {
+          "id": "greek_yogurt",
+          "min_g": 50,
+          "max_g": 80
+        },
+        {
+          "id": "oats_rolled",
+          "min_g": 15,
+          "max_g": 25
+        },
+        {
+          "id": "honey",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "sweetener",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "vanilla",
+          "g": 1
+        },
+        {
+          "id": "lemon",
+          "g": 5
+        },
+        {
+          "id": "berries_frozen",
+          "min_g": 40,
+          "max_g": 80
+        }
+      ],
+      "steps": [
+        "Запечете овесените ядки на сух тиган 2–3 минути и ги смесете с меда – това е основата.",
+        "Пасирайте изварата с гръцкия йогурт, подсладителя, ванилията и лимоновия сок до гладък крем.",
+        "Разпределете в чаши: основа, крем и горски плодове отгоре.",
+        "Оставете в хладилника поне 1 час преди сервиране."
+      ],
+      "tags": [
+        "sweet",
+        "high_protein",
+        "no_bake"
+      ],
+      "section": "healthy_desserts",
+      "total_min": 15,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "gluten"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 218.8,
+          "protein_g": 19.7,
+          "fat_g": 4.8,
+          "carbs_g": 24.2,
+          "fiber_g": 2.8
+        },
+        "max": {
+          "kcal": 358.4,
+          "protein_g": 30.4,
+          "fat_g": 7.8,
+          "carbs_g": 42.4,
+          "fiber_g": 5
+        }
+      }
+    },
+    {
+      "id": "proteinov_keks_v_chasha",
+      "name": "Протеинов кекс в чаша",
+      "meal_types": [
+        "dessert",
+        "snack"
+      ],
+      "protein": "eggs",
+      "cuisine": "fitness",
+      "prep_min": 3,
+      "cook_min": 2,
+      "treat": true,
+      "ingredients": [
+        {
+          "id": "egg",
+          "g": 60
+        },
+        {
+          "id": "oats_rolled",
+          "min_g": 25,
+          "max_g": 40
+        },
+        {
+          "id": "cocoa_powder",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "whey_protein",
+          "min_g": 0,
+          "max_g": 20
+        },
+        {
+          "id": "milk_low_fat",
+          "min_g": 30,
+          "max_g": 60
+        },
+        {
+          "id": "sweetener",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "baking_powder",
+          "g": 2
+        },
+        {
+          "id": "dark_chocolate",
+          "min_g": 0,
+          "max_g": 10
+        }
+      ],
+      "steps": [
+        "Смелете овесените ядки на брашно.",
+        "В голяма чаша разбъркайте яйцето, млякото, подсладителя, овесеното брашно, какаото, протеина и бакпулвера.",
+        "Добавете парченце шоколад в средата.",
+        "Печете в микровълнова на пълна мощност 70–90 секунди."
+      ],
+      "tags": [
+        "sweet",
+        "quick",
+        "high_protein"
+      ],
+      "section": "healthy_desserts",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "total_min": 5,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "eggs",
+        "gluten",
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "eggs",
+        "gluten"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 210.5,
+          "protein_g": 13.7,
+          "fat_g": 8.7,
+          "carbs_g": 21.9,
+          "fiber_g": 4.5
+        },
+        "max": {
+          "kcal": 425.5,
+          "protein_g": 34.7,
+          "fat_g": 15.6,
+          "carbs_g": 42.1,
+          "fiber_g": 9.7
+        }
+      }
+    },
+    {
+      "id": "bananovi_biskvitki_ovesni",
+      "name": "Бананови бисквитки с овесени ядки",
+      "meal_types": [
+        "dessert",
+        "snack"
+      ],
+      "protein": "none",
+      "cuisine": "fitness",
+      "prep_min": 10,
+      "cook_min": 15,
+      "batch_servings": 4,
+      "keeps_days": 4,
+      "treat": true,
+      "ingredients": [
+        {
+          "id": "banana",
+          "min_g": 50,
+          "max_g": 80
+        },
+        {
+          "id": "oats_rolled",
+          "min_g": 30,
+          "max_g": 50
+        },
+        {
+          "id": "peanut_butter",
+          "min_g": 0,
+          "max_g": 10
+        },
+        {
+          "id": "cinnamon",
+          "g": 0.5
+        },
+        {
+          "id": "dark_chocolate",
+          "min_g": 0,
+          "max_g": 10
+        }
+      ],
+      "steps": [
+        "Загрейте фурната на 180°C.",
+        "Намачкайте бананите с вилица и ги смесете с овесените ядки, фъстъченото масло, канелата и нарязания шоколад.",
+        "Оформете бисквитки с лъжица върху хартия за печене (около 3 на порция).",
+        "Печете 13–15 минути, докато се зачервят по краищата."
+      ],
+      "tags": [
+        "sweet",
+        "meal_prep",
+        "no_added_sugar"
+      ],
+      "section": "healthy_desserts",
+      "total_min": 25,
+      "diets": [
+        "vegan",
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "gluten"
+      ],
+      "allergens_optional": [
+        "peanuts"
+      ],
+      "exclusion_tags": [
+        "gluten"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 162.4,
+          "protein_g": 5.6,
+          "fat_g": 2.2,
+          "carbs_g": 31.7,
+          "fiber_g": 4.7
+        },
+        "max": {
+          "kcal": 386.5,
+          "protein_g": 12.3,
+          "fat_g": 13.1,
+          "carbs_g": 58.6,
+          "fiber_g": 9.2
+        }
+      }
+    },
+    {
+      "id": "morkoven_keks_ovesen",
+      "name": "Морковен кекс с овесени ядки",
+      "meal_types": [
+        "dessert",
+        "snack"
+      ],
+      "protein": "eggs",
+      "cuisine": "fitness",
+      "prep_min": 15,
+      "cook_min": 35,
+      "batch_servings": 8,
+      "keeps_days": 4,
+      "treat": true,
+      "ingredients": [
+        {
+          "id": "carrot",
+          "min_g": 40,
+          "max_g": 60
+        },
+        {
+          "id": "oats_rolled",
+          "min_g": 25,
+          "max_g": 35
+        },
+        {
+          "id": "egg",
+          "min_g": 20,
+          "max_g": 30
+        },
+        {
+          "id": "greek_yogurt",
+          "min_g": 20,
+          "max_g": 40
+        },
+        {
+          "id": "walnuts",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "sweetener",
+          "min_g": 8,
+          "max_g": 12
+        },
+        {
+          "id": "cinnamon",
+          "g": 1
+        },
+        {
+          "id": "baking_powder",
+          "g": 2
+        },
+        {
+          "id": "vanilla",
+          "g": 1
+        },
+        {
+          "id": "cottage_cheese_lowfat",
+          "min_g": 0,
+          "max_g": 50,
+          "note": "за крем отгоре"
+        }
+      ],
+      "steps": [
+        "Загрейте фурната на 180°C. Настържете морковите на ситно.",
+        "Смелете овесените ядки на брашно и ги смесете с канелата и бакпулвера.",
+        "Разбийте яйцата с гръцкия йогурт, подсладителя и ванилията, добавете сухите съставки, морковите и нарязаните орехи.",
+        "Изсипете във форма за кекс с хартия и печете 30–35 минути (до суха клечка).",
+        "По желание намажете изстиналия кекс с извара, разбита с малко подсладител. Нарежете на 8 парчета."
+      ],
+      "tags": [
+        "sweet",
+        "meal_prep",
+        "hidden_veg"
+      ],
+      "section": "healthy_desserts",
+      "total_min": 50,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "eggs",
+        "gluten",
+        "milk",
+        "nuts"
+      ],
+      "exclusion_tags": [
+        "dairy",
+        "eggs",
+        "gluten",
+        "nuts"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 200.8,
+          "protein_g": 9.7,
+          "fat_g": 8,
+          "carbs_g": 23.5,
+          "fiber_g": 4.6
+        },
+        "max": {
+          "kcal": 350.3,
+          "protein_g": 21.6,
+          "fat_g": 14.5,
+          "carbs_g": 35,
+          "fiber_g": 6.6
+        }
+      }
+    },
+    {
+      "id": "pecheni_yabalki_orehi_kanela",
+      "name": "Печени ябълки с орехи и канела",
+      "meal_types": [
+        "dessert",
+        "snack"
+      ],
+      "protein": "none",
+      "cuisine": "bulgarian",
+      "prep_min": 10,
+      "cook_min": 30,
+      "batch_servings": 2,
+      "keeps_days": 2,
+      "treat": true,
+      "ingredients": [
+        {
+          "id": "apple",
+          "min_g": 150,
+          "max_g": 250
+        },
+        {
+          "id": "walnuts",
+          "min_g": 10,
+          "max_g": 20
+        },
+        {
+          "id": "honey",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "cinnamon",
+          "g": 1
+        },
+        {
+          "id": "greek_yogurt",
+          "min_g": 0,
+          "max_g": 80,
+          "note": "за сервиране"
+        }
+      ],
+      "steps": [
+        "Загрейте фурната на 180°C.",
+        "Издълбайте сърцевината на ябълките, без да ги пробивате докрай.",
+        "Напълнете ги с натрошени орехи, мед и канела и ги наредете в тава с малко вода на дъното.",
+        "Печете 25–30 минути, докато омекнат. Сервирайте топли, по желание с гръцки йогурт."
+      ],
+      "tags": [
+        "sweet",
+        "fruit",
+        "autumn"
+      ],
+      "section": "healthy_desserts",
+      "total_min": 40,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "nuts"
+      ],
+      "allergens_optional": [
+        "milk"
+      ],
+      "exclusion_tags": [
+        "nuts"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 161.1,
+          "protein_g": 2,
+          "fat_g": 6.8,
+          "carbs_g": 27,
+          "fiber_g": 4.8
+        },
+        "max": {
+          "kcal": 371.3,
+          "protein_g": 11,
+          "fat_g": 17.5,
+          "carbs_g": 49.5,
+          "fiber_g": 7.9
+        }
+      }
+    },
+    {
+      "id": "chia_puding_gorski_plodove",
+      "name": "Чиа пудинг с горски плодове",
+      "meal_types": [
+        "dessert",
+        "breakfast",
+        "snack"
+      ],
+      "protein": "dairy",
+      "cuisine": "fitness",
+      "prep_min": 5,
+      "cook_min": 0,
+      "keeps_days": 3,
+      "treat": true,
+      "ingredients": [
+        {
+          "id": "chia_seeds",
+          "min_g": 20,
+          "max_g": 35
+        },
+        {
+          "id": "milk_low_fat",
+          "min_g": 120,
+          "max_g": 200
+        },
+        {
+          "id": "honey",
+          "min_g": 0,
+          "max_g": 10
+        },
+        {
+          "id": "vanilla",
+          "g": 1
+        },
+        {
+          "id": "berries_frozen",
+          "min_g": 60,
+          "max_g": 120
+        }
+      ],
+      "steps": [
+        "Смесете чията с млякото, ванилията и по желание меда и разбъркайте добре.",
+        "След 10 минути разбъркайте отново, за да не се образуват бучки.",
+        "Оставете в хладилника поне 3 часа или за през нощта.",
+        "Сервирайте с горските плодове отгоре."
+      ],
+      "tags": [
+        "sweet",
+        "no_cook",
+        "meal_prep",
+        "fiber"
+      ],
+      "section": "healthy_desserts",
+      "batch_servings": 1,
+      "total_min": 5,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 190.7,
+          "protein_g": 7.6,
+          "fat_g": 8.8,
+          "carbs_g": 21.7,
+          "fiber_g": 8.5
+        },
+        "max": {
+          "kcal": 364.6,
+          "protein_g": 13,
+          "fat_g": 15.3,
+          "carbs_g": 47.5,
+          "fiber_g": 15.3
+        }
+      }
+    },
+    {
+      "id": "sladoled_banan_kakao",
+      "name": "„Сладолед“ от замразени банани и какао",
+      "meal_types": [
+        "dessert",
+        "snack"
+      ],
+      "protein": "none",
+      "cuisine": "fitness",
+      "prep_min": 5,
+      "cook_min": 0,
+      "treat": true,
+      "ingredients": [
+        {
+          "id": "banana",
+          "min_g": 100,
+          "max_g": 180,
+          "note": "замразен на кръгчета"
+        },
+        {
+          "id": "cocoa_powder",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "milk_low_fat",
+          "min_g": 20,
+          "max_g": 50
+        },
+        {
+          "id": "peanut_butter",
+          "min_g": 0,
+          "max_g": 15
+        }
+      ],
+      "steps": [
+        "Нарежете бананите на кръгчета и ги замразете поне за 4 часа.",
+        "Пасирайте замразения банан с какаото, млякото и фъстъченото масло в мощен блендер до консистенция на сладолед.",
+        "Сервирайте веднага или замразете за още 30 минути за по-твърд сладолед."
+      ],
+      "tags": [
+        "sweet",
+        "no_added_sugar",
+        "fruit"
+      ],
+      "section": "healthy_desserts",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "total_min": 5,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "milk"
+      ],
+      "allergens_optional": [
+        "peanuts"
+      ],
+      "exclusion_tags": [
+        "dairy"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 110.4,
+          "protein_g": 2.7,
+          "fat_g": 1.4,
+          "carbs_g": 26.7,
+          "fiber_g": 4.5
+        },
+        "max": {
+          "kcal": 297.7,
+          "protein_g": 8.9,
+          "fat_g": 10.6,
+          "carbs_g": 52.7,
+          "fiber_g": 9.1
+        }
+      }
+    },
+    {
+      "id": "zamrazen_yogurt_gorski_plodove",
+      "name": "Замразен йогурт с горски плодове",
+      "meal_types": [
+        "dessert",
+        "snack"
+      ],
+      "protein": "dairy",
+      "cuisine": "fitness",
+      "prep_min": 10,
+      "cook_min": 0,
+      "batch_servings": 4,
+      "keeps_days": 14,
+      "treat": true,
+      "ingredients": [
+        {
+          "id": "greek_yogurt",
+          "min_g": 100,
+          "max_g": 180
+        },
+        {
+          "id": "berries_frozen",
+          "min_g": 50,
+          "max_g": 100
+        },
+        {
+          "id": "honey",
+          "min_g": 5,
+          "max_g": 10
+        },
+        {
+          "id": "dark_chocolate",
+          "min_g": 0,
+          "max_g": 10
+        }
+      ],
+      "steps": [
+        "Смесете гръцкия йогурт с меда.",
+        "Разстелете го на тънък пласт (около 1 см) върху тава с хартия за печене.",
+        "Поръсете с горски плодове и настърган черен шоколад.",
+        "Замразете за поне 3 часа и начупете на парчета. Пазете във фризера."
+      ],
+      "tags": [
+        "sweet",
+        "high_protein",
+        "meal_prep",
+        "summer"
+      ],
+      "section": "healthy_desserts",
+      "total_min": 10,
+      "diets": [
+        "vegetarian",
+        "pescatarian"
+      ],
+      "allergens": [
+        "milk"
+      ],
+      "exclusion_tags": [
+        "dairy"
+      ],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 137.7,
+          "protein_g": 9.2,
+          "fat_g": 5.3,
+          "carbs_g": 14.2,
+          "fiber_g": 1.4
+        },
+        "max": {
+          "kcal": 315.8,
+          "protein_g": 17.4,
+          "fat_g": 13.9,
+          "carbs_g": 32.2,
+          "fiber_g": 3.8
+        }
+      }
+    },
+    {
+      "id": "yagodi_cheren_shokolad",
+      "name": "Ягоди с черен шоколад",
+      "meal_types": [
+        "dessert",
+        "snack"
+      ],
+      "protein": "none",
+      "cuisine": "international",
+      "prep_min": 10,
+      "cook_min": 3,
+      "treat": true,
+      "ingredients": [
+        {
+          "id": "strawberries",
+          "min_g": 120,
+          "max_g": 200
+        },
+        {
+          "id": "dark_chocolate",
+          "min_g": 10,
+          "max_g": 20
+        }
+      ],
+      "steps": [
+        "Измийте и подсушете добре ягодите.",
+        "Разтопете шоколада на водна баня или в микровълнова на кратки интервали по 20 секунди.",
+        "Потопете ягодите до половината в шоколада и ги наредете върху хартия за печене.",
+        "Оставете в хладилника 15 минути, докато шоколадът се стегне."
+      ],
+      "tags": [
+        "sweet",
+        "fruit",
+        "quick"
+      ],
+      "section": "healthy_desserts",
+      "batch_servings": 1,
+      "keeps_days": 1,
+      "total_min": 13,
+      "diets": [
+        "vegetarian",
+        "pescatarian",
+        "low_carb"
+      ],
+      "allergens": [],
+      "exclusion_tags": [],
+      "nutrition_per_serving": {
+        "min": {
+          "kcal": 98.2,
+          "protein_g": 1.6,
+          "fat_g": 4.6,
+          "carbs_g": 13.8,
+          "fiber_g": 3.5
+        },
+        "max": {
+          "kcal": 183.6,
+          "protein_g": 2.9,
+          "fat_g": 9.1,
+          "carbs_g": 24.5,
+          "fiber_g": 6.2
+        }
+      }
+    }
+  ]
+}

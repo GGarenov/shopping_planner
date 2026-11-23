@@ -1,0 +1,36 @@
+{
+  "name": "test",
+  "sex": "male",
+  "age": 34,
+  "height_cm": 176,
+  "weight_kg": 96,
+  "activity": "light",
+  "activity_note": "3 workouts a week",
+  "goal": "lose",
+  "budget_eur": 100,
+  "people": 1,
+  "days": 7,
+  "slots": [
+    "breakfast",
+    "lunch",
+    "dinner",
+    "snack"
+  ],
+  "diet": null,
+  "exclude_tags": [],
+  "allergens": [],
+  "pantry": [
+    "salt",
+    "black_pepper",
+    "paprika",
+    "sunflower_oil",
+    "vinegar",
+    "sugar"
+  ],
+  "max_repeats": 2,
+  "max_desserts_per_week": 2,
+  "min_fish_per_week": 1,
+  "no_same_protein_per_day": true,
+  "candidates_per_slot": 8,
+  "kcal_tolerance": 100
+}

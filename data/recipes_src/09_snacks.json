@@ -1,0 +1,147 @@
+{
+  "section": "snacks",
+  "recipes": [
+    {
+      "id": "humus_zelenchukovi_prachitsi",
+      "name": "Хумус със зеленчукови пръчици",
+      "meal_types": ["snack"], "protein": "legumes", "cuisine": "international",
+      "prep_min": 10, "cook_min": 0, "batch_servings": 4, "keeps_days": 4,
+      "ingredients": [
+        { "id": "chickpeas_canned", "min_g": 80, "max_g": 150, "note": "отцеден" },
+        { "id": "tahini", "min_g": 10, "max_g": 20 },
+        { "id": "lemon", "g": 10 },
+        { "id": "garlic", "g": 2 },
+        { "id": "olive_oil", "g": 5 },
+        { "id": "cumin", "g": 0.5 },
+        { "id": "salt", "g": 0.5 },
+        { "id": "carrot", "min_g": 60, "max_g": 120 },
+        { "id": "cucumber", "min_g": 60, "max_g": 120 }
+      ],
+      "steps": [
+        "Пасирайте нахута, тахана, лимоновия сок, чесъна, кимиона и солта, като добавяте по малко студена вода, докато стане гладък крем.",
+        "Сервирайте хумуса, полят със зехтин, с моркови и краставица, нарязани на пръчици."
+      ],
+      "tags": ["no_cook", "meal_prep"]
+    },
+    {
+      "id": "izvara_yabalka_kanela",
+      "name": "Извара с ябълка и канела",
+      "meal_types": ["snack", "breakfast"], "protein": "dairy", "cuisine": "fitness",
+      "prep_min": 5, "cook_min": 0,
+      "ingredients": [
+        { "id": "cottage_cheese_lowfat", "min_g": 120, "max_g": 250 },
+        { "id": "apple", "min_g": 100, "max_g": 180 },
+        { "id": "cinnamon", "g": 1 },
+        { "id": "honey", "min_g": 0, "max_g": 10 }
+      ],
+      "steps": [
+        "Настържете или нарежете ябълката на кубчета.",
+        "Смесете я с изварата, поръсете с канела и по желание добавете мед."
+      ],
+      "tags": ["no_cook", "quick", "high_protein", "sweet"]
+    },
+    {
+      "id": "kiselo_mlyako_orehi_med",
+      "name": "Кисело мляко с орехи и мед",
+      "meal_types": ["snack", "breakfast"], "protein": "dairy", "cuisine": "bulgarian",
+      "prep_min": 2, "cook_min": 0,
+      "ingredients": [
+        { "id": "yogurt_whole", "min_g": 150, "max_g": 250 },
+        { "id": "walnuts", "min_g": 10, "max_g": 25 },
+        { "id": "honey", "min_g": 5, "max_g": 15 }
+      ],
+      "steps": [
+        "Сложете киселото мляко в купа, поръсете с натрошени орехи и полейте с мед."
+      ],
+      "tags": ["no_cook", "quick", "sweet"]
+    },
+    {
+      "id": "yabalka_fastacheno_maslo",
+      "name": "Ябълка с фъстъчено масло",
+      "meal_types": ["snack"], "protein": "legumes", "cuisine": "fitness",
+      "prep_min": 2, "cook_min": 0,
+      "ingredients": [
+        { "id": "apple", "min_g": 120, "max_g": 200 },
+        { "id": "peanut_butter", "min_g": 10, "max_g": 25 }
+      ],
+      "steps": [
+        "Нарежете ябълката на резени и ги намажете или потопете във фъстъченото масло."
+      ],
+      "tags": ["no_cook", "quick", "sweet"]
+    },
+    {
+      "id": "orizovki_izvara_domat",
+      "name": "Оризовки с извара и домат",
+      "meal_types": ["snack"], "protein": "dairy", "cuisine": "fitness",
+      "prep_min": 3, "cook_min": 0,
+      "ingredients": [
+        { "id": "rice_cakes", "min_g": 18, "max_g": 36, "step_g": 9, "note": "2–4 броя" },
+        { "id": "cottage_cheese_lowfat", "min_g": 80, "max_g": 150 },
+        { "id": "tomato", "min_g": 50, "max_g": 100 },
+        { "id": "salt", "g": 0.5 },
+        { "id": "black_pepper", "g": 0.3 }
+      ],
+      "steps": [
+        "Намажете оризовките с изварата.",
+        "Сложете отгоре резени домат и поръсете със сол и черен пипер."
+      ],
+      "tags": ["no_cook", "quick", "high_protein"]
+    },
+    {
+      "id": "vareni_yaitsa_krastavitsa",
+      "name": "Варени яйца с краставица",
+      "meal_types": ["snack"], "protein": "eggs", "cuisine": "fitness",
+      "prep_min": 2, "cook_min": 9, "keeps_days": 3,
+      "ingredients": [
+        { "id": "egg", "min_g": 60, "max_g": 180, "step_g": 60 },
+        { "id": "cucumber", "min_g": 100, "max_g": 200 },
+        { "id": "salt", "g": 0.5 }
+      ],
+      "steps": [
+        "Сварете яйцата 8–9 минути от кипването и ги охладете в студена вода.",
+        "Обелете ги и ги сервирайте с нарязана краставица и щипка сол."
+      ],
+      "tags": ["quick", "high_protein", "low_carb_friendly", "meal_prep"]
+    },
+    {
+      "id": "plodova_salata_kiselo_mlyako",
+      "name": "Плодова салата с кисело мляко",
+      "meal_types": ["snack", "breakfast", "dessert"], "protein": "dairy", "cuisine": "international",
+      "prep_min": 10, "cook_min": 0,
+      "ingredients": [
+        { "id": "apple", "min_g": 60, "max_g": 120 },
+        { "id": "banana", "min_g": 50, "max_g": 100 },
+        { "id": "orange", "min_g": 60, "max_g": 120 },
+        { "id": "kiwi", "min_g": 0, "max_g": 80 },
+        { "id": "yogurt_low_fat", "min_g": 100, "max_g": 200 },
+        { "id": "honey", "min_g": 0, "max_g": 10 },
+        { "id": "walnuts", "min_g": 0, "max_g": 15 }
+      ],
+      "steps": [
+        "Нарежете плодовете на хапки.",
+        "Залейте ги с киселото мляко, по желание полейте с мед и поръсете с орехи."
+      ],
+      "tags": ["no_cook", "quick", "sweet"]
+    },
+    {
+      "id": "zelenchutsi_dip_kiselo_mlyako",
+      "name": "Моркови и чушки с дип от кисело мляко и копър",
+      "meal_types": ["snack"], "protein": "dairy", "cuisine": "fitness",
+      "prep_min": 8, "cook_min": 0,
+      "ingredients": [
+        { "id": "carrot", "min_g": 60, "max_g": 120 },
+        { "id": "pepper_sweet", "min_g": 60, "max_g": 120 },
+        { "id": "cucumber", "min_g": 60, "max_g": 120 },
+        { "id": "greek_yogurt", "min_g": 80, "max_g": 150 },
+        { "id": "dill", "g": 3 },
+        { "id": "garlic", "g": 2 },
+        { "id": "salt", "g": 0.5 }
+      ],
+      "steps": [
+        "Смесете гръцкия йогурт с нарязания копър, смачкания чесън и солта.",
+        "Нарежете морковите, чушките и краставицата на пръчици и ги сервирайте с дипа."
+      ],
+      "tags": ["no_cook", "quick", "high_protein"]
+    }
+  ]
+}

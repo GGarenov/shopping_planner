@@ -1,0 +1,266 @@
+{
+  "section": "healthy_desserts",
+  "_note": "Amounts are per serving. batch_servings = how many servings one tray/batch makes.",
+  "recipes": [
+    {
+      "id": "proteinovi_brauni",
+      "name": "Протеинови брауни",
+      "meal_types": ["dessert", "snack"], "protein": "dairy", "cuisine": "fitness",
+      "prep_min": 10, "cook_min": 22, "batch_servings": 8, "keeps_days": 4, "treat": true,
+      "ingredients": [
+        { "id": "cottage_cheese_lowfat", "min_g": 50, "max_g": 80 },
+        { "id": "egg", "g": 30 },
+        { "id": "oats_rolled", "min_g": 20, "max_g": 30 },
+        { "id": "banana", "min_g": 30, "max_g": 50 },
+        { "id": "cocoa_powder", "min_g": 8, "max_g": 12 },
+        { "id": "whey_protein", "min_g": 0, "max_g": 15 },
+        { "id": "sweetener", "min_g": 5, "max_g": 10 },
+        { "id": "baking_powder", "g": 1 },
+        { "id": "vanilla", "g": 1 },
+        { "id": "dark_chocolate", "min_g": 0, "max_g": 10 }
+      ],
+      "steps": [
+        "Загрейте фурната на 180°C и постелете тава 20×20 см с хартия за печене.",
+        "Пасирайте изварата, яйцата, банана, овесените ядки, какаото, протеина, подсладителя, бакпулвера и ванилията до гладка смес.",
+        "Изсипете в тавата и поръсете с нарязания черен шоколад.",
+        "Печете 20–22 минути – средата трябва да остане леко влажна.",
+        "Оставете да изстинат напълно и нарежете на 8 парчета."
+      ],
+      "tags": ["sweet", "high_protein", "meal_prep"]
+    },
+    {
+      "id": "brauni_bob_kakao",
+      "name": "Брауни от боб и какао",
+      "meal_types": ["dessert", "snack"], "protein": "legumes", "cuisine": "fitness",
+      "prep_min": 10, "cook_min": 22, "batch_servings": 8, "keeps_days": 4, "treat": true,
+      "ingredients": [
+        { "id": "beans_canned", "min_g": 50, "max_g": 80, "note": "отцеден и изплакнат" },
+        { "id": "egg", "g": 20 },
+        { "id": "oats_rolled", "min_g": 10, "max_g": 15 },
+        { "id": "cocoa_powder", "min_g": 8, "max_g": 12 },
+        { "id": "peanut_butter", "min_g": 5, "max_g": 10 },
+        { "id": "sweetener", "min_g": 8, "max_g": 12 },
+        { "id": "baking_powder", "g": 1 },
+        { "id": "vanilla", "g": 1 },
+        { "id": "dark_chocolate", "min_g": 0, "max_g": 10 }
+      ],
+      "steps": [
+        "Загрейте фурната на 180°C и постелете тава 20×20 см с хартия за печене.",
+        "Пасирайте всички съставки без шоколада до напълно гладка смес – боб не бива да се усеща.",
+        "Изсипете в тавата, изравнете и поръсете с нарязания шоколад.",
+        "Печете 20–22 минути. Оставете да изстинат и нарежете на 8 парчета."
+      ],
+      "tags": ["sweet", "meal_prep", "fiber"]
+    },
+    {
+      "id": "brauni_tikvichki",
+      "name": "Брауни с тиквички",
+      "meal_types": ["dessert", "snack"], "protein": "eggs", "cuisine": "fitness",
+      "prep_min": 15, "cook_min": 25, "batch_servings": 8, "keeps_days": 4, "treat": true,
+      "ingredients": [
+        { "id": "zucchini", "min_g": 50, "max_g": 80 },
+        { "id": "oats_rolled", "min_g": 20, "max_g": 30 },
+        { "id": "egg", "g": 20 },
+        { "id": "greek_yogurt", "min_g": 20, "max_g": 40 },
+        { "id": "cocoa_powder", "g": 8 },
+        { "id": "sweetener", "min_g": 8, "max_g": 12 },
+        { "id": "baking_powder", "g": 1 },
+        { "id": "dark_chocolate", "min_g": 0, "max_g": 10 }
+      ],
+      "steps": [
+        "Загрейте фурната на 180°C. Настържете тиквичките на ситно и изстискайте добре водата.",
+        "Смелете овесените ядки на брашно.",
+        "Разбийте яйцата с гръцкия йогурт и подсладителя, добавете овесеното брашно, какаото и бакпулвера, после тиквичките.",
+        "Изсипете в тава 20×20 см с хартия, поръсете с шоколад и печете 22–25 минути.",
+        "Оставете да изстинат и нарежете на 8 парчета."
+      ],
+      "tags": ["sweet", "meal_prep", "hidden_veg"]
+    },
+    {
+      "id": "cheesecake_izvara_v_chashi",
+      "name": "Чийзкейк от извара без печене (в чаши)",
+      "meal_types": ["dessert", "snack"], "protein": "dairy", "cuisine": "fitness",
+      "prep_min": 15, "cook_min": 0, "batch_servings": 2, "keeps_days": 2, "treat": true,
+      "ingredients": [
+        { "id": "cottage_cheese_lowfat", "min_g": 100, "max_g": 150 },
+        { "id": "greek_yogurt", "min_g": 50, "max_g": 80 },
+        { "id": "oats_rolled", "min_g": 15, "max_g": 25 },
+        { "id": "honey", "min_g": 5, "max_g": 10 },
+        { "id": "sweetener", "min_g": 5, "max_g": 10 },
+        { "id": "vanilla", "g": 1 },
+        { "id": "lemon", "g": 5 },
+        { "id": "berries_frozen", "min_g": 40, "max_g": 80 }
+      ],
+      "steps": [
+        "Запечете овесените ядки на сух тиган 2–3 минути и ги смесете с меда – това е основата.",
+        "Пасирайте изварата с гръцкия йогурт, подсладителя, ванилията и лимоновия сок до гладък крем.",
+        "Разпределете в чаши: основа, крем и горски плодове отгоре.",
+        "Оставете в хладилника поне 1 час преди сервиране."
+      ],
+      "tags": ["sweet", "high_protein", "no_bake"]
+    },
+    {
+      "id": "proteinov_keks_v_chasha",
+      "name": "Протеинов кекс в чаша",
+      "meal_types": ["dessert", "snack"], "protein": "eggs", "cuisine": "fitness",
+      "prep_min": 3, "cook_min": 2, "treat": true,
+      "ingredients": [
+        { "id": "egg", "g": 60 },
+        { "id": "oats_rolled", "min_g": 25, "max_g": 40 },
+        { "id": "cocoa_powder", "min_g": 5, "max_g": 10 },
+        { "id": "whey_protein", "min_g": 0, "max_g": 20 },
+        { "id": "milk_low_fat", "min_g": 30, "max_g": 60 },
+        { "id": "sweetener", "min_g": 5, "max_g": 10 },
+        { "id": "baking_powder", "g": 2 },
+        { "id": "dark_chocolate", "min_g": 0, "max_g": 10 }
+      ],
+      "steps": [
+        "Смелете овесените ядки на брашно.",
+        "В голяма чаша разбъркайте яйцето, млякото, подсладителя, овесеното брашно, какаото, протеина и бакпулвера.",
+        "Добавете парченце шоколад в средата.",
+        "Печете в микровълнова на пълна мощност 70–90 секунди."
+      ],
+      "tags": ["sweet", "quick", "high_protein"]
+    },
+    {
+      "id": "bananovi_biskvitki_ovesni",
+      "name": "Бананови бисквитки с овесени ядки",
+      "meal_types": ["dessert", "snack"], "protein": "none", "cuisine": "fitness",
+      "prep_min": 10, "cook_min": 15, "batch_servings": 4, "keeps_days": 4, "treat": true,
+      "ingredients": [
+        { "id": "banana", "min_g": 50, "max_g": 80 },
+        { "id": "oats_rolled", "min_g": 30, "max_g": 50 },
+        { "id": "peanut_butter", "min_g": 0, "max_g": 10 },
+        { "id": "cinnamon", "g": 0.5 },
+        { "id": "dark_chocolate", "min_g": 0, "max_g": 10 }
+      ],
+      "steps": [
+        "Загрейте фурната на 180°C.",
+        "Намачкайте бананите с вилица и ги смесете с овесените ядки, фъстъченото масло, канелата и нарязания шоколад.",
+        "Оформете бисквитки с лъжица върху хартия за печене (около 3 на порция).",
+        "Печете 13–15 минути, докато се зачервят по краищата."
+      ],
+      "tags": ["sweet", "meal_prep", "no_added_sugar"]
+    },
+    {
+      "id": "morkoven_keks_ovesen",
+      "name": "Морковен кекс с овесени ядки",
+      "meal_types": ["dessert", "snack"], "protein": "eggs", "cuisine": "fitness",
+      "prep_min": 15, "cook_min": 35, "batch_servings": 8, "keeps_days": 4, "treat": true,
+      "ingredients": [
+        { "id": "carrot", "min_g": 40, "max_g": 60 },
+        { "id": "oats_rolled", "min_g": 25, "max_g": 35 },
+        { "id": "egg", "min_g": 20, "max_g": 30 },
+        { "id": "greek_yogurt", "min_g": 20, "max_g": 40 },
+        { "id": "walnuts", "min_g": 5, "max_g": 10 },
+        { "id": "sweetener", "min_g": 8, "max_g": 12 },
+        { "id": "cinnamon", "g": 1 },
+        { "id": "baking_powder", "g": 2 },
+        { "id": "vanilla", "g": 1 },
+        { "id": "cottage_cheese_lowfat", "min_g": 0, "max_g": 50, "note": "за крем отгоре" }
+      ],
+      "steps": [
+        "Загрейте фурната на 180°C. Настържете морковите на ситно.",
+        "Смелете овесените ядки на брашно и ги смесете с канелата и бакпулвера.",
+        "Разбийте яйцата с гръцкия йогурт, подсладителя и ванилията, добавете сухите съставки, морковите и нарязаните орехи.",
+        "Изсипете във форма за кекс с хартия и печете 30–35 минути (до суха клечка).",
+        "По желание намажете изстиналия кекс с извара, разбита с малко подсладител. Нарежете на 8 парчета."
+      ],
+      "tags": ["sweet", "meal_prep", "hidden_veg"]
+    },
+    {
+      "id": "pecheni_yabalki_orehi_kanela",
+      "name": "Печени ябълки с орехи и канела",
+      "meal_types": ["dessert", "snack"], "protein": "none", "cuisine": "bulgarian",
+      "prep_min": 10, "cook_min": 30, "batch_servings": 2, "keeps_days": 2, "treat": true,
+      "ingredients": [
+        { "id": "apple", "min_g": 150, "max_g": 250 },
+        { "id": "walnuts", "min_g": 10, "max_g": 20 },
+        { "id": "honey", "min_g": 5, "max_g": 10 },
+        { "id": "cinnamon", "g": 1 },
+        { "id": "greek_yogurt", "min_g": 0, "max_g": 80, "note": "за сервиране" }
+      ],
+      "steps": [
+        "Загрейте фурната на 180°C.",
+        "Издълбайте сърцевината на ябълките, без да ги пробивате докрай.",
+        "Напълнете ги с натрошени орехи, мед и канела и ги наредете в тава с малко вода на дъното.",
+        "Печете 25–30 минути, докато омекнат. Сервирайте топли, по желание с гръцки йогурт."
+      ],
+      "tags": ["sweet", "fruit", "autumn"]
+    },
+    {
+      "id": "chia_puding_gorski_plodove",
+      "name": "Чиа пудинг с горски плодове",
+      "meal_types": ["dessert", "breakfast", "snack"], "protein": "dairy", "cuisine": "fitness",
+      "prep_min": 5, "cook_min": 0, "keeps_days": 3, "treat": true,
+      "ingredients": [
+        { "id": "chia_seeds", "min_g": 20, "max_g": 35 },
+        { "id": "milk_low_fat", "min_g": 120, "max_g": 200 },
+        { "id": "honey", "min_g": 0, "max_g": 10 },
+        { "id": "vanilla", "g": 1 },
+        { "id": "berries_frozen", "min_g": 60, "max_g": 120 }
+      ],
+      "steps": [
+        "Смесете чията с млякото, ванилията и по желание меда и разбъркайте добре.",
+        "След 10 минути разбъркайте отново, за да не се образуват бучки.",
+        "Оставете в хладилника поне 3 часа или за през нощта.",
+        "Сервирайте с горските плодове отгоре."
+      ],
+      "tags": ["sweet", "no_cook", "meal_prep", "fiber"]
+    },
+    {
+      "id": "sladoled_banan_kakao",
+      "name": "„Сладолед“ от замразени банани и какао",
+      "meal_types": ["dessert", "snack"], "protein": "none", "cuisine": "fitness",
+      "prep_min": 5, "cook_min": 0, "treat": true,
+      "ingredients": [
+        { "id": "banana", "min_g": 100, "max_g": 180, "note": "замразен на кръгчета" },
+        { "id": "cocoa_powder", "min_g": 5, "max_g": 10 },
+        { "id": "milk_low_fat", "min_g": 20, "max_g": 50 },
+        { "id": "peanut_butter", "min_g": 0, "max_g": 15 }
+      ],
+      "steps": [
+        "Нарежете бананите на кръгчета и ги замразете поне за 4 часа.",
+        "Пасирайте замразения банан с какаото, млякото и фъстъченото масло в мощен блендер до консистенция на сладолед.",
+        "Сервирайте веднага или замразете за още 30 минути за по-твърд сладолед."
+      ],
+      "tags": ["sweet", "no_added_sugar", "fruit"]
+    },
+    {
+      "id": "zamrazen_yogurt_gorski_plodove",
+      "name": "Замразен йогурт с горски плодове",
+      "meal_types": ["dessert", "snack"], "protein": "dairy", "cuisine": "fitness",
+      "prep_min": 10, "cook_min": 0, "batch_servings": 4, "keeps_days": 14, "treat": true,
+      "ingredients": [
+        { "id": "greek_yogurt", "min_g": 100, "max_g": 180 },
+        { "id": "berries_frozen", "min_g": 50, "max_g": 100 },
+        { "id": "honey", "min_g": 5, "max_g": 10 },
+        { "id": "dark_chocolate", "min_g": 0, "max_g": 10 }
+      ],
+      "steps": [
+        "Смесете гръцкия йогурт с меда.",
+        "Разстелете го на тънък пласт (около 1 см) върху тава с хартия за печене.",
+        "Поръсете с горски плодове и настърган черен шоколад.",
+        "Замразете за поне 3 часа и начупете на парчета. Пазете във фризера."
+      ],
+      "tags": ["sweet", "high_protein", "meal_prep", "summer"]
+    },
+    {
+      "id": "yagodi_cheren_shokolad",
+      "name": "Ягоди с черен шоколад",
+      "meal_types": ["dessert", "snack"], "protein": "none", "cuisine": "international",
+      "prep_min": 10, "cook_min": 3, "treat": true,
+      "ingredients": [
+        { "id": "strawberries", "min_g": 120, "max_g": 200 },
+        { "id": "dark_chocolate", "min_g": 10, "max_g": 20 }
+      ],
+      "steps": [
+        "Измийте и подсушете добре ягодите.",
+        "Разтопете шоколада на водна баня или в микровълнова на кратки интервали по 20 секунди.",
+        "Потопете ягодите до половината в шоколада и ги наредете върху хартия за печене.",
+        "Оставете в хладилника 15 минути, докато шоколадът се стегне."
+      ],
+      "tags": ["sweet", "fruit", "quick"]
+    }
+  ]
+}

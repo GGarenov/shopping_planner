@@ -1,0 +1,96 @@
+{
+  "section": "side_salads_soups",
+  "recipes": [
+    {
+      "id": "shopska_salata",
+      "name": "Шопска салата",
+      "meal_types": ["side"], "protein": "dairy", "cuisine": "bulgarian",
+      "prep_min": 10, "cook_min": 0,
+      "ingredients": [
+        { "id": "tomato", "min_g": 120, "max_g": 200 },
+        { "id": "cucumber", "min_g": 80, "max_g": 150 },
+        { "id": "pepper_sweet", "min_g": 50, "max_g": 100 },
+        { "id": "onion", "g": 20 },
+        { "id": "feta_cheese", "min_g": 30, "max_g": 50 },
+        { "id": "parsley", "g": 5 },
+        { "id": "sunflower_oil", "min_g": 5, "max_g": 10 },
+        { "id": "vinegar", "g": 5 },
+        { "id": "salt", "g": 1 }
+      ],
+      "steps": [
+        "Нарежете доматите, краставицата, чушката и лука на кубчета.",
+        "Подправете с олио, оцет и сол и разбъркайте.",
+        "Настържете отгоре сиренето и поръсете с магданоз."
+      ],
+      "tags": ["no_cook", "quick"]
+    },
+    {
+      "id": "snezhanka",
+      "name": "Снежанка",
+      "meal_types": ["side", "snack"], "protein": "dairy", "cuisine": "bulgarian",
+      "prep_min": 10, "cook_min": 0,
+      "ingredients": [
+        { "id": "greek_yogurt", "min_g": 100, "max_g": 200, "note": "или цедено кисело мляко" },
+        { "id": "cucumber", "min_g": 80, "max_g": 150 },
+        { "id": "garlic", "g": 3 },
+        { "id": "dill", "g": 5 },
+        { "id": "walnuts", "min_g": 10, "max_g": 20 },
+        { "id": "olive_oil", "g": 3 },
+        { "id": "salt", "g": 1 }
+      ],
+      "steps": [
+        "Нарежете краставицата на много малки кубчета или я настържете и изстискайте водата.",
+        "Смесете гръцкия йогурт с краставицата, смачкания чесън, копъра и солта.",
+        "Сервирайте поръсено с натрошени орехи и няколко капки зехтин."
+      ],
+      "tags": ["no_cook", "quick", "high_protein"]
+    },
+    {
+      "id": "tarator",
+      "name": "Таратор",
+      "meal_types": ["side", "lunch"], "protein": "dairy", "cuisine": "bulgarian",
+      "prep_min": 10, "cook_min": 0,
+      "ingredients": [
+        { "id": "yogurt_whole", "min_g": 150, "max_g": 250 },
+        { "id": "cucumber", "min_g": 80, "max_g": 150 },
+        { "id": "garlic", "g": 3 },
+        { "id": "dill", "g": 5 },
+        { "id": "walnuts", "min_g": 10, "max_g": 20 },
+        { "id": "sunflower_oil", "g": 5 },
+        { "id": "salt", "g": 1 }
+      ],
+      "steps": [
+        "Нарежете краставицата на малки кубчета.",
+        "Разбийте киселото мляко с толкова студена вода, колкото да получите желаната гъстота.",
+        "Добавете краставицата, смачкания чесън, копъра, олиото и солта.",
+        "Сервирайте студен, поръсен с натрошени орехи."
+      ],
+      "tags": ["no_cook", "quick", "summer"]
+    },
+    {
+      "id": "pileshka_supa_zastroyka",
+      "name": "Пилешка супа със застройка",
+      "meal_types": ["side", "lunch", "dinner"], "protein": "chicken", "cuisine": "bulgarian",
+      "prep_min": 10, "cook_min": 40, "batch_servings": 4, "keeps_days": 3,
+      "ingredients": [
+        { "id": "chicken_breast", "min_g": 60, "max_g": 120 },
+        { "id": "carrot", "g": 40 },
+        { "id": "onion", "g": 30 },
+        { "id": "pasta", "min_g": 15, "max_g": 30, "note": "фиде" },
+        { "id": "egg", "g": 15 },
+        { "id": "yogurt_whole", "min_g": 30, "max_g": 50 },
+        { "id": "lemon", "g": 10 },
+        { "id": "parsley", "g": 5 },
+        { "id": "salt", "g": 1.5 }
+      ],
+      "steps": [
+        "Сложете пилешкото месо в тенджера със студена вода, кипнете и обирайте пяната. Варете 20 минути.",
+        "Извадете месото, добавете в бульона нарязаните моркови и лука и варете 10 минути.",
+        "Добавете фидето и солта и варете още 5 минути. Върнете накъсаното месо.",
+        "За застройката разбийте яйцата с киселото мляко и лимоновия сок, разредете с малко от бульона и я изсипете в супата при непрекъснато бъркане, без да кипва повече.",
+        "Поръсете с магданоз."
+      ],
+      "tags": ["family", "meal_prep"]
+    }
+  ]
+}

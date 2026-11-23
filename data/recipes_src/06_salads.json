@@ -1,0 +1,225 @@
+{
+  "section": "main_salads",
+  "recipes": [
+    {
+      "id": "salata_riba_ton_bob_tsarevitsa",
+      "name": "Салата с риба тон, боб и царевица",
+      "meal_types": ["lunch", "dinner"], "protein": "fish", "cuisine": "international",
+      "prep_min": 10, "cook_min": 0,
+      "ingredients": [
+        { "id": "tuna_canned_water", "min_g": 100, "max_g": 180, "note": "отцедена" },
+        { "id": "beans_canned", "min_g": 80, "max_g": 150, "note": "отцеден" },
+        { "id": "corn_canned", "min_g": 40, "max_g": 80 },
+        { "id": "lettuce", "min_g": 50, "max_g": 100 },
+        { "id": "tomato", "min_g": 80, "max_g": 150 },
+        { "id": "onion", "g": 20 },
+        { "id": "olive_oil", "min_g": 5, "max_g": 10 },
+        { "id": "lemon", "g": 10 },
+        { "id": "salt", "g": 1 }
+      ],
+      "steps": [
+        "Отцедете и изплакнете боба и царевицата.",
+        "Нарежете марулята, доматите и лука.",
+        "Смесете всичко в купа, добавете рибата тон на едри парчета.",
+        "Подправете със зехтин, лимонов сок и сол."
+      ],
+      "tags": ["high_protein", "no_cook", "quick", "meal_prep"]
+    },
+    {
+      "id": "salata_riba_ton_yaitse_kartofi",
+      "name": "Салата с риба тон, яйце и картофи",
+      "meal_types": ["lunch", "dinner"], "protein": "fish", "cuisine": "international",
+      "prep_min": 10, "cook_min": 20, "keeps_days": 2,
+      "ingredients": [
+        { "id": "tuna_canned_water", "min_g": 100, "max_g": 150, "note": "отцедена" },
+        { "id": "egg", "min_g": 60, "max_g": 120, "step_g": 60 },
+        { "id": "potato", "min_g": 100, "max_g": 250 },
+        { "id": "green_beans_frozen", "min_g": 60, "max_g": 120 },
+        { "id": "tomato", "min_g": 80, "max_g": 120 },
+        { "id": "lettuce", "min_g": 40, "max_g": 80 },
+        { "id": "olive_oil", "min_g": 5, "max_g": 10 },
+        { "id": "mustard", "g": 5 },
+        { "id": "vinegar", "g": 5 },
+        { "id": "salt", "g": 1 }
+      ],
+      "steps": [
+        "Сварете картофите 15–20 минути, а яйцата – 8 минути. Сварете зеления боб 5 минути.",
+        "Обелете и нарежете картофите и яйцата.",
+        "Разбъркайте зехтина, горчицата, оцета и солта за дресинг.",
+        "Наредете марулята, картофите, боба, доматите, яйцата и рибата тон в чиния и полейте с дресинга."
+      ],
+      "tags": ["high_protein", "meal_prep"]
+    },
+    {
+      "id": "tsezar_salata_pile",
+      "name": "Цезар салата с пиле",
+      "meal_types": ["lunch", "dinner"], "protein": "chicken", "cuisine": "international",
+      "prep_min": 15, "cook_min": 12,
+      "ingredients": [
+        { "id": "chicken_breast", "min_g": 120, "max_g": 220 },
+        { "id": "lettuce", "min_g": 100, "max_g": 150, "note": "романа или айсберг" },
+        { "id": "bread_wholewheat", "min_g": 20, "max_g": 40, "note": "за крутони" },
+        { "id": "parmesan", "min_g": 10, "max_g": 20 },
+        { "id": "greek_yogurt", "min_g": 40, "max_g": 80 },
+        { "id": "lemon", "g": 10 },
+        { "id": "mustard", "g": 5 },
+        { "id": "garlic", "g": 2 },
+        { "id": "olive_oil", "g": 5 },
+        { "id": "salt", "g": 1 },
+        { "id": "black_pepper", "g": 0.5 }
+      ],
+      "steps": [
+        "Овкусете пилешкото със сол и черен пипер и го изпечете на грил тиган със зехтина по 5–6 минути от всяка страна.",
+        "Нарежете хляба на кубчета и го запечете на сух тиган или във фурна до хрупкавост.",
+        "За дресинга смесете гръцкия йогурт, лимоновия сок, горчицата, смачкания чесън и половината настърган пармезан.",
+        "Нарежете марулята, разбъркайте я с дресинга и наредете отгоре нарязаното пилешко, крутоните и останалия пармезан."
+      ],
+      "tags": ["high_protein"]
+    },
+    {
+      "id": "grutska_salata_pile",
+      "name": "Гръцка салата с пиле",
+      "meal_types": ["lunch", "dinner"], "protein": "chicken", "cuisine": "international",
+      "prep_min": 10, "cook_min": 12,
+      "ingredients": [
+        { "id": "chicken_breast", "min_g": 120, "max_g": 220 },
+        { "id": "tomato", "min_g": 100, "max_g": 200 },
+        { "id": "cucumber", "min_g": 80, "max_g": 150 },
+        { "id": "pepper_sweet", "min_g": 50, "max_g": 100 },
+        { "id": "onion", "g": 20 },
+        { "id": "feta_cheese", "min_g": 30, "max_g": 60 },
+        { "id": "olive_oil", "min_g": 5, "max_g": 10 },
+        { "id": "vinegar", "g": 5 },
+        { "id": "oregano", "g": 1 },
+        { "id": "salt", "g": 1 }
+      ],
+      "steps": [
+        "Овкусете пилешкото със сол и риган и го изпечете на грил тиган по 5–6 минути от всяка страна.",
+        "Нарежете доматите, краставицата, чушката и лука на едри парчета.",
+        "Подредете зеленчуците в купа, сложете отгоре сиренето на парче и нарязаното пилешко.",
+        "Полейте със зехтин и оцет и поръсете с риган."
+      ],
+      "tags": ["high_protein", "low_carb_friendly"]
+    },
+    {
+      "id": "salata_kinoa_pile",
+      "name": "Салата с киноа и пиле",
+      "meal_types": ["lunch", "dinner"], "protein": "chicken", "cuisine": "fitness",
+      "prep_min": 15, "cook_min": 15, "keeps_days": 2,
+      "ingredients": [
+        { "id": "quinoa", "min_g": 40, "max_g": 80 },
+        { "id": "chicken_breast", "min_g": 100, "max_g": 200 },
+        { "id": "cucumber", "min_g": 80, "max_g": 150 },
+        { "id": "tomato", "min_g": 80, "max_g": 150 },
+        { "id": "pepper_sweet", "min_g": 50, "max_g": 100 },
+        { "id": "parsley", "g": 5 },
+        { "id": "lemon", "g": 15 },
+        { "id": "olive_oil", "min_g": 5, "max_g": 10 },
+        { "id": "salt", "g": 1 }
+      ],
+      "steps": [
+        "Измийте киноата и я сварете в двойно количество подсолена вода 12–15 минути. Оставете да изстине.",
+        "Изпечете пилешкото на грил тиган и го нарежете на хапки.",
+        "Нарежете зеленчуците на малки кубчета и магданоза ситно.",
+        "Смесете всичко и подправете с лимонов сок, зехтин и сол."
+      ],
+      "tags": ["high_protein", "meal_prep"]
+    },
+    {
+      "id": "salata_syomga_avokado",
+      "name": "Салата със сьомга и авокадо",
+      "meal_types": ["lunch", "dinner"], "protein": "fish", "cuisine": "international",
+      "prep_min": 10, "cook_min": 15,
+      "ingredients": [
+        { "id": "salmon", "min_g": 120, "max_g": 200 },
+        { "id": "avocado", "min_g": 50, "max_g": 100 },
+        { "id": "lettuce", "min_g": 60, "max_g": 120 },
+        { "id": "cucumber", "min_g": 60, "max_g": 120 },
+        { "id": "tomato", "min_g": 60, "max_g": 120 },
+        { "id": "pumpkin_seeds", "min_g": 5, "max_g": 15 },
+        { "id": "lemon", "g": 15 },
+        { "id": "olive_oil", "g": 5 },
+        { "id": "salt", "g": 1 }
+      ],
+      "steps": [
+        "Посолете сьомгата и я изпечете на фурна при 200°C за 12–15 минути или на тиган по 4 минути от всяка страна.",
+        "Нарежете марулята, краставицата, доматите и авокадото.",
+        "Наредете салатата, сложете отгоре сьомгата на парчета и поръсете с тиквените семки.",
+        "Полейте с лимонов сок и зехтин."
+      ],
+      "tags": ["high_protein", "omega3", "low_carb_friendly"]
+    },
+    {
+      "id": "salata_teleshko_rukola",
+      "name": "Салата с телешко и рукола",
+      "meal_types": ["lunch", "dinner"], "protein": "beef", "cuisine": "international",
+      "prep_min": 10, "cook_min": 10,
+      "ingredients": [
+        { "id": "beef_steak", "min_g": 120, "max_g": 200 },
+        { "id": "lettuce", "min_g": 50, "max_g": 100, "note": "рукола" },
+        { "id": "tomato", "min_g": 80, "max_g": 150, "note": "чери" },
+        { "id": "parmesan", "min_g": 10, "max_g": 20 },
+        { "id": "olive_oil", "min_g": 5, "max_g": 10 },
+        { "id": "vinegar", "g": 5, "note": "балсамов" },
+        { "id": "salt", "g": 1 },
+        { "id": "black_pepper", "g": 0.5 }
+      ],
+      "steps": [
+        "Овкусете месото със сол и черен пипер и го изпечете на много горещ тиган по 3 минути от всяка страна.",
+        "Оставете го да почине 5 минути и го нарежете на тънки ивици.",
+        "Наредете руколата и разполовените доматчета, сложете отгоре месото и пармезана на люспи.",
+        "Полейте със зехтин и балсамов оцет."
+      ],
+      "tags": ["high_protein", "low_carb_friendly", "quick"]
+    },
+    {
+      "id": "salata_pueshko_yabalka_orehi",
+      "name": "Салата с пуешко, ябълка и орехи",
+      "meal_types": ["lunch", "dinner"], "protein": "turkey", "cuisine": "international",
+      "prep_min": 10, "cook_min": 12,
+      "ingredients": [
+        { "id": "turkey_breast", "min_g": 120, "max_g": 200 },
+        { "id": "lettuce", "min_g": 60, "max_g": 120 },
+        { "id": "apple", "min_g": 80, "max_g": 150 },
+        { "id": "walnuts", "min_g": 10, "max_g": 25 },
+        { "id": "olive_oil", "g": 5 },
+        { "id": "mustard", "g": 5 },
+        { "id": "lemon", "g": 10 },
+        { "id": "honey", "min_g": 0, "max_g": 5 },
+        { "id": "salt", "g": 1 }
+      ],
+      "steps": [
+        "Посолете пуешкото и го изпечете на грил тиган по 5–6 минути от всяка страна. Нарежете го на ивици.",
+        "Нарежете ябълката на тънки резенчета и я полейте с малко лимонов сок.",
+        "Разбъркайте зехтина, горчицата, останалия лимонов сок и меда за дресинг.",
+        "Смесете марулята, ябълката и месото, полейте с дресинга и поръсете с натрошени орехи."
+      ],
+      "tags": ["high_protein"]
+    },
+    {
+      "id": "salata_nahut_krastavitsa_domati",
+      "name": "Салата с нахут, краставица и домати",
+      "meal_types": ["lunch", "dinner"], "protein": "legumes", "cuisine": "international",
+      "prep_min": 10, "cook_min": 0, "keeps_days": 2,
+      "ingredients": [
+        { "id": "chickpeas_canned", "min_g": 150, "max_g": 260, "note": "отцеден" },
+        { "id": "cucumber", "min_g": 80, "max_g": 150 },
+        { "id": "tomato", "min_g": 80, "max_g": 150 },
+        { "id": "pepper_sweet", "min_g": 0, "max_g": 80 },
+        { "id": "pumpkin_seeds", "min_g": 0, "max_g": 20 },
+        { "id": "onion", "g": 20 },
+        { "id": "parsley", "g": 10 },
+        { "id": "lemon", "g": 15 },
+        { "id": "olive_oil", "min_g": 5, "max_g": 10 },
+        { "id": "cumin", "g": 1 },
+        { "id": "salt", "g": 1 }
+      ],
+      "steps": [
+        "Отцедете и изплакнете нахута.",
+        "Нарежете краставицата, доматите, чушката и лука на малки кубчета, а магданоза – ситно.",
+        "Смесете всичко и подправете с лимонов сок, зехтин, кимион и сол."
+      ],
+      "tags": ["no_cook", "quick", "meal_prep"]
+    }
+  ]
+}

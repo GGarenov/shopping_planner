@@ -1,0 +1,126 @@
+{
+  "section": "vegetarian",
+  "recipes": [
+    {
+      "id": "krem_supa_chervena_leshta",
+      "name": "Крем супа от червена леща",
+      "meal_types": ["lunch", "dinner"], "protein": "legumes", "cuisine": "international",
+      "prep_min": 10, "cook_min": 25, "batch_servings": 4, "keeps_days": 3,
+      "ingredients": [
+        { "id": "lentils_red", "min_g": 50, "max_g": 90 },
+        { "id": "carrot", "min_g": 60, "max_g": 100 },
+        { "id": "onion", "g": 50 },
+        { "id": "garlic", "g": 3 },
+        { "id": "olive_oil", "min_g": 5, "max_g": 10 },
+        { "id": "cumin", "g": 1 },
+        { "id": "paprika", "g": 1 },
+        { "id": "lemon", "g": 10 },
+        { "id": "salt", "g": 1.5 },
+        { "id": "bread_wholewheat", "min_g": 0, "max_g": 70, "step_g": 35, "note": "за сервиране" }
+      ],
+      "steps": [
+        "Задушете нарязания лук и морковите в зехтина 5 минути, добавете чесъна, кимиона и червения пипер.",
+        "Добавете измитата леща и 3 пъти повече вода (по обем) и посолете.",
+        "Варете 18–20 минути, докато лещата се разпадне.",
+        "Пасирайте до гладка супа и добавете лимоновия сок. Ако е много гъста, разредете с малко гореща вода."
+      ],
+      "tags": ["meal_prep", "budget"]
+    },
+    {
+      "id": "kari_nahut_spanak",
+      "name": "Къри с нахут и спанак",
+      "meal_types": ["lunch", "dinner"], "protein": "legumes", "cuisine": "international",
+      "prep_min": 10, "cook_min": 20, "batch_servings": 2, "keeps_days": 3,
+      "ingredients": [
+        { "id": "chickpeas_canned", "min_g": 150, "max_g": 250, "note": "отцеден" },
+        { "id": "spinach_fresh", "min_g": 60, "max_g": 120 },
+        { "id": "tomatoes_canned", "min_g": 100, "max_g": 200 },
+        { "id": "onion", "g": 50 },
+        { "id": "garlic", "g": 5 },
+        { "id": "ginger", "g": 5 },
+        { "id": "curry_powder", "g": 4 },
+        { "id": "sunflower_oil", "min_g": 5, "max_g": 10 },
+        { "id": "salt", "g": 1.5 },
+        { "id": "rice_white", "min_g": 0, "max_g": 80, "note": "за сервиране" }
+      ],
+      "steps": [
+        "Задушете ситно нарязания лук в олиото 5 минути, добавете чесъна, настъргания джинджифил и кърито и бъркайте 1 минута.",
+        "Добавете доматите, отцедения нахут и солта и оставете да къкри 10 минути.",
+        "Добавете спанака и бъркайте, докато омекне.",
+        "Сервирайте самостоятелно или с ориз."
+      ],
+      "tags": ["meal_prep", "budget"]
+    },
+    {
+      "id": "tofu_zelenchutsi_oriz",
+      "name": "Тофу със зеленчуци и ориз",
+      "meal_types": ["lunch", "dinner"], "protein": "tofu", "cuisine": "international",
+      "prep_min": 15, "cook_min": 15,
+      "ingredients": [
+        { "id": "tofu", "min_g": 120, "max_g": 220 },
+        { "id": "rice_white", "min_g": 40, "max_g": 90 },
+        { "id": "broccoli_fresh", "min_g": 80, "max_g": 150 },
+        { "id": "pepper_sweet", "min_g": 60, "max_g": 120 },
+        { "id": "carrot", "min_g": 40, "max_g": 80 },
+        { "id": "garlic", "g": 5 },
+        { "id": "ginger", "g": 5 },
+        { "id": "soy_sauce", "g": 15 },
+        { "id": "sunflower_oil", "min_g": 5, "max_g": 10 }
+      ],
+      "steps": [
+        "Сварете ориза според указанията на опаковката.",
+        "Подсушете тофуто с кухненска хартия и го нарежете на кубчета.",
+        "Запържете тофуто в половината олио, докато се зачерви от всички страни, и го извадете.",
+        "Запържете зеленчуците в останалото олио 4–5 минути, добавете чесъна, джинджифила, соевия сос и тофуто и разбъркайте. Сервирайте с ориза."
+      ],
+      "tags": ["quick"]
+    },
+    {
+      "id": "elda_gabi_yaitse",
+      "name": "Елда с гъби и яйце",
+      "meal_types": ["lunch", "dinner"], "protein": "eggs", "cuisine": "international",
+      "prep_min": 10, "cook_min": 20,
+      "ingredients": [
+        { "id": "buckwheat", "min_g": 50, "max_g": 90 },
+        { "id": "mushrooms", "min_g": 100, "max_g": 200 },
+        { "id": "onion", "g": 40 },
+        { "id": "egg", "min_g": 60, "max_g": 120, "step_g": 60 },
+        { "id": "butter", "g": 5 },
+        { "id": "parsley", "g": 5 },
+        { "id": "salt", "g": 1.5 },
+        { "id": "black_pepper", "g": 0.5 }
+      ],
+      "steps": [
+        "Измийте елдата и я сварете в двойно количество подсолена вода 15 минути.",
+        "Задушете нарязания лук и гъбите в маслото 7–8 минути, докато водата се изпари.",
+        "Разбъркайте елдата с гъбите и черния пипер.",
+        "Изпържете или сварете яйцата и ги сервирайте отгоре. Поръсете с магданоз."
+      ],
+      "tags": ["budget"]
+    },
+    {
+      "id": "fritata_zelenchutsi_sirene",
+      "name": "Фритата със зеленчуци и сирене",
+      "meal_types": ["lunch", "dinner", "breakfast"], "protein": "eggs", "cuisine": "international",
+      "prep_min": 10, "cook_min": 20, "batch_servings": 2, "keeps_days": 2,
+      "ingredients": [
+        { "id": "egg", "min_g": 120, "max_g": 240, "step_g": 60 },
+        { "id": "zucchini", "min_g": 80, "max_g": 150 },
+        { "id": "pepper_sweet", "min_g": 60, "max_g": 120 },
+        { "id": "onion", "g": 30 },
+        { "id": "feta_cheese", "min_g": 30, "max_g": 60 },
+        { "id": "olive_oil", "g": 5 },
+        { "id": "parsley", "g": 5 },
+        { "id": "salt", "g": 0.5 },
+        { "id": "black_pepper", "g": 0.5 }
+      ],
+      "steps": [
+        "Загрейте фурната на 190°C.",
+        "Задушете нарязаните тиквички, чушки и лук в зехтина в тиган, подходящ за фурна, 5–6 минути.",
+        "Разбийте яйцата със солта, черния пипер и магданоза и ги изсипете върху зеленчуците. Натрошете отгоре сиренето.",
+        "Гответе на котлона 2 минути, после преместете във фурната за 12–15 минути, докато се стегне."
+      ],
+      "tags": ["high_protein", "low_carb_friendly", "meal_prep"]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "name": "shopping-planner",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "ebag:login": "node scripts/ebag_login.mjs",
+    "ebag:sync": "node scripts/sync_ebag.mjs",
+    "ebag:relink": "node scripts/sync_ebag.mjs --relink --no-details",
+    "usda:fill": "node scripts/fill_usda_macros.mjs",
+    "recipes:build": "node scripts/build_recipes.mjs",
+    "plan": "node scripts/plan.mjs",
+    "review": "node scripts/review_server.mjs",
+    "cart": "node scripts/send_to_cart.mjs",
+    "db:push": "supabase db push"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.119.2",
+    "highs": "^1.16.0",
+    "next": "^15.5.29",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.7",
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^15.5.29",
+    "postcss": "^8.5.33",
+    "supabase": "^3.3.0",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
