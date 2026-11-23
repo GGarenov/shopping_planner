@@ -20,7 +20,8 @@
     "test": "vitest run",
     "seed": "node --env-file-if-exists=.env.local scripts/seed.ts",
     "ebag:bootstrap": "node --env-file-if-exists=.env.local scripts/ebag_bootstrap.ts",
-    "icons": "node scripts/make_icons.mjs"
+    "icons": "node scripts/make_icons.mjs",
+    "images:fetch": "node scripts/fetch_recipe_images.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.2",

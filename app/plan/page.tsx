@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
+import { smallPhotos } from "@/lib/recipes/images";
 import Link from "next/link";
 import { BottomNav } from "@/components/BottomNav";
 import { PricesNotice } from "@/components/PricesNotice";
@@ -84,6 +85,7 @@ export default async function PlanPage({ searchParams }: { searchParams: Promise
           kcalMin={plan.targets.kcal_min}
           kcalMax={plan.targets.kcal_max}
           proteinMin={plan.targets.protein_min}
+          photos={smallPhotos(plan.plan.flatMap((d) => d.meals.map((m) => m.recipe_id)))}
         />
 
         <footer className="flex flex-col gap-2 border-t border-border pt-4">

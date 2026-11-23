@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { SLOT_BG } from "@/lib/planner/labels";
 import type { Recipe } from "@/lib/planner/plan";
 import { getPlan } from "@/lib/plans/load";
+import { recipePhoto } from "@/lib/recipes/images";
 import { requireCompleteProfile } from "@/lib/profile/load";
 import { createClient } from "@/lib/supabase/server";
 
@@ -32,6 +33,7 @@ export default async function MealPage({ params }: { params: Promise<{ id: strin
   const { data: recipeRow } = await supabase.from("recipes").select("data").eq("id", meal.recipe_id).maybeSingle();
   const recipe = (recipeRow?.data ?? null) as RecipeData | null;
   const pantry = new Set(plan.solver.pantry ?? []);
+  const photo = recipePhoto(meal.recipe_id);
   const time = recipe?.total_min ?? ((recipe?.prep_min ?? 0) + (recipe?.cook_min ?? 0) || null);
 
   return (
@@ -53,6 +55,19 @@ export default async function MealPage({ params }: { params: Promise<{ id: strin
           </p>
         ) : null}
       </header>
+
+      {photo && (
+        <figure className="-mt-2 flex flex-col gap-1">
+          {/* eslint-disable-next-line @next/next/no-img-element -- pre-sized 800 px WebP from public/recipes */}
+          <img src={photo.large} alt={meal.recipe} width={800} height={800} className="aspect-square w-full rounded-3xl object-cover shadow-sm" />
+          <figcaption className="text-right text-xs opacity-60">
+            Снимката е примерна ·{" "}
+            <a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline">
+              {photo.site}
+            </a>
+          </figcaption>
+        </figure>
+      )}
 
       <section className="grid grid-cols-4 gap-2 text-center" aria-label="Хранителна стойност">
         <Macro label="kcal" value={Math.round(meal.kcal).toString()} />

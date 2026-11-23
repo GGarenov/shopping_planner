@@ -1,0 +1,610 @@
+{
+  "ovesena_kasha_banan": {
+    "file": "/recipes/ovesena_kasha_banan-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=113208-shokoladova-ovesena-kasha-s-priasno-mliako-i-banan",
+    "source_title": "Шоколадова овесена каша с прясно мляко и банан",
+    "site": "1001recepti.com",
+    "score": 0.93,
+    "fetched": "2026-11-23"
+  },
+  "ovesena_kasha_yabalka_orehi": {
+    "file": "/recipes/ovesena_kasha_yabalka_orehi-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=4354-iabulkova-ovesena-kasha-s-iadkovo-mliako",
+    "source_title": "Ябълкова овесена каша с ядково мляко",
+    "site": "1001recepti.com",
+    "score": 0.75,
+    "fetched": "2026-11-23"
+  },
+  "overnight_oats_grucki_yogurt": {
+    "file": "/recipes/overnight_oats_grucki_yogurt-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=111839-ovesena-kasha-s-med-i-malini",
+    "source_title": "Каша с овесени ядки, мед и малини за закуска",
+    "site": "1001recepti.com",
+    "score": 0.73,
+    "fetched": "2026-11-23"
+  },
+  "izvara_med_gorski_plodove": {
+    "file": "/recipes/izvara_med_gorski_plodove-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=4349-chiizkeik-v-chashi-s-kokosovo-mliako-izvara-i-gorski-plodove",
+    "source_title": "Чийзкейк в чаши с кокосово мляко, извара и горски плодове",
+    "site": "1001recepti.com",
+    "score": 0.86,
+    "fetched": "2026-11-23"
+  },
+  "skir_yagodi_bademi": {
+    "file": "/recipes/skir_yagodi_bademi-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=114965-zdravoslovno-parfe-s-malini-i-skir",
+    "source_title": "Здравословно парфе с малини и скир",
+    "site": "1001recepti.com",
+    "score": 0.46,
+    "fetched": "2026-11-23"
+  },
+  "mishmash": {
+    "file": "/recipes/mishmash-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=118510-turski-mishmash-menemen-s-iaica-domati-i-zeleni-chushki",
+    "source_title": "Турски мишмаш менемен с яйца, домати и зелени чушки",
+    "site": "1001recepti.com",
+    "score": 1.03,
+    "fetched": "2026-11-23"
+  },
+  "yaitsa_po_panagyurski": {
+    "file": "/recipes/yaitsa_po_panagyurski-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=3395-iaica-po-panagurski",
+    "source_title": "Лесни яйца по панагюрски върху кисело мляко и сирене",
+    "site": "1001recepti.com",
+    "score": 1.05,
+    "fetched": "2026-11-23"
+  },
+  "omlet_spanak_sirene": {
+    "file": "/recipes/omlet_spanak_sirene-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=120240-bogat-omlet-sus-spanak-domati-i-sirene",
+    "source_title": "Богат омлет със спанак, домати и сирене",
+    "site": "1001recepti.com",
+    "score": 1.11,
+    "fetched": "2026-11-23"
+  },
+  "tost_yaitse_avokado": {
+    "file": "/recipes/tost_yaitse_avokado-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=4031-zdravoslovni-tost-sandvichi-s-pulnozurnest-hliab-avokado-sirene-i-nar",
+    "source_title": "Здравословни тост сандвичи с пълнозърнест хляб, авокадо, сирене и нар",
+    "site": "1001recepti.com",
+    "score": 0.82,
+    "fetched": "2026-11-23"
+  },
+  "proteinovi_palachinki_izvara": {
+    "file": "/recipes/proteinovi_palachinki_izvara-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=3943-proteinovi-palachinki-s-izvara-i-oveseni-iadki",
+    "source_title": "Протеинови палачинки с извара и овесени ядки",
+    "site": "1001recepti.com",
+    "score": 1.11,
+    "fetched": "2026-11-23"
+  },
+  "shakshuka": {
+    "file": "/recipes/shakshuka-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=118075-shakshuka",
+    "source_title": "Шакшука",
+    "site": "1001recepti.com",
+    "score": 1.15,
+    "fetched": "2026-11-23"
+  },
+  "pileshko_oriz_brokoli": {
+    "file": "/recipes/pileshko_oriz_brokoli-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=115368-pileshko-file-s-gubi-chushki-i-oriz-ot-karfiol-i-brokoli",
+    "source_title": "Пилешко филе с гъби, чушки и ориз от карфиол и броколи",
+    "site": "1001recepti.com",
+    "score": 1.09,
+    "fetched": "2026-11-23"
+  },
+  "pile_s_oriz_na_furna": {
+    "file": "/recipes/pile_s_oriz_na_furna-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=1843-pile-s-oriz-i-kartofi",
+    "source_title": "Пиле с ориз и картофи на фурна",
+    "site": "1001recepti.com",
+    "score": 1.13,
+    "fetched": "2026-11-23"
+  },
+  "pecheni_pileshki_butcheta_kartofi": {
+    "file": "/recipes/pecheni_pileshki_butcheta_kartofi-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=118152-pecheni-pileshki-butcheta-s-kartofi-i-podpravki",
+    "source_title": "Печени пилешки бутчета с картофи и подправки",
+    "site": "1001recepti.com",
+    "score": 1.13,
+    "fetched": "2026-11-23"
+  },
+  "pileshko_kari_oriz": {
+    "file": "/recipes/pileshko_kari_oriz-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=117425-kitaisko-pileshko-kuri-s-oriz",
+    "source_title": "Китайско пилешко къри с ориз",
+    "site": "1001recepti.com",
+    "score": 1.13,
+    "fetched": "2026-11-23"
+  },
+  "pasta_pileshko_spanak": {
+    "file": "/recipes/pasta_pileshko_spanak-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=3935-pasta-s-pileshko-gubi-spanak-susheni-domati-i-smetana",
+    "source_title": "Пене паста с пилешко, гъби, спанак, сушени домати и сметана",
+    "site": "1001recepti.com",
+    "score": 1.05,
+    "fetched": "2026-11-23"
+  },
+  "pueshko_bulgur_pecheni_zelenchutsi": {
+    "file": "/recipes/pueshko_bulgur_pecheni_zelenchutsi-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=2487-pueshko-s-oriz-i-zelenchuci",
+    "source_title": "Печено пуешко месо от гърди (филе) с ориз и зеленчуци - лук, чушки, моркови, грах от консерва на фурна",
+    "site": "1001recepti.com",
+    "score": 0.79,
+    "fetched": "2026-11-23"
+  },
+  "svinsko_gabi_oriz": {
+    "file": "/recipes/svinsko_gabi_oriz-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=109581-pechen-svinski-drob-s-oriz-i-gubi-na-furna",
+    "source_title": "Печен свински дроб с ориз и гъби на фурна",
+    "site": "1001recepti.com",
+    "score": 1.09,
+    "fetched": "2026-11-23"
+  },
+  "svinsko_sas_zele": {
+    "file": "/recipes/svinsko_sas_zele-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=394-supa-ot-svinsko-meso",
+    "source_title": "Супа от свинско месо и зеле",
+    "site": "1001recepti.com",
+    "score": 1.11,
+    "fetched": "2026-11-23"
+  },
+  "teleshki_stek_kartofi_salata": {
+    "file": "/recipes/teleshki_stek_kartofi_salata-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=118268-teleshki-stekove-s-pecheni-kartofi-i-zelena-salata",
+    "source_title": "Телешки стекове с печени картофи и зелена салата",
+    "site": "1001recepti.com",
+    "score": 0.86,
+    "fetched": "2026-11-23"
+  },
+  "teleshko_v_gyuvech_zelenchutsi": {
+    "file": "/recipes/teleshko_v_gyuvech_zelenchutsi-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=100300-guvech-s-pileshko-teleshko-bial-i-zelen-bob-v-glinena-tendjera",
+    "source_title": "Гювеч с пилешко, телешко, картофи, бял и зелен боб в глинена тенджера",
+    "site": "1001recepti.com",
+    "score": 1.03,
+    "fetched": "2026-11-23"
+  },
+  "pasta_boloneze": {
+    "file": "/recipes/pasta_boloneze-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=118238-zapekanka-s-pasta-i-sos-boloneze",
+    "source_title": "Запеканка с паста и сос болонезе",
+    "site": "1001recepti.com",
+    "score": 1.11,
+    "fetched": "2026-11-23"
+  },
+  "chili_kon_karne": {
+    "file": "/recipes/chili_kon_karne-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=120898-chili-kon-karne",
+    "source_title": "Чили кон карне",
+    "site": "1001recepti.com",
+    "score": 1.15,
+    "fetched": "2026-11-23"
+  },
+  "musaka": {
+    "file": "/recipes/musaka-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=1369-musaka-s-kaima-i-kartofi",
+    "source_title": "Мусака с кайма и заливка",
+    "site": "1001recepti.com",
+    "score": 1.11,
+    "fetched": "2026-11-23"
+  },
+  "kyufteta_na_furna_kartofi": {
+    "file": "/recipes/kyufteta_na_furna_kartofi-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=120493-tradicionni-turski-kufteta-s-kartofi-na-furna",
+    "source_title": "Традиционни турски кюфтета с картофи на фурна",
+    "site": "1001recepti.com",
+    "score": 1.11,
+    "fetched": "2026-11-23"
+  },
+  "palneni_chushki_kayma_oriz": {
+    "file": "/recipes/palneni_chushki_kayma_oriz-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=118234-pulneni-chushki-s-oriz-i-teleshka-kaima",
+    "source_title": "Пълнени чушки с ориз и телешка кайма",
+    "site": "1001recepti.com",
+    "score": 1.13,
+    "fetched": "2026-11-23"
+  },
+  "pastarva_limon_kartofi": {
+    "file": "/recipes/pastarva_limon_kartofi-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=111614-pechena-pusturva-s-beibi-kartofi-cheri-domati-chesun-i-limon-na-furna",
+    "source_title": "Печена пъстърва с бейби картофи, чери домати, чесън и лимон на фурна",
+    "site": "1001recepti.com",
+    "score": 1.03,
+    "fetched": "2026-11-23"
+  },
+  "poke_riba_ton_oriz": {
+    "file": "/recipes/poke_riba_ton_oriz-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=114809-aziatska-kupa-s-kafiav-oriz-kinoa-edamame-zelenchuci-i-mango",
+    "source_title": "Азиатска купа с кафяв ориз, киноа, едамаме, зеленчуци и манго",
+    "site": "1001recepti.com",
+    "score": 0.61,
+    "fetched": "2026-11-23"
+  },
+  "salata_riba_ton_bob_tsarevitsa": {
+    "file": "/recipes/salata_riba_ton_bob_tsarevitsa-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=119265-zelena-salata-s-riba-ton-carevica-i-cherven-bob",
+    "source_title": "Зелена салата с риба тон, царевица и червен боб",
+    "site": "1001recepti.com",
+    "score": 1.11,
+    "fetched": "2026-11-23"
+  },
+  "salata_kinoa_pile": {
+    "file": "/recipes/salata_kinoa_pile-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=120630-salata-s-cveklo-kinoa-i-pile",
+    "source_title": "Салата с цвекло, киноа и пиле",
+    "site": "1001recepti.com",
+    "score": 1.13,
+    "fetched": "2026-11-23"
+  },
+  "salata_syomga_avokado": {
+    "file": "/recipes/salata_syomga_avokado-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=112255-salata-tartar-sus-sioomga-file-i-avokado",
+    "source_title": "Салата тартар със сьомга филе и авокадо",
+    "site": "1001recepti.com",
+    "score": 1.11,
+    "fetched": "2026-11-23"
+  },
+  "salata_teleshko_rukola": {
+    "file": "/recipes/salata_teleshko_rukola-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=111550-salata-s-teleshki-drob-rukola-avokado-i-susam",
+    "source_title": "Салата с телешки дроб, рукола, авокадо и сусам",
+    "site": "1001recepti.com",
+    "score": 1.09,
+    "fetched": "2026-11-23"
+  },
+  "salata_pueshko_yabalka_orehi": {
+    "file": "/recipes/salata_pueshko_yabalka_orehi-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=2490-salata-s-iabulki-i-orehi",
+    "source_title": "Салата с айсберг, рукола, ябълки и орехи",
+    "site": "1001recepti.com",
+    "score": 0.88,
+    "fetched": "2026-11-23"
+  },
+  "salata_nahut_krastavitsa_domati": {
+    "file": "/recipes/salata_nahut_krastavitsa_domati-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=119889-salata-s-nahut-domati-krastavica-i-magdanoz",
+    "source_title": "Салата с нахут, домати, краставица и магданоз",
+    "site": "1001recepti.com",
+    "score": 1.13,
+    "fetched": "2026-11-23"
+  },
+  "krem_supa_chervena_leshta": {
+    "file": "/recipes/krem_supa_chervena_leshta-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=111000-krem-supa-ot-chervena-leshta-v-multikukur",
+    "source_title": "Крем супа от червена леща в мултикукър",
+    "site": "1001recepti.com",
+    "score": 1.13,
+    "fetched": "2026-11-23"
+  },
+  "kari_nahut_spanak": {
+    "file": "/recipes/kari_nahut_spanak-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=118722-kuri-s-nahut-spanak-i-vareni-iaica",
+    "source_title": "Къри с нахут, спанак и варени яйца",
+    "site": "1001recepti.com",
+    "score": 1.11,
+    "fetched": "2026-11-23"
+  },
+  "tofu_zelenchutsi_oriz": {
+    "file": "/recipes/tofu_zelenchutsi_oriz-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=116688-pecheno-sirene-tofu-na-gril-sus-zelenchuci-i-oriz",
+    "source_title": "Печено сирене тофу на грил със зеленчуци и ориз",
+    "site": "1001recepti.com",
+    "score": 1.09,
+    "fetched": "2026-11-23"
+  },
+  "fritata_zelenchutsi_sirene": {
+    "file": "/recipes/fritata_zelenchutsi_sirene-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=114793-fritata-s-koze-sirene-i-pecheni-zelenchuci",
+    "source_title": "Фритата с козе сирене и печени зеленчуци",
+    "site": "1001recepti.com",
+    "score": 1.11,
+    "fetched": "2026-11-23"
+  },
+  "shopska_salata": {
+    "file": "/recipes/shopska_salata-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=103344-klasicheska-shopska-salata-s-domati-krastavici-chushki-luk-i-sirene",
+    "source_title": "Класическа шопска салата с домати, краставици, печени чушки, лук и натрошено сирене",
+    "site": "1001recepti.com",
+    "score": 0.99,
+    "fetched": "2026-11-23"
+  },
+  "snezhanka": {
+    "file": "/recipes/snezhanka-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=3821-salata-snejanka-sus-skir-kiselo-mliako",
+    "source_title": "Протеинова салата Снежанка със скир кисело мляко",
+    "site": "1001recepti.com",
+    "score": 1.05,
+    "fetched": "2026-11-23"
+  },
+  "tarator": {
+    "file": "/recipes/tarator-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=2748-tarator-s-tikvichki",
+    "source_title": "Таратор с тиквички",
+    "site": "1001recepti.com",
+    "score": 1.13,
+    "fetched": "2026-11-23"
+  },
+  "pileshka_supa_zastroyka": {
+    "file": "/recipes/pileshka_supa_zastroyka-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=3596-supa-ot-domashna-kokoshka-sus-zelenchuci-bez-zastroika",
+    "source_title": "Пилешка супа от домашна кокошка със зеленчуци без застройка",
+    "site": "1001recepti.com",
+    "score": 1.09,
+    "fetched": "2026-11-23"
+  },
+  "kiselo_mlyako_orehi_med": {
+    "file": "/recipes/kiselo_mlyako_orehi_med-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=1950-cedeno-kiselo-mliako-s-orehi-i-med",
+    "source_title": "Цедено кисело мляко с орехи и мед",
+    "site": "1001recepti.com",
+    "score": 1.13,
+    "fetched": "2026-11-23"
+  },
+  "yabalka_fastacheno_maslo": {
+    "file": "/recipes/yabalka_fastacheno_maslo-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=110936-desert-zakuska-s-kinoa-iadkovo-mliako-banan-iabulki-orehi-i-fustucheno-maslo",
+    "source_title": "Десерт / закуска с киноа, ядково мляко, банан, ябълки, орехи и фъстъчено масло",
+    "site": "1001recepti.com",
+    "score": 1.01,
+    "fetched": "2026-11-23"
+  },
+  "vareni_yaitsa_krastavitsa": {
+    "file": "/recipes/vareni_yaitsa_krastavitsa-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=118133-zelena-salata-sus-spanak-krastavica-i-vareni-iaica",
+    "source_title": "Зелена салата със спанак, краставица и варени яйца",
+    "site": "1001recepti.com",
+    "score": 1.09,
+    "fetched": "2026-11-23"
+  },
+  "plodova_salata_kiselo_mlyako": {
+    "file": "/recipes/plodova_salata_kiselo_mlyako-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=2007-plodova-salata-s-kiselo-mliako-i-med",
+    "source_title": "Плодова салата с кисело мляко и мед",
+    "site": "1001recepti.com",
+    "score": 1.13,
+    "fetched": "2026-11-23"
+  },
+  "proteinovi_brauni": {
+    "file": "/recipes/proteinovi_brauni-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=112660-shokoladovi-proteinovi-brauni-fudj-barcheta",
+    "source_title": "Шоколадови протеинови брауни (фъдж) барчета",
+    "site": "1001recepti.com",
+    "score": 1.09,
+    "fetched": "2026-11-23"
+  },
+  "brauni_bob_kakao": {
+    "file": "/recipes/brauni_bob_kakao-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=113877-fudj-brauni-s-cherven-bob-bez-brashno",
+    "source_title": "Фъдж брауни с червен боб без брашно",
+    "site": "1001recepti.com",
+    "score": 0.78,
+    "fetched": "2026-11-23"
+  },
+  "bananovi_biskvitki_ovesni": {
+    "file": "/recipes/bananovi_biskvitki_ovesni-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=102000-bananovi-biskviti-s-oveseni-iadki-i-stafidi",
+    "source_title": "Бананови бисквити с овесени ядки и стафиди без масло",
+    "site": "1001recepti.com",
+    "score": 1.11,
+    "fetched": "2026-11-23"
+  },
+  "pecheni_yabalki_orehi_kanela": {
+    "file": "/recipes/pecheni_yabalki_orehi_kanela-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=2225-pecheni-iabulki-s-orehi-i-kanela",
+    "source_title": "Печени ябълки с орехи и канела",
+    "site": "1001recepti.com",
+    "score": 1.15,
+    "fetched": "2026-11-23"
+  },
+  "chia_puding_gorski_plodove": {
+    "file": "/recipes/chia_puding_gorski_plodove-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=3976-vegetarianski-puding-s-chia-kokosovo-mliako-klenov-sirop-i-plodove",
+    "source_title": "Вегетариански пудинг с чиа, кокосово мляко, кленов сироп и плодове",
+    "site": "1001recepti.com",
+    "score": 0.82,
+    "fetched": "2026-11-23"
+  },
+  "sladoled_banan_kakao": {
+    "file": "/recipes/sladoled_banan_kakao-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=107730-burz-i-lesen-domashen-sladoled-s-banan-kakao-vaniliia-i-fustucheno-maslo-v-kuhnenski-robot-pasator",
+    "source_title": "Бърз и лесен домашен сладолед с банан, какао, ванилия и фъстъчено масло в кухненски робот (пасатор)",
+    "site": "1001recepti.com",
+    "score": 0.74,
+    "fetched": "2026-11-23"
+  },
+  "zamrazen_yogurt_gorski_plodove": {
+    "file": "/recipes/zamrazen_yogurt_gorski_plodove-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=108895-sladoleden-iogurt-s-malini",
+    "source_title": "Сладоледен йогурт от цедено кисело мляко, суха сметана и замразени малини",
+    "site": "1001recepti.com",
+    "score": 0.55,
+    "fetched": "2026-11-23"
+  },
+  "yagodi_cheren_shokolad": {
+    "file": "/recipes/yagodi_cheren_shokolad-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=117422-iagodi-potopeni-v-cheren-shokolad",
+    "source_title": "Ягоди, потопени в черен шоколад",
+    "site": "1001recepti.com",
+    "score": 1.13,
+    "fetched": "2026-11-23"
+  },
+  "filiya_izvara_domat": {
+    "file": "/recipes/filiya_izvara_domat-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=936-brusketi-s-pulnozurnest-hliab-izvara-i-susheni-domati",
+    "source_title": "Сандвичи брускети с пълнозърнест хляб, извара и сушени домати",
+    "site": "1001recepti.com",
+    "score": 1.05,
+    "fetched": "2026-11-23"
+  },
+  "tortila_pile_zelenchutsi": {
+    "file": "/recipes/tortila_pile_zelenchutsi-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=3794-fahitas-s-pshenicheni-tortili-pileshko-file-avokado-i-zelenchuci",
+    "source_title": "Фахитас с пшеничени тортили, пилешко филе, авокадо и зеленчуци",
+    "site": "1001recepti.com",
+    "score": 0.74,
+    "fetched": "2026-11-23"
+  },
+  "svinsko_file_sladki_kartofi": {
+    "file": "/recipes/svinsko_file_sladki_kartofi-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=112767-sladko-kiselo-svinsko-file-hapki-s-ananas-i-chushki-na-tigan",
+    "source_title": "Сладко-кисело свинско филе (хапки) с ананас и чушки на тиган",
+    "site": "1001recepti.com",
+    "score": 0.82,
+    "fetched": "2026-11-23"
+  },
+  "svinsko_stir_fry_oriz": {
+    "file": "/recipes/svinsko_stir_fry_oriz-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=114509-stir-frai-pileshko-file-sus-zelenchuci-v-uok",
+    "source_title": "Стир-фрай пилешко филе със зеленчуци в уок",
+    "site": "1001recepti.com",
+    "score": 1.07,
+    "fetched": "2026-11-23"
+  },
+  "svinski_parzholi_pecheni_zelenchutsi": {
+    "file": "/recipes/svinski_parzholi_pecheni_zelenchutsi-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=120559-pecheni-svinski-purjoli-s-gubi-i-mashterka",
+    "source_title": "Печени свински пържоли с гъби и мащерка",
+    "site": "1001recepti.com",
+    "score": 0.88,
+    "fetched": "2026-11-23"
+  },
+  "syomga_kartofi_brokoli": {
+    "file": "/recipes/syomga_kartofi_brokoli-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=4104-pechena-sioomga-s-presni-kartofi-i-salca-na-furna",
+    "source_title": "Печена сьомга с пресни картофи и салца на фурна",
+    "site": "1001recepti.com",
+    "score": 1.09,
+    "fetched": "2026-11-23"
+  },
+  "byala_riba_na_furna_zelenchutsi": {
+    "file": "/recipes/byala_riba_na_furna_zelenchutsi-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=2466-pechena-riba-v-bira",
+    "source_title": "Печена бяла риба със зеленчуци в бира на фурна",
+    "site": "1001recepti.com",
+    "score": 1.11,
+    "fetched": "2026-11-23"
+  },
+  "skumriya_na_furna_kartofi": {
+    "file": "/recipes/skumriya_na_furna_kartofi-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=105261-pechena-riba-skumriia-s-presni-kartofi-luk-i-maioneza-vuv-folio-na-furna",
+    "source_title": "Печена риба скумрия с пресни картофи, лук и майонеза във фолио на фурна",
+    "site": "1001recepti.com",
+    "score": 1.03,
+    "fetched": "2026-11-23"
+  },
+  "pasta_skaridi_chesan": {
+    "file": "/recipes/pasta_skaridi_chesan-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=1223-pasta-s-morski-darove",
+    "source_title": "Паста макарони с морски дарове (скариди, калмари, миди) и сос от домати, бяло вино, чесън и праз лук",
+    "site": "1001recepti.com",
+    "score": 0.93,
+    "fetched": "2026-11-23"
+  },
+  "salata_riba_ton_yaitse_kartofi": {
+    "file": "/recipes/salata_riba_ton_yaitse_kartofi-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=101463-salata-mimoza",
+    "source_title": "Солена торта Мимоза - празнична картофена салата с риба тон, червено цвекло и майонеза",
+    "site": "1001recepti.com",
+    "score": 0.83,
+    "fetched": "2026-11-23"
+  },
+  "tsezar_salata_pile": {
+    "file": "/recipes/tsezar_salata_pile-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=117317-cezar-salata-s-pileshko-file-na-gril",
+    "source_title": "Цезар салата с пилешко филе на грил",
+    "site": "1001recepti.com",
+    "score": 0.78,
+    "fetched": "2026-11-23"
+  },
+  "grutska_salata_pile": {
+    "file": "/recipes/grutska_salata_pile-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=117618-grucka-salata-s-feta-maslini-i-zelenchuci",
+    "source_title": "Гръцка салата с фета, маслини и зеленчуци",
+    "site": "1001recepti.com",
+    "score": 1.13,
+    "fetched": "2026-11-23"
+  },
+  "elda_gabi_yaitse": {
+    "file": "/recipes/elda_gabi_yaitse-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=118995-elda-s-gubi",
+    "source_title": "Елда с гъби",
+    "site": "1001recepti.com",
+    "score": 1.15,
+    "fetched": "2026-11-23"
+  },
+  "humus_zelenchukovi_prachitsi": {
+    "file": "/recipes/humus_zelenchukovi_prachitsi-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=185-humus-ot-nahut",
+    "source_title": "Хумус от нахут",
+    "site": "1001recepti.com",
+    "score": 1.13,
+    "fetched": "2026-11-23"
+  },
+  "izvara_yabalka_kanela": {
+    "file": "/recipes/izvara_yabalka_kanela-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=1439-domashni-kroasani",
+    "source_title": "Домашни кроасани с тесто от извара с пълнеж от ябълки, стафиди и лешници",
+    "site": "1001recepti.com",
+    "score": 0.72,
+    "fetched": "2026-11-23"
+  },
+  "orizovki_izvara_domat": {
+    "file": "/recipes/orizovki_izvara_domat-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=936-brusketi-s-pulnozurnest-hliab-izvara-i-susheni-domati",
+    "source_title": "Сандвичи брускети с пълнозърнест хляб, извара и сушени домати",
+    "site": "1001recepti.com",
+    "score": 1,
+    "fetched": "2026-11-23"
+  },
+  "zelenchutsi_dip_kiselo_mlyako": {
+    "file": "/recipes/zelenchutsi_dip_kiselo_mlyako-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=118408-labne-livanski-dip-ot-cedeno-kiselo-mliako",
+    "source_title": "Лабне – ливански дип от цедено кисело мляко",
+    "site": "1001recepti.com",
+    "score": 1.09,
+    "fetched": "2026-11-23"
+  },
+  "cheesecake_izvara_v_chashi": {
+    "file": "/recipes/cheesecake_izvara_v_chashi-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=4675-pechen-chiizkeik-s-izvara-kiselo-mliako-bial-shokolad-borovinki-i-kupini",
+    "source_title": "Печен чийзкейк с извара, кисело мляко, бял шоколад, боровинки и къпини",
+    "site": "1001recepti.com",
+    "score": 1.03,
+    "fetched": "2026-11-23"
+  },
+  "proteinov_keks_v_chasha": {
+    "file": "/recipes/proteinov_keks_v_chasha-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=4347-zdravoslovno-brauni-s-cherveno-cveklo-banan-tahan-i-bademi",
+    "source_title": "Здравословен брауни сладкиш с червено цвекло, банан, тахан, протеин и бадеми",
+    "site": "1001recepti.com",
+    "score": 0.51,
+    "fetched": "2026-11-23"
+  },
+  "morkoven_keks_ovesen": {
+    "file": "/recipes/morkoven_keks_ovesen-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=111005-sladkish-s-pulnozurnesto-brashno-oveseni-iadki-morkovi-i-furmi",
+    "source_title": "Сладкиш с пълнозърнесто брашно, овесени ядки, моркови и фурми",
+    "site": "1001recepti.com",
+    "score": 0.84,
+    "fetched": "2026-11-23"
+  },
+  "pileshki_suvlaki_dzadziki_bulgur": {
+    "file": "/recipes/pileshki_suvlaki_dzadziki_bulgur-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=100870-pileshki-shishcheta-s-tikvichki-na-skara",
+    "source_title": "Пилешки шишчета с тиквички на скара",
+    "site": "1001recepti.com",
+    "score": 1.11,
+    "fetched": "2026-11-23"
+  },
+  "brauni_tikvichki": {
+    "file": "/recipes/brauni_tikvichki-400.webp",
+    "source_url": "https://www.1001recepti.com/recipe/?recipe_id=114616-shokoladov-keik-s-tikvichki-i-shokoladovi-parchenca",
+    "source_title": "Шоколадов кейк с тиквички и шоколадови парченца",
+    "site": "1001recepti.com",
+    "score": 0.31,
+    "fetched": "2026-11-23"
+  }
+}
