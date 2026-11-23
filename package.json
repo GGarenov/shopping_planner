@@ -1,6 +1,7 @@
 {
   "name": "shopping-planner",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -16,7 +17,8 @@
     "review": "node scripts/review_server.mjs",
     "cart": "node scripts/send_to_cart.mjs",
     "db:push": "supabase db push",
-    "test": "vitest run"
+    "test": "vitest run",
+    "seed": "node --env-file-if-exists=.env.local scripts/seed.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.2",
@@ -45,6 +47,6 @@
     "vitest": "^4.1.12"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22.18"
   }
 }

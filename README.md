@@ -8,12 +8,19 @@ Next.js 15 (App Router, TypeScript, Tailwind) on Vercel · Supabase (Auth + Post
 HiGHS (WASM) optimizer · GitHub Actions for the daily eBag sync.
 
 ## Local development
+Node ≥ 22.18 (scripts run TypeScript directly via Node's type stripping).
 ```bash
 npm install
 cp .env.example .env.local   # fill in Supabase keys etc.
 npm run dev                  # http://localhost:3000
-npm run typecheck && npm run lint && npm run build
+npm run typecheck && npm run lint && npm test && npm run build
+npm run seed                 # upload ingredients / recipes / products to Supabase (idempotent; --dry-run to check)
 ```
+On Windows, run `npm test` from a terminal whose path starts with `C:\` (capital C) — a lowercase
+`c:\` makes Vitest load itself twice ("failed to find the current suite").
+
+Shared logic lives in `lib/` (TypeScript). `scripts/ebag_parse.mjs` re-exports `lib/ebag/parse.ts`, so the
+Node scripts and the app use the same code.
 
 ## Database
 Migrations live in `supabase/migrations/`. To apply them to the hosted project:

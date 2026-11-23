@@ -240,15 +240,15 @@ Design: mobile-first, large touch targets, works at 360 px width, light/dark, no
 - [x] Vercel project linked to GitHub; env vars set
 - **Done when:** empty app deployed on Vercel, tables exist, RLS enabled.
 
-### Phase 1 — Data in Supabase (1 day)
-- [ ] `scripts/seed.ts`: upload `ingredients.json`, `recipes.json`, `ebag_products.json` (idempotent upserts)
-- [ ] Move shared logic to `lib/` (TypeScript): `lib/ebag/parse.ts`, `lib/planner/targets.ts`
+### Phase 1 — Data in Supabase (1 day) ✅ done 2026-11-23
+- [x] `scripts/seed.ts`: upload `ingredients.json`, `recipes.json`, `ebag_products.json` (idempotent upserts)
+- [x] Move shared logic to `lib/` (TypeScript): `lib/ebag/parse.ts`, `lib/planner/targets.ts`
 - **Done when:** the three reference tables are filled and readable by a logged-in user.
 
-### Phase 2 — Auth, onboarding, targets (1–2 days)
-- [ ] Supabase email magic-link login; protected routes
-- [ ] Onboarding steps → `profiles`; targets screen with formula and override
-- [ ] PWA: manifest, icons, service worker, install hint screen
+### Phase 2 — Auth, onboarding, targets (1–2 days) — built; real-phone check pending
+- [x] Supabase email magic-link login; protected routes
+- [x] Onboarding steps → `profiles`; targets screen with formula and override
+- [x] PWA: manifest, icons, service worker, install hint screen
 - **Done when:** a tester can install, log in, finish onboarding and see correct targets (unit-tested formula).
 
 ### Phase 3 — Planner in the app (2 days)
