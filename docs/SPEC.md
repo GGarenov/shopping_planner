@@ -233,11 +233,11 @@ Design: mobile-first, large touch targets, works at 360 px width, light/dark, no
 
 ## 10. To-do plan
 
-### Phase 0 — Setup (½ day)
-- [ ] `git init`, GitHub repo (private), `.gitignore` (no `.secrets/`, `.env*`, `node_modules/`, `logs/`)
-- [ ] Next.js 15 + TypeScript + Tailwind in the repo root; keep `scripts/` and `data/` working
-- [ ] Supabase project; migrations in `supabase/migrations/` for the tables in §6 with RLS
-- [ ] Vercel project linked to GitHub; env vars set
+### Phase 0 — Setup (½ day) ✅ done 2026-11-23
+- [x] `git init`, GitHub repo (private), `.gitignore` (no `.secrets/`, `.env*`, `node_modules/`, `logs/`)
+- [x] Next.js 15 + TypeScript + Tailwind in the repo root; keep `scripts/` and `data/` working
+- [x] Supabase project; migrations in `supabase/migrations/` for the tables in §6 with RLS
+- [x] Vercel project linked to GitHub; env vars set
 - **Done when:** empty app deployed on Vercel, tables exist, RLS enabled.
 
 ### Phase 1 — Data in Supabase (1 day)
