@@ -9,8 +9,8 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "ebag:login": "node scripts/ebag_login.mjs",
-    "ebag:sync": "node scripts/sync_ebag.mjs",
-    "ebag:relink": "node scripts/sync_ebag.mjs --relink --no-details",
+    "ebag:sync": "node --env-file-if-exists=.env.local scripts/sync.ts",
+    "ebag:relink": "node --env-file-if-exists=.env.local scripts/sync.ts --relink --no-details",
     "usda:fill": "node scripts/fill_usda_macros.mjs",
     "recipes:build": "node scripts/build_recipes.mjs",
     "plan": "node scripts/plan.mjs",
@@ -18,7 +18,8 @@
     "cart": "node scripts/send_to_cart.mjs",
     "db:push": "supabase db push",
     "test": "vitest run",
-    "seed": "node --env-file-if-exists=.env.local scripts/seed.ts"
+    "seed": "node --env-file-if-exists=.env.local scripts/seed.ts",
+    "ebag:bootstrap": "node --env-file-if-exists=.env.local scripts/ebag_bootstrap.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.2",

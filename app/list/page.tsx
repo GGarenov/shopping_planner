@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BottomNav } from "@/components/BottomNav";
-import { shortDate } from "@/lib/planner/week";
+import { PricesNotice } from "@/components/PricesNotice";
+import { shortDate, sofiaToday } from "@/lib/planner/week";
+import { getSyncStatus } from "@/lib/sync/status";
 import { getLatestPlan } from "@/lib/plans/load";
 import { groupByAisle, shoppingTotals } from "@/lib/plans/shopping";
 import { PANTRY_OPTIONS } from "@/lib/profile/options";
@@ -14,7 +16,7 @@ export const metadata: Metadata = { title: "Списък за пазаруван
 export default async function ListPage() {
   await requireCompleteProfile();
   const supabase = await createClient();
-  const plan = await getLatestPlan(supabase);
+  const [plan, sync] = await Promise.all([getLatestPlan(supabase), getSyncStatus(supabase)]);
 
   if (!plan) {
     return (
@@ -48,6 +50,8 @@ export default async function ListPage() {
           </p>
           <h1 className="text-2xl font-bold">Списък за пазаруване</h1>
         </header>
+
+        <PricesNotice planPricesDate={plan.solver.prices_date} latestPricesDate={sync.pricesDate} today={sofiaToday()} />
 
         <ShoppingList planId={plan.id} groups={groupByAisle(plan.shopping)} totals={totals} initialChecked={checked} />
 

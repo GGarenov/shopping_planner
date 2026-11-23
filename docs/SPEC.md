@@ -76,7 +76,7 @@ from scratch. Port to TypeScript where it moves into the app.
 | `data/ebag_overrides.json` | Manual fixes: excluded products, forced links, approved links |
 | `data/usda/` | USDA FoodData Central downloads + `usda_macros.csv` |
 | `data/profiles/test.json` | Example user profile (all planner options) |
-| `scripts/sync_ebag.mjs` | Daily sync: crawl categories → link → fetch details → rebuild products |
+| `scripts/sync.ts` | Daily sync into Supabase: crawl categories → link → fetch details → rebuild products (was `sync_ebag.mjs`) |
 | `scripts/ebag_client.mjs` | eBag MCP client with OAuth (PKCE, dynamic client registration, refresh) + rate-limit handling |
 | `scripts/ebag_parse.mjs` | Pack size, weight-from-name, prices, nutrition label parsing, match rules |
 | `scripts/plan.mjs` | **The planner** (two-stage HiGHS optimizer), ~5 s |
@@ -280,10 +280,15 @@ Design: mobile-first, large touch targets, works at 360 px width, light/dark, no
 - **Done when:** totals match the plan JSON; checks survive reload.
 
 ### Phase 5 — Daily sync in GitHub Actions (1–2 days)
-- [ ] Port `scripts/sync_ebag.mjs` to write into Supabase (keep JSON export optional)
-- [ ] Owner token bootstrap: one-off local command stores encrypted tokens in `system_secrets`
-- [ ] Workflow `.github/workflows/sync.yml` (daily + manual trigger); token refresh written back
-- [ ] App shows the date of the latest successful sync
+- [x] Port `scripts/sync_ebag.mjs` to write into Supabase (keep JSON export optional) → `scripts/sync.ts`
+  (pure steps in `lib/ebag/catalog.ts`, identical output on the repo data; details cache in table `ebag_details`;
+  `--dry-run`, `--no-details`, `--export`, `--relink`). First run 2026-11-23: 6,310 products, 1,351 linked
+  (1,209 available), 400 details, 574 eBag calls, 7 min.
+- [x] Owner token bootstrap: `npm run ebag:bootstrap` stores encrypted tokens (AES-256-GCM) in `system_secrets`
+  and removes them from the local file (one holder per rotating refresh token)
+- [x] Workflow `.github/workflows/sync.yml` (daily 03:17 UTC + manual trigger, no parallel runs); token refresh
+  written back
+- [x] App shows the date of the latest successful sync: "new prices — make a new plan" / "prices not updated since"
 - **Done when:** two consecutive scheduled runs succeed and prices in the app change accordingly.
 
 ### Phase 6 — Per-user eBag connection + cart (2 days)

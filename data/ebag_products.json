@@ -1,6 +1,6 @@
 {
   "_about": {
-    "description": "eBag products linked to generic ingredients (ingredients.json). Rebuilt daily by scripts/sync_ebag.mjs. Entries with link \"manual\" are hand-curated: only price/stock/availability are refreshed. To fix a wrong auto link, add the product to data/ebag_overrides.json.",
+    "description": "eBag products linked to generic ingredients (ingredients.json). Rebuilt by scripts/sync.ts (daily into Supabase; this file only with --export). Entries with link \"manual\" are hand-curated: only price/stock/availability are refreshed. To fix a wrong auto link, add the product to data/ebag_overrides.json.",
     "version": 2,
     "source": "eBag MCP (https://ebag.bg/mcp)",
     "fetched": "2026-11-23",

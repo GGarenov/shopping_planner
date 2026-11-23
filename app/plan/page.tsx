@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BottomNav } from "@/components/BottomNav";
-import { shortDate, todayIndexInWeek } from "@/lib/planner/week";
+import { PricesNotice } from "@/components/PricesNotice";
+import { shortDate, sofiaToday, todayIndexInWeek } from "@/lib/planner/week";
+import { getSyncStatus } from "@/lib/sync/status";
 import { getLatestPlan } from "@/lib/plans/load";
 import { requireCompleteProfile } from "@/lib/profile/load";
 import { createClient } from "@/lib/supabase/server";
@@ -15,7 +17,7 @@ const eur = (n: number) => `${n.toFixed(2).replace(".", ",")} €`;
 export default async function PlanPage() {
   await requireCompleteProfile();
   const supabase = await createClient();
-  const plan = await getLatestPlan(supabase);
+  const [plan, sync] = await Promise.all([getLatestPlan(supabase), getSyncStatus(supabase)]);
 
   if (!plan) {
     return (
@@ -47,6 +49,8 @@ export default async function PlanPage() {
           </p>
           <h1 className="text-2xl font-bold">Седмичен план</h1>
         </header>
+
+        <PricesNotice planPricesDate={plan.solver.prices_date} latestPricesDate={sync.pricesDate} today={sofiaToday()} />
 
         <section className="grid grid-cols-2 gap-3">
           <div className="card flex flex-col">

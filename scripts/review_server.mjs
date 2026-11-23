@@ -110,7 +110,7 @@ http.createServer(async (req, res) => {
       fs.writeFileSync(PATHS.overrides, JSON.stringify(o, null, 2) + '\n', 'utf8');
       res.writeHead(204).end();
     } else if (req.method === 'POST' && req.url === '/api/apply') {
-      execFile(process.execPath, [path.join(ROOT, 'scripts', 'sync_ebag.mjs'), '--relink', '--no-details'], { cwd: ROOT }, (err, out, errOut) => {
+      execFile(process.execPath, ['--env-file-if-exists=.env.local', path.join(ROOT, 'scripts', 'sync.ts'), '--relink', '--no-details', '--dry-run', '--export'], { cwd: ROOT }, (err, out, errOut) => {
         if (err) res.writeHead(500).end(String(errOut || err.message));
         else res.writeHead(200).end(out.split('\n').slice(-4).join('\n'));
       });

@@ -9,6 +9,7 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 import { UnauthorizedError } from '@modelcontextprotocol/sdk/client/auth.js';
 import { MCP_URL, PATHS, SYNC } from './ebag_config.mjs';
+import { EbagApi } from '../lib/ebag/api.ts';
 
 const CALLBACK_PORT = 53682;
 const REDIRECT_URL = `http://127.0.0.1:${CALLBACK_PORT}/callback`;
@@ -98,38 +99,7 @@ export async function connect({ interactive = false } = {}) {
     ({ client, transport } = make());
     await client.connect(transport);
   }
-  return new EbagApi(client);
+  return new EbagApi(client, { delayMs: SYNC.delayMs, retries: SYNC.retries });
 }
 
-const sleep = ms => new Promise(r => setTimeout(r, ms));
-
-export class EbagApi {
-  constructor(client) { this.client = client; this.calls = 0; }
-
-  async call(name, args) {
-    let lastErr;
-    for (let attempt = 1; attempt <= SYNC.retries; attempt++) {
-      try {
-        if (this.calls++) await sleep(SYNC.delayMs);
-        const res = await this.client.callTool({ name, arguments: args });
-        if (res.isError) throw new Error(`${name} error: ${res.content?.map(c => c.text).join(' ')}`);
-        let data = res.structuredContent;
-        if (!data) {
-          const text = res.content?.find(c => c.type === 'text')?.text;
-          data = text ? JSON.parse(text) : {};
-        }
-        return data.result ?? data;
-      } catch (err) {
-        lastErr = err;
-        if (attempt >= SYNC.retries) break;
-        // eBag rate limit: 429 with "Expected available in N seconds" -> wait that long (+1 s).
-        const m = String(err.message).match(/available in (\d+) seconds?/i);
-        const waitMs = m ? (Number(m[1]) + 1) * 1000 : (err.code === 429 ? 10000 : 1000 * 2 ** attempt);
-        await sleep(waitMs);
-      }
-    }
-    throw lastErr;
-  }
-
-  close() { return this.client.close(); }
-}
+export { EbagApi };

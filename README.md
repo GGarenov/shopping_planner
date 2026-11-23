@@ -33,11 +33,23 @@ npm run db:push
 ## Existing data scripts (Node.js)
 | Command | What it does |
 |---|---|
-| `npm run ebag:login` | One-off eBag OAuth login (tokens in `.secrets/`) |
-| `npm run ebag:sync` | Crawl eBag, link products, refresh `data/ebag_products.json` |
+| `npm run ebag:login` | eBag OAuth login in the browser (tokens in `.secrets/ebag_oauth.json`) |
+| `npm run ebag:bootstrap` | Move that login into Supabase (encrypted) for the daily sync; removes the local tokens |
+| `npm run ebag:sync` | Crawl eBag → link → details → upsert `products` in Supabase (`--dry-run`, `--no-details`, `--export`) |
+| `npm run ebag:relink` | Re-link from the saved `data/ebag_catalog.json` (no eBag calls) |
 | `npm run recipes:build` | Build and validate `data/recipes.json` from `data/recipes_src/` |
 | `npm run plan` | Run the two-stage HiGHS planner for a profile |
 | `npm run cart` | Re-check stock and fill the eBag cart |
 | `npm run review` | Local page to review product links |
 
 Raw USDA downloads (`data/usda/raw/`, 54 MB) are not committed; `data/usda/usda_macros.csv` is.
+
+## Daily eBag sync (GitHub Actions)
+`.github/workflows/sync.yml` runs `scripts/sync.ts` every day (03:17 UTC) and on demand (Actions → eBag sync →
+Run workflow). It uses the owner's eBag login stored encrypted in Supabase (`system_secrets`). eBag may rotate the
+refresh token, so the job writes new tokens back there, and two runs never overlap.
+
+- Repo secrets: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `EBAG_TOKEN_KEY` (same values as in `.env.local`).
+- If a run fails with "eBag login required": run `npm run ebag:login`, then `npm run ebag:bootstrap` locally.
+- Every run is recorded in `sync_runs` (status, stats, log); the app shows the date of the latest successful one.
+- GitHub pauses scheduled workflows after 60 days without commits — re-enable it in the Actions tab if that happens.

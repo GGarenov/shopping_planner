@@ -8,7 +8,7 @@
     "allergens": "EU 14 allergen list: gluten, milk, eggs, fish, crustaceans, molluscs, peanuts, nuts, soy, sesame, celery, mustard, lupin, sulphites",
     "diets": "diets this ingredient fits: vegan, vegetarian, pescatarian, low_carb",
     "tags": "for user exclusions: poultry, red_meat, pork, fish, seafood, dairy, eggs, gluten, nuts",
-    "match": "How scripts/sync_ebag.mjs links eBag products automatically. include/exclude are case-insensitive regexes on the product name (\\b = word boundary, Cyrillic-aware). categories = category groups defined in scripts/ebag_config.mjs. A product links to the ingredient whose include matches the longest text; ties are flagged for review."
+    "match": "How scripts/sync.ts links eBag products automatically. include/exclude are case-insensitive regexes on the product name (\\b = word boundary, Cyrillic-aware). categories = category groups defined in lib/ebag/config.ts. A product links to the ingredient whose include matches the longest text; ties are flagged for review."
   },
   "ingredients": [
     {

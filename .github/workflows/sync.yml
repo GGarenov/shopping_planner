@@ -1,0 +1,40 @@
+# Daily eBag price/stock sync into Supabase (SPEC §7.3). Uses the owner's eBag sign-in stored encrypted in
+# Supabase (system_secrets); refreshed tokens are written back there by the job.
+# Repo secrets: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, EBAG_TOKEN_KEY.
+name: eBag sync
+
+on:
+  schedule:
+    - cron: "17 3 * * *" # 05:17 Sofia in winter, 06:17 in summer (GitHub cron is UTC; off the hour = less queueing)
+  workflow_dispatch:
+    inputs:
+      details:
+        description: "Fetch product details (labels)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+# Never two runs at once: they would race on the rotating eBag refresh token.
+concurrency:
+  group: ebag-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --omit=dev --no-audit --no-fund # runtime deps only; Node strips the TS types itself
+      - name: Sync
+        run: node scripts/sync.ts ${{ inputs.details == false && '--no-details' || '' }}
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          EBAG_TOKEN_KEY: ${{ secrets.EBAG_TOKEN_KEY }}
