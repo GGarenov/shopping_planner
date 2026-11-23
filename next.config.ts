@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ["highs"],
   outputFileTracingIncludes: {
     "/api/plan": ["./node_modules/highs/build/*.wasm"],
+    "/api/solver-check": ["./node_modules/highs/build/*.wasm"],
   },
 };
 
