@@ -2,7 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 /** Paths reachable without logging in. */
-const PUBLIC_PATHS = ["/login", "/auth", "/offline", "/api/solver-check"]; // solver-check: temporary Phase 3 spike
+const PUBLIC_PATHS = ["/login", "/auth", "/offline"];
 
 const isPublic = (pathname: string) => PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`));
 
@@ -38,6 +38,8 @@ export async function updateSession(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (!user && !isPublic(pathname)) {
+    // API calls get a JSON 401 instead of an HTML redirect.
+    if (pathname.startsWith("/api/")) return NextResponse.json({ error: "Влез отново в профила си." }, { status: 401 });
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     url.search = "";

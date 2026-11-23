@@ -3,6 +3,7 @@ import Link from "next/link";
 import { computeTargets, explainTargets, resolveTargets, type BodyData } from "@/lib/planner/targets";
 import { requireCompleteProfile } from "@/lib/profile/load";
 import { GOAL_OPTIONS } from "@/lib/profile/options";
+import { BottomNav } from "@/components/BottomNav";
 import { TargetsEditor } from "./TargetsEditor";
 
 export const metadata: Metadata = { title: "Твоите цели · Пазарен план" };
@@ -24,7 +25,8 @@ export default async function TargetsPage() {
   const goal = GOAL_OPTIONS.find((g) => g.value === profile.goal)?.label;
 
   return (
-    <main className="page">
+    <>
+    <main className="page pb-24">
       <header className="flex flex-col gap-1">
         <p className="text-sm opacity-70">Цел: {goal}</p>
         <h1 className="text-2xl font-bold">Твоите дневни цели</h1>
@@ -80,5 +82,7 @@ export default async function TargetsPage() {
         </form>
       </nav>
     </main>
+    <BottomNav />
+    </>
   );
 }

@@ -1,7 +1,7 @@
 import { readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { computeTargets, explainTargets, resolveTargets, type BodyData } from "./targets";
+import { computeTargets, explainTargets, resolveTargets, type BodyData } from "./targets.ts";
 
 const root = path.resolve(__dirname, "../..");
 const testProfile = JSON.parse(readFileSync(path.join(root, "data/profiles/test.json"), "utf8")) as BodyData;
