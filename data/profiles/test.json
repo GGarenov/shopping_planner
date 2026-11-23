@@ -31,6 +31,6 @@
   "max_desserts_per_week": 2,
   "min_fish_per_week": 1,
   "no_same_protein_per_day": true,
-  "candidates_per_slot": 8,
+  "candidates_per_slot": 6,
   "kcal_tolerance": 100
 }

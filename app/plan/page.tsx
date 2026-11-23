@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
+import { InstallButton } from "@/components/InstallButton";
 import { smallPhotos } from "@/lib/recipes/images";
 import Link from "next/link";
 import { BottomNav } from "@/components/BottomNav";
@@ -35,6 +36,7 @@ export default async function PlanPage({ searchParams }: { searchParams: Promise
             </p>
           </Hero>
           <GeneratePlanButton />
+          <InstallButton variant="banner" />
         </main>
         <BottomNav />
       </>
@@ -52,7 +54,12 @@ export default async function PlanPage({ searchParams }: { searchParams: Promise
             <div className="flex flex-col rounded-2xl bg-sun px-3 py-2.5 text-sun-fg">
               <span className="text-xs font-semibold">Плащаш в eBag</span>
               <span className="text-xl font-extrabold tabular-nums">{eur(plan.checkout_eur)}</span>
-              {budget != null && <span className="text-xs">бюджет {eur(budget)}</span>}
+              {budget != null && (
+                <span className="text-xs">
+                  бюджет {eur(budget)}
+                  {plan.checkout_eur > budget && <> · с {eur(plan.checkout_eur - budget)} над него</>}
+                </span>
+              )}
             </div>
             <div className="flex flex-col rounded-2xl bg-white/15 px-3 py-2.5">
               <span className="text-xs font-semibold text-white/85">Изяждаш тази седмица</span>
@@ -72,6 +79,8 @@ export default async function PlanPage({ searchParams }: { searchParams: Promise
         ) : (
           <PricesNotice planPricesDate={plan.solver.prices_date} latestPricesDate={sync.pricesDate} today={sofiaToday()} />
         )}
+
+        <InstallButton variant="banner" />
 
         <Link href={isOld ? `/list?id=${plan.id}` : "/list"} className="btn-primary">
           Списък за пазаруване

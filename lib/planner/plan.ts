@@ -89,6 +89,8 @@ export interface PlanProfile {
   avoid_recipes?: string[];
   /** Stage-1 cost added per use of an avoided recipe, in EUR (default 0.4: about half the recipes change). */
   avoid_penalty_eur?: number;
+  /** How far over budget a plan may go before the kcal window is widened (default 0.05 = 5 %). */
+  budget_slack?: number;
   /** On failure, find out why (extra solves, a few seconds). false = fail fast with the generic message. Default true. */
   diagnose?: boolean;
   /** Hard stop for the whole run in seconds (default 40). */
@@ -100,6 +102,10 @@ export interface PlanProfile {
   rounds?: number;
   refine_candidates_per_slot?: number;
   stage1_time_limit_s?: number;
+  /** Stage 1 aims this far inside the kcal window / above the protein minimum (default 10 kcal / 1 g; was 25 / 3 —
+   *  too tight for small, low-kcal profiles: stage 1 found no plan in time on Vercel, 2026-11-23 tester feedback). */
+  stage1_kcal_margin?: number;
+  stage1_protein_margin?: number;
   stage2_time_limit_s?: number;
   mip_gap?: number;
   mip_heuristic_effort?: number;
@@ -166,7 +172,7 @@ export type PlanResult =
       ok: false;
       /** no_recipes / no_meal_plan: the recipes can't cover the targets with this diet and these exclusions;
        *  budget_too_low: a plan exists but costs more (min_budget_eur); no_purchase_plan: anything else. */
-      reason: "no_recipes" | "no_meal_plan" | "budget_too_low" | "no_purchase_plan";
+      reason: "no_recipes" | "no_meal_plan" | "budget_too_low" | "no_purchase_plan" | "timeout";
       message: string;
       min_budget_eur?: number;
       log: string[];
@@ -193,6 +199,9 @@ export const NO_PLAN_MESSAGE_BG =
 /** Not enough recipes fit the diet and exclusions while meeting the daily targets. */
 export const NO_RECIPES_MESSAGE_BG =
   "Нямаме достатъчно рецепти, които да отговарят на диетата и изключенията ти и в същото време да покриват дневните ти цели. Опитай с по-малко изключения или по-широк диапазон калории.";
+
+/** The solver ran out of time without a plan (not proven impossible). */
+export const TIMEOUT_MESSAGE_BG = "Не успяхме да съставим плана навреме. Опитай отново — обикновено вторият опит минава.";
 
 /** The budget is too low; min is the cheapest plan the planner found (whole euros). */
 export function budgetMessageBg(budget: number, min: number): string {
@@ -330,7 +339,7 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
     }
     r._score = cost / Math.max(protein, 5); // EUR per gram of protein
   }
-  const K = profile.candidates_per_slot ?? 8;
+  const K = profile.candidates_per_slot ?? 6;
   const slots: Slot[] = profile.slots ?? ["breakfast", "lunch", "dinner", "snack"];
   const days = profile.days ?? 7;
   const candidates = {} as Record<Slot, UsableRecipe[]>;
@@ -455,9 +464,9 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
     m1.add(m1.obj.slice(), "<=", profile.budget_eur * budgetFactor);
     // Stage-1 targets are slightly tighter so stage 2 has room to adjust with real label macros.
     for (let d = 0; d < days; d++) {
-      m1.add(kcal[d]!, ">=", T.kcal_min + 25);
-      m1.add(kcal[d]!, "<=", T.kcal_max - 25);
-      m1.add(prot[d]!, ">=", T.protein_min + 3);
+      m1.add(kcal[d]!, ">=", T.kcal_min + (profile.stage1_kcal_margin ?? 10));
+      m1.add(kcal[d]!, "<=", T.kcal_max - (profile.stage1_kcal_margin ?? 10));
+      m1.add(prot[d]!, ">=", T.protein_min + (profile.stage1_protein_margin ?? 1));
     }
     // variety
     const uses = new Map<string, XVar[]>();
@@ -502,8 +511,15 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
     let r2!: ReturnType<typeof solve>;
     let U!: Map<string, UVar[]>;
     let B!: BVar[];
-    let tol: number;
-    for (tol = 0; tol <= 100; tol += 50) {
+    let tol = 0;
+    let cap = budget;
+    // Attempts, in order of preference: exact targets within budget; exact targets up to 5 % over budget (better
+    // than days off target for a few cents); then a slightly wider kcal window. Without a budget: just the window.
+    const slack = Number.isFinite(budget) ? budget * (1 + (profile.budget_slack ?? 0.05)) : budget;
+    const attempts: [number, number][] = Number.isFinite(budget)
+      ? [[0, budget], [0, slack], [50, slack], [100, slack]]
+      : [[0, budget], [50, budget], [100, budget]];
+    for ([tol, cap] of attempts) {
       // if real label macros make a day miss the window, widen it a little
       for (const r of usable) for (const it of r.items) delete it._vars;
       const m2 = newModel();
@@ -560,10 +576,10 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
           }
           m2.add([...usesT, term(-o.usable_g, b)], "<=", 0);
         });
-      if (Number.isFinite(budget)) m2.add(B.map((b) => term(b.offer.price, b.name)), "<=", budget);
+      if (Number.isFinite(cap)) m2.add(B.map((b) => term(b.offer.price, b.name)), "<=", cap);
       r2 = solve(m2, { time_limit: timeLimit, mip_rel_gap: 0.005 });
       if (r2.ok) break;
-      log.push(`  stage 2 attempt tol=${tol}: ${r2.status}`);
+      log.push(`  stage 2 attempt tol=${tol} budget=${cap.toFixed(2)}: ${r2.status}`);
     }
     if (!r2.ok) return { ok: false as const };
     const val = r2.val;
@@ -714,7 +730,11 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
       const { m1, s1 } = buildStage1(costPerG, candidates, Infinity); // same, without the budget estimate
       const r1 = solve(m1, stage1Opts);
       log.push(`Diagnose: stage 1 without budget ${r1.status} ${r1.s.toFixed(1)} s`);
-      if (!r1.ok) return { ok: false, reason: "no_meal_plan", message: NO_RECIPES_MESSAGE_BG, log };
+      // Only a proven "infeasible" means the recipes can't do it; running out of time is not the user's problem.
+      if (!r1.ok)
+        return r1.status === "Infeasible"
+          ? { ok: false, reason: "no_meal_plan", message: NO_RECIPES_MESSAGE_BG, log }
+          : { ok: false, reason: "timeout", message: TIMEOUT_MESSAGE_BG, log };
       chosen = new Map();
       for (const v of s1.X) if (r1.val(v.name) > 0.5) chosen.set(`${v.d}_${v.s}`, v.r);
     }
