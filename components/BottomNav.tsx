@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 const ITEMS = [
   { href: "/plan", label: "План", icon: "M4 5h16M4 12h16M4 19h10" },
   { href: "/list", label: "Списък", icon: "M3 4h2l2.4 11h11.2L21 7H6.2M9 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm9 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" },
+  { href: "/ebag", label: "eBag", icon: "M6 8h12l-1 12H7L6 8Zm3 0V6a3 3 0 0 1 6 0v2" },
   { href: "/targets", label: "Цели", icon: "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm0 4a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 4a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z" },
 ];
 

@@ -292,9 +292,11 @@ Design: mobile-first, large touch targets, works at 360 px width, light/dark, no
 - **Done when:** two consecutive scheduled runs succeed and prices in the app change accordingly.
 
 ### Phase 6 — Per-user eBag connection + cart (2 days)
-- [ ] OAuth client registration for the deployment; `/api/ebag/connect`, `/api/ebag/callback`, disconnect
-- [ ] `POST /api/ebag/cart` with stock check, substitutions, per-item report
-- [ ] eBag screen in the UI
+- [x] OAuth client registration for the deployment (one per redirect URI, in `system_secrets`); `/api/ebag/connect`,
+  `/api/ebag/callback` (state + iss checked, PKCE in an encrypted httpOnly cookie), `/api/ebag/disconnect` (revokes)
+- [x] `POST /api/ebag/cart` with stock check, substitutions, per-item report (`lib/ebag/cart.ts`, tested with a fake
+  eBag); the client sends batches of 6 so each call stays far below the function time limit
+- [x] eBag screen in the UI (`/ebag` tab; «Изпрати в eBag количката» on the list)
 - **Done when:** 2 different test accounts each fill their own cart from their own plan; nothing is ordered.
 
 ### Phase 7 — Test-ready polish (1–2 days)

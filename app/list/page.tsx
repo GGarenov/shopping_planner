@@ -53,6 +53,10 @@ export default async function ListPage() {
 
         <PricesNotice planPricesDate={plan.solver.prices_date} latestPricesDate={sync.pricesDate} today={sofiaToday()} />
 
+        <Link href="/ebag" className="btn-primary">
+          Изпрати в eBag количката
+        </Link>
+
         <ShoppingList planId={plan.id} groups={groupByAisle(plan.shopping)} totals={totals} initialChecked={checked} />
 
         <footer className="flex flex-col gap-2 border-t border-border pt-4 text-sm opacity-70">
