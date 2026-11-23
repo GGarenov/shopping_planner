@@ -1,54 +1,70 @@
 "use server";
 
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 
-export type LoginState =
-  | { step: "email"; error?: string; email?: string }
-  | { step: "code"; email: string; error?: string; info?: string };
+export type AuthState = { error?: string; email?: string };
 
-const emailSchema = z.email({ error: "Невалиден имейл адрес" });
+const credentials = z.object({
+  email: z.email({ error: "Невалиден имейл адрес" }),
+  password: z.string().min(1, { error: "Въведи парола" }),
+});
 
-async function siteOrigin() {
-  const h = await headers();
-  const host = h.get("x-forwarded-host") ?? h.get("host");
-  const proto = h.get("x-forwarded-proto") ?? "https";
-  return host ? `${proto}://${host}` : (process.env.APP_BASE_URL ?? "http://localhost:3000");
-}
+const newAccount = credentials.extend({
+  password: z.string().min(8, { error: "Паролата трябва да е поне 8 символа" }).max(72, { error: "Паролата е твърде дълга" }),
+});
 
-export async function sendLoginEmail(_prev: LoginState, formData: FormData): Promise<LoginState> {
-  const parsed = emailSchema.safeParse(String(formData.get("email") ?? "").trim().toLowerCase());
-  if (!parsed.success) return { step: "email", error: "Невалиден имейл адрес", email: String(formData.get("email") ?? "") };
-  const email = parsed.data;
+const read = (fd: FormData) => ({
+  email: String(fd.get("email") ?? "").trim().toLowerCase(),
+  password: String(fd.get("password") ?? ""),
+});
+
+export async function signIn(_prev: AuthState, formData: FormData): Promise<AuthState> {
+  const input = read(formData);
+  const parsed = credentials.safeParse(input);
+  if (!parsed.success) return { error: parsed.error.issues[0]?.message, email: input.email };
 
   const supabase = await createClient();
-  const { error } = await supabase.auth.signInWithOtp({
-    email,
-    options: { shouldCreateUser: true, emailRedirectTo: `${await siteOrigin()}/auth/callback` },
-  });
+  const { error } = await supabase.auth.signInWithPassword(parsed.data);
   if (error) {
-    console.error("signInWithOtp failed", error.status, error.code, error.message);
+    console.error("signInWithPassword failed", error.status, error.code);
     const msg =
-      error.status === 429
-        ? "Твърде много опити. Изчакай малко и опитай пак."
-        : "Не успяхме да изпратим имейла. Опитай отново след малко.";
-    return { step: "email", error: msg, email };
+      error.code === "invalid_credentials"
+        ? "Грешен имейл или парола."
+        : error.code === "email_not_confirmed"
+          ? "Акаунтът не е потвърден. Пиши ни от линка „Обратна връзка“."
+          : error.status === 429
+            ? "Твърде много опити. Изчакай малко и опитай пак."
+            : "Не успяхме да те впишем. Опитай отново.";
+    return { error: msg, email: input.email };
   }
-  return { step: "code", email, info: `Изпратихме имейл на ${email}.` };
+  redirect("/");
 }
 
-export async function verifyLoginCode(prev: LoginState, formData: FormData): Promise<LoginState> {
-  const email = prev.step === "code" ? prev.email : String(formData.get("email") ?? "");
-  const token = String(formData.get("code") ?? "").replace(/\D/g, "");
-  if (token.length < 6) return { step: "code", email, error: "Въведи кода от имейла" };
+export async function signUp(_prev: AuthState, formData: FormData): Promise<AuthState> {
+  const input = read(formData);
+  const parsed = newAccount.safeParse(input);
+  if (!parsed.success) return { error: parsed.error.issues[0]?.message, email: input.email };
 
   const supabase = await createClient();
-  const { error } = await supabase.auth.verifyOtp({ email, token, type: "email" });
+  const { data, error } = await supabase.auth.signUp(parsed.data);
   if (error) {
-    console.error("verifyOtp failed", error.status, error.code, error.message);
-    return { step: "code", email, error: "Кодът е грешен или изтекъл. Поискай нов." };
+    console.error("signUp failed", error.status, error.code);
+    const msg =
+      error.code === "user_already_exists"
+        ? "Вече има акаунт с този имейл. Влез от „Вход“."
+        : error.code === "weak_password"
+          ? "Паролата е твърде слаба. Избери по-дълга."
+          : error.status === 429
+            ? "Твърде много опити. Изчакай малко и опитай пак."
+            : "Не успяхме да създадем акаунта. Опитай отново.";
+    return { error: msg, email: input.email };
+  }
+  if (!data.session) {
+    // "Confirm email" is still on in Supabase → no session until the email is confirmed.
+    console.error("signUp returned no session — disable 'Confirm email' in Supabase Auth settings");
+    return { error: "Акаунтът е създаден, но чака потвърждение. Пиши ни от „Обратна връзка“.", email: input.email };
   }
   redirect("/");
 }

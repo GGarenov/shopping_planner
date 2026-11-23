@@ -3,12 +3,7 @@ import { LoginForm } from "./LoginForm";
 
 export const metadata: Metadata = { title: "Вход · Пазарен план" };
 
-const ERRORS: Record<string, string> = {
-  link: "Линкът за вход е невалиден или изтекъл. Поискай нов.",
-};
-
-export default async function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
-  const { error } = await searchParams;
+export default function LoginPage() {
   return (
     <main className="page justify-center">
       <div className="flex flex-col gap-2">
@@ -18,8 +13,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
           реални продукти от eBag.bg, готов за количката.
         </p>
       </div>
-      <LoginForm initialError={error ? (ERRORS[error] ?? ERRORS.link) : undefined} />
-      <p className="text-xs opacity-60">Без парола: изпращаме ти линк и код за вход по имейл.</p>
+      <LoginForm />
     </main>
   );
 }

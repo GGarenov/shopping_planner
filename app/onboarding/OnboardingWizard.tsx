@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useTransition } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { Activity, Goal, Sex } from "@/lib/planner/targets";
 import {
@@ -102,11 +103,15 @@ export function OnboardingWizard({ initial, editing }: { initial: WizardValues; 
               ← Назад
             </button>
           ) : editing ? (
-            <a href="/targets" className="btn-ghost -ml-3">
+            <Link href="/targets" className="btn-ghost -ml-3">
               ← Отказ
-            </a>
+            </Link>
           ) : (
-            <span />
+            <form action="/auth/signout" method="post">
+              <button type="submit" className="btn-ghost -ml-3">
+                Изход
+              </button>
+            </form>
           )}
           <span>
             {stepIndex + 1} / {STEPS.length}

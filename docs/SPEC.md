@@ -45,7 +45,7 @@ household mode, push notifications, AI features, admin UI for recipes.
 
 A tester can, on their phone, without help:
 
-1. Open the link, install the app to the home screen, log in with an email link.
+1. Open the link, install the app to the home screen, create an account / log in with email + password.
 2. Enter sex, age, height, weight, activity, goal, weekly budget, diet/exclusions/allergies, pantry items.
 3. See their daily targets (kcal range, protein) with the formula explained, and adjust them.
 4. Tap **"Създай план"** and within **≤ 15 s** see a 7-day plan (breakfast, lunch, dinner, snack) where every
@@ -97,7 +97,7 @@ Next.js 15 (App Router, TypeScript) on Vercel
    ├─ GET  /api/ebag/callback   → finish OAuth, store encrypted tokens
    └─ POST /api/ebag/cart       → stock check + substitutions + update cart
    │
-Supabase — Auth (email magic link) + Postgres (+ Row Level Security)
+Supabase — Auth (email + password) + Postgres (+ Row Level Security)
    ▲
 GitHub Actions — daily cron: eBag sync with the OWNER's account → upserts into Supabase
 ```
@@ -199,7 +199,7 @@ Bulgarian message suggesting a bigger budget / fewer exclusions.
 
 | # | Screen | Content |
 |---|---|---|
-| 1 | Вход | Email → magic link. Short explanation of the app. |
+| 1 | Вход | Tabs Вход / Регистрация: email + password (no emails sent). Short explanation of the app. |
 | 2 | Инсталирай | One-time hint how to add to home screen (iOS Safari / Android Chrome). |
 | 3 | Онбординг (стъпки) | Пол · Възраст · Ръст · Тегло · Активност (4 options with examples) · Цел · Бюджет/седмица · Хранене (без ограничения/вегетарианско/веганско/пескетарианско) · Изключения и алергии · Какво има вкъщи (сол, олио, оцет…) |
 | 4 | Твоите цели | kcal range, protein, formula explained, edit |
@@ -246,7 +246,7 @@ Design: mobile-first, large touch targets, works at 360 px width, light/dark, no
 - **Done when:** the three reference tables are filled and readable by a logged-in user.
 
 ### Phase 2 — Auth, onboarding, targets (1–2 days) — built; real-phone check pending
-- [x] Supabase email magic-link login; protected routes
+- [x] Supabase email + password login (changed from magic link 2026-11-23: no SMTP needed, works inside the iOS home-screen app; "Confirm email" off); protected routes
 - [x] Onboarding steps → `profiles`; targets screen with formula and override
 - [x] PWA: manifest, icons, service worker, install hint screen
 - **Done when:** a tester can install, log in, finish onboarding and see correct targets (unit-tested formula).

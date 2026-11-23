@@ -68,7 +68,7 @@ export function InstallHint({ next }: { next: string }) {
             Избери <strong>„Добави към началния екран“</strong> и после <strong>„Добави“</strong>.
           </li>
           <li>
-            Отвори приложението от началния екран и влез отново — с <strong>кода</strong> от имейла.
+            Отвори приложението от началния екран и влез отново със своя <strong>имейл и парола</strong>.
           </li>
         </ol>
       ) : platform === "android" ? (
