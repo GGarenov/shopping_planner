@@ -1,11 +1,10 @@
-export default function Home() {
-  return (
-    <main className="mx-auto flex min-h-dvh max-w-md flex-col justify-center gap-4 px-4 py-8">
-      <h1 className="text-3xl font-bold">Пазарен план</h1>
-      <p className="text-lg opacity-80">
-        Седмичен хранителен план според целта и бюджета ти — и списък с реални продукти от eBag.bg.
-      </p>
-      <p className="text-sm opacity-60">Скоро: вход с имейл линк.</p>
-    </main>
-  );
+import { redirect } from "next/navigation";
+import { getUserAndProfile } from "@/lib/profile/load";
+import { isComplete } from "@/lib/profile/schema";
+
+/** Entry point: route the user to the next thing they need to do. */
+export default async function Home() {
+  const { profile } = await getUserAndProfile();
+  // Phase 3 will send complete profiles to the weekly plan instead.
+  redirect(isComplete(profile) ? "/targets" : "/onboarding");
 }
