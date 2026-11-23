@@ -1,36 +1,34 @@
 "use client";
 
 import { useState } from "react";
-import type { CartItemResult, CartSummary } from "@/lib/ebag/cart";
-import { eur } from "@/lib/plans/shopping";
+import type { CartItemResult } from "@/lib/ebag/cart";
 
 const BATCH = 6;
 
-export function CartSender({ planId, ebagIds }: { planId: string; ebagIds: number[] }) {
+export function CartSender({ planId, ebagIds, onDone }: { planId: string; ebagIds: number[]; onDone?: () => void }) {
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(0);
   const [results, setResults] = useState<CartItemResult[]>([]);
-  const [summary, setSummary] = useState<CartSummary | null>(null);
+  const [finished, setFinished] = useState(false);
   const [error, setError] = useState<{ text: string; reconnect: boolean } | null>(null);
 
   const send = async () => {
     setBusy(true);
     setError(null);
     setResults([]);
-    setSummary(null);
+    setFinished(false);
     setDone(0);
     let queue = [...ebagIds];
     const all: CartItemResult[] = [];
     try {
       while (queue.length) {
         const batch = queue.slice(0, BATCH);
-        const last = queue.length <= BATCH;
         const res = await fetch("/api/ebag/cart", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ planId, ebagIds: batch, summary: last }),
+          body: JSON.stringify({ planId, ebagIds: batch }),
         });
-        const body = (await res.json().catch(() => ({}))) as { results?: CartItemResult[]; pending?: number[]; summary?: CartSummary | null; error?: string; reason?: string };
+        const body = (await res.json().catch(() => ({}))) as { results?: CartItemResult[]; pending?: number[]; error?: string; reason?: string };
         if (!res.ok || !body.results) {
           setError({ text: body.error ?? "Нещо се обърка. Опитай отново.", reconnect: body.reason === "reconnect" });
           return;
@@ -39,12 +37,13 @@ export function CartSender({ planId, ebagIds }: { planId: string; ebagIds: numbe
         setResults([...all]);
         setDone(all.length);
         queue = [...(body.pending ?? []), ...queue.slice(BATCH)];
-        if (body.summary) setSummary(body.summary);
       }
+      setFinished(true);
     } catch {
       setError({ text: "Няма връзка. Провери интернета и опитай отново — вече добавените продукти остават в количката.", reconnect: false });
     } finally {
       setBusy(false);
+      onDone?.(); // refresh the cart view, also after a partial run
     }
   };
 
@@ -73,26 +72,18 @@ export function CartSender({ planId, ebagIds }: { planId: string; ebagIds: numbe
         </div>
       )}
 
-      {summary && (
-        <div className="card flex flex-col gap-2">
-          <p className="font-semibold">
-            Готово: {added.length + replaced.length} от {results.length} продукта са в количката ти.
-          </p>
-          {summary.total != null && (
-            <p className="text-sm">
-              Количка в eBag: {summary.items ?? "?"} продукта, {eur(summary.total)}
-              {summary.shipping != null && <> + доставка {eur(summary.shipping)}</>}
-            </p>
-          )}
-          <a href={summary.url} target="_blank" rel="noopener noreferrer" className="btn-primary">
-            Отвори количката в eBag ↗
-          </a>
-          <p className="text-sm opacity-70">Нищо не е поръчано. Провери количката и поръчай в eBag, ако искаш.</p>
-        </div>
+      {finished && results.length > 0 && (
+        <p className="rounded-xl bg-accent-soft px-4 py-3 text-sm font-semibold" role="status">
+          Готово: {added.length + replaced.length} от {results.length} продукта са в количката ти.
+        </p>
       )}
 
       {results.length > 0 && (
-        <ul className="flex flex-col gap-2" aria-label="Резултат по продукти">
+        <details className="flex flex-col gap-2" open={missing.length + replaced.length > 0}>
+          <summary className="cursor-pointer text-sm opacity-80">
+            Резултат по продукти: ✓ {added.length} · ↻ {replaced.length} · ✗ {missing.length}
+          </summary>
+          <ul className="mt-2 flex flex-col gap-2" aria-label="Резултат по продукти">
           {[...missing, ...replaced, ...added].map((r) => (
             <li key={r.ebag_id} className="card flex items-start gap-3 text-sm">
               <span aria-hidden className={`text-lg leading-none ${r.status === "missing" ? "text-red-600" : r.status === "replaced" ? "text-amber-600" : "text-accent"}`}>
@@ -108,7 +99,8 @@ export function CartSender({ planId, ebagIds }: { planId: string; ebagIds: numbe
               </span>
             </li>
           ))}
-        </ul>
+          </ul>
+        </details>
       )}
     </section>
   );

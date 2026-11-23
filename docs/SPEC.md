@@ -299,6 +299,12 @@ Design: mobile-first, large touch targets, works at 360 px width, light/dark, no
 - [x] eBag screen in the UI (`/ebag` tab; «Изпрати в eBag количката» on the list)
 - **Done when:** 2 different test accounts each fill their own cart from their own plan; nothing is ordered.
 
+### Phase 6b — eBag cart inside the app ✅ done
+- [x] Live eBag cart on the eBag screen: photos, prices, promos, +/− and remove (respecting step/min), clear cart
+- [x] Totals with delivery fee and savings; progress to cheaper/free delivery and the minimum order (`get_delivery_info`)
+- [x] Earliest delivery slots (read-only, `get_delivery_slots`); «Поръчай в eBag ↗» opens eBag's cart — booking a slot,
+  ordering and payment stay on eBag (the MCP cannot do them)
+
 ### Phase 7 — Test-ready polish (1–2 days)
 - [ ] Regenerate plan; past plans list; delete account
 - [ ] Error states in Bulgarian (no plan possible, eBag disconnected, sync stale)

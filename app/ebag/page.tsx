@@ -7,7 +7,8 @@ import { eur } from "@/lib/plans/shopping";
 import { requireCompleteProfile } from "@/lib/profile/load";
 import { createAdminClient, createClient } from "@/lib/supabase/server";
 import { bgDate } from "@/lib/sync/status";
-import { CartSender } from "./CartSender";
+import { sofiaToday } from "@/lib/planner/week";
+import { EbagConnected } from "./EbagConnected";
 
 export const metadata: Metadata = { title: "eBag · Пазарен план" };
 
@@ -60,21 +61,7 @@ export default async function EbagPage({ searchParams }: { searchParams: Promise
         {connected && (
           <>
             <p className="text-sm opacity-70">Свързан от {bgDate(row.connected_at)}.</p>
-            {plan ? (
-              <section className="flex flex-col gap-3">
-                <div className="card flex flex-col gap-1">
-                  <span className="font-semibold">Списък за седмицата</span>
-                  <span className="text-sm opacity-80">
-                    {plan.shopping.length} продукта · около {eur(plan.checkout_eur)} по цени от{" "}
-                    {plan.solver.prices_date ? bgDate(plan.solver.prices_date) : "днес"}
-                  </span>
-                  <span className="text-sm opacity-70">
-                    Преди добавяне проверяваме наличността. Изчерпаните сменяме с подобен продукт. Каквото вече има в количката ти, остава.
-                  </span>
-                </div>
-                <CartSender planId={plan.id} ebagIds={plan.shopping.map((it) => it.ebag_id)} />
-              </section>
-            ) : (
+            {!plan && (
               <section className="flex flex-col gap-3">
                 <p className="opacity-80">Още нямаш план. Създай седмичен план и после го прати в количката.</p>
                 <Link href="/plan" className="btn-primary">
@@ -82,6 +69,18 @@ export default async function EbagPage({ searchParams }: { searchParams: Promise
                 </Link>
               </section>
             )}
+            <EbagConnected
+              today={sofiaToday()}
+              plan={
+                plan
+                  ? {
+                      id: plan.id,
+                      ebagIds: plan.shopping.map((it) => it.ebag_id),
+                      summary: `${plan.shopping.length} продукта · около ${eur(plan.checkout_eur)} по цени от ${plan.solver.prices_date ? bgDate(plan.solver.prices_date) : "днес"}`,
+                    }
+                  : null
+              }
+            />
           </>
         )}
 
