@@ -991,7 +991,7 @@
         {
           "slot": "breakfast",
           "recipe_id": "overnight_oats_grucki_yogurt",
-          "recipe": "Овесена каша за през нощта с гръцки йогурт и мед",
+          "recipe": "Овесена каша с гръцки йогурт и мед",
           "items": [
             {
               "id": "oats_rolled",
@@ -1194,7 +1194,7 @@
         {
           "slot": "breakfast",
           "recipe_id": "overnight_oats_grucki_yogurt",
-          "recipe": "Овесена каша за през нощта с гръцки йогурт и мед",
+          "recipe": "Овесена каша с гръцки йогурт и мед",
           "items": [
             {
               "id": "oats_rolled",

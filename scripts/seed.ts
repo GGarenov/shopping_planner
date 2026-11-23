@@ -1,6 +1,8 @@
 // Uploads the reference data to Supabase (idempotent upserts, service role).
 //   npm run seed                 → ingredients, recipes, products
 //   npm run seed -- --dry-run    → validate and count only, write nothing
+//   npm run seed -- --recipes    → ingredients + recipes only (after editing recipes). Use this once the daily
+//                                  sync runs: products in Supabase are newer than data/ebag_products.json.
 //
 // Products that are in Supabase but no longer in data/ebag_products.json are marked available = false
 // (never deleted: old plans may still reference them).
@@ -12,6 +14,7 @@ import { createClient } from "@supabase/supabase-js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DRY = process.argv.includes("--dry-run");
+const RECIPES_ONLY = process.argv.includes("--recipes");
 const BATCH = 500;
 
 interface Ingredient {
@@ -78,6 +81,10 @@ const startedAt = new Date().toISOString();
 
 await upsert("ingredients", ingredients.map((i) => ({ id: i.id, data: i })), "id");
 await upsert("recipes", recipes.map((r) => ({ id: r.id, data: r })), "id");
+if (RECIPES_ONLY) {
+  console.log(`done in ${((Date.now() - t0) / 1000).toFixed(1)} s (recipes only; products untouched)`);
+  process.exit(0);
+}
 await upsert(
   "products",
   products.map((p) => ({

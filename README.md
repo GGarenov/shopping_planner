@@ -15,6 +15,7 @@ cp .env.example .env.local   # fill in Supabase keys etc.
 npm run dev                  # http://localhost:3000
 npm run typecheck && npm run lint && npm test && npm run build
 npm run seed                 # upload ingredients / recipes / products to Supabase (idempotent; --dry-run to check)
+npm run seed -- --recipes    # only ingredients + recipes (after editing recipes; keeps the synced products)
 ```
 On Windows, run `npm test` from a terminal whose path starts with `C:\` (capital C) — a lowercase
 `c:\` makes Vitest load itself twice ("failed to find the current suite").
