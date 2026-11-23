@@ -16,6 +16,7 @@ import {
 } from "@/lib/profile/options";
 import { profileInputSchema } from "@/lib/profile/schema";
 import { shouldShowInstallHint } from "@/app/install/hint";
+import { BudgetField, Chips, Choice, NumberField } from "@/components/form/fields";
 import { saveProfile } from "./actions";
 
 export interface WizardValues {
@@ -193,20 +194,7 @@ function StepBody({
     case 4:
       return (
         <>
-          <NumberField label="Бюджет" unit="€ / седмица" value={values.budget_eur} onChange={(v) => set("budget_eur", v)} decimal />
-          <div className="flex flex-wrap gap-2">
-            {[60, 80, 100, 120, 150].map((b) => (
-              <button
-                key={b}
-                type="button"
-                className="chip"
-                aria-pressed={values.budget_eur === String(b)}
-                onClick={() => set("budget_eur", String(b))}
-              >
-                {b} €
-              </button>
-            ))}
-          </div>
+          <BudgetField value={values.budget_eur} onChange={(v) => set("budget_eur", v)} />
         </>
       );
     case 5:
@@ -260,84 +248,4 @@ function StepBody({
     default:
       return null;
   }
-}
-
-function Choice({
-  checked,
-  onClick,
-  label,
-  sub,
-  disabled,
-}: {
-  checked: boolean;
-  onClick: () => void;
-  label: string;
-  sub?: string;
-  disabled?: boolean;
-}) {
-  return (
-    <button type="button" role="radio" aria-checked={checked} className="choice disabled:opacity-50" onClick={onClick} disabled={disabled}>
-      <span
-        aria-hidden
-        className={`size-5 shrink-0 rounded-full border-2 ${checked ? "border-accent bg-accent" : "border-border"}`}
-      />
-      <span className="flex flex-col">
-        <span className="text-lg font-medium">{label}</span>
-        {sub && <span className="text-sm opacity-70">{sub}</span>}
-      </span>
-    </button>
-  );
-}
-
-function Chips({
-  options,
-  selected,
-  onToggle,
-}: {
-  options: { value: string; label: string }[];
-  selected: string[];
-  onToggle: (v: string) => void;
-}) {
-  return (
-    <div className="flex flex-wrap gap-2">
-      {options.map((o) => (
-        <button key={o.value} type="button" className="chip" aria-pressed={selected.includes(o.value)} onClick={() => onToggle(o.value)}>
-          {o.label}
-        </button>
-      ))}
-    </div>
-  );
-}
-
-function NumberField({
-  label,
-  unit,
-  value,
-  onChange,
-  decimal,
-}: {
-  label: string;
-  unit: string;
-  value: string;
-  onChange: (v: string) => void;
-  decimal?: boolean;
-}) {
-  const id = `f-${label}`;
-  return (
-    <div className="flex flex-col gap-1">
-      <label htmlFor={id} className="text-sm font-medium">
-        {label}
-      </label>
-      <div className="flex items-center gap-3">
-        <input
-          id={id}
-          className="input"
-          inputMode={decimal ? "decimal" : "numeric"}
-          value={value}
-          onChange={(e) => onChange(e.target.value.replace(",", "."))}
-        />
-        <span className="w-28 shrink-0 text-sm opacity-70">{unit}</span>
-      </div>
-    </div>
-  );
 }

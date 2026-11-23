@@ -92,7 +92,11 @@ export default async function PlanPage({ searchParams }: { searchParams: Promise
         />
 
         <footer className="flex flex-col gap-2 border-t border-border pt-4">
-          {!isOld && <GeneratePlanButton label="Нов план" variant="secondary" />}
+          {!isOld && (
+            <Link href="/plan/new" className="btn-secondary">
+              Нов план
+            </Link>
+          )}
           {plan.solver.prices_date && (
             <p className="text-center text-xs opacity-60">Цени от {plan.solver.prices_date.split("-").reverse().join(".")}</p>
           )}

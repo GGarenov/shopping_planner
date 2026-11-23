@@ -11,7 +11,7 @@ export const profileInputSchema = z.object({
   weight_kg: z.coerce.number().min(30, "Тегло 30–300 кг").max(300, "Тегло 30–300 кг"),
   activity: z.enum(["sedentary", "light", "moderate", "high"], { error: "Избери активност" }),
   goal: z.enum(["lose", "maintain", "gain"], { error: "Избери цел" }),
-  budget_eur: z.coerce.number().min(20, "Бюджет поне 20 €").max(1000, "Бюджет до 1000 €"),
+  budget_eur: z.coerce.number().min(20, "Бюджет поне 20 €").max(2000, "Бюджет до 2000 €"),
   diet: z.enum(["vegetarian", "vegan", "pescatarian"]).nullable(),
   exclude_tags: z.array(oneOf(EXCLUDE_OPTIONS)).default([]),
   allergens: z.array(oneOf(ALLERGEN_OPTIONS)).default([]),
@@ -70,3 +70,19 @@ export function isComplete(p: ProfileRow | null): p is CompleteProfile {
     !!p.options?.consent_at
   );
 }
+
+/** "New plan" settings screen: the profile fields (no consent step) + targets, automatic or set by hand. */
+export const planSettingsSchema = profileInputSchema.omit({ consent: true }).extend({
+  targets: z.discriminatedUnion("mode", [
+    z.object({ mode: z.literal("auto") }),
+    z.object({ mode: z.literal("manual"), kcal_min: z.unknown(), kcal_max: z.unknown(), protein_min: z.unknown() }).transform((v, ctx) => {
+      const r = targetsOverrideSchema.safeParse(v);
+      if (!r.success) {
+        for (const i of r.error.issues) ctx.addIssue({ code: "custom", message: i.message });
+        return z.NEVER;
+      }
+      return { mode: "manual" as const, ...r.data };
+    }),
+  ]),
+});
+export type PlanSettingsInput = z.input<typeof planSettingsSchema>;
