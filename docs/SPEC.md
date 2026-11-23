@@ -245,17 +245,28 @@ Design: mobile-first, large touch targets, works at 360 px width, light/dark, no
 - [x] Move shared logic to `lib/` (TypeScript): `lib/ebag/parse.ts`, `lib/planner/targets.ts`
 - **Done when:** the three reference tables are filled and readable by a logged-in user.
 
-### Phase 2 — Auth, onboarding, targets (1–2 days) — built; real-phone check pending
+### Phase 2 — Auth, onboarding, targets (1–2 days) ✅ done 2026-11-23 (checked on a real phone)
 - [x] Supabase email + password login (changed from magic link 2026-11-23: no SMTP needed, works inside the iOS home-screen app; "Confirm email" off); protected routes
 - [x] Onboarding steps → `profiles`; targets screen with formula and override
 - [x] PWA: manifest, icons, service worker, install hint screen
 - **Done when:** a tester can install, log in, finish onboarding and see correct targets (unit-tested formula).
 
-### Phase 3 — Planner in the app (2 days)
-- [ ] Port `scripts/plan.mjs` to `lib/planner/` (pure function: inputs → plan JSON); reads data from Supabase
-- [ ] `POST /api/plan` (auth required) → saves to `plans`; WASM bundling verified on Vercel
-- [ ] Week plan screen, recipe screen
+### Phase 3 — Planner in the app (2 days) ✅ done 2026-11-23
+- [x] Port `scripts/plan.mjs` to `lib/planner/` (pure function: inputs → plan JSON); reads data from Supabase
+- [x] `POST /api/plan` (auth required) → saves to `plans`; WASM bundling verified on Vercel
+- [x] Week plan screen, recipe screen
 - **Done when:** plan for `data/profiles/test.json` data is generated on Vercel in ≤ 15 s and all days meet targets.
+  Result: 11.9 s cold / 8.2 s warm on Vercel (lhr1), every day within range.
+- **Known limitation (found 2026-11-23, inherited from plan.mjs):** many realistic profiles get no plan —
+  male < ~95 €/week, female lose 80 €, vegetarian (protein target too high for 7 lunch / 9 dinner recipes),
+  vegan (no breakfast recipes). Stage 1 prices ingredients per gram and ignores whole-pack cost, so stage 2
+  often cannot fit the packs into the budget. Fix before inviting testers (see Phase 3b).
+
+### Phase 3b — Planner robustness (before testers)
+- [ ] Stage 1: fixed cost per distinct ingredient (smallest pack price) so meals reuse what is bought
+- [ ] Specific Bulgarian messages: budget too low (with the minimum that works) vs. not enough recipes
+- [ ] Recipe coverage: vegan breakfasts, more high-protein vegetarian lunches/dinners (or hide vegan until then)
+- [ ] "Нов план" gives a different week (avoid the previous plan's recipes)
 
 ### Phase 4 — Shopping list (1 day)
 - [ ] List screen grouped by aisle; promo badges; checkout vs eaten; checkboxes persisted in `shopping_checks`
