@@ -37,7 +37,7 @@ export default async function MealPage({ params }: { params: Promise<{ id: strin
   return (
     <main className="page">
       <header className="flex flex-col gap-2">
-        <Link href="/plan" className="btn-ghost -ml-3 self-start">
+        <Link href={`/plan?id=${plan.id}`} className="btn-ghost -ml-3 self-start">
           ← Към плана
         </Link>
         <p className="text-sm opacity-70">

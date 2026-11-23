@@ -31,3 +31,22 @@ export async function getPlan(supabase: SupabaseClient, id: string): Promise<Pla
   if (error) throw new Error(`plans select failed: ${error.message}`);
   return data ? normalize(data) : null;
 }
+
+export interface PlanSummary {
+  id: string;
+  week_start: string;
+  checkout_eur: number;
+  eaten_eur: number;
+  created_at: string;
+}
+
+/** The user's plans, newest first (RLS limits rows to the logged-in user). */
+export async function listPlans(supabase: SupabaseClient, limit = 20): Promise<PlanSummary[]> {
+  const { data, error } = await supabase
+    .from("plans")
+    .select("id, week_start, checkout_eur, eaten_eur, created_at")
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  if (error) throw new Error(`plans select failed: ${error.message}`);
+  return (data ?? []).map((r) => ({ ...r, checkout_eur: Number(r.checkout_eur), eaten_eur: Number(r.eaten_eur) }) as PlanSummary);
+}

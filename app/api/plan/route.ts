@@ -53,23 +53,27 @@ export async function POST() {
   const { data: last } = await supabase.from("plans").select("plan").eq("user_id", user.id).order("created_at", { ascending: false }).limit(1).maybeSingle();
   const avoid = [...new Set(((last?.plan ?? []) as PlanDay[]).flatMap((d) => d.meals.map((m) => m.recipe_id)))];
 
-  const res = await generatePlan({
-    profile: {
-      name: "app",
-      ...body,
-      budget_eur: profile.budget_eur,
-      diet: profile.diet,
-      exclude_tags: profile.exclude_tags,
-      allergens: profile.allergens,
-      pantry: profile.pantry,
-      targets_override: targets,
-      avoid_recipes: avoid,
-      stage2_time_limit_s: 8,
-    },
-    ingredients: data.ingredients,
-    recipes: data.recipes,
-    products: data.products,
-  });
+  const planProfile = {
+    name: "app",
+    ...body,
+    budget_eur: profile.budget_eur,
+    diet: profile.diet,
+    exclude_tags: profile.exclude_tags,
+    allergens: profile.allergens,
+    pantry: profile.pantry,
+    targets_override: targets,
+    avoid_recipes: avoid,
+    stage2_time_limit_s: 8,
+  };
+  const input = { ingredients: data.ingredients, recipes: data.recipes, products: data.products };
+  // "Нов план": first try a different week (fail fast); if that doesn't fit, the best plan regardless of the last one.
+  // Deadlines keep both attempts inside the function limit (maxDuration 60 s).
+  let res = await generatePlan({ ...input, profile: { ...planProfile, diagnose: avoid.length === 0, deadline_s: avoid.length ? 20 : 40 } });
+  let varied = avoid.length > 0;
+  if (!res.ok && avoid.length > 0) {
+    res = await generatePlan({ ...input, profile: { ...planProfile, avoid_recipes: [], deadline_s: 30 } });
+    varied = false;
+  }
   const tSolved = Date.now();
 
   if (!res.ok) {
@@ -110,5 +114,5 @@ export async function POST() {
     total_s: (Date.now() - t0) / 1000,
     checkout: out.checkout_eur,
   });
-  return NextResponse.json({ id: saved.id, seconds: (Date.now() - t0) / 1000 });
+  return NextResponse.json({ id: saved.id, seconds: (Date.now() - t0) / 1000, varied: avoid.length ? varied : null });
 }

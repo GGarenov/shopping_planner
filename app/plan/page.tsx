@@ -4,7 +4,7 @@ import { BottomNav } from "@/components/BottomNav";
 import { PricesNotice } from "@/components/PricesNotice";
 import { shortDate, sofiaToday, todayIndexInWeek } from "@/lib/planner/week";
 import { getSyncStatus } from "@/lib/sync/status";
-import { getLatestPlan } from "@/lib/plans/load";
+import { getLatestPlan, getPlan } from "@/lib/plans/load";
 import { requireCompleteProfile } from "@/lib/profile/load";
 import { createClient } from "@/lib/supabase/server";
 import { GeneratePlanButton } from "./GeneratePlanButton";
@@ -14,10 +14,13 @@ export const metadata: Metadata = { title: "Седмичен план · Паз�
 
 const eur = (n: number) => `${n.toFixed(2).replace(".", ",")} €`;
 
-export default async function PlanPage() {
+export default async function PlanPage({ searchParams }: { searchParams: Promise<{ id?: string }> }) {
+  const { id } = await searchParams;
   await requireCompleteProfile();
   const supabase = await createClient();
-  const [plan, sync] = await Promise.all([getLatestPlan(supabase), getSyncStatus(supabase)]);
+  const [latest, sync] = await Promise.all([getLatestPlan(supabase), getSyncStatus(supabase)]);
+  const plan = (id && id !== latest?.id ? await getPlan(supabase, id) : null) ?? latest;
+  const isOld = !!plan && plan.id !== latest?.id;
 
   if (!plan) {
     return (
@@ -50,7 +53,16 @@ export default async function PlanPage() {
           <h1 className="text-2xl font-bold">Седмичен план</h1>
         </header>
 
-        <PricesNotice planPricesDate={plan.solver.prices_date} latestPricesDate={sync.pricesDate} today={sofiaToday()} />
+        {isOld ? (
+          <p className="rounded-xl border border-border px-4 py-3 text-sm" role="status">
+            Това е по-стар план.{" "}
+            <Link href="/plan" className="font-semibold underline">
+              Към текущия план
+            </Link>
+          </p>
+        ) : (
+          <PricesNotice planPricesDate={plan.solver.prices_date} latestPricesDate={sync.pricesDate} today={sofiaToday()} />
+        )}
 
         <section className="grid grid-cols-2 gap-3">
           <div className="card flex flex-col">
@@ -65,7 +77,7 @@ export default async function PlanPage() {
           </div>
         </section>
 
-        <Link href="/list" className="btn-primary">
+        <Link href={isOld ? `/list?id=${plan.id}` : "/list"} className="btn-primary">
           Списък за пазаруване
         </Link>
 
@@ -80,7 +92,7 @@ export default async function PlanPage() {
         />
 
         <footer className="flex flex-col gap-2 border-t border-border pt-4">
-          <GeneratePlanButton label="Нов план" variant="secondary" />
+          {!isOld && <GeneratePlanButton label="Нов план" variant="secondary" />}
           {plan.solver.prices_date && (
             <p className="text-center text-xs opacity-60">Цени от {plan.solver.prices_date.split("-").reverse().join(".")}</p>
           )}

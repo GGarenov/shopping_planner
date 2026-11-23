@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const ITEMS = [
+const ITEMS: { href: string; label: string; icon: string; also?: string[] }[] = [
   { href: "/plan", label: "План", icon: "M4 5h16M4 12h16M4 19h10" },
   { href: "/list", label: "Списък", icon: "M3 4h2l2.4 11h11.2L21 7H6.2M9 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm9 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" },
   { href: "/ebag", label: "eBag", icon: "M6 8h12l-1 12H7L6 8Zm3 0V6a3 3 0 0 1 6 0v2" },
-  { href: "/targets", label: "Цели", icon: "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm0 4a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 4a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z" },
+  { href: "/profile", label: "Профил", also: ["/targets"], icon: "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-7 8a7 7 0 0 1 14 0" },
 ];
 
 /** Fixed bottom tab bar for the main screens. Pages using it need bottom padding (pb-24). */
@@ -20,7 +20,7 @@ export function BottomNav() {
     >
       <ul className="mx-auto flex max-w-md">
         {ITEMS.map((it) => {
-          const active = pathname === it.href || pathname.startsWith(`${it.href}/`);
+          const active = [it.href, ...(it.also ?? [])].some((h) => pathname === h || pathname.startsWith(`${h}/`));
           return (
             <li key={it.href} className="flex-1">
               <Link

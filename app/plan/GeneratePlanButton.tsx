@@ -10,6 +10,7 @@ export function GeneratePlanButton({ label = "Създай план", variant = 
   const router = useRouter();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [info, setInfo] = useState<string | null>(null);
   const [fixable, setFixable] = useState(false); // the error is about the user's settings (budget, diet, exclusions)
   const [step, setStep] = useState(0);
 
@@ -23,15 +24,17 @@ export function GeneratePlanButton({ label = "Създай план", variant = 
   const generate = async () => {
     setBusy(true);
     setError(null);
+    setInfo(null);
     setFixable(false);
     try {
       const res = await fetch("/api/plan", { method: "POST" });
-      const body = (await res.json().catch(() => ({}))) as { id?: string; error?: string; reason?: string };
+      const body = (await res.json().catch(() => ({}))) as { id?: string; error?: string; reason?: string; varied?: boolean | null };
       if (!res.ok || !body.id) {
         setError(body.error ?? "Нещо се обърка. Опитай отново.");
         setFixable(res.status === 422);
         return;
       }
+      if (body.varied === false) setInfo("Не намерихме различна седмица в рамките на бюджета — това е най-изгодният вариант.");
       router.push("/plan");
       router.refresh();
     } catch {
@@ -48,7 +51,12 @@ export function GeneratePlanButton({ label = "Създай план", variant = 
       </button>
       {busy && (
         <p className="text-center text-sm opacity-70" aria-live="polite">
-          {STEPS[step]} (до ~15 сек)
+          {STEPS[step]} ({label === "Нов план" ? "до ~30 сек" : "до ~15 сек"})
+        </p>
+      )}
+      {info && (
+        <p className="rounded-xl border border-border px-4 py-3 text-sm" role="status">
+          {info}
         </p>
       )}
       {error && (

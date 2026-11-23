@@ -306,9 +306,13 @@ Design: mobile-first, large touch targets, works at 360 px width, light/dark, no
   ordering and payment stay on eBag (the MCP cannot do them)
 
 ### Phase 7 — Test-ready polish (1–2 days)
-- [ ] Regenerate plan; past plans list; delete account
-- [ ] Error states in Bulgarian (no plan possible, eBag disconnected, sync stale)
-- [ ] Feedback link; invite the 5–10 testers
+- [x] Regenerate plan; past plans list; delete account — «Профил» tab (goals, data, eBag status, plans with
+  `/plan?id=` + `/list?id=`, log out, «Изтрий профила ми»: revokes eBag, deletes the auth user → everything
+  cascades). «Нов план» falls back to the best plan in budget when a different week doesn't fit (was an error).
+- [x] Error states in Bulgarian (no plan possible, eBag disconnected, sync stale; plus `error.tsx`, `not-found.tsx`,
+  `global-error.tsx`)
+- [x] Feedback: in-app form → table `feedback` (insert-only for users; read in the Supabase dashboard)
+- [ ] Invite the 5–10 testers
 - **Done when:** the full "definition of done" (§3) passes on an iPhone and an Android phone.
 
 ### Nice-to-have after the test (not in this release)

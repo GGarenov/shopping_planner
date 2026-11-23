@@ -4,7 +4,7 @@ import { BottomNav } from "@/components/BottomNav";
 import { PricesNotice } from "@/components/PricesNotice";
 import { shortDate, sofiaToday } from "@/lib/planner/week";
 import { getSyncStatus } from "@/lib/sync/status";
-import { getLatestPlan } from "@/lib/plans/load";
+import { getLatestPlan, getPlan } from "@/lib/plans/load";
 import { groupByAisle, shoppingTotals } from "@/lib/plans/shopping";
 import { PANTRY_OPTIONS } from "@/lib/profile/options";
 import { requireCompleteProfile } from "@/lib/profile/load";
@@ -13,10 +13,13 @@ import { ShoppingList } from "./ShoppingList";
 
 export const metadata: Metadata = { title: "Списък за пазаруване · Пазарен план" };
 
-export default async function ListPage() {
+export default async function ListPage({ searchParams }: { searchParams: Promise<{ id?: string }> }) {
+  const { id } = await searchParams;
   await requireCompleteProfile();
   const supabase = await createClient();
-  const [plan, sync] = await Promise.all([getLatestPlan(supabase), getSyncStatus(supabase)]);
+  const [latest, sync] = await Promise.all([getLatestPlan(supabase), getSyncStatus(supabase)]);
+  const plan = (id && id !== latest?.id ? await getPlan(supabase, id) : null) ?? latest;
+  const isOld = !!plan && plan.id !== latest?.id;
 
   if (!plan) {
     return (
@@ -51,11 +54,21 @@ export default async function ListPage() {
           <h1 className="text-2xl font-bold">Списък за пазаруване</h1>
         </header>
 
-        <PricesNotice planPricesDate={plan.solver.prices_date} latestPricesDate={sync.pricesDate} today={sofiaToday()} />
-
-        <Link href="/ebag" className="btn-primary">
-          Изпрати в eBag количката
-        </Link>
+        {isOld ? (
+          <p className="rounded-xl border border-border px-4 py-3 text-sm" role="status">
+            Списък от по-стар план.{" "}
+            <Link href="/list" className="font-semibold underline">
+              Към текущия списък
+            </Link>
+          </p>
+        ) : (
+          <>
+            <PricesNotice planPricesDate={plan.solver.prices_date} latestPricesDate={sync.pricesDate} today={sofiaToday()} />
+            <Link href="/ebag" className="btn-primary">
+              Изпрати в eBag количката
+            </Link>
+          </>
+        )}
 
         <ShoppingList planId={plan.id} groups={groupByAisle(plan.shopping)} totals={totals} initialChecked={checked} />
 

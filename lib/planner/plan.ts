@@ -89,6 +89,8 @@ export interface PlanProfile {
   avoid_recipes?: string[];
   /** Stage-1 cost added per use of an avoided recipe, in EUR (default 0.4: about half the recipes change). */
   avoid_penalty_eur?: number;
+  /** On failure, find out why (extra solves, a few seconds). false = fail fast with the generic message. Default true. */
+  diagnose?: boolean;
   /** Hard stop for the whole run in seconds (default 40). */
   deadline_s?: number;
   min_fish_per_week?: number;
@@ -701,6 +703,9 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
       const eff = (Math.ceil(g / o.usable_g) * o.price) / g;
       costPerG.set(iid, Math.max(o.per_g, eff));
     }
+  }
+  if (!best && profile.diagnose === false) {
+    return { ok: false, reason: stage1Failed ? "no_meal_plan" : "no_purchase_plan", message: NO_PLAN_MESSAGE_BG, log };
   }
   if (!best) {
     // Find out why, so the user gets an actionable message: is it the recipes (diet/exclusions vs targets) or money?
