@@ -2,7 +2,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { beforeAll, describe, expect, it } from "vitest";
-import { generatePlan, NO_PLAN_MESSAGE_BG, type PlanInput, type PlanOutput, type PlanProfile } from "./plan";
+import { budgetMessageBg, generatePlan, NO_RECIPES_MESSAGE_BG, type PlanInput, type PlanOutput, type PlanProfile } from "./plan";
 
 const root = path.resolve(__dirname, "../..");
 const read = (rel: string) => JSON.parse(readFileSync(path.join(root, rel), "utf8"));
@@ -58,7 +58,8 @@ describe("generatePlan (data/profiles/test.json)", () => {
     const meals = out.plan.flatMap((d) => d.meals);
     const counts = new Map<string, number>();
     for (const m of meals) counts.set(m.recipe_id, (counts.get(m.recipe_id) ?? 0) + 1);
-    expect(Math.max(...counts.values())).toBeLessThanOrEqual(2);
+    expect(Math.max(...counts.values())).toBeLessThanOrEqual(testProfile.max_repeats ?? 4);
+    for (const day of out.plan) expect(new Set(day.meals.map((m) => m.recipe_id)).size).toBe(day.meals.length); // never twice a day
     const recipes = new Map(data.recipes.map((r) => [r.id, r]));
     const fish = meals.filter((m) => (m.slot === "lunch" || m.slot === "dinner") && ["fish", "seafood"].includes(recipes.get(m.recipe_id)?.protein ?? ""));
     expect(fish.length).toBeGreaterThanOrEqual(1);
@@ -73,13 +74,36 @@ describe("generatePlan (data/profiles/test.json)", () => {
   });
 });
 
-describe("generatePlan — infeasible input", () => {
-  it("returns a Bulgarian message instead of throwing when the budget is far too small", async () => {
+describe("generatePlan — no plan possible", () => {
+  it("budget too low: says so and names the cheapest plan it found", async () => {
     const res = await generatePlan({ ...data, profile: { ...testProfile, budget_eur: 15 } });
     expect(res.ok).toBe(false);
+    if (res.ok) return;
+    expect(res.reason).toBe("budget_too_low");
+    expect(res.min_budget_eur).toBeGreaterThan(15);
+    expect(res.message).toBe(budgetMessageBg(15, res.min_budget_eur!));
+    expect(res.message).toMatch(/^С бюджет 15 € .* около \d+ €/);
+  }, 60_000);
+
+  it("not enough recipes for the diet: says so (vegan has no breakfasts yet)", async () => {
+    const res = await generatePlan({ ...data, profile: { ...testProfile, diet: "vegan" } });
+    expect(res.ok).toBe(false);
     if (!res.ok) {
-      expect(res.message).toBe(NO_PLAN_MESSAGE_BG);
-      expect(["no_meal_plan", "no_purchase_plan"]).toContain(res.reason);
+      expect(res.reason).toBe("no_recipes");
+      expect(res.message).toBe(NO_RECIPES_MESSAGE_BG);
     }
+  });
+});
+
+describe("generatePlan — new plan", () => {
+  it("avoid_recipes steers to a different week", async () => {
+    const ids = (o: PlanOutput) => new Set(o.plan.flatMap((d) => d.meals.map((m) => m.recipe_id)));
+    const first = await generatePlan({ ...data, profile: testProfile });
+    if (!first.ok) throw new Error(first.reason);
+    const prev = ids(first.output);
+    const second = await generatePlan({ ...data, profile: { ...testProfile, avoid_recipes: [...prev] } });
+    if (!second.ok) throw new Error(second.reason);
+    const shared = [...ids(second.output)].filter((id) => prev.has(id)).length;
+    expect(shared).toBeLessThan(prev.size);
   }, 60_000);
 });

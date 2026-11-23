@@ -262,11 +262,16 @@ Design: mobile-first, large touch targets, works at 360 px width, light/dark, no
   vegan (no breakfast recipes). Stage 1 prices ingredients per gram and ignores whole-pack cost, so stage 2
   often cannot fit the packs into the budget. Fix before inviting testers (see Phase 3b).
 
-### Phase 3b — Planner robustness (before testers)
-- [ ] Stage 1: fixed cost per distinct ingredient (smallest pack price) so meals reuse what is bought
-- [ ] Specific Bulgarian messages: budget too low (with the minimum that works) vs. not enough recipes
-- [ ] Recipe coverage: vegan breakfasts, more high-protein vegetarian lunches/dinners (or hide vegan until then)
-- [ ] "Нов план" gives a different week (avoid the previous plan's recipes)
+### Phase 3b — Planner robustness (before testers) ✅ done
+- [x] Fewer half-used packs: a recipe may repeat up to 4×/week (never twice a day; was 2). Whole-pack costs inside
+  stage 1 were tried (fixed charge per ingredient, also with a MIP start) — HiGHS WASM finds no plan in time, dropped.
+  Result on 16 test profiles: 13 get a plan (was 4), typical checkout €66–82 (test profile €98 → €68).
+- [x] Specific Bulgarian messages: `budget_too_low` with the cheapest plan found ("около 69 €") vs. `no_recipes` /
+  `no_meal_plan` (diet + exclusions can't cover the targets); the error links to the settings
+- [x] Vegan shown as "Скоро" (not selectable) until there are vegan breakfasts; vegetarian now works
+- [x] "Нов план" steers away from the previous plan's recipes (soft penalty, ~half the recipes change)
+- [x] Hard wall-clock stop for every solve (40 s for the whole run), after one 190 s overrun of HiGHS's time_limit
+- Known: checkout varies ±€15 between plans — stage 1 prices per gram, packs are only priced in stage 2.
 
 ### Phase 4 — Shopping list (1 day)
 - [ ] List screen grouped by aisle; promo badges; checkout vs eaten; checkboxes persisted in `shopping_checks`

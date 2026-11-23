@@ -1,7 +1,7 @@
 // POST /api/plan — generates the user's weekly plan and saves it to `plans` (SPEC §7.2).
 import { NextResponse } from "next/server";
 import { resolveTargets } from "@/lib/planner/targets";
-import { generatePlan } from "@/lib/planner/plan";
+import { generatePlan, type PlanDay } from "@/lib/planner/plan";
 import { loadPlannerData } from "@/lib/planner/load";
 import { planWeekStart } from "@/lib/planner/week";
 import { isComplete, type ProfileRow } from "@/lib/profile/schema";
@@ -49,6 +49,10 @@ export async function POST() {
   };
   const targets = resolveTargets(body, profile.targets_override);
 
+  // "Нов план" should give a different week: steer away from the recipes of the latest plan.
+  const { data: last } = await supabase.from("plans").select("plan").eq("user_id", user.id).order("created_at", { ascending: false }).limit(1).maybeSingle();
+  const avoid = [...new Set(((last?.plan ?? []) as PlanDay[]).flatMap((d) => d.meals.map((m) => m.recipe_id)))];
+
   const res = await generatePlan({
     profile: {
       name: "app",
@@ -59,6 +63,7 @@ export async function POST() {
       allergens: profile.allergens,
       pantry: profile.pantry,
       targets_override: targets,
+      avoid_recipes: avoid,
       stage2_time_limit_s: 8,
     },
     ingredients: data.ingredients,
@@ -69,7 +74,7 @@ export async function POST() {
 
   if (!res.ok) {
     console.warn("plan: no feasible plan", { user: user.id, reason: res.reason, log: res.log });
-    return NextResponse.json({ error: res.message, reason: res.reason }, { status: 422 });
+    return NextResponse.json({ error: res.message, reason: res.reason, min_budget_eur: res.min_budget_eur }, { status: 422 });
   }
 
   const out = res.output;

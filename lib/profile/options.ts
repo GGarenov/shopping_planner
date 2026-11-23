@@ -23,10 +23,11 @@ export const GOAL_OPTIONS: { value: Goal; label: string; hint: string }[] = [
 ];
 
 /** `null` = no restriction. */
-export const DIET_OPTIONS: { value: Diet | null; label: string }[] = [
+/** `soon`: shown but not selectable yet — too few recipes for a full week (vegan: no breakfasts yet). */
+export const DIET_OPTIONS: { value: Diet | null; label: string; soon?: string }[] = [
   { value: null, label: "Без ограничения" },
   { value: "vegetarian", label: "Вегетарианско" },
-  { value: "vegan", label: "Веганско" },
+  { value: "vegan", label: "Веганско", soon: "Скоро — още нямаме достатъчно веган рецепти" },
   { value: "pescatarian", label: "Пескетарианско (риба, без месо)" },
 ];
 

@@ -213,7 +213,14 @@ function StepBody({
       return (
         <div role="radiogroup" className="flex flex-col gap-3">
           {DIET_OPTIONS.map((o) => (
-            <Choice key={o.label} checked={values.diet === o.value} onClick={() => set("diet", o.value)} label={o.label} />
+            <Choice
+              key={o.label}
+              checked={values.diet === o.value}
+              onClick={() => set("diet", o.value)}
+              label={o.label}
+              sub={o.soon}
+              disabled={!!o.soon && values.diet !== o.value}
+            />
           ))}
         </div>
       );
@@ -255,9 +262,21 @@ function StepBody({
   }
 }
 
-function Choice({ checked, onClick, label, sub }: { checked: boolean; onClick: () => void; label: string; sub?: string }) {
+function Choice({
+  checked,
+  onClick,
+  label,
+  sub,
+  disabled,
+}: {
+  checked: boolean;
+  onClick: () => void;
+  label: string;
+  sub?: string;
+  disabled?: boolean;
+}) {
   return (
-    <button type="button" role="radio" aria-checked={checked} className="choice" onClick={onClick}>
+    <button type="button" role="radio" aria-checked={checked} className="choice disabled:opacity-50" onClick={onClick} disabled={disabled}>
       <span
         aria-hidden
         className={`size-5 shrink-0 rounded-full border-2 ${checked ? "border-accent bg-accent" : "border-border"}`}

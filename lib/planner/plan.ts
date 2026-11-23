@@ -7,8 +7,12 @@
 //   recipe ranges using each product's own label macros, and minimise the checkout total within budget.
 // Macros: the bought product's eBag label when valid, otherwise USDA (ingredients.json).
 //
-// Ported 1:1 from the original scripts/plan.mjs and verified to give an identical plan (2026-11-23); the only
-// intentional change since is the rounding margin in stage 2. scripts/plan.mjs is now a CLI wrapper around this.
+// Ported 1:1 from the original scripts/plan.mjs and verified to give an identical plan (2026-11-23). Intentional
+// changes since (Phase 3b): rounding margin in stage 2; a recipe may repeat up to 4×/week (was 2 — the main cause of
+// "no plan" at realistic budgets); avoid_recipes for "new plan"; a diagnosis step on failure (budget_too_low with the
+// cheapest plan found, vs not enough recipes); every solve has a hard wall-clock stop (persistent HiGHS API +
+// interrupt callbacks). Tried and dropped: whole-pack costs inside stage 1 — HiGHS WASM can't solve that in seconds.
+// scripts/plan.mjs is a CLI wrapper around this file.
 // Imports use .ts extensions so Node can run this file directly (type stripping) from scripts/.
 import { getHighs } from "./highs.ts";
 import { computeTargets, type Activity, type Goal, type Sex, type Targets } from "./targets.ts";
@@ -78,8 +82,15 @@ export interface PlanProfile {
   kcal_tolerance?: number;
   days?: number;
   slots?: Slot[];
+  /** Max uses of one recipe per week (default 4; never twice a day). */
   max_repeats?: number;
   max_desserts_per_week?: number;
+  /** Recipes to steer away from (e.g. the previous plan's), so "new plan" gives a different week. */
+  avoid_recipes?: string[];
+  /** Stage-1 cost added per use of an avoided recipe, in EUR (default 0.4: about half the recipes change). */
+  avoid_penalty_eur?: number;
+  /** Hard stop for the whole run in seconds (default 40). */
+  deadline_s?: number;
   min_fish_per_week?: number;
   no_same_protein_per_day?: boolean;
   candidates_per_slot?: number;
@@ -149,7 +160,15 @@ export interface PlanOutput {
 
 export type PlanResult =
   | { ok: true; output: PlanOutput; log: string[] }
-  | { ok: false; reason: "no_recipes" | "no_meal_plan" | "no_purchase_plan"; message: string; log: string[] };
+  | {
+      ok: false;
+      /** no_recipes / no_meal_plan: the recipes can't cover the targets with this diet and these exclusions;
+       *  budget_too_low: a plan exists but costs more (min_budget_eur); no_purchase_plan: anything else. */
+      reason: "no_recipes" | "no_meal_plan" | "budget_too_low" | "no_purchase_plan";
+      message: string;
+      min_budget_eur?: number;
+      log: string[];
+    };
 
 export interface PlanInput {
   profile: PlanProfile;
@@ -168,6 +187,16 @@ const ROUNDING_MARGIN_PROTEIN_G = 1;
 /** Bulgarian message shown when no plan is possible (SPEC §7.2). */
 export const NO_PLAN_MESSAGE_BG =
   "Не успяхме да съставим план с тези настройки. Опитай с по-голям бюджет, по-малко изключения или по-широк диапазон калории.";
+
+/** Not enough recipes fit the diet and exclusions while meeting the daily targets. */
+export const NO_RECIPES_MESSAGE_BG =
+  "Нямаме достатъчно рецепти, които да отговарят на диетата и изключенията ти и в същото време да покриват дневните ти цели. Опитай с по-малко изключения или по-широк диапазон калории.";
+
+/** The budget is too low; min is the cheapest plan the planner found (whole euros). */
+export function budgetMessageBg(budget: number, min: number): string {
+  const eur = (n: number) => `${String(Math.round(n * 100) / 100).replace(".", ",")} €`;
+  return `С бюджет ${eur(budget)} не успяхме да съберем седмичен план с твоите цели. Най-евтиният план, който намерихме, е около ${eur(min)}. Увеличи бюджета и опитай пак.`;
+}
 
 // ---------- LP helpers ----------
 type GTerm = [number, string, number]; // grams = coef * var; [coef, var, upper bound of var]
@@ -314,7 +343,7 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
     candidates[s] = [...pick];
   }
   if (slots.some((s) => !candidates[s].length)) {
-    return { ok: false, reason: "no_recipes", message: NO_PLAN_MESSAGE_BG, log: [`no recipes for some slot; dropped: ${dropped.length}`] };
+    return { ok: false, reason: "no_recipes", message: NO_RECIPES_MESSAGE_BG, log: [`no recipes for some slot; dropped: ${dropped.length}`] };
   }
 
   // Adds recipe/quantity variables for the given slot options. Returns X list and per-day grams per ingredient.
@@ -362,12 +391,41 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
   }
 
   const highs = await getHighs();
-  function solve(m: Model, opts: Record<string, unknown>) {
+  // Hard stop for the whole run: a serverless function must answer even if HiGHS overruns its own time_limit
+  // (seen once: a 190 s solve with an 8 s limit after many solves in one process).
+  const planDeadline = t00 + (profile.deadline_s ?? 40) * 1000;
+  const S = highs.constants.modelStatus;
+  const STATUS: Partial<Record<number, string>> = {
+    [S.optimal]: "Optimal",
+    [S.timeLimit]: "Time limit reached",
+    [S.interrupted]: "Time limit reached",
+    [S.infeasible]: "Infeasible",
+  };
+  function solve(m: Model, opts: { time_limit: number } & Record<string, string | number | boolean>) {
     const t = now();
-    const res = highs.solve(m.lp(), { output_flag: false, ...opts });
-    const ok = !!res.Columns && ["Optimal", "Time limit reached"].includes(res.Status) && Number.isFinite(res.ObjectiveValue);
-    const cols = res.Columns as Record<string, { Primal?: number }> | undefined;
-    return { res, ok, s: (now() - t) / 1000, val: (v: string | undefined) => (v ? (cols?.[v]?.Primal ?? 0) : 0) };
+    const remaining = Math.max(0.5, (planDeadline - t) / 1000);
+    const timeLimit = Math.min(opts.time_limit, remaining);
+    const guard = Math.min(t + (timeLimit + 2) * 1000, planDeadline + 2000);
+    const stop = (e: { interrupt(): void }): undefined => {
+      if (now() > guard) e.interrupt();
+    };
+    const model = highs.createModel({ format: "lp", data: m.lp() });
+    try {
+      model.options.set({ output_flag: false, ...opts, time_limit: timeLimit });
+      const C = highs.constants.callbackType;
+      const { modelStatus } = model.run({ [C.simplexInterrupt]: stop, [C.ipmInterrupt]: stop, [C.mipInterrupt]: stop });
+      const status = STATUS[modelStatus] ?? `status ${modelStatus}`;
+      const hasSolution = Number(model.info.get("primal_solution_status")) === 2; // feasible
+      const ok = hasSolution && (modelStatus === S.optimal || modelStatus === S.timeLimit || modelStatus === S.interrupted);
+      const cols = new Map<string, number>();
+      if (ok) {
+        const x = model.getSolution().colValue;
+        for (let i = 0; i < x.length; i++) cols.set(model.getColName(i), x[i]!);
+      }
+      return { ok, status, s: (now() - t) / 1000, val: (v: string | undefined) => (v ? (cols.get(v) ?? 0) : 0) };
+    } finally {
+      model.dispose();
+    }
   }
 
   log.push(`Targets: ${T.kcal_min}-${T.kcal_max} kcal/day, protein >= ${T.protein_min} g/day, budget ${profile.budget_eur} EUR`);
@@ -403,7 +461,9 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
     const uses = new Map<string, XVar[]>();
     for (const v of s1.X) (uses.get(v.r.id) ?? uses.set(v.r.id, []).get(v.r.id)!).push(v);
     for (const [, list] of uses) {
-      m1.add(list.map((v) => term(1, v.name)), "<=", profile.max_repeats ?? 2);
+      // Up to 4 uses a week (never twice a day): fewer distinct recipes = fewer half-used packs. With 2, most
+      // realistic budgets got no plan (2026-11-23: male €98 → €68 checkout for the same targets).
+      m1.add(list.map((v) => term(1, v.name)), "<=", profile.max_repeats ?? 4);
       for (let d = 0; d < days; d++) m1.add(list.filter((v) => v.d === d).map((v) => term(1, v.name)), "<=", 1);
     }
     m1.add(s1.X.filter((v) => v.r.treat).map((v) => term(1, v.name)), "<=", profile.max_desserts_per_week ?? 2);
@@ -415,6 +475,9 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
             "<=",
             1,
           );
+    // Soft "something new": a small cost per use of an avoided recipe (added after the budget row, so it is not money).
+    const avoid = new Set(profile.avoid_recipes ?? []);
+    if (avoid.size) for (const v of s1.X) if (avoid.has(v.r.id)) m1.obj.push(term(profile.avoid_penalty_eur ?? 0.4, v.name));
     const minFish = profile.min_fish_per_week ?? 1;
     if (minFish > 0)
       m1.add(s1.X.filter((v) => FISH.has(v.r.protein ?? "") && (v.s === "lunch" || v.s === "dinner")).map((v) => term(1, v.name)), ">=", minFish);
@@ -433,7 +496,7 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
     iid: string;
     j: number;
   }
-  function stage2(chosen: Map<string, UsableRecipe>) {
+  function stage2(chosen: Map<string, UsableRecipe>, budget = profile.budget_eur, timeLimit = profile.stage2_time_limit_s ?? 10) {
     let r2!: ReturnType<typeof solve>;
     let U!: Map<string, UVar[]>;
     let B!: BVar[];
@@ -495,10 +558,10 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
           }
           m2.add([...usesT, term(-o.usable_g, b)], "<=", 0);
         });
-      m2.add(B.map((b) => term(b.offer.price, b.name)), "<=", profile.budget_eur);
-      r2 = solve(m2, { time_limit: profile.stage2_time_limit_s ?? 10, mip_rel_gap: 0.005 });
+      if (Number.isFinite(budget)) m2.add(B.map((b) => term(b.offer.price, b.name)), "<=", budget);
+      r2 = solve(m2, { time_limit: timeLimit, mip_rel_gap: 0.005 });
       if (r2.ok) break;
-      log.push(`  stage 2 attempt tol=${tol}: ${r2.res.Status}`);
+      log.push(`  stage 2 attempt tol=${tol}: ${r2.status}`);
     }
     if (!r2.ok) return { ok: false as const };
     const val = r2.val;
@@ -567,7 +630,7 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
       .sort((a, b) => a.aisle.localeCompare(b.aisle) || a.ingredient.localeCompare(b.ingredient));
     const checkout = shopping.reduce((a, s) => a + s.cost, 0);
     const eaten = shopping.reduce((a, s) => a + s.eaten_cost, 0);
-    return { ok: true as const, plan, shopping, checkout, eaten, status: r2.res.Status as string, seconds: r2.s, tol };
+    return { ok: true as const, plan, shopping, checkout, eaten, status: r2.status, seconds: r2.s, tol };
   }
 
   // ---------- 7. rounds: stage 1 -> stage 2, re-pricing ingredients by real pack usage ----------
@@ -582,6 +645,7 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
   let best: (Stage2Ok & { round: number; stage1: { status: string; seconds: number } }) | null = null;
   let bestChosen: Map<string, UsableRecipe> | null = null;
   let stage1Failed = false;
+  let firstChosen: Map<string, UsableRecipe> | null = null;
   const seen = new Set<string>();
   function refinedPools() {
     const K2 = profile.refine_candidates_per_slot ?? 5;
@@ -605,7 +669,7 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
     const { m1, s1, weekly } = buildStage1(costPerG, round === 1 ? candidates : refinedPools(), round === 1 ? 1 : 1.15);
     const r1 = solve(m1, stage1Opts);
     if (!r1.ok) {
-      log.push(`Round ${round}: stage 1 found no plan (${r1.res.Status})`);
+      log.push(`Round ${round}: stage 1 found no plan (${r1.status})`);
       if (round === 1) {
         stage1Failed = true;
         break;
@@ -622,12 +686,13 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
       break;
     }
     seen.add(key);
+    firstChosen ??= chosen;
     const r2 = stage2(chosen);
     log.push(
-      `Round ${round}: stage 1 ${r1.res.Status} ${r1.s.toFixed(1)} s, stage 2 ${r2.ok ? `${r2.status} ${r2.seconds.toFixed(1)} s — checkout ${r2.checkout.toFixed(2)} EUR` : "no purchase plan"}`,
+      `Round ${round}: stage 1 ${r1.status} ${r1.s.toFixed(1)} s, stage 2 ${r2.ok ? `${r2.status} ${r2.seconds.toFixed(1)} s — checkout ${r2.checkout.toFixed(2)} EUR` : "no purchase plan"}`,
     );
     if (r2.ok && (!best || r2.checkout < best.checkout)) {
-      best = { ...r2, round, stage1: { status: r1.res.Status as string, seconds: r1.s } };
+      best = { ...r2, round, stage1: { status: r1.status, seconds: r1.s } };
       bestChosen = chosen;
     }
     for (const [iid, g] of grams) {
@@ -638,7 +703,23 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
     }
   }
   if (!best) {
-    return { ok: false, reason: stage1Failed ? "no_meal_plan" : "no_purchase_plan", message: NO_PLAN_MESSAGE_BG, log };
+    // Find out why, so the user gets an actionable message: is it the recipes (diet/exclusions vs targets) or money?
+    let chosen = firstChosen;
+    if (stage1Failed) {
+      const { m1, s1 } = buildStage1(costPerG, candidates, Infinity); // same, without the budget estimate
+      const r1 = solve(m1, stage1Opts);
+      log.push(`Diagnose: stage 1 without budget ${r1.status} ${r1.s.toFixed(1)} s`);
+      if (!r1.ok) return { ok: false, reason: "no_meal_plan", message: NO_RECIPES_MESSAGE_BG, log };
+      chosen = new Map();
+      for (const v of s1.X) if (r1.val(v.name) > 0.5) chosen.set(`${v.d}_${v.s}`, v.r);
+    }
+    const free = chosen ? stage2(chosen, Infinity, Math.min(6, profile.stage2_time_limit_s ?? 10)) : null;
+    if (free?.ok) {
+      const min = Math.ceil(free.checkout);
+      log.push(`Diagnose: cheapest plan found without the budget: ${free.checkout.toFixed(2)} EUR`);
+      return { ok: false, reason: "budget_too_low", message: budgetMessageBg(profile.budget_eur, min), min_budget_eur: min, log };
+    }
+    return { ok: false, reason: "no_purchase_plan", message: NO_PLAN_MESSAGE_BG, log };
   }
 
   // ---------- 8. result ----------

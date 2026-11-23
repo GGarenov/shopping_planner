@@ -27,7 +27,7 @@
     "vinegar",
     "sugar"
   ],
-  "max_repeats": 2,
+  "max_repeats": 4,
   "max_desserts_per_week": 2,
   "min_fish_per_week": 1,
   "no_same_protein_per_day": true,
