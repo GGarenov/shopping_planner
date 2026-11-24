@@ -3,8 +3,8 @@ import type { MetadataRoute } from "next";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     id: "/",
-    name: "Пазарен план",
-    short_name: "Пазарен план",
+    name: "Pazarko",
+    short_name: "Pazarko",
     description: "Седмичен хранителен план и списък за пазаруване от eBag.bg",
     lang: "bg",
     start_url: "/",

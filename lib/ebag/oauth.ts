@@ -38,7 +38,7 @@ export async function getAppClient(admin: SupabaseClient, redirect: string): Pro
   if (error) throw new Error(`system_secrets read failed: ${error.message}`);
   if (data) return decryptJson<OAuthClientInformationMixed>(data.value_encrypted);
   const clientMetadata: OAuthClientMetadata = {
-    client_name: "Пазарен план",
+    client_name: "Pazarko",
     redirect_uris: [redirect],
     grant_types: ["authorization_code", "refresh_token"],
     response_types: ["code"],

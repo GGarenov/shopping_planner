@@ -7,7 +7,7 @@ import { INSTALL_CAPTURE_SCRIPT } from "@/lib/pwa/captureScript";
 import "./globals.css";
 
 // Rounded, friendly face with full Cyrillic; self-hosted by Next at build time.
-const nunito = Nunito({ subsets: ["latin", "cyrillic"], weight: ["500", "600", "700", "800"], variable: "--font-nunito", display: "swap" });
+const nunito = Nunito({ subsets: ["latin", "cyrillic"], weight: ["500", "600", "700", "800", "900"], variable: "--font-nunito", display: "swap" });
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("common");

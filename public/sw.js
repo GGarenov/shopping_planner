@@ -1,7 +1,7 @@
 // Minimal service worker: makes the app installable and shows an offline page.
 // Pages and data are always fetched from the network (they are per-user and change daily);
 // only hashed build assets and icons are cached.
-const VERSION = 'v2'; // v2: «Лагуна» brand icons
+const VERSION = 'v3'; // v3: «Pazarko» bag icons
 const STATIC_CACHE = `static-${VERSION}`;
 const PRECACHE = ['/offline', '/icons/icon-192.png', '/icons/icon-512.png'];
 

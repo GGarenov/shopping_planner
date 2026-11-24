@@ -13,7 +13,7 @@
   "disconnectedNotice": "eBag has been disconnected.",
   "expiredTitle": "Your eBag connection has expired",
   "connectTitle": "Connect your eBag account",
-  "connectText": "You'll log in to eBag.bg and allow “Shopping Plan” to add products to your cart. Your password stays with eBag — we only keep an encrypted key to your cart. You can disconnect any time.",
+  "connectText": "You'll log in to eBag.bg and allow “Pazarko” to add products to your cart. Your password stays with eBag — we only keep an encrypted key to your cart. You can disconnect any time.",
   "reconnectShort": "Reconnect",
   "connect": "Connect eBag",
   "connectedSince": "Connected since {date}.",

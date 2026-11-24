@@ -1,5 +1,5 @@
 {
-  "metaTitle": "Profile · Shopping Plan",
+  "metaTitle": "Profile · Pazarko",
   "title": "Profile",
   "goalsTitle": "Your goals",
   "goalsSummary": "{goal} · {min}–{max} kcal · protein ≥ {protein} g",
@@ -25,7 +25,7 @@
     "failed": "We couldn’t send your message. Please try again."
   },
   "delete": {
-    "metaTitle": "Delete profile · Shopping Plan",
+    "metaTitle": "Delete profile · Pazarko",
     "title": "Delete profile",
     "intro": "We will delete the profile <b>{email}</b> and all its data:",
     "itemData": "your details (sex, age, height, weight, goals, budget, restrictions)",

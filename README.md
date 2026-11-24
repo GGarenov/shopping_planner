@@ -1,4 +1,4 @@
-# Shopping Planner
+# Pazarko (shopping planner)
 
 Mobile web app (PWA) for Bulgaria: goal + body data + weekly budget → 7-day meal plan and a shopping list of
 real eBag.bg products in whole packs. See [docs/SPEC.md](docs/SPEC.md) for the full specification.
