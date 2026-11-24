@@ -1,11 +1,13 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useActionState, useEffect, useRef } from "react";
 import { sendFeedback } from "./actions";
 
 export function FeedbackForm() {
   const [state, action, pending] = useActionState(sendFeedback, null);
   const form = useRef<HTMLFormElement>(null);
+  const t = useTranslations("profile.feedback");
   useEffect(() => {
     if (state?.ok) form.current?.reset();
   }, [state]);
@@ -13,16 +15,16 @@ export function FeedbackForm() {
   return (
     <form ref={form} action={action} className="flex flex-col gap-2">
       <label htmlFor="feedback" className="text-sm opacity-80">
-        Какво не работи, какво ти липсва, какво ти хареса? Пиши свободно — четем всичко.
+        {t("label")}
       </label>
-      <textarea id="feedback" name="message" rows={4} maxLength={4000} required className="input min-h-28 py-3" placeholder="Напр. „Рецептата за … е много сложна“" />
+      <textarea id="feedback" name="message" rows={4} maxLength={4000} required className="input min-h-28 py-3" placeholder={t("placeholder")} />
       <input type="hidden" name="page" value="/profile" />
       <button type="submit" className="btn-secondary" disabled={pending}>
-        {pending ? "Изпращаме…" : "Изпрати"}
+        {pending ? t("sending") : t("send")}
       </button>
       {state?.ok && (
         <p className="rounded-xl bg-accent-soft px-4 py-3 text-sm" role="status">
-          Благодарим! Получихме съобщението ти.
+          {t("thanks")}
         </p>
       )}
       {state?.error && (

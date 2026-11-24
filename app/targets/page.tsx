@@ -1,16 +1,20 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
 import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
 import { computeTargets, explainTargets, resolveTargets, type BodyData } from "@/lib/planner/targets";
 import { requireCompleteProfile } from "@/lib/profile/load";
-import { GOAL_OPTIONS } from "@/lib/profile/options";
 import { BottomNav } from "@/components/BottomNav";
 import { TargetsEditor } from "./TargetsEditor";
 
-export const metadata: Metadata = { title: "Твоите цели · Пазарен план" };
+export async function generateMetadata(): Promise<Metadata> {
+  const [t, tc] = await Promise.all([getTranslations("targets"), getTranslations("common")]);
+  return { title: `${t("title")} · ${tc("appName")}` };
+}
 
 export default async function TargetsPage() {
   const { profile } = await requireCompleteProfile();
+  const [t, tc, to, locale] = await Promise.all([getTranslations("targets"), getTranslations("common"), getTranslations("options"), getLocale()]);
   const body: BodyData = {
     sex: profile.sex,
     age: profile.age,
@@ -22,35 +26,35 @@ export default async function TargetsPage() {
   };
   const computed = computeTargets(body);
   const targets = resolveTargets(body, profile.targets_override);
-  const steps = explainTargets(body);
-  const goal = GOAL_OPTIONS.find((g) => g.value === profile.goal)?.label;
+  const steps = explainTargets(body, locale);
+  const goal = to(`goal.${profile.goal}.label`);
 
   return (
     <>
     <main className="page pb-24">
-      <Hero title="Твоите дневни цели" kicker={`Цел: ${goal}`} />
+      <Hero title={t("heading")} kicker={t("goal", { goal })} />
 
       <section className="grid grid-cols-2 gap-3">
         <div className="card flex flex-col gap-1">
-          <span className="text-sm opacity-70">Калории на ден</span>
+          <span className="text-sm opacity-70">{t("kcalPerDay")}</span>
           <span className="text-2xl font-bold tabular-nums">
             {targets.kcal_min}–{targets.kcal_max}
           </span>
           <span className="text-sm opacity-70">kcal</span>
         </div>
         <div className="card flex flex-col gap-1">
-          <span className="text-sm opacity-70">Протеин на ден</span>
+          <span className="text-sm opacity-70">{t("proteinPerDay")}</span>
           <span className="text-2xl font-bold tabular-nums">≥ {targets.protein_min}</span>
-          <span className="text-sm opacity-70">грама</span>
+          <span className="text-sm opacity-70">{t("grams")}</span>
         </div>
       </section>
 
       {targets.source === "manual" && (
-        <p className="rounded-xl bg-accent-soft px-4 py-3 text-sm">Целите са зададени ръчно от теб.</p>
+        <p className="rounded-xl bg-accent-soft px-4 py-3 text-sm">{t("manual")}</p>
       )}
 
       <section className="flex flex-col gap-3">
-        <h2 className="text-lg font-semibold">Как ги изчислихме</h2>
+        <h2 className="text-lg font-semibold">{t("howCalculated")}</h2>
         <ol className="flex flex-col gap-2">
           {steps.map((s) => (
             <li key={s.label} className="card flex flex-col gap-1">
@@ -63,7 +67,7 @@ export default async function TargetsPage() {
           ))}
         </ol>
         <p className="text-sm opacity-70">
-          Всеки ден от плана ще е в този диапазон калории и поне с този протеин — не само средно за седмицата.
+          {t("everyDay")}
         </p>
       </section>
 
@@ -71,11 +75,11 @@ export default async function TargetsPage() {
 
       <nav className="mt-auto flex flex-col gap-2 border-t border-border pt-4">
         <Link href="/onboarding" className="btn-secondary">
-          Редактирай данните си
+          {t("editData")}
         </Link>
         <form action="/auth/signout" method="post">
           <button type="submit" className="btn-ghost w-full">
-            Изход
+            {tc("logout")}
           </button>
         </form>
       </nav>

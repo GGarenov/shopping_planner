@@ -1,0 +1,20 @@
+{
+  "sexRequired": "Избери пол",
+  "ageRange": "Възраст 14–100",
+  "heightRange": "Ръст 120–230 см",
+  "weightRange": "Тегло 30–300 кг",
+  "activityRequired": "Избери активност",
+  "goalRequired": "Избери цел",
+  "budgetMin": "Бюджет поне 20 €",
+  "budgetMax": "Бюджет до 2000 €",
+  "consentRequired": "Нужно е съгласие за обработка на данните",
+  "kcalMin": "Минимум 1000 kcal",
+  "kcalMax": "Максимум 5000 kcal",
+  "proteinRange": "Протеин 30–300 г",
+  "kcalSpan": "Диапазонът трябва да е поне 100 kcal",
+  "invalidData": "Невалидни данни",
+  "invalidValues": "Невалидни стойности",
+  "saveFailed": "Не успяхме да запазим. Опитай отново.",
+  "saveProfileFailed": "Не успяхме да запазим данните. Опитай отново.",
+  "saveSettingsFailed": "Не успяхме да запазим настройките. Опитай отново."
+}

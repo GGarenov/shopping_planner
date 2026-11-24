@@ -1,0 +1,17 @@
+{
+  "title": "Your goals",
+  "heading": "Your daily goals",
+  "goal": "Goal: {goal}",
+  "kcalPerDay": "Calories per day",
+  "proteinPerDay": "Protein per day",
+  "grams": "grams",
+  "manual": "You set these goals by hand.",
+  "howCalculated": "How we calculated them",
+  "everyDay": "Every day of the plan will be within this calorie range and have at least this much protein — not just on average over the week.",
+  "editData": "Edit your details",
+  "editManually": "Change goals manually",
+  "resetComputed": "Restore calculated ({kcalMin}–{kcalMax} kcal, {protein} g protein)",
+  "kcalFrom": "kcal from",
+  "kcalTo": "kcal to",
+  "proteinMin": "Protein minimum (g)"
+}

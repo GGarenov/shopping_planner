@@ -2,12 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
-export const PLAN_STEPS = ["Избираме рецепти за всеки ден…", "Проверяваме калориите и протеина…", "Търсим най-изгодните продукти в eBag…", "Смятаме цели опаковки…"];
+/** Progress steps shown while the plan is being made: keys plan.generate.steps.<index>. */
+export const PLAN_STEPS = ["0", "1", "2", "3"];
 
-/** POST /api/plan with progress text and Bulgarian errors; on success goes to /plan. */
+/** POST /api/plan with progress text and translated errors; on success goes to /plan. */
 export function usePlanGenerator() {
   const router = useRouter();
+  const t = useTranslations("plan.generate");
+  const tc = useTranslations("common");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
@@ -31,21 +35,21 @@ export function usePlanGenerator() {
       const res = await fetch("/api/plan", { method: "POST" });
       const body = (await res.json().catch(() => ({}))) as { id?: string; error?: string; reason?: string; varied?: boolean | null };
       if (!res.ok || !body.id) {
-        setError(body.error ?? "Нещо се обърка. Опитай отново.");
+        setError(body.error ?? tc("somethingWrong"));
         setFixable(res.status === 422 && body.reason !== "timeout"); // a timeout is not about the settings
         return false;
       }
-      if (body.varied === false) setInfo("Не намерихме различна седмица в рамките на бюджета — това е най-изгодният вариант.");
+      if (body.varied === false) setInfo(t("notVaried"));
       router.push("/plan");
       router.refresh();
       return true;
     } catch {
-      setError("Няма връзка. Провери интернета и опитай отново.");
+      setError(tc("noConnection"));
       return false;
     } finally {
       setBusy(false);
     }
   };
 
-  return { generate, busy, error, setError, info, fixable, stepText: PLAN_STEPS[step]! };
+  return { generate, busy, error, setError, info, fixable, stepText: t(`steps.${PLAN_STEPS[step]!}`) };
 }

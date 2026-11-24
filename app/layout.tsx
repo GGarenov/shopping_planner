@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Nunito } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getTranslations } from "next-intl/server";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 import { INSTALL_CAPTURE_SCRIPT } from "@/lib/pwa/captureScript";
 import "./globals.css";
@@ -7,11 +9,13 @@ import "./globals.css";
 // Rounded, friendly face with full Cyrillic; self-hosted by Next at build time.
 const nunito = Nunito({ subsets: ["latin", "cyrillic"], weight: ["500", "600", "700", "800"], variable: "--font-nunito", display: "swap" });
 
-export const metadata: Metadata = {
-  title: "Пазарен план",
-  description: "Седмичен хранителен план и списък за пазаруване от eBag.bg",
-  applicationName: "Пазарен план",
-  appleWebApp: { capable: true, title: "Пазарен план", statusBarStyle: "default" },
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("common");
+  return {
+  title: t("appName"),
+  description: t("appDescription"),
+  applicationName: t("appName"),
+  appleWebApp: { capable: true, title: t("appName"), statusBarStyle: "default" },
   formatDetection: { telephone: false },
   icons: {
     icon: [
@@ -20,7 +24,8 @@ export const metadata: Metadata = {
     ],
     apple: { url: "/icons/apple-touch-icon.png", sizes: "180x180" },
   },
-};
+  };
+}
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -30,15 +35,16 @@ export const viewport: Viewport = {
   colorScheme: "light",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const locale = await getLocale();
   return (
-    <html lang="bg" className={nunito.variable}>
+    <html lang={locale} className={nunito.variable}>
       <head>
         {/* Keep the browser's install event from the very first moment, for the «Добави в телефона» button. */}
         <script dangerouslySetInnerHTML={{ __html: INSTALL_CAPTURE_SCRIPT }} />
       </head>
       <body className="min-h-dvh font-sans antialiased">
-        {children}
+        <NextIntlClientProvider>{children}</NextIntlClientProvider>
         <ServiceWorkerRegister />
       </body>
     </html>

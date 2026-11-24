@@ -1,7 +1,9 @@
 // POST /api/plan — generates the user's weekly plan and saves it to `plans` (SPEC §7.2).
 import { NextResponse } from "next/server";
+import { getLocale, getTranslations } from "next-intl/server";
+import { num } from "@/lib/i18n/format";
 import { resolveTargets } from "@/lib/planner/targets";
-import { generatePlan, type PlanDay } from "@/lib/planner/plan";
+import { generatePlan, NO_RECIPES_MESSAGE_BG, type PlanDay, type PlanResult } from "@/lib/planner/plan";
 import { loadPlannerData } from "@/lib/planner/load";
 import { planWeekStart } from "@/lib/planner/week";
 import { isComplete, type ProfileRow } from "@/lib/profile/schema";
@@ -13,28 +15,41 @@ export const maxDuration = 60; // the planner targets ≤ 15 s; headroom for col
 
 const fail = (status: number, error: string) => NextResponse.json({ error }, { status });
 
+type Translator = Awaited<ReturnType<typeof getTranslations>>;
+
+/** The user-facing "no plan" message in the user's language, built from the planner's reason (its `message` is Bulgarian). */
+function failureMessage(res: Extract<PlanResult, { ok: false }>, budget: number, t: Translator, locale: string): string {
+  // Same rounding as budgetMessageBg: bg "80,5 €", en "€80.5".
+  const money = (n: number) => (locale === "en" ? `€${num(n, locale, 2)}` : `${num(n, locale, 2)} €`);
+  if (res.reason === "budget_too_low" && res.min_budget_eur != null) return t("budgetTooLow", { budget: money(budget), min: money(res.min_budget_eur) });
+  if (res.reason === "timeout") return t("timeout");
+  if (res.reason === "no_recipes" || res.message === NO_RECIPES_MESSAGE_BG) return t("noRecipes");
+  return t("noPlan");
+}
+
 export async function POST() {
   const t0 = Date.now();
+  const [t, tc, locale] = await Promise.all([getTranslations("planner"), getTranslations("common"), getLocale()]);
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return fail(401, "Влез отново в профила си.");
+  if (!user) return fail(401, tc("loginAgain"));
 
   const { data: row, error: profileError } = await supabase.from("profiles").select("*").eq("user_id", user.id).maybeSingle();
   if (profileError) {
     console.error("plan: profile select failed", profileError.message);
-    return fail(500, "Нещо се обърка. Опитай отново.");
+    return fail(500, tc("somethingWrong"));
   }
   const profile = row ? ({ ...row, weight_kg: Number(row.weight_kg), budget_eur: Number(row.budget_eur), options: row.options ?? {} } as ProfileRow) : null;
-  if (!isComplete(profile)) return fail(400, "Първо попълни данните си.");
+  if (!isComplete(profile)) return fail(400, t("profileIncomplete"));
 
   let data;
   try {
     data = await loadPlannerData(supabase);
   } catch (e) {
     console.error("plan: loading reference data failed", e);
-    return fail(500, "Не успяхме да заредим продуктите. Опитай отново след малко.");
+    return fail(500, t("loadFailed"));
   }
   const tLoaded = Date.now();
 
@@ -78,7 +93,7 @@ export async function POST() {
 
   if (!res.ok) {
     console.warn("plan: no feasible plan", { user: user.id, reason: res.reason, log: res.log });
-    return NextResponse.json({ error: res.message, reason: res.reason, min_budget_eur: res.min_budget_eur }, { status: 422 });
+    return NextResponse.json({ error: failureMessage(res, profile.budget_eur, t, locale), reason: res.reason, min_budget_eur: res.min_budget_eur }, { status: 422 });
   }
 
   const out = res.output;
@@ -105,7 +120,7 @@ export async function POST() {
     .single();
   if (saveError) {
     console.error("plan: insert failed", saveError.message);
-    return fail(500, "Планът е готов, но не успяхме да го запазим. Опитай отново.");
+    return fail(500, t("saveFailed"));
   }
 
   console.log("plan: ok", {

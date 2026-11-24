@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { InstallHint } from "./InstallHint";
 
-export const metadata: Metadata = { title: "Инсталирай · Пазарен план" };
+export async function generateMetadata(): Promise<Metadata> {
+  const [t, tc] = await Promise.all([getTranslations("install"), getTranslations("common")]);
+  return { title: `${t("title")} · ${tc("appName")}` };
+}
 
 export default async function InstallPage({ searchParams }: { searchParams: Promise<{ next?: string }> }) {
   const { next } = await searchParams;

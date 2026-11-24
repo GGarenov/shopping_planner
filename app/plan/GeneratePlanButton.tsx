@@ -1,19 +1,21 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { usePlanGenerator } from "./usePlanGenerator";
 
 /** The first plan (empty state). New plans go through /plan/new, where the settings can be changed first. */
-export function GeneratePlanButton({ label = "Създай план" }: { label?: string }) {
+export function GeneratePlanButton({ label }: { label?: string }) {
+  const t = useTranslations("plan.generate");
   const { generate, busy, error, info, fixable, stepText } = usePlanGenerator();
   return (
     <div className="flex flex-col gap-2">
       <button type="button" className="btn-primary" onClick={() => void generate()} disabled={busy}>
-        {busy ? "Съставяме плана…" : label}
+        {busy ? t("creating") : (label ?? t("create"))}
       </button>
       {busy && (
         <p className="text-center text-sm opacity-70" aria-live="polite">
-          {stepText} (до ~15 сек)
+          {t("upTo15", { step: stepText })}
         </p>
       )}
       {info && (
@@ -26,7 +28,7 @@ export function GeneratePlanButton({ label = "Създай план" }: { label?
           <p className="error">{error}</p>
           {fixable && (
             <Link href="/plan/new" className="btn-secondary">
-              Промени бюджета или ограниченията
+              {t("fixSettings")}
             </Link>
           )}
         </div>

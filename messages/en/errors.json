@@ -1,0 +1,20 @@
+{
+  "sexRequired": "Choose your sex",
+  "ageRange": "Age 14–100",
+  "heightRange": "Height 120–230 cm",
+  "weightRange": "Weight 30–300 kg",
+  "activityRequired": "Choose your activity level",
+  "goalRequired": "Choose a goal",
+  "budgetMin": "Budget at least €20",
+  "budgetMax": "Budget up to €2000",
+  "consentRequired": "We need your consent to process your data",
+  "kcalMin": "At least 1000 kcal",
+  "kcalMax": "At most 5000 kcal",
+  "proteinRange": "Protein 30–300 g",
+  "kcalSpan": "The range must be at least 100 kcal",
+  "invalidData": "Invalid data",
+  "invalidValues": "Invalid values",
+  "saveFailed": "Couldn't save. Please try again.",
+  "saveProfileFailed": "Couldn't save your data. Please try again.",
+  "saveSettingsFailed": "Couldn't save the settings. Please try again."
+}

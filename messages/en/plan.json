@@ -1,0 +1,79 @@
+{
+  "title": "Weekly plan",
+  "empty": "You don’t have a plan yet. We’ll pick breakfast, lunch, dinner and a snack for 7 days — every day within your calories and protein, and within your budget.",
+  "youPay": "You pay at eBag",
+  "budget": "budget {amount}",
+  "overBudget": " · {amount} over it",
+  "youEat": "You eat this week",
+  "restForLater": "the rest keeps for later",
+  "oldPlan": "This is an older plan.",
+  "toCurrent": "Go to the current plan",
+  "shoppingList": "Shopping list",
+  "newPlan": "New plan",
+  "week": {
+    "days": "Days",
+    "dayTotals": "Day totals",
+    "mealLine": "{kcal} kcal · {protein} g protein"
+  },
+  "slot": {
+    "breakfast": "Breakfast",
+    "lunch": "Lunch",
+    "dinner": "Dinner",
+    "snack": "Snack"
+  },
+  "day": { "0": "Mon", "1": "Tue", "2": "Wed", "3": "Thu", "4": "Fri", "5": "Sat", "6": "Sun" },
+  "dayLong": { "0": "Monday", "1": "Tuesday", "2": "Wednesday", "3": "Thursday", "4": "Friday", "5": "Saturday", "6": "Sunday" },
+  "generate": {
+    "create": "Create plan",
+    "createThe": "Create the plan",
+    "creating": "Putting your plan together…",
+    "upTo15": "{step} (up to ~15 sec)",
+    "upTo30": "{step} (up to ~30 sec)",
+    "fixSettings": "Change the budget or restrictions",
+    "notVaried": "We couldn’t find a different week within your budget — this is the best-value option.",
+    "steps": {
+      "0": "Picking recipes for each day…",
+      "1": "Checking calories and protein…",
+      "2": "Finding the best-value products at eBag…",
+      "3": "Working out whole packs…"
+    }
+  },
+  "prices": {
+    "newer": "There are new eBag prices ({date}). Tap “New plan” on the plan screen to use them.",
+    "stale": "Prices haven’t been updated since {date} — they may have changed at eBag."
+  },
+  "settings": {
+    "intro": "Check your settings for the week. We’ll keep them for next time too.",
+    "budget": "Weekly budget",
+    "weightGoal": "Weight and goal",
+    "weight": "Weight",
+    "kg": "kg",
+    "goal": "Goal",
+    "targets": "Calories and protein per day",
+    "proteinUnit": "g protein",
+    "fillBody": "Fill in your age, height and weight",
+    "computedNote": "We calculate them from your details, and they update as you change them.",
+    "setManually": "Set them manually",
+    "kcalFrom": "kcal from",
+    "kcalTo": "kcal to",
+    "proteinMin": "Protein at least",
+    "gPerDay": "g per day",
+    "auto": "Calculate them automatically",
+    "autoValues": " ({kcalMin}–{kcalMax} kcal, {protein} g)",
+    "food": "Food",
+    "diet": "Diet",
+    "soon": " (soon)",
+    "dontEat": "I don’t eat",
+    "allergies": "Allergies",
+    "more": "More details",
+    "sex": "Sex",
+    "age": "Age",
+    "years": "years",
+    "height": "Height",
+    "cm": "cm",
+    "activityQ": "How active are you?",
+    "activity": "Activity",
+    "pantry": "What you have at home",
+    "pantryNote": "Used in recipes but not bought."
+  }
+}

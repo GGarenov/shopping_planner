@@ -1,0 +1,13 @@
+{
+  "title": "Recipe",
+  "backToPlan": "← Back to plan",
+  "prep": "Prep {n} min",
+  "cook": "Cooking {n} min",
+  "total": " · total {n} min",
+  "photoNote": "Example photo ·",
+  "nutrition": "Nutrition",
+  "ingredients": "Ingredients",
+  "atHome": "(you have it at home)",
+  "gramsNote": "Grams are for the edible part (no peel, bones or shells).",
+  "steps": "Method"
+}

@@ -83,9 +83,9 @@ export function resolveTargets(p: BodyData, override?: TargetsOverride | null): 
   };
 }
 
-/** Bulgarian number format: decimal comma, no thousands separator (e.g. 77,4 · 2,0 · 1,375). */
-const bg = (n: number, minFraction = 0) =>
-  n.toLocaleString("bg-BG", { useGrouping: false, minimumFractionDigits: minFraction, maximumFractionDigits: 3 });
+/** Number format without thousands separator: bg decimal comma (77,4 · 2,0 · 1,375), en decimal point (77.4 · 2.0). */
+const fmt = (locale: string, n: number, minFraction = 0) =>
+  n.toLocaleString(locale === "en" ? "en-GB" : "bg-BG", { useGrouping: false, minimumFractionDigits: minFraction, maximumFractionDigits: 3 });
 
 export interface FormulaStep {
   label: string;
@@ -93,8 +93,44 @@ export interface FormulaStep {
   value: string;
 }
 
-/** Step-by-step explanation in Bulgarian for the targets screen. */
-export function explainTargets(p: BodyData): FormulaStep[] {
+/** Texts of the explanation per language (the targets screen passes the UI locale; default Bulgarian). */
+const EXPLAIN_TEXT = {
+  bg: {
+    bmr: "Базов метаболизъм (Mifflin-St Jeor)",
+    tdee: "Дневен разход с активността",
+    goal: "Според целта",
+    range: "Диапазон",
+    protein: "Протеин (минимум)",
+    kg: "кг",
+    cm: "см",
+    g: "г",
+    years: "г.",
+    cutNote: "(20 %, най-много 750)",
+    noChange: "(без промяна)",
+    min: "минимум",
+    refNote: (bmi25: string, kg: string) => `(по-малкото от теглото и теглото при ИТМ 25 = ${bmi25} ${kg})`,
+  },
+  en: {
+    bmr: "Basal metabolism (Mifflin-St Jeor)",
+    tdee: "Daily burn with activity",
+    goal: "For your goal",
+    range: "Range",
+    protein: "Protein (minimum)",
+    kg: "kg",
+    cm: "cm",
+    g: "g",
+    years: "y",
+    cutNote: "(20 %, at most 750)",
+    noChange: "(no change)",
+    min: "minimum",
+    refNote: (bmi25: string, kg: string) => `(the lower of your weight and the weight at BMI 25 = ${bmi25} ${kg})`,
+  },
+};
+
+/** Step-by-step explanation for the targets screen, in Bulgarian (default) or English. */
+export function explainTargets(p: BodyData, locale: string = "bg"): FormulaStep[] {
+  const L = locale === "en" ? EXPLAIN_TEXT.en : EXPLAIN_TEXT.bg;
+  const n = (v: number, minFraction = 0) => fmt(locale, v, minFraction);
   const t = computeTargets(p);
   const factor = ACTIVITY_FACTOR[p.activity];
   const sexTerm = p.sex === "male" ? "+ 5" : "− 161";
@@ -107,38 +143,38 @@ export function explainTargets(p: BodyData): FormulaStep[] {
   if (p.goal === "lose") {
     const rawTdee = (10 * p.weight_kg + 6.25 * p.height_cm - 5 * p.age + (p.sex === "male" ? 5 : -161)) * factor;
     const cut = Math.round(Math.min(0.2 * rawTdee, 750));
-    goalExpr = `${tdee} − ${cut} (20 %, най-много 750)`;
+    goalExpr = `${tdee} − ${cut} ${L.cutNote}`;
   } else if (p.goal === "gain") {
     goalExpr = `${tdee} + 300`;
   } else {
-    goalExpr = `${tdee} (без промяна)`;
+    goalExpr = `${tdee} ${L.noChange}`;
   }
 
   return [
     {
-      label: "Базов метаболизъм (Mifflin-St Jeor)",
-      expression: `10 × ${bg(p.weight_kg)} кг + 6,25 × ${p.height_cm} см − 5 × ${p.age} г. ${sexTerm}`,
+      label: L.bmr,
+      expression: `10 × ${n(p.weight_kg)} ${L.kg} + ${n(6.25)} × ${p.height_cm} ${L.cm} − 5 × ${p.age} ${L.years} ${sexTerm}`,
       value: `${t.bmr} kcal`,
     },
     {
-      label: "Дневен разход с активността",
-      expression: `${t.bmr} × ${bg(factor)}`,
+      label: L.tdee,
+      expression: `${t.bmr} × ${n(factor)}`,
       value: `${tdee} kcal`,
     },
     {
-      label: "Според целта",
-      expression: `${goalExpr}; минимум ${floor}`,
+      label: L.goal,
+      expression: `${goalExpr}; ${L.min} ${floor}`,
       value: `${t.kcal} kcal`,
     },
     {
-      label: "Диапазон",
+      label: L.range,
       expression: `${t.kcal} ± ${p.kcal_tolerance ?? DEFAULT_KCAL_TOLERANCE}`,
       value: `${t.kcal_min}–${t.kcal_max} kcal`,
     },
     {
-      label: "Протеин (минимум)",
-      expression: `${bg(proteinPerKg, 1)} г × ${bg(t.ref_weight)} кг (по-малкото от теглото и теглото при ИТМ 25 = ${bg(bmi25)} кг)`,
-      value: `${t.protein_min} г`,
+      label: L.protein,
+      expression: `${n(proteinPerKg, 1)} ${L.g} × ${n(t.ref_weight)} ${L.kg} ${L.refNote(n(bmi25), L.kg)}`,
+      value: `${t.protein_min} ${L.g}`,
     },
   ];
 }

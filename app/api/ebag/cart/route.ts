@@ -4,6 +4,7 @@
 //          items not reached in time come back in `pending`
 //   PATCH → change the cart: { op: "set", productId, quantity, unit } | { op: "remove", productId, unit } | { op: "clear" }
 import { NextResponse, type NextRequest } from "next/server";
+import { getTranslations } from "next-intl/server";
 import { z } from "zod";
 import type { EbagApi } from "@/lib/ebag/api";
 import { fillCartItem, getCartSummary, type CartItemResult } from "@/lib/ebag/cart";
@@ -45,8 +46,9 @@ const patchBody = z.discriminatedUnion("op", [
 ]);
 
 export async function PATCH(req: NextRequest) {
+  const t = await getTranslations("ebag.api");
   const parsed = patchBody.safeParse(await req.json().catch(() => null));
-  if (!parsed.success) return fail(400, "Невалидна заявка.");
+  if (!parsed.success) return fail(400, t("invalidRequest"));
   const b = parsed.data;
   return withUserEbag(async ({ api }) => {
     let warning: string | null = null;
@@ -59,10 +61,10 @@ export async function PATCH(req: NextRequest) {
           quantity: b.op === "set" ? b.quantity : 0,
           unit: b.unit,
         });
-        if (res.warnings?.length) warning = "eBag коригира количеството според наличността.";
+        if (res.warnings?.length) warning = t("qtyAdjusted");
       }
     } catch {
-      warning = "eBag не прие промяната — виж актуалната количка.";
+      warning = t("changeRejected");
     }
     return NextResponse.json({ cart: await readCart(api), warning });
   });
@@ -72,11 +74,12 @@ const postBody = z.object({ planId: z.uuid(), ebagIds: z.array(z.number().int().
 
 export async function POST(req: NextRequest) {
   const t0 = Date.now();
+  const t = await getTranslations("ebag.api");
   const parsed = postBody.safeParse(await req.json().catch(() => null));
-  if (!parsed.success) return fail(400, "Невалидна заявка.");
+  if (!parsed.success) return fail(400, t("invalidRequest"));
   return withUserEbag(async ({ api, supabase }) => {
     const plan = await getPlan(supabase, parsed.data.planId); // RLS: only the user's own plans
-    if (!plan) return fail(404, "Планът не е намерен.");
+    if (!plan) return fail(404, t("planNotFound"));
     const wanted = new Set(parsed.data.ebagIds);
     const results: CartItemResult[] = [];
     const pending: number[] = [];

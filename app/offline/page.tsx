@@ -1,15 +1,12 @@
+import { OfflineContent } from "./OfflineContent";
+
 export const dynamic = "force-static";
 
+/** Static (precached by the service worker), so the language is picked on the client from the `lang` cookie. */
 export default function OfflinePage() {
   return (
     <main className="page justify-center text-center">
-      <h1 className="text-2xl font-bold">Няма връзка с интернет</h1>
-      <p className="opacity-80">Провери връзката си и опитай отново.</p>
-      {/* Full page load on purpose: retries the network instead of client-side routing. */}
-      {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-      <a href="/" className="btn-primary">
-        Опитай пак
-      </a>
+      <OfflineContent />
     </main>
   );
 }

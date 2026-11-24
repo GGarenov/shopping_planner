@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Hero } from "@/components/Hero";
 import Link from "next/link";
 import { BottomNav } from "@/components/BottomNav";
 import { PricesNotice } from "@/components/PricesNotice";
-import { shortDate, sofiaToday } from "@/lib/planner/week";
+import { sofiaToday } from "@/lib/planner/week";
+import { longDate, shortDay } from "@/lib/i18n/format";
+import { ingredientName } from "@/lib/i18n/content";
 import { getSyncStatus } from "@/lib/sync/status";
 import { getLatestPlan, getPlan } from "@/lib/plans/load";
 import { groupByAisle, shoppingTotals } from "@/lib/plans/shopping";
@@ -12,10 +15,14 @@ import { requireCompleteProfile } from "@/lib/profile/load";
 import { createClient } from "@/lib/supabase/server";
 import { ShoppingList } from "./ShoppingList";
 
-export const metadata: Metadata = { title: "Списък за пазаруване · Пазарен план" };
+export async function generateMetadata(): Promise<Metadata> {
+  const [t, common] = await Promise.all([getTranslations("list"), getTranslations("common")]);
+  return { title: `${t("title")} · ${common("appName")}` };
+}
 
 export default async function ListPage({ searchParams }: { searchParams: Promise<{ id?: string }> }) {
   const { id } = await searchParams;
+  const [t, locale] = await Promise.all([getTranslations("list"), getLocale()]);
   await requireCompleteProfile();
   const supabase = await createClient();
   const [latest, sync] = await Promise.all([getLatestPlan(supabase), getSyncStatus(supabase)]);
@@ -26,10 +33,10 @@ export default async function ListPage({ searchParams }: { searchParams: Promise
     return (
       <>
         <main className="page pb-24">
-          <Hero title="Списък за пазаруване" />
-          <p className="opacity-80">Списъкът се прави заедно с плана. Първо създай седмичен план.</p>
+          <Hero title={t("title")} />
+          <p className="opacity-80">{t("emptyText")}</p>
           <Link href="/plan" className="btn-primary">
-            Към плана
+            {t("toPlan")}
           </Link>
         </main>
         <BottomNav />
@@ -42,26 +49,26 @@ export default async function ListPage({ searchParams }: { searchParams: Promise
   const checked = (checks ?? []).filter((c) => c.checked).map((c) => Number(c.ebag_id));
 
   const totals = shoppingTotals(plan.shopping);
-  const pantryLabels = (plan.solver.pantry ?? []).map((id) => PANTRY_OPTIONS.find((p) => p.value === id)?.label ?? id);
+  const pantryLabels = (plan.solver.pantry ?? []).map((id) => ingredientName(id, PANTRY_OPTIONS.find((p) => p.value === id)?.label ?? id, locale));
   const days = plan.plan.length;
 
   return (
     <>
       <main className="page pb-24">
-        <Hero title="Списък за пазаруване" kicker={`${shortDate(plan.week_start, 0)} – ${shortDate(plan.week_start, days - 1)}`} />
+        <Hero title={t("title")} kicker={`${shortDay(plan.week_start, 0, locale)} – ${shortDay(plan.week_start, days - 1, locale)}`} />
 
         {isOld ? (
           <p className="rounded-xl border border-border px-4 py-3 text-sm" role="status">
-            Списък от по-стар план.{" "}
+            {t("oldPlan")}{" "}
             <Link href="/list" className="font-semibold underline">
-              Към текущия списък
+              {t("toCurrent")}
             </Link>
           </p>
         ) : (
           <>
             <PricesNotice planPricesDate={plan.solver.prices_date} latestPricesDate={sync.pricesDate} today={sofiaToday()} />
             <Link href="/ebag" className="btn-primary">
-              Изпрати в eBag количката
+              {t("sendToEbag")}
             </Link>
           </>
         )}
@@ -69,11 +76,9 @@ export default async function ListPage({ searchParams }: { searchParams: Promise
         <ShoppingList planId={plan.id} groups={groupByAisle(plan.shopping)} totals={totals} initialChecked={checked} />
 
         <footer className="flex flex-col gap-2 border-t border-border pt-4 text-sm opacity-70">
-          {pantryLabels.length > 0 && <p>Не купуваме, защото ги имаш вкъщи: {pantryLabels.join(", ")}.</p>}
-          <p>
-            Купуваш цели опаковки, затова плащаш повече, отколкото изяждаш за седмицата — остатъкът остава за после.
-          </p>
-          {plan.solver.prices_date && <p>Цени от {plan.solver.prices_date.split("-").reverse().join(".")} — в eBag може да са се променили.</p>}
+          {pantryLabels.length > 0 && <p>{t("pantryNote", { items: pantryLabels.join(", ") })}</p>}
+          <p>{t("packsNote")}</p>
+          {plan.solver.prices_date && <p>{t("pricesNote", { date: longDate(plan.solver.prices_date, locale) })}</p>}
         </footer>
       </main>
       <BottomNav />

@@ -1,3 +1,5 @@
-// Bulgarian UI labels for planner data.
-export const SLOT_BG: Record<string, string> = { breakfast: "Закуска", lunch: "Обяд", dinner: "Вечеря", snack: "Междинно" };
-export const DAY_SHORT_BG = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"];
+// UI labels for planner data live in messages/<locale>/plan.json: plan.slot.<slot>, plan.day.<0..6> (short),
+// plan.dayLong.<0..6>. Day names saved inside a plan are Bulgarian — show the translated day by its index instead.
+export const slotKey = (slot: string) => `slot.${slot}`;
+export const dayShortKey = (index: number) => `day.${index % 7}`;
+export const dayLongKey = (index: number) => `dayLong.${index % 7}`;

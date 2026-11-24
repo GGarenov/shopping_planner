@@ -1,0 +1,36 @@
+{
+  "title": "Your details",
+  "steps": {
+    "sex": { "title": "Sex", "hint": "Needed for the calorie formula." },
+    "body": { "title": "Age, height and weight" },
+    "activity": { "title": "How active are you?" },
+    "goal": { "title": "What's your goal?" },
+    "budget": { "title": "Weekly budget", "hint": "How much you want to spend on food at eBag per week." },
+    "diet": { "title": "Diet" },
+    "exclude": { "title": "Exclusions and allergies", "hint": "Recipes with these products won't be in the plan." },
+    "pantry": { "title": "What do you have at home?", "hint": "These products are used in recipes but not bought." },
+    "consent": { "title": "Consent" }
+  },
+  "cancel": "← Cancel",
+  "finish": "Done — show my goals",
+  "next": "Next",
+  "age": "Age",
+  "years": "years",
+  "height": "Height",
+  "cm": "cm",
+  "weight": "Weight",
+  "kg": "kg",
+  "dontEat": "I don't eat",
+  "allergies": "Allergies",
+  "allergyNote": "Check the product labels if you have a serious allergy — the data comes from eBag.",
+  "consentText1": "To calculate your goals, we store your sex, age, height, weight, activity, goal, budget and food preferences. This is personal data.",
+  "consentText2": "We use it only for your plan. We don't share it. You can delete your account with all its data at any time.",
+  "consentCheckbox": "I agree to my data being processed to create the plan.",
+  "fields": {
+    "budgetAria": "Weekly budget",
+    "otherAmount": "Other amount",
+    "budgetPlaceholder": "e.g. 80",
+    "perWeek": "€ / week",
+    "budgetHint": "From €20 to €2000. For one person, €70–100 is usually enough."
+  }
+}

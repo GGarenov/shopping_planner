@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { requireCompleteProfile } from "@/lib/profile/load";
 import { PlanSettingsForm, type SettingsValues } from "./PlanSettingsForm";
 
-export const metadata: Metadata = { title: "Нов план · Пазарен план" };
+export async function generateMetadata(): Promise<Metadata> {
+  const [t, tc] = await Promise.all([getTranslations("plan"), getTranslations("common")]);
+  return { title: `${t("newPlan")} · ${tc("appName")}` };
+}
 
 export default async function NewPlanPage() {
   const { profile: p } = await requireCompleteProfile();

@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
+import { getTranslations } from "next-intl/server";
 import { z } from "zod";
 import { decryptJson } from "@/lib/crypto/secret";
 import { getConnectionRow, revokeAtEbag, type UserConnection } from "@/lib/ebag/oauth";
@@ -11,12 +12,13 @@ const feedbackInput = z.object({ message: z.string().trim().min(3).max(4000), pa
 
 export async function sendFeedback(_prev: { ok?: boolean; error?: string } | null, form: FormData): Promise<{ ok?: boolean; error?: string }> {
   const parsed = feedbackInput.safeParse({ message: form.get("message"), page: form.get("page") ?? undefined });
-  if (!parsed.success) return { error: "Напиши поне няколко думи." };
+  const t = await getTranslations("profile.feedback");
+  if (!parsed.success) return { error: t("tooShort") };
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return { error: "Влез отново в профила си." };
+  if (!user) return { error: (await getTranslations("common"))("loginAgain") };
   const { error } = await supabase.from("feedback").insert({
     user_id: user.id,
     message: parsed.data.message,
@@ -25,7 +27,7 @@ export async function sendFeedback(_prev: { ok?: boolean; error?: string } | nul
   });
   if (error) {
     console.error("feedback insert failed", error.message);
-    return { error: "Не успяхме да изпратим съобщението. Опитай пак." };
+    return { error: t("failed") };
   }
   return { ok: true };
 }
@@ -35,7 +37,8 @@ export async function sendFeedback(_prev: { ok?: boolean; error?: string } | nul
  * deleted — profile, plans, shopping checks and eBag tokens go with it (foreign keys cascade).
  */
 export async function deleteAccount(_prev: { error?: string } | null, form: FormData): Promise<{ error?: string }> {
-  if (form.get("confirm") !== "yes") return { error: "Отбележи, че разбираш, че това не може да се върне." };
+  const t = await getTranslations("profile.delete");
+  if (form.get("confirm") !== "yes") return { error: t("mustConfirm") };
   const supabase = await createClient();
   const {
     data: { user },
@@ -53,7 +56,7 @@ export async function deleteAccount(_prev: { error?: string } | null, form: Form
   const { error } = await admin.auth.admin.deleteUser(user.id);
   if (error) {
     console.error("delete account failed", error.message);
-    return { error: "Не успяхме да изтрием профила. Опитай пак или ни пиши." };
+    return { error: t("failed") };
   }
   console.log("account deleted", { user: user.id });
   redirect("/login?deleted=1");

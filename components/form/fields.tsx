@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 // Form controls shared by the onboarding wizard and the "new plan" settings screen.
 
 export function Choice({
@@ -71,10 +73,11 @@ export const BUDGET_PRESETS = [50, 100, 150];
 
 /** Weekly budget: quick presets plus any amount typed in ("Друга сума"). */
 export function BudgetField({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  const t = useTranslations("onboarding.fields");
   const isPreset = BUDGET_PRESETS.some((b) => String(b) === value);
   return (
     <div className="flex flex-col gap-3">
-      <div className="grid grid-cols-3 gap-2" role="radiogroup" aria-label="Бюджет за седмицата">
+      <div className="grid grid-cols-3 gap-2" role="radiogroup" aria-label={t("budgetAria")}>
         {BUDGET_PRESETS.map((b) => (
           <button key={b} type="button" role="radio" aria-checked={value === String(b)} className="choice justify-center py-3 text-lg font-semibold" onClick={() => onChange(String(b))}>
             {b} €
@@ -82,20 +85,20 @@ export function BudgetField({ value, onChange }: { value: string; onChange: (v: 
         ))}
       </div>
       <label htmlFor="budget-other" className="text-sm font-medium">
-        Друга сума
+        {t("otherAmount")}
       </label>
       <div className="flex items-center gap-3">
         <input
           id="budget-other"
           className={`input text-lg ${isPreset ? "" : "border-accent"}`}
           inputMode="decimal"
-          placeholder="напр. 80"
+          placeholder={t("budgetPlaceholder")}
           value={value}
           onChange={(e) => onChange(e.target.value.replace(",", ".").replace(/[^\d.]/g, ""))}
         />
-        <span className="w-28 shrink-0 text-sm opacity-70">€ / седмица</span>
+        <span className="w-28 shrink-0 text-sm opacity-70">{t("perWeek")}</span>
       </div>
-      <p className="text-xs opacity-70">От 20 до 2000 €. За един човек обикновено стигат 70–100 €.</p>
+      <p className="text-xs opacity-70">{t("budgetHint")}</p>
     </div>
   );
 }

@@ -24,13 +24,13 @@ describe("shopping list", () => {
     const idx = groups.map((g) => order.indexOf(g.key));
     expect(idx.every((i) => i >= 0)).toBe(true);
     expect(idx).toEqual([...idx].sort((a, b) => a - b));
-    for (const g of groups) expect(g.label).not.toBe(g.key);
+    for (const g of groups) expect(g.known).toBe(true);
   });
 
-  it("unknown aisles go last with their key as label", () => {
+  it("unknown aisles go last, marked unknown", () => {
     const item = { ...plan.shopping[0]!, aisle: "zzz_new" } as ShoppingItem;
     const groups = groupByAisle([item, plan.shopping[1]!]);
-    expect(groups.at(-1)).toMatchObject({ key: "zzz_new", label: "zzz_new" });
+    expect(groups.at(-1)).toMatchObject({ key: "zzz_new", known: false });
   });
 
   it("formats packs and euros", () => {

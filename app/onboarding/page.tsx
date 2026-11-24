@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { getUserAndProfile } from "@/lib/profile/load";
 import { DEFAULT_PANTRY } from "@/lib/profile/options";
 import { isComplete } from "@/lib/profile/schema";
 import { OnboardingWizard, type WizardValues } from "./OnboardingWizard";
 
-export const metadata: Metadata = { title: "Твоите данни · Пазарен план" };
+export async function generateMetadata(): Promise<Metadata> {
+  const [t, tc] = await Promise.all([getTranslations("onboarding"), getTranslations("common")]);
+  return { title: `${t("title")} · ${tc("appName")}` };
+}
 
 export default async function OnboardingPage() {
   const { profile } = await getUserAndProfile();

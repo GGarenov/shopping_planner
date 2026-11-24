@@ -1,33 +1,63 @@
 import { z } from "zod";
 import { ALLERGEN_OPTIONS, EXCLUDE_OPTIONS, PANTRY_OPTIONS } from "./options";
 
+/**
+ * Validation messages below are translation keys of the "errors" namespace (messages/<locale>/errors.json).
+ * Show one with `t(errorKey(issue.message))`, t = getTranslations("errors") / useTranslations("errors").
+ * errorKey() maps zod's own untranslated messages (e.g. a non-numeric age) to the `fallback` key.
+ */
+export const ERROR_KEYS = [
+  "sexRequired",
+  "ageRange",
+  "heightRange",
+  "weightRange",
+  "activityRequired",
+  "goalRequired",
+  "budgetMin",
+  "budgetMax",
+  "consentRequired",
+  "kcalMin",
+  "kcalMax",
+  "proteinRange",
+  "kcalSpan",
+  "invalidData",
+  "invalidValues",
+  "saveFailed",
+  "saveProfileFailed",
+  "saveSettingsFailed",
+] as const;
+export type ErrorKey = (typeof ERROR_KEYS)[number];
+
+export const errorKey = (message: string | undefined, fallback: ErrorKey = "invalidData"): ErrorKey =>
+  (ERROR_KEYS as readonly string[]).includes(message ?? "") ? (message as ErrorKey) : fallback;
+
 const oneOf = (opts: { value: string }[]) => z.enum(opts.map((o) => o.value) as [string, ...string[]]);
 
 /** Onboarding input → profiles row. Ranges mirror the DB check constraints. */
 export const profileInputSchema = z.object({
-  sex: z.enum(["male", "female"], { error: "Избери пол" }),
-  age: z.coerce.number().int().min(14, "Възраст 14–100").max(100, "Възраст 14–100"),
-  height_cm: z.coerce.number().int().min(120, "Ръст 120–230 см").max(230, "Ръст 120–230 см"),
-  weight_kg: z.coerce.number().min(30, "Тегло 30–300 кг").max(300, "Тегло 30–300 кг"),
-  activity: z.enum(["sedentary", "light", "moderate", "high"], { error: "Избери активност" }),
-  goal: z.enum(["lose", "maintain", "gain"], { error: "Избери цел" }),
-  budget_eur: z.coerce.number().min(20, "Бюджет поне 20 €").max(2000, "Бюджет до 2000 €"),
+  sex: z.enum(["male", "female"], { error: "sexRequired" }),
+  age: z.coerce.number().int().min(14, "ageRange").max(100, "ageRange"),
+  height_cm: z.coerce.number().int().min(120, "heightRange").max(230, "heightRange"),
+  weight_kg: z.coerce.number().min(30, "weightRange").max(300, "weightRange"),
+  activity: z.enum(["sedentary", "light", "moderate", "high"], { error: "activityRequired" }),
+  goal: z.enum(["lose", "maintain", "gain"], { error: "goalRequired" }),
+  budget_eur: z.coerce.number().min(20, "budgetMin").max(2000, "budgetMax"),
   diet: z.enum(["vegetarian", "vegan", "pescatarian"]).nullable(),
   exclude_tags: z.array(oneOf(EXCLUDE_OPTIONS)).default([]),
   allergens: z.array(oneOf(ALLERGEN_OPTIONS)).default([]),
   pantry: z.array(oneOf(PANTRY_OPTIONS)).default([]),
-  consent: z.literal(true, { error: "Нужно е съгласие за обработка на данните" }),
+  consent: z.literal(true, { error: "consentRequired" }),
 });
 
 export type ProfileInput = z.infer<typeof profileInputSchema>;
 
 export const targetsOverrideSchema = z
   .object({
-    kcal_min: z.coerce.number().int().min(1000, "Минимум 1000 kcal").max(5000, "Максимум 5000 kcal"),
-    kcal_max: z.coerce.number().int().min(1000, "Минимум 1000 kcal").max(5000, "Максимум 5000 kcal"),
-    protein_min: z.coerce.number().int().min(30, "Протеин 30–300 г").max(300, "Протеин 30–300 г"),
+    kcal_min: z.coerce.number().int().min(1000, "kcalMin").max(5000, "kcalMax"),
+    kcal_max: z.coerce.number().int().min(1000, "kcalMin").max(5000, "kcalMax"),
+    protein_min: z.coerce.number().int().min(30, "proteinRange").max(300, "proteinRange"),
   })
-  .refine((v) => v.kcal_max - v.kcal_min >= 100, { error: "Диапазонът трябва да е поне 100 kcal", path: ["kcal_max"] });
+  .refine((v) => v.kcal_max - v.kcal_min >= 100, { error: "kcalSpan", path: ["kcal_max"] });
 
 /** Row shape from the `profiles` table. */
 export interface ProfileRow {

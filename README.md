@@ -54,3 +54,13 @@ refresh token, so the job writes new tokens back there, and two runs never overl
 - If a run fails with "eBag login required": run `npm run ebag:login`, then `npm run ebag:bootstrap` locally.
 - Every run is recorded in `sync_runs` (status, stats, log); the app shows the date of the latest successful one.
 - GitHub pauses scheduled workflows after 60 days without commits — re-enable it in the Actions tab if that happens.
+
+## Languages (Bulgarian / English)
+The UI is bilingual with [next-intl](https://next-intl.dev); Bulgarian is the default, the «БГ | EN» switch in the
+header sets a `lang` cookie (and `profiles.options.lang`, so it follows the user to another device). URLs don't change.
+
+- UI text: `messages/bg/<area>.json` (source) and `messages/en/<area>.json`; areas are listed in `lib/i18n/config.ts`.
+  A key missing in English shows the Bulgarian text. `lib/i18n/messages.test.ts` fails if keys or `{placeholders}` differ.
+- Recipes and ingredients: Bulgarian in `data/recipes.json` / `data/ingredients.json`, English in
+  `data/i18n/recipes.en.json` (name + steps per recipe id) and `data/i18n/ingredients.en.json`.
+- eBag product names stay as eBag shows them.

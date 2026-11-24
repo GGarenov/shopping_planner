@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Hero } from "@/components/Hero";
 import { InstallButton } from "@/components/InstallButton";
 import { smallPhotos } from "@/lib/recipes/images";
 import Link from "next/link";
 import { BottomNav } from "@/components/BottomNav";
 import { PricesNotice } from "@/components/PricesNotice";
-import { shortDate, sofiaToday, todayIndexInWeek } from "@/lib/planner/week";
+import { eur, longDate, shortDay } from "@/lib/i18n/format";
+import { sofiaToday, todayIndexInWeek } from "@/lib/planner/week";
 import { getSyncStatus } from "@/lib/sync/status";
 import { getLatestPlan, getPlan } from "@/lib/plans/load";
 import { requireCompleteProfile } from "@/lib/profile/load";
@@ -13,12 +15,14 @@ import { createClient } from "@/lib/supabase/server";
 import { GeneratePlanButton } from "./GeneratePlanButton";
 import { WeekView } from "./WeekView";
 
-export const metadata: Metadata = { title: "Седмичен план · Пазарен план" };
-
-const eur = (n: number) => `${n.toFixed(2).replace(".", ",")} €`;
+export async function generateMetadata(): Promise<Metadata> {
+  const [t, tc] = await Promise.all([getTranslations("plan"), getTranslations("common")]);
+  return { title: `${t("title")} · ${tc("appName")}` };
+}
 
 export default async function PlanPage({ searchParams }: { searchParams: Promise<{ id?: string }> }) {
   const { id } = await searchParams;
+  const [t, tc, locale] = await Promise.all([getTranslations("plan"), getTranslations("common"), getLocale()]);
   await requireCompleteProfile();
   const supabase = await createClient();
   const [latest, sync] = await Promise.all([getLatestPlan(supabase), getSyncStatus(supabase)]);
@@ -29,11 +33,8 @@ export default async function PlanPage({ searchParams }: { searchParams: Promise
     return (
       <>
         <main className="page pb-24">
-          <Hero title="Седмичен план">
-            <p className="text-white/90">
-              Още нямаш план. Ще изберем закуска, обяд, вечеря и междинно хранене за 7 дни — всеки ден в твоите калории и
-              протеин, в рамките на бюджета ти.
-            </p>
+          <Hero title={t("title")}>
+            <p className="text-white/90">{t("empty")}</p>
           </Hero>
           <GeneratePlanButton />
           <InstallButton variant="banner" />
@@ -43,37 +44,37 @@ export default async function PlanPage({ searchParams }: { searchParams: Promise
     );
   }
 
-  const dates = plan.plan.map((_, i) => shortDate(plan.week_start, i));
+  const dates = plan.plan.map((_, i) => shortDay(plan.week_start, i, locale));
   const budget = plan.solver.budget_eur;
 
   return (
     <>
       <main className="page pb-24">
-        <Hero title="Седмичен план" kicker={`${dates[0]} – ${dates[dates.length - 1]}`}>
+        <Hero title={t("title")} kicker={`${dates[0]} – ${dates[dates.length - 1]}`}>
           <section className="grid grid-cols-2 gap-2">
             <div className="flex flex-col rounded-2xl bg-sun px-3 py-2.5 text-sun-fg">
-              <span className="text-xs font-semibold">Плащаш в eBag</span>
-              <span className="text-xl font-extrabold tabular-nums">{eur(plan.checkout_eur)}</span>
+              <span className="text-xs font-semibold">{t("youPay")}</span>
+              <span className="text-xl font-extrabold tabular-nums">{eur(plan.checkout_eur, locale)}</span>
               {budget != null && (
                 <span className="text-xs">
-                  бюджет {eur(budget)}
-                  {plan.checkout_eur > budget && <> · с {eur(plan.checkout_eur - budget)} над него</>}
+                  {t("budget", { amount: eur(budget, locale) })}
+                  {plan.checkout_eur > budget && <>{t("overBudget", { amount: eur(plan.checkout_eur - budget, locale) })}</>}
                 </span>
               )}
             </div>
             <div className="flex flex-col rounded-2xl bg-white/15 px-3 py-2.5">
-              <span className="text-xs font-semibold text-white/85">Изяждаш тази седмица</span>
-              <span className="text-xl font-extrabold tabular-nums">{eur(plan.eaten_eur)}</span>
-              <span className="text-xs text-white/80">остатъкът остава за после</span>
+              <span className="text-xs font-semibold text-white/85">{t("youEat")}</span>
+              <span className="text-xl font-extrabold tabular-nums">{eur(plan.eaten_eur, locale)}</span>
+              <span className="text-xs text-white/80">{t("restForLater")}</span>
             </div>
           </section>
         </Hero>
 
         {isOld ? (
           <p className="rounded-xl border border-border px-4 py-3 text-sm" role="status">
-            Това е по-стар план.{" "}
+            {t("oldPlan")}{" "}
             <Link href="/plan" className="font-semibold underline">
-              Към текущия план
+              {t("toCurrent")}
             </Link>
           </p>
         ) : (
@@ -83,7 +84,7 @@ export default async function PlanPage({ searchParams }: { searchParams: Promise
         <InstallButton variant="banner" />
 
         <Link href={isOld ? `/list?id=${plan.id}` : "/list"} className="btn-primary">
-          Списък за пазаруване
+          {t("shoppingList")}
         </Link>
 
         <WeekView
@@ -100,11 +101,11 @@ export default async function PlanPage({ searchParams }: { searchParams: Promise
         <footer className="flex flex-col gap-2 border-t border-border pt-4">
           {!isOld && (
             <Link href="/plan/new" className="btn-secondary">
-              Нов план
+              {t("newPlan")}
             </Link>
           )}
           {plan.solver.prices_date && (
-            <p className="text-center text-xs opacity-60">Цени от {plan.solver.prices_date.split("-").reverse().join(".")}</p>
+            <p className="text-center text-xs opacity-60">{tc("pricesFrom", { date: longDate(plan.solver.prices_date, locale) })}</p>
           )}
         </footer>
       </main>

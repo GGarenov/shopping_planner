@@ -1,25 +1,35 @@
 import type { Metadata } from "next";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Hero } from "@/components/Hero";
 import { InstallButton } from "@/components/InstallButton";
 import Link from "next/link";
 import { BottomNav } from "@/components/BottomNav";
 import { getConnectionRow } from "@/lib/ebag/oauth";
 import { resolveTargets } from "@/lib/planner/targets";
-import { shortDate } from "@/lib/planner/week";
 import { listPlans } from "@/lib/plans/load";
-import { eur } from "@/lib/plans/shopping";
+import { eur, shortDay } from "@/lib/i18n/format";
 import { requireCompleteProfile } from "@/lib/profile/load";
-import { GOAL_OPTIONS } from "@/lib/profile/options";
 import { createAdminClient, createClient } from "@/lib/supabase/server";
 import { FeedbackForm } from "./FeedbackForm";
 
-export const metadata: Metadata = { title: "Профил · Пазарен план" };
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("profile");
+  return { title: t("metaTitle") };
+}
 
-const created = (iso: string) =>
-  new Intl.DateTimeFormat("bg-BG", { timeZone: "Europe/Sofia", day: "numeric", month: "numeric", hour: "2-digit", minute: "2-digit" }).format(new Date(iso));
+/** bg "23.11, 17:39", en "23 Nov, 17:39". */
+const created = (iso: string, locale: string) =>
+  new Intl.DateTimeFormat(locale === "en" ? "en-GB" : "bg-BG", {
+    timeZone: "Europe/Sofia",
+    day: "numeric",
+    month: locale === "en" ? "short" : "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(iso));
 
 export default async function ProfilePage() {
   const { user, profile } = await requireCompleteProfile();
+  const [t, tc, to, locale] = await Promise.all([getTranslations("profile"), getTranslations("common"), getTranslations("options"), getLocale()]);
   const supabase = await createClient();
   const [plans, ebag] = await Promise.all([listPlans(supabase, 20), getConnectionRow(createAdminClient(), user.id)]);
   const targets = resolveTargets(
@@ -34,12 +44,12 @@ export default async function ProfilePage() {
     },
     profile.targets_override,
   );
-  const goal = GOAL_OPTIONS.find((g) => g.value === profile.goal)?.label;
+  const goal = to(`goal.${profile.goal}.label`);
 
   return (
     <>
       <main className="page pb-24">
-        <Hero title="Профил">
+        <Hero title={t("title")}>
           <p className="text-sm break-all text-white/85">{user.email}</p>
         </Hero>
 
@@ -48,18 +58,18 @@ export default async function ProfilePage() {
         <section className="flex flex-col gap-2">
           <Link href="/targets" className="card flex items-center justify-between gap-3">
             <span className="flex flex-col">
-              <span className="font-semibold">Твоите цели</span>
+              <span className="font-semibold">{t("goalsTitle")}</span>
               <span className="text-sm opacity-70">
-                {goal} · {targets.kcal_min}–{targets.kcal_max} kcal · протеин ≥ {targets.protein_min} г
+                {t("goalsSummary", { goal, min: String(targets.kcal_min), max: String(targets.kcal_max), protein: String(targets.protein_min) })}
               </span>
             </span>
             <span aria-hidden>›</span>
           </Link>
           <Link href="/onboarding" className="card flex items-center justify-between gap-3">
             <span className="flex flex-col">
-              <span className="font-semibold">Твоите данни</span>
+              <span className="font-semibold">{t("detailsTitle")}</span>
               <span className="text-sm opacity-70">
-                {profile.weight_kg} кг · {profile.height_cm} см · бюджет {eur(profile.budget_eur)}/седмица
+                {t("detailsSummary", { weight: String(profile.weight_kg), height: String(profile.height_cm), budget: eur(profile.budget_eur, locale) })}
               </span>
             </span>
             <span aria-hidden>›</span>
@@ -67,7 +77,7 @@ export default async function ProfilePage() {
           <Link href="/ebag" className="card flex items-center justify-between gap-3">
             <span className="flex flex-col">
               <span className="font-semibold">eBag</span>
-              <span className="text-sm opacity-70">{ebag?.status === "connected" ? "Свързан" : ebag ? "Връзката е изтекла" : "Не е свързан"}</span>
+              <span className="text-sm opacity-70">{ebag?.status === "connected" ? t("ebagConnected") : ebag ? t("ebagExpired") : t("ebagNotConnected")}</span>
             </span>
             <span aria-hidden>›</span>
           </Link>
@@ -75,10 +85,10 @@ export default async function ProfilePage() {
 
         <section className="flex flex-col gap-2" aria-labelledby="plans-title">
           <h2 id="plans-title" className="text-lg font-semibold">
-            Планове
+            {t("plansTitle")}
           </h2>
           {plans.length === 0 ? (
-            <p className="text-sm opacity-70">Още нямаш планове.</p>
+            <p className="text-sm opacity-70">{t("noPlans")}</p>
           ) : (
             <ul className="flex flex-col gap-2">
               {plans.map((p, i) => (
@@ -86,11 +96,11 @@ export default async function ProfilePage() {
                   <Link href={i === 0 ? "/plan" : `/plan?id=${p.id}`} className="card flex items-center justify-between gap-3">
                     <span className="flex flex-col">
                       <span className="font-medium">
-                        Седмица {shortDate(p.week_start, 0)} – {shortDate(p.week_start, 6)}
-                        {i === 0 && <span className="ml-2 rounded-full bg-accent-soft px-2 py-0.5 text-xs font-semibold">текущ</span>}
+                        {t("week", { from: shortDay(p.week_start, 0, locale), to: shortDay(p.week_start, 6, locale) })}
+                        {i === 0 && <span className="ml-2 rounded-full bg-accent-soft px-2 py-0.5 text-xs font-semibold">{t("current")}</span>}
                       </span>
                       <span className="text-sm opacity-70">
-                        {eur(p.checkout_eur)} · създаден {created(p.created_at)}
+                        {t("planMeta", { price: eur(p.checkout_eur, locale), created: created(p.created_at, locale) })}
                       </span>
                     </span>
                     <span aria-hidden>›</span>
@@ -103,7 +113,7 @@ export default async function ProfilePage() {
 
         <section className="flex flex-col gap-2" aria-labelledby="feedback-title">
           <h2 id="feedback-title" className="text-lg font-semibold">
-            Обратна връзка
+            {t("feedbackTitle")}
           </h2>
           <FeedbackForm />
         </section>
@@ -111,11 +121,11 @@ export default async function ProfilePage() {
         <nav className="mt-auto flex flex-col gap-2 border-t border-border pt-4">
           <form action="/auth/signout" method="post">
             <button type="submit" className="btn-secondary w-full">
-              Изход
+              {tc("logout")}
             </button>
           </form>
           <Link href="/profile/delete" className="btn-ghost text-red-600">
-            Изтрий профила ми
+            {t("deleteLink")}
           </Link>
         </nav>
       </main>

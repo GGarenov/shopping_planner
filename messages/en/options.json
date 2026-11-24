@@ -1,0 +1,64 @@
+{
+  "sex": { "male": "Male", "female": "Female" },
+  "activity": {
+    "sedentary": { "label": "Sedentary", "example": "Office work, almost no movement or sport" },
+    "light": { "label": "Lightly active", "example": "1–3 workouts a week or lots of walking" },
+    "moderate": { "label": "Moderately active", "example": "3–5 workouts a week" },
+    "high": { "label": "Very active", "example": "6–7 workouts a week or physical work" }
+  },
+  "goal": {
+    "lose": { "label": "Lose weight", "hint": "Deficit of up to 20 %, more protein" },
+    "maintain": { "label": "Maintain", "hint": "As much as you burn" },
+    "gain": { "label": "Build muscle", "hint": "+300 kcal a day" }
+  },
+  "diet": {
+    "none": "No restrictions",
+    "vegetarian": "Vegetarian",
+    "vegan": "Vegan",
+    "pescatarian": "Pescatarian (fish, no meat)",
+    "soon": "Coming soon — we don't have enough vegan recipes yet"
+  },
+  "exclude": {
+    "pork": "Pork",
+    "red_meat": "Red meat",
+    "poultry": "Poultry",
+    "fish": "Fish",
+    "seafood": "Seafood",
+    "eggs": "Eggs",
+    "dairy": "Dairy",
+    "gluten": "Gluten",
+    "nuts": "Nuts"
+  },
+  "allergen": {
+    "gluten": "Gluten",
+    "milk": "Milk",
+    "eggs": "Eggs",
+    "fish": "Fish",
+    "crustaceans": "Crustaceans",
+    "nuts": "Tree nuts",
+    "peanuts": "Peanuts",
+    "soy": "Soy",
+    "sesame": "Sesame",
+    "mustard": "Mustard",
+    "sulphites": "Sulphites"
+  },
+  "pantry": {
+    "salt": "Salt",
+    "black_pepper": "Black pepper",
+    "paprika": "Paprika",
+    "sunflower_oil": "Sunflower oil",
+    "olive_oil": "Olive oil",
+    "vinegar": "Vinegar",
+    "sugar": "Sugar",
+    "flour_wheat": "Flour",
+    "honey": "Honey",
+    "baking_powder": "Baking powder",
+    "cinnamon": "Cinnamon",
+    "cumin": "Cumin",
+    "oregano": "Oregano",
+    "soy_sauce": "Soy sauce",
+    "mustard": "Mustard",
+    "garlic": "Garlic",
+    "lemon": "Lemon"
+  }
+}

@@ -1,8 +1,9 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { getTranslations } from "next-intl/server";
 import { getUserAndProfile } from "@/lib/profile/load";
-import { targetsOverrideSchema } from "@/lib/profile/schema";
+import { errorKey, targetsOverrideSchema } from "@/lib/profile/schema";
 
 export type OverrideState = {
   error?: string;
@@ -17,14 +18,15 @@ export async function saveTargetsOverride(_prev: OverrideState, formData: FormDa
     kcal_max: String(formData.get("kcal_max") ?? ""),
     protein_min: String(formData.get("protein_min") ?? ""),
   };
+  const t = await getTranslations("errors");
   const parsed = targetsOverrideSchema.safeParse(values);
-  if (!parsed.success) return { error: parsed.error.issues[0]?.message ?? "Невалидни стойности", values };
+  if (!parsed.success) return { error: t(errorKey(parsed.error.issues[0]?.message, "invalidValues")), values };
 
   const { supabase, user } = await getUserAndProfile();
   const { error } = await supabase.from("profiles").update({ targets_override: parsed.data }).eq("user_id", user.id);
   if (error) {
     console.error("targets_override update failed", error.code, error.message);
-    return { error: "Не успяхме да запазим. Опитай отново.", values };
+    return { error: t("saveFailed"), values };
   }
   revalidatePath("/targets");
   return { saved: true };

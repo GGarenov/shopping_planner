@@ -1,11 +1,26 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import type { CartItemResult } from "@/lib/ebag/cart";
 
 const BATCH = 6;
 
-export function CartSender({ planId, ebagIds, onDone }: { planId: string; ebagIds: number[]; onDone?: () => void }) {
+export function CartSender({
+  planId,
+  ebagIds,
+  ingredients,
+  onDone,
+}: {
+  planId: string;
+  ebagIds: number[];
+  /** Ingredient name in the UI language per planned eBag id (results carry the Bulgarian name). */
+  ingredients?: Record<number, string>;
+  onDone?: () => void;
+}) {
+  const t = useTranslations("ebag");
+  const common = useTranslations("common");
+  const qty = (q: number, unit: string) => (unit === "kg" ? t("qtyKg", { q: String(q) }) : t("qtyPcs", { q: String(q) }));
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(0);
   const [results, setResults] = useState<CartItemResult[]>([]);
@@ -30,7 +45,7 @@ export function CartSender({ planId, ebagIds, onDone }: { planId: string; ebagId
         });
         const body = (await res.json().catch(() => ({}))) as { results?: CartItemResult[]; pending?: number[]; error?: string; reason?: string };
         if (!res.ok || !body.results) {
-          setError({ text: body.error ?? "Нещо се обърка. Опитай отново.", reconnect: body.reason === "reconnect" });
+          setError({ text: body.error ?? common("somethingWrong"), reconnect: body.reason === "reconnect" });
           return;
         }
         all.push(...body.results);
@@ -40,7 +55,7 @@ export function CartSender({ planId, ebagIds, onDone }: { planId: string; ebagId
       }
       setFinished(true);
     } catch {
-      setError({ text: "Няма връзка. Провери интернета и опитай отново — вече добавените продукти остават в количката.", reconnect: false });
+      setError({ text: t("sendOffline"), reconnect: false });
     } finally {
       setBusy(false);
       onDone?.(); // refresh the cart view, also after a partial run
@@ -54,11 +69,11 @@ export function CartSender({ planId, ebagIds, onDone }: { planId: string; ebagId
   return (
     <section className="flex flex-col gap-3">
       <button type="button" className="btn-primary" onClick={send} disabled={busy}>
-        {busy ? `Добавяме… ${done} от ${ebagIds.length}` : results.length ? "Изпрати отново" : "Изпрати в количката"}
+        {busy ? t("adding", { done, total: ebagIds.length }) : results.length ? t("resend") : t("send")}
       </button>
       {busy && (
         <p className="text-center text-sm opacity-70" aria-live="polite">
-          Проверяваме наличността на всеки продукт — около минута.
+          {t("checking")}
         </p>
       )}
       {error && (
@@ -66,7 +81,7 @@ export function CartSender({ planId, ebagIds, onDone }: { planId: string; ebagId
           <p className="error">{error.text}</p>
           {error.reconnect && (
             <a href="/api/ebag/connect" className="btn-secondary">
-              Свържи eBag отново
+              {t("reconnect")}
             </a>
           )}
         </div>
@@ -74,16 +89,16 @@ export function CartSender({ planId, ebagIds, onDone }: { planId: string; ebagId
 
       {finished && results.length > 0 && (
         <p className="rounded-xl bg-accent-soft px-4 py-3 text-sm font-semibold" role="status">
-          Готово: {added.length + replaced.length} от {results.length} продукта са в количката ти.
+          {t("sentDone", { n: added.length + replaced.length, total: results.length })}
         </p>
       )}
 
       {results.length > 0 && (
         <details className="flex flex-col gap-2" open={missing.length + replaced.length > 0}>
           <summary className="cursor-pointer text-sm opacity-80">
-            Резултат по продукти: ✓ {added.length} · ↻ {replaced.length} · ✗ {missing.length}
+            {t("resultSummary", { added: added.length, replaced: replaced.length, missing: missing.length })}
           </summary>
-          <ul className="mt-2 flex flex-col gap-2" aria-label="Резултат по продукти">
+          <ul className="mt-2 flex flex-col gap-2" aria-label={t("resultLabel")}>
           {[...missing, ...replaced, ...added].map((r) => (
             <li key={r.ebag_id} className="card flex items-start gap-3 text-sm">
               <span aria-hidden className={`text-lg leading-none ${r.status === "missing" ? "text-red-600" : r.status === "replaced" ? "text-amber-600" : "text-accent"}`}>
@@ -92,9 +107,9 @@ export function CartSender({ planId, ebagIds, onDone }: { planId: string; ebagId
               <span className="flex min-w-0 flex-col">
                 <span className="font-medium break-words">{r.line?.name ?? r.product}</span>
                 <span className="opacity-70">
-                  {r.status === "added" && `${r.line!.qty} ${r.line!.unit === "kg" ? "кг" : "бр."}`}
-                  {r.status === "replaced" && `${r.line!.qty} ${r.line!.unit === "kg" ? "кг" : "бр."} — вместо „${r.product}“ (изчерпан)`}
-                  {r.status === "missing" && `${r.ingredient}: изчерпан, няма заместител — купи го другаде`}
+                  {r.status === "added" && qty(r.line!.qty, r.line!.unit)}
+                  {r.status === "replaced" && t("replacedLine", { qty: qty(r.line!.qty, r.line!.unit), product: r.product })}
+                  {r.status === "missing" && t("missingLine", { ingredient: ingredients?.[r.ebag_id] ?? r.ingredient })}
                 </span>
               </span>
             </li>

@@ -1,0 +1,680 @@
+{
+  "ovesena_kasha_banan": {
+    "name": "Oatmeal with banana and yogurt",
+    "steps": [
+      "Cook the oats in twice their volume of water for 3–5 minutes, stirring.",
+      "Let the porridge cool for 2–3 minutes.",
+      "Add the yogurt and the banana, sliced into rounds.",
+      "Sprinkle with cinnamon and serve."
+    ]
+  },
+  "ovesena_kasha_yabalka_orehi": {
+    "name": "Oatmeal with apple, cinnamon and walnuts",
+    "steps": [
+      "Grate or finely chop the apple.",
+      "Put the oats, milk and apple in a small pot and cook over low heat for 5–6 minutes, stirring.",
+      "Add the cinnamon and stir.",
+      "Serve topped with crushed walnuts and a little honey if you like."
+    ]
+  },
+  "overnight_oats_grucki_yogurt": {
+    "name": "Overnight oats with Greek yogurt and honey",
+    "steps": [
+      "In the evening, mix the oats, Greek yogurt, milk, honey and chia seeds in a jar or bowl.",
+      "Cover and refrigerate for at least 6 hours or overnight.",
+      "In the morning, stir and top with the berries."
+    ]
+  },
+  "izvara_med_gorski_plodove": {
+    "name": "Cottage cheese with honey and berries",
+    "steps": [
+      "If the berries are frozen, thaw them in advance or microwave for 1 minute.",
+      "Put the cottage cheese in a bowl, add the berries and drizzle with honey."
+    ]
+  },
+  "skir_yagodi_bademi": {
+    "name": "Skyr with strawberries and almonds",
+    "steps": [
+      "Wash and slice the strawberries.",
+      "Put the skyr in a bowl, add the strawberries and sprinkle with the chopped almonds."
+    ]
+  },
+  "mishmash": {
+    "name": "Mishmash (Bulgarian scrambled eggs with peppers, tomatoes and feta)",
+    "steps": [
+      "Dice the onion, peppers and tomatoes.",
+      "Sauté the onion and peppers in the oil for 5–6 minutes, then add the tomatoes and cook for another 3–4 minutes.",
+      "Beat the eggs with the crumbled sirene and pour them into the pan.",
+      "Stir over low heat until the eggs are set but still moist.",
+      "Sprinkle with black pepper and chopped parsley."
+    ]
+  },
+  "yaitsa_po_panagyurski": {
+    "name": "Panagyurishte-style eggs (light version)",
+    "steps": [
+      "Mix the yogurt with the crushed garlic and a pinch of salt and spread it on a plate.",
+      "Bring water to a boil in a wide pot, add the vinegar and lower the heat until the water is just simmering.",
+      "Crack each egg into a small bowl and gently slide it into the water. Poach for 3 minutes, until the whites are set.",
+      "Lift the eggs out with a slotted spoon and arrange them on the yogurt.",
+      "Melt the butter, add the paprika for a few seconds and pour over the eggs."
+    ]
+  },
+  "omlet_spanak_sirene": {
+    "name": "Spinach and feta omelette",
+    "steps": [
+      "Heat the olive oil in a pan and sauté the spinach for 1–2 minutes, until wilted.",
+      "Beat the eggs with the black pepper and pour them over the spinach.",
+      "Sprinkle with the crumbled sirene and cook, covered, over low heat for 4–5 minutes.",
+      "Fold the omelette in half and serve."
+    ]
+  },
+  "tost_yaitse_avokado": {
+    "name": "Wholegrain toast with egg and avocado",
+    "steps": [
+      "Toast the bread slices.",
+      "Mash the avocado with a fork, lemon juice, salt and black pepper.",
+      "Fry the eggs in a dry pan (or boil them for 7 minutes).",
+      "Spread the avocado on the toast, add the eggs and, if you like, tomato slices."
+    ]
+  },
+  "filiya_izvara_domat": {
+    "name": "Cottage cheese toast with tomato and cucumber",
+    "steps": [
+      "Mix the cottage cheese with the chopped dill and a pinch of salt.",
+      "Spread the cottage cheese on the bread slices.",
+      "Serve with sliced tomato and cucumber."
+    ]
+  },
+  "proteinovi_palachinki_izvara": {
+    "name": "Protein pancakes with cottage cheese",
+    "steps": [
+      "Blend the oats, eggs, cottage cheese, milk, baking powder and vanilla until smooth.",
+      "Wipe a pan with a little oil (using a paper towel) and heat it over medium heat.",
+      "Pour in 2–3 tablespoons of batter per pancake and cook for 1–2 minutes on each side.",
+      "Serve with berries and honey if you like."
+    ]
+  },
+  "shakshuka": {
+    "name": "Shakshuka",
+    "steps": [
+      "Slice the onion and peppers into strips and sauté them in the olive oil for 6–7 minutes.",
+      "Add the garlic, cumin and paprika and stir for 30 seconds.",
+      "Add the tomatoes and salt and simmer for 8–10 minutes, until the sauce thickens.",
+      "Make wells in the sauce and crack the eggs into them. Cook, covered, for 5–6 minutes, until the whites are set.",
+      "Sprinkle with crumbled sirene and parsley and serve straight from the pan."
+    ]
+  },
+  "pileshko_oriz_brokoli": {
+    "name": "Chicken breast with rice and broccoli",
+    "steps": [
+      "Cook the rice in salted water according to the package directions (about 15 minutes).",
+      "Cut the chicken into bite-sized pieces and season with salt, black pepper and paprika.",
+      "Fry the chicken in the olive oil over high heat for 6–8 minutes, until browned and cooked through.",
+      "Boil or steam the broccoli for 5–6 minutes.",
+      "Serve the chicken with the rice and broccoli, drizzle with lemon juice and sprinkle with finely chopped garlic."
+    ]
+  },
+  "pile_s_oriz_na_furna": {
+    "name": "Oven-baked chicken with rice",
+    "steps": [
+      "Preheat the oven to 200 °C.",
+      "Sauté the chopped onion and carrots in the oil for 5 minutes, add the rice and paprika and stir for 1–2 minutes.",
+      "Transfer the rice to a baking dish, pour in hot water (2.5 times the volume of the rice) and add salt.",
+      "Arrange the chicken pieces, seasoned with salt and black pepper, on top.",
+      "Bake for 45–50 minutes, until the rice has absorbed the water and the chicken is golden."
+    ]
+  },
+  "pecheni_pileshki_butcheta_kartofi": {
+    "name": "Roast chicken drumsticks with potatoes",
+    "steps": [
+      "Preheat the oven to 200 °C.",
+      "Cut the potatoes into slices or quarters and the onion into large chunks.",
+      "Toss the potatoes, onion, drumsticks, olive oil, garlic and spices in a baking dish.",
+      "Roast for 45–50 minutes, turning once halfway, until the drumsticks are golden."
+    ]
+  },
+  "pileshko_kari_oriz": {
+    "name": "Chicken curry with rice",
+    "steps": [
+      "Cook the rice according to the package directions.",
+      "Sauté the finely chopped onion in the oil for 5 minutes, add the grated ginger, garlic and curry powder and stir for 1 minute.",
+      "Add the bite-sized chicken pieces and cook for 5 minutes.",
+      "Add the tomatoes and salt and simmer for 10 minutes.",
+      "Remove from the heat and stir in the yogurt. Serve with the rice."
+    ]
+  },
+  "pileshki_suvlaki_dzadziki_bulgur": {
+    "name": "Chicken souvlaki with tzatziki and bulgur",
+    "steps": [
+      "Cut the chicken into cubes and marinate for at least 15 minutes in half the olive oil, the lemon juice, oregano, salt and half the garlic.",
+      "Pour twice the volume of boiling salted water over the bulgur, cover and leave for 15 minutes.",
+      "For the tzatziki, grate the cucumber, squeeze out the water and mix it with the Greek yogurt, the remaining garlic and the dill.",
+      "Thread the meat onto skewers (or just pan-fry it) and cook in a grill pan for 8–10 minutes, turning.",
+      "Serve with the bulgur, tzatziki and sliced tomato and onion."
+    ]
+  },
+  "pasta_pileshko_spanak": {
+    "name": "Pasta with chicken and spinach",
+    "steps": [
+      "Cook the pasta in salted water according to the package directions.",
+      "Fry the bite-sized chicken pieces in the olive oil for 6–7 minutes.",
+      "Add the garlic and spinach and stir until the spinach wilts.",
+      "Pour in the milk, add the grated Parmesan and black pepper and let the sauce thicken for 2–3 minutes.",
+      "Toss with the drained pasta and serve."
+    ]
+  },
+  "tortila_pile_zelenchutsi": {
+    "name": "Chicken and vegetable wraps",
+    "steps": [
+      "Slice the chicken, peppers and onion into thin strips.",
+      "Fry them in the olive oil over high heat for 7–8 minutes with the paprika, cumin and salt.",
+      "Warm the tortillas in a dry pan for 20 seconds on each side.",
+      "Spread the tortillas with Greek yogurt, add the lettuce, tomatoes and chicken and roll them up."
+    ]
+  },
+  "pueshko_bulgur_pecheni_zelenchutsi": {
+    "name": "Turkey breast with bulgur and roasted vegetables",
+    "steps": [
+      "Preheat the oven to 210 °C. Cut the zucchini, peppers and onion into large chunks, toss with half the olive oil, oregano and salt and roast for 25 minutes.",
+      "Pour twice the volume of boiling salted water over the bulgur, cover and leave for 15 minutes.",
+      "Season the turkey with salt, black pepper and garlic and pan-fry it in the remaining olive oil for 4–5 minutes on each side.",
+      "Let the meat rest for 3 minutes, slice it and serve with the bulgur and vegetables."
+    ]
+  },
+  "svinsko_file_sladki_kartofi": {
+    "name": "Pork tenderloin with sweet potatoes",
+    "steps": [
+      "Preheat the oven to 200 °C. Dice the sweet potatoes, toss with half the olive oil and salt and roast for 25–30 minutes.",
+      "Rub the pork tenderloin with mustard, garlic, paprika, black pepper and salt.",
+      "Sear the meat in a hot pan with the remaining olive oil for 2 minutes on each side, then transfer it to the oven for 12–15 minutes.",
+      "Boil the green beans in salted water for 5–6 minutes.",
+      "Let the meat rest for 5 minutes, slice it into medallions and serve."
+    ]
+  },
+  "svinsko_gabi_oriz": {
+    "name": "Pork with mushrooms and rice",
+    "steps": [
+      "Cook the rice according to the package directions.",
+      "Slice the meat into thin strips and fry in the oil over high heat for 5 minutes. Remove from the pan.",
+      "In the same pan, sauté the onion and sliced mushrooms for 6–7 minutes, until the liquid has evaporated.",
+      "Return the meat, add the garlic, milk, salt and black pepper and cook for 5 minutes, until the sauce thickens.",
+      "Sprinkle with parsley and serve with the rice."
+    ]
+  },
+  "svinsko_stir_fry_oriz": {
+    "name": "Asian-style pork stir-fry with rice",
+    "steps": [
+      "Cook the rice according to the package directions.",
+      "Slice the meat into thin strips and the vegetables into strips and small florets.",
+      "Stir-fry the meat in very hot oil for 3–4 minutes and remove it.",
+      "Stir-fry the vegetables for 4–5 minutes, stirring constantly – they should stay crisp.",
+      "Return the meat, add the garlic, grated ginger, soy sauce and honey and stir for 1 more minute. Serve with the rice."
+    ]
+  },
+  "svinski_parzholi_pecheni_zelenchutsi": {
+    "name": "Pork chops with roasted vegetables",
+    "steps": [
+      "Preheat the oven to 210 °C. Cut up the potatoes, zucchini and peppers, toss with the olive oil, oregano and half the salt and roast for 35–40 minutes.",
+      "Season the chops with garlic, paprika, black pepper and the remaining salt.",
+      "Cook the chops in a hot grill pan for 4–5 minutes on each side.",
+      "Serve with the roasted vegetables."
+    ]
+  },
+  "svinsko_sas_zele": {
+    "name": "Pork with sauerkraut",
+    "steps": [
+      "Cut the meat into cubes and brown it in the oil in a pot or clay casserole for 5–6 minutes.",
+      "Add the chopped onion and sauté for 3–4 minutes, then add the paprika.",
+      "Add the chopped sauerkraut and black pepper and pour in half a cup of water.",
+      "Cover and bake at 180 °C (or cook over low heat on the stovetop) for about 75–90 minutes, until the meat is tender.",
+      "Salt is usually not needed – the sauerkraut is salty enough."
+    ]
+  },
+  "teleshki_stek_kartofi_salata": {
+    "name": "Beef steak with potatoes and salad",
+    "steps": [
+      "Preheat the oven to 210 °C. Slice the potatoes, toss with half the olive oil and salt and roast for 30–35 minutes.",
+      "Take the steak out of the fridge 20 minutes before cooking and pat it dry with paper towels.",
+      "Season with salt and black pepper and cook in a very hot pan for 3–4 minutes on each side (for medium).",
+      "Let the meat rest for 5 minutes before slicing.",
+      "Make a salad with the lettuce, tomatoes and cucumber, dressed with the remaining olive oil and lemon juice."
+    ]
+  },
+  "teleshko_v_gyuvech_zelenchutsi": {
+    "name": "Beef and vegetable gyuvech (clay-pot stew)",
+    "steps": [
+      "Cut the meat into cubes and brown it in the oil over high heat for 5–6 minutes.",
+      "Add the chopped onion and carrots and sauté for 5 minutes, then add the paprika.",
+      "Transfer to a clay pot, add the potatoes, peppers, mushrooms, tomatoes, salt and black pepper and pour in 1 cup of water.",
+      "Cover and bake at 180 °C for about 1 hour 45 minutes, until the meat is tender.",
+      "Remove the lid for the last 15 minutes so the sauce thickens."
+    ]
+  },
+  "pasta_boloneze": {
+    "name": "Pasta Bolognese",
+    "steps": [
+      "Sauté the finely chopped onion and grated carrot in the olive oil for 5 minutes.",
+      "Add the mince and brown it, breaking it up with a spoon, until it changes colour.",
+      "Add the garlic, tomatoes, oregano, salt and black pepper and let the sauce simmer over low heat for 20–25 minutes.",
+      "Cook the pasta in salted water according to the package directions.",
+      "Serve the pasta with the sauce, sprinkled with Parmesan if you like."
+    ]
+  },
+  "chili_kon_karne": {
+    "name": "Chili con carne",
+    "steps": [
+      "Sauté the chopped onion and peppers in the oil for 5 minutes.",
+      "Add the mince and brown it until it changes colour.",
+      "Add the garlic, cumin and paprika and stir for 1 minute.",
+      "Add the tomatoes, drained beans, corn and salt and cook over low heat for 20–25 minutes.",
+      "Serve on its own or with rice."
+    ]
+  },
+  "musaka": {
+    "name": "Moussaka (Bulgarian potato and mince bake)",
+    "steps": [
+      "Preheat the oven to 200 °C. Dice the potatoes and finely chop the onion and tomatoes.",
+      "Sauté the onion in the oil for 4–5 minutes, add the mince and brown it until it changes colour. Add the tomatoes, paprika, black pepper and salt.",
+      "Mix the mince with the potatoes in a baking dish, pour in water to come halfway up and bake for 40–45 minutes.",
+      "Beat the eggs with the yogurt and pour over the moussaka.",
+      "Bake for another 12–15 minutes, until the topping is golden. Let rest for 10 minutes before cutting."
+    ]
+  },
+  "kyufteta_na_furna_kartofi": {
+    "name": "Oven-baked meatballs with potatoes",
+    "steps": [
+      "Preheat the oven to 200 °C. Slice the potatoes, toss with the oil and half the salt and arrange them in a baking dish.",
+      "Mix the mince with the grated onion, egg, oats, parsley, cumin, black pepper and the remaining salt. Knead well and leave for 10 minutes.",
+      "Shape into patties with wet hands and arrange them on top of the potatoes.",
+      "Bake for 35–40 minutes, turning the meatballs halfway."
+    ]
+  },
+  "palneni_chushki_kayma_oriz": {
+    "name": "Peppers stuffed with mince and rice",
+    "steps": [
+      "Cut out the pepper stems and remove the seeds.",
+      "Sauté the chopped onion in the oil, add the mince and brown it. Add the rice, grated tomato, paprika, salt and parsley and stir for 2 minutes.",
+      "Fill the peppers about 3/4 full and stand them upright in a baking dish.",
+      "Pour in hot water to halfway up the peppers, cover with foil and bake at 180 °C for about 50 minutes. Remove the foil for the last 10 minutes.",
+      "Serve with yogurt."
+    ]
+  },
+  "syomga_kartofi_brokoli": {
+    "name": "Salmon with potatoes and broccoli",
+    "steps": [
+      "Preheat the oven to 200 °C. Dice the potatoes, toss with the olive oil and a little salt and roast for 15 minutes.",
+      "Add the broccoli and the salmon, seasoned with salt, black pepper and lemon juice, to the dish.",
+      "Roast for another 12–15 minutes, until the fish flakes easily with a fork.",
+      "Sprinkle with dill and serve with a lemon wedge."
+    ]
+  },
+  "byala_riba_na_furna_zelenchutsi": {
+    "name": "Baked white fish with vegetables",
+    "steps": [
+      "Preheat the oven to 200 °C. Thinly slice the potatoes (if using) and roast them for 15 minutes with half the olive oil.",
+      "Cut up the zucchini, peppers, tomatoes and onion and spread them in the dish.",
+      "Place the fish fillets, seasoned with salt, garlic and lemon juice, on top and drizzle with the remaining olive oil.",
+      "Bake for 18–20 minutes. Sprinkle with parsley before serving."
+    ]
+  },
+  "skumriya_na_furna_kartofi": {
+    "name": "Baked mackerel with potatoes",
+    "steps": [
+      "Preheat the oven to 200 °C. Slice the potatoes and cut the onion into rings, toss with the oil and half the salt and roast for 20 minutes.",
+      "Clean the mackerel, salt it inside and out, sprinkle with paprika and put a lemon slice and parsley in the cavity.",
+      "Place the fish on top of the potatoes and bake for another 18–20 minutes.",
+      "Make a salad of finely shredded cabbage with vinegar and a pinch of salt and serve alongside."
+    ]
+  },
+  "pastarva_limon_kartofi": {
+    "name": "Trout with lemon and potatoes",
+    "steps": [
+      "Boil the potatoes in salted water for 15–20 minutes and slice them.",
+      "Salt the trout and pan-fry it in the butter for 4–5 minutes on each side.",
+      "Towards the end, add the garlic and lemon juice to the pan and spoon the sauce over the fish.",
+      "Sprinkle the potatoes with dill and serve with the fish and a green salad."
+    ]
+  },
+  "pasta_skaridi_chesan": {
+    "name": "Garlic shrimp pasta",
+    "steps": [
+      "Cook the pasta in salted water according to the package directions. Reserve half a cup of the cooking water.",
+      "Heat the olive oil and fry the sliced garlic for 30 seconds without letting it brown.",
+      "Add the shrimp (and chopped tomatoes, if you like) and cook for 3–4 minutes, until pink.",
+      "Add the pasta, a little of the cooking water, the lemon juice and parsley and toss."
+    ]
+  },
+  "poke_riba_ton_oriz": {
+    "name": "Tuna, rice and vegetable bowl (poke)",
+    "steps": [
+      "Cook the rice and let it cool.",
+      "Dice the cucumber and avocado and grate the carrots.",
+      "Spread the rice in a bowl and top with the tuna, vegetables and corn.",
+      "Drizzle with soy sauce and lemon juice."
+    ]
+  },
+  "salata_riba_ton_bob_tsarevitsa": {
+    "name": "Tuna, bean and corn salad",
+    "steps": [
+      "Drain and rinse the beans and corn.",
+      "Chop the lettuce, tomatoes and onion.",
+      "Mix everything in a bowl and add the tuna in large chunks.",
+      "Dress with olive oil, lemon juice and salt."
+    ]
+  },
+  "salata_riba_ton_yaitse_kartofi": {
+    "name": "Tuna, egg and potato salad",
+    "steps": [
+      "Boil the potatoes for 15–20 minutes and the eggs for 8 minutes. Boil the green beans for 5 minutes.",
+      "Peel and slice the potatoes and eggs.",
+      "Whisk the olive oil, mustard, vinegar and salt for the dressing.",
+      "Arrange the lettuce, potatoes, beans, tomatoes, eggs and tuna on a plate and drizzle with the dressing."
+    ]
+  },
+  "tsezar_salata_pile": {
+    "name": "Chicken Caesar salad",
+    "steps": [
+      "Season the chicken with salt and black pepper and cook it in a grill pan with the olive oil for 5–6 minutes on each side.",
+      "Cut the bread into cubes and toast in a dry pan or in the oven until crisp.",
+      "For the dressing, mix the Greek yogurt, lemon juice, mustard, crushed garlic and half the grated Parmesan.",
+      "Chop the lettuce, toss it with the dressing and top with the sliced chicken, croutons and remaining Parmesan."
+    ]
+  },
+  "grutska_salata_pile": {
+    "name": "Greek salad with chicken",
+    "steps": [
+      "Season the chicken with salt and oregano and cook it in a grill pan for 5–6 minutes on each side.",
+      "Cut the tomatoes, cucumber, pepper and onion into large chunks.",
+      "Arrange the vegetables in a bowl and top with the sirene in one piece and the sliced chicken.",
+      "Drizzle with olive oil and vinegar and sprinkle with oregano."
+    ]
+  },
+  "salata_kinoa_pile": {
+    "name": "Quinoa and chicken salad",
+    "steps": [
+      "Rinse the quinoa and cook it in twice its volume of salted water for 12–15 minutes. Let it cool.",
+      "Cook the chicken in a grill pan and cut it into bite-sized pieces.",
+      "Dice the vegetables and finely chop the parsley.",
+      "Mix everything together and dress with lemon juice, olive oil and salt."
+    ]
+  },
+  "salata_syomga_avokado": {
+    "name": "Salmon and avocado salad",
+    "steps": [
+      "Salt the salmon and bake it at 200 °C for 12–15 minutes, or pan-fry it for 4 minutes on each side.",
+      "Chop the lettuce, cucumber, tomatoes and avocado.",
+      "Arrange the salad, top with the salmon in pieces and sprinkle with the pumpkin seeds.",
+      "Drizzle with lemon juice and olive oil."
+    ]
+  },
+  "salata_teleshko_rukola": {
+    "name": "Beef and rocket salad",
+    "steps": [
+      "Season the meat with salt and black pepper and sear it in a very hot pan for 3 minutes on each side.",
+      "Let it rest for 5 minutes and slice it into thin strips.",
+      "Arrange the rocket and halved cherry tomatoes, then top with the meat and shaved Parmesan.",
+      "Drizzle with olive oil and balsamic vinegar."
+    ]
+  },
+  "salata_pueshko_yabalka_orehi": {
+    "name": "Turkey, apple and walnut salad",
+    "steps": [
+      "Salt the turkey and cook it in a grill pan for 5–6 minutes on each side. Slice it into strips.",
+      "Thinly slice the apple and drizzle with a little lemon juice.",
+      "Whisk the olive oil, mustard, remaining lemon juice and honey for the dressing.",
+      "Combine the lettuce, apple and meat, drizzle with the dressing and sprinkle with crushed walnuts."
+    ]
+  },
+  "salata_nahut_krastavitsa_domati": {
+    "name": "Chickpea, cucumber and tomato salad",
+    "steps": [
+      "Drain and rinse the chickpeas.",
+      "Dice the cucumber, tomatoes, pepper and onion and finely chop the parsley.",
+      "Mix everything and dress with lemon juice, olive oil, cumin and salt."
+    ]
+  },
+  "krem_supa_chervena_leshta": {
+    "name": "Creamy red lentil soup",
+    "steps": [
+      "Sauté the chopped onion and carrots in the olive oil for 5 minutes, then add the garlic, cumin and paprika.",
+      "Add the rinsed lentils and 3 times as much water (by volume) and season with salt.",
+      "Simmer for 18–20 minutes, until the lentils break down.",
+      "Blend until smooth and add the lemon juice. If it's too thick, thin with a little hot water."
+    ]
+  },
+  "kari_nahut_spanak": {
+    "name": "Chickpea and spinach curry",
+    "steps": [
+      "Sauté the finely chopped onion in the oil for 5 minutes, add the garlic, grated ginger and curry powder and stir for 1 minute.",
+      "Add the tomatoes, drained chickpeas and salt and simmer for 10 minutes.",
+      "Add the spinach and stir until wilted.",
+      "Serve on its own or with rice."
+    ]
+  },
+  "tofu_zelenchutsi_oriz": {
+    "name": "Tofu with vegetables and rice",
+    "steps": [
+      "Cook the rice according to the package directions.",
+      "Pat the tofu dry with paper towels and cut it into cubes.",
+      "Fry the tofu in half the oil until golden on all sides and remove it.",
+      "Stir-fry the vegetables in the remaining oil for 4–5 minutes, add the garlic, ginger, soy sauce and tofu and toss. Serve with the rice."
+    ]
+  },
+  "elda_gabi_yaitse": {
+    "name": "Buckwheat with mushrooms and egg",
+    "steps": [
+      "Rinse the buckwheat and cook it in twice its volume of salted water for 15 minutes.",
+      "Sauté the chopped onion and mushrooms in the butter for 7–8 minutes, until the liquid has evaporated.",
+      "Mix the buckwheat with the mushrooms and black pepper.",
+      "Fry or boil the eggs and serve them on top. Sprinkle with parsley."
+    ]
+  },
+  "fritata_zelenchutsi_sirene": {
+    "name": "Vegetable and feta frittata",
+    "steps": [
+      "Preheat the oven to 190 °C.",
+      "Sauté the chopped zucchini, peppers and onion in the olive oil in an ovenproof pan for 5–6 minutes.",
+      "Beat the eggs with the salt, black pepper and parsley and pour over the vegetables. Crumble the sirene on top.",
+      "Cook on the stovetop for 2 minutes, then transfer to the oven for 12–15 minutes, until set."
+    ]
+  },
+  "shopska_salata": {
+    "name": "Shopska salad",
+    "steps": [
+      "Dice the tomatoes, cucumber, pepper and onion.",
+      "Dress with oil, vinegar and salt and toss.",
+      "Grate the sirene over the top and sprinkle with parsley."
+    ]
+  },
+  "snezhanka": {
+    "name": "Snezhanka (yogurt and cucumber salad)",
+    "steps": [
+      "Cut the cucumber into very small cubes, or grate it and squeeze out the water.",
+      "Mix the Greek yogurt with the cucumber, crushed garlic, dill and salt.",
+      "Serve sprinkled with crushed walnuts and a few drops of olive oil."
+    ]
+  },
+  "tarator": {
+    "name": "Tarator (cold cucumber and yogurt soup)",
+    "steps": [
+      "Dice the cucumber into small cubes.",
+      "Whisk the yogurt with enough cold water to reach the consistency you like.",
+      "Add the cucumber, crushed garlic, dill, oil and salt.",
+      "Serve cold, sprinkled with crushed walnuts."
+    ]
+  },
+  "pileshka_supa_zastroyka": {
+    "name": "Chicken soup with egg-and-yogurt liaison",
+    "steps": [
+      "Put the chicken in a pot of cold water, bring to a boil and skim off the foam. Simmer for 20 minutes.",
+      "Remove the meat, add the chopped carrots and onion to the broth and simmer for 10 minutes.",
+      "Add the vermicelli and salt and cook for another 5 minutes. Return the shredded meat.",
+      "For the liaison, beat the eggs with the yogurt and lemon juice, temper with a little broth and pour into the soup while stirring constantly; do not let it boil again.",
+      "Sprinkle with parsley."
+    ]
+  },
+  "humus_zelenchukovi_prachitsi": {
+    "name": "Hummus with vegetable sticks",
+    "steps": [
+      "Blend the chickpeas, tahini, lemon juice, garlic, cumin and salt, adding a little cold water at a time, until smooth and creamy.",
+      "Serve the hummus drizzled with olive oil, with carrots and cucumber cut into sticks."
+    ]
+  },
+  "izvara_yabalka_kanela": {
+    "name": "Cottage cheese with apple and cinnamon",
+    "steps": [
+      "Grate or dice the apple.",
+      "Mix it with the cottage cheese, sprinkle with cinnamon and add honey if you like."
+    ]
+  },
+  "kiselo_mlyako_orehi_med": {
+    "name": "Yogurt with walnuts and honey",
+    "steps": [
+      "Put the yogurt in a bowl, sprinkle with crushed walnuts and drizzle with honey."
+    ]
+  },
+  "yabalka_fastacheno_maslo": {
+    "name": "Apple with peanut butter",
+    "steps": [
+      "Slice the apple and spread the slices with peanut butter or dip them in it."
+    ]
+  },
+  "orizovki_izvara_domat": {
+    "name": "Rice cakes with cottage cheese and tomato",
+    "steps": [
+      "Spread the rice cakes with the cottage cheese.",
+      "Top with tomato slices and sprinkle with salt and black pepper."
+    ]
+  },
+  "vareni_yaitsa_krastavitsa": {
+    "name": "Boiled eggs with cucumber",
+    "steps": [
+      "Boil the eggs for 8–9 minutes from when the water boils and cool them in cold water.",
+      "Peel and serve with sliced cucumber and a pinch of salt."
+    ]
+  },
+  "plodova_salata_kiselo_mlyako": {
+    "name": "Fruit salad with yogurt",
+    "steps": [
+      "Cut the fruit into bite-sized pieces.",
+      "Pour the yogurt over it, drizzle with honey if you like and sprinkle with walnuts."
+    ]
+  },
+  "zelenchutsi_dip_kiselo_mlyako": {
+    "name": "Carrots and peppers with yogurt-dill dip",
+    "steps": [
+      "Mix the Greek yogurt with the chopped dill, crushed garlic and salt.",
+      "Cut the carrots, peppers and cucumber into sticks and serve with the dip."
+    ]
+  },
+  "proteinovi_brauni": {
+    "name": "Protein brownies",
+    "steps": [
+      "Preheat the oven to 180 °C and line a 20×20 cm pan with baking paper.",
+      "Blend the cottage cheese, eggs, banana, oats, cocoa, protein powder, sweetener, baking powder and vanilla until smooth.",
+      "Pour into the pan and sprinkle with the chopped dark chocolate.",
+      "Bake for 20–22 minutes – the centre should stay slightly moist.",
+      "Let cool completely and cut into 8 pieces."
+    ]
+  },
+  "brauni_bob_kakao": {
+    "name": "Black bean cocoa brownies",
+    "steps": [
+      "Preheat the oven to 180 °C and line a 20×20 cm pan with baking paper.",
+      "Blend all the ingredients except the chocolate until completely smooth – you shouldn't be able to taste the beans.",
+      "Pour into the pan, level the top and sprinkle with the chopped chocolate.",
+      "Bake for 20–22 minutes. Let cool and cut into 8 pieces."
+    ]
+  },
+  "brauni_tikvichki": {
+    "name": "Zucchini brownies",
+    "steps": [
+      "Preheat the oven to 180 °C. Finely grate the zucchini and squeeze out the water well.",
+      "Grind the oats into flour.",
+      "Beat the eggs with the Greek yogurt and sweetener, add the oat flour, cocoa and baking powder, then the zucchini.",
+      "Pour into a 20×20 cm pan lined with paper, sprinkle with chocolate and bake for 22–25 minutes.",
+      "Let cool and cut into 8 pieces."
+    ]
+  },
+  "cheesecake_izvara_v_chashi": {
+    "name": "No-bake cottage cheese cheesecake cups",
+    "steps": [
+      "Toast the oats in a dry pan for 2–3 minutes and mix them with the honey – this is the base.",
+      "Blend the cottage cheese with the Greek yogurt, sweetener, vanilla and lemon juice until smooth and creamy.",
+      "Layer into glasses: base, cream and berries on top.",
+      "Refrigerate for at least 1 hour before serving."
+    ]
+  },
+  "proteinov_keks_v_chasha": {
+    "name": "Protein mug cake",
+    "steps": [
+      "Grind the oats into flour.",
+      "In a large mug, mix the egg, milk, sweetener, oat flour, cocoa, protein powder and baking powder.",
+      "Press a piece of chocolate into the centre.",
+      "Microwave on full power for 70–90 seconds."
+    ]
+  },
+  "bananovi_biskvitki_ovesni": {
+    "name": "Banana oat cookies",
+    "steps": [
+      "Preheat the oven to 180 °C.",
+      "Mash the bananas with a fork and mix with the oats, peanut butter, cinnamon and chopped chocolate.",
+      "Spoon cookies onto baking paper (about 3 per serving).",
+      "Bake for 13–15 minutes, until golden at the edges."
+    ]
+  },
+  "morkoven_keks_ovesen": {
+    "name": "Carrot oat cake",
+    "steps": [
+      "Preheat the oven to 180 °C. Finely grate the carrots.",
+      "Grind the oats into flour and mix with the cinnamon and baking powder.",
+      "Beat the eggs with the Greek yogurt, sweetener and vanilla, then add the dry ingredients, carrots and chopped walnuts.",
+      "Pour into a lined loaf tin and bake for 30–35 minutes (until a skewer comes out clean).",
+      "If you like, spread the cooled cake with cottage cheese whipped with a little sweetener. Cut into 8 pieces."
+    ]
+  },
+  "pecheni_yabalki_orehi_kanela": {
+    "name": "Baked apples with walnuts and cinnamon",
+    "steps": [
+      "Preheat the oven to 180 °C.",
+      "Core the apples without cutting all the way through.",
+      "Fill them with crushed walnuts, honey and cinnamon and arrange in a baking dish with a little water in the bottom.",
+      "Bake for 25–30 minutes, until soft. Serve warm, with Greek yogurt if you like."
+    ]
+  },
+  "chia_puding_gorski_plodove": {
+    "name": "Chia pudding with berries",
+    "steps": [
+      "Mix the chia seeds with the milk, vanilla and honey (optional) and stir well.",
+      "After 10 minutes, stir again so no lumps form.",
+      "Refrigerate for at least 3 hours or overnight.",
+      "Serve topped with the berries."
+    ]
+  },
+  "sladoled_banan_kakao": {
+    "name": "Frozen banana and cocoa \"ice cream\"",
+    "steps": [
+      "Slice the bananas into rounds and freeze for at least 4 hours.",
+      "Blend the frozen banana with the cocoa, milk and peanut butter in a powerful blender until it has the texture of ice cream.",
+      "Serve immediately, or freeze for another 30 minutes for a firmer ice cream."
+    ]
+  },
+  "zamrazen_yogurt_gorski_plodove": {
+    "name": "Frozen yogurt bark with berries",
+    "steps": [
+      "Mix the Greek yogurt with the honey.",
+      "Spread it in a thin layer (about 1 cm) on a tray lined with baking paper.",
+      "Sprinkle with berries and grated dark chocolate.",
+      "Freeze for at least 3 hours and break into pieces. Keep in the freezer."
+    ]
+  },
+  "yagodi_cheren_shokolad": {
+    "name": "Dark chocolate strawberries",
+    "steps": [
+      "Wash the strawberries and dry them well.",
+      "Melt the chocolate over a water bath or in the microwave in short 20-second bursts.",
+      "Dip the strawberries halfway into the chocolate and place them on baking paper.",
+      "Refrigerate for 15 minutes, until the chocolate sets."
+    ]
+  }
+}

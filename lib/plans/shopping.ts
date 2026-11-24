@@ -1,27 +1,29 @@
-// Shopping list helpers: aisle grouping in store-walk order, totals, Bulgarian labels. Pure — used by the list
-// screen and its tests.
+// Shopping list helpers: aisle grouping in store-walk order, totals, labels. Pure — used by the list
+// screen and its tests. Aisle names are translations: messages/<locale>/list.json → aisle.<key>.
+import { eur as formatEur } from "@/lib/i18n/format";
 import type { ShoppingItem } from "@/lib/planner/plan";
 
 /** Aisle keys from ingredients.json, in the order you walk a shop. Unknown aisles go last. */
-export const AISLES: { key: string; label: string }[] = [
-  { key: "vegetables", label: "Зеленчуци" },
-  { key: "fruit", label: "Плодове" },
-  { key: "bakery", label: "Хляб" },
-  { key: "meat", label: "Месо" },
-  { key: "fish", label: "Риба" },
-  { key: "dairy", label: "Млечни и яйца" },
-  { key: "grains_legumes", label: "Зърнени и бобови" },
-  { key: "canned", label: "Консерви" },
-  { key: "frozen", label: "Замразени" },
-  { key: "nuts_seeds", label: "Ядки и семена" },
-  { key: "baking", label: "За печене" },
-  { key: "oils_condiments", label: "Олио, оцет и сосове" },
-  { key: "spices", label: "Подправки" },
+export const AISLES: { key: string }[] = [
+  { key: "vegetables" },
+  { key: "fruit" },
+  { key: "bakery" },
+  { key: "meat" },
+  { key: "fish" },
+  { key: "dairy" },
+  { key: "grains_legumes" },
+  { key: "canned" },
+  { key: "frozen" },
+  { key: "nuts_seeds" },
+  { key: "baking" },
+  { key: "oils_condiments" },
+  { key: "spices" },
 ];
 
 export interface AisleGroup {
   key: string;
-  label: string;
+  /** false for an aisle not in AISLES — show the key itself instead of a translated name. */
+  known: boolean;
   items: ShoppingItem[];
   cost: number;
 }
@@ -37,7 +39,7 @@ export function groupByAisle(items: ShoppingItem[]): AisleGroup[] {
     .sort(([a], [b]) => (order.get(a) ?? 99) - (order.get(b) ?? 99) || a.localeCompare(b))
     .map(([key, list]) => ({
       key,
-      label: AISLES.find((a) => a.key === key)?.label ?? key,
+      known: order.has(key),
       items: [...list].sort((a, b) => a.ingredient.localeCompare(b.ingredient, "bg") || a.product.localeCompare(b.product, "bg")),
       cost: cents(list.reduce((s, it) => s + it.cost, 0)),
     }));
@@ -55,4 +57,5 @@ export function packLabel(it: Pick<ShoppingItem, "pack" | "packs">): string {
   return it.packs > 1 ? `${it.packs} × ${it.pack}` : it.pack;
 }
 
-export const eur = (n: number) => `${n.toFixed(2).replace(".", ",")} €`;
+/** Money in the given locale (default Bulgarian, "9,40 €"). */
+export const eur = (n: number, locale?: string) => formatEur(n, locale);

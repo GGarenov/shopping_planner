@@ -1,7 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { deliveryHint, stepQuantity, type CartView, type CartViewItem, type DeliveryInfo, type Slot } from "@/lib/ebag/cartView";
+import { packUnits } from "@/lib/i18n/format";
 import { eur } from "@/lib/plans/shopping";
 
 interface View {
@@ -10,17 +12,27 @@ interface View {
   slots: Slot[];
 }
 
-const WEEKDAY = ["нд", "пн", "вт", "ср", "чт", "пт", "сб"];
-const qtyLabel = (q: number, unit: "kg" | "pcs") => (unit === "kg" ? `${String(q).replace(".", ",")} кг` : `${q} бр.`);
+type T = ReturnType<typeof useTranslations<"ebag">>;
 
-function slotLabel(s: Slot, today: string): string {
+const qtyLabel = (t: T, locale: string, q: number, unit: "kg" | "pcs") =>
+  unit === "kg" ? t("qtyKg", { q: locale === "en" ? String(q) : String(q).replace(".", ",") }) : t("qtyPcs", { q: String(q) });
+
+/** bg "днес 10:00–12:00" / "пт 28.11 10:00–12:00", en "today 10:00–12:00" / "Fri 28 Nov 10:00–12:00". */
+function slotLabel(t: T, locale: string, s: Slot, today: string): string {
   const days = Math.round((Date.parse(s.date) - Date.parse(today)) / 86_400_000);
   const [, m, d] = s.date.split("-");
-  const day = days === 0 ? "днес" : days === 1 ? "утре" : `${WEEKDAY[new Date(`${s.date}T12:00:00Z`).getUTCDay()]} ${d}.${m}`;
+  const date = new Date(`${s.date}T12:00:00Z`);
+  const dayMonth = locale === "en" ? new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", timeZone: "UTC" }).format(date) : `${d}.${m}`;
+  const day =
+    days === 0 ? t("slotToday") : days === 1 ? t("slotTomorrow") : t("slotDay", { weekday: t("weekdays").split(",")[date.getUTCDay()] ?? "", date: dayMonth });
   return `${day} ${s.time.replace("-", "–")}`;
 }
 
 export function EbagCart({ today, refreshKey }: { today: string; refreshKey: number }) {
+  const t = useTranslations("ebag");
+  const common = useTranslations("common");
+  const locale = useLocale();
+  const money = (n: number) => eur(n, locale);
   const [view, setView] = useState<View | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<{ text: string; reconnect: boolean } | null>(null);
@@ -33,14 +45,14 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
     try {
       const res = await fetch("/api/ebag/cart", { cache: "no-store" });
       const body = (await res.json().catch(() => ({}))) as Partial<View> & { error?: string; reason?: string };
-      if (!res.ok || !body.cart) setError({ text: body.error ?? "Не успяхме да заредим количката.", reconnect: body.reason === "reconnect" });
+      if (!res.ok || !body.cart) setError({ text: body.error ?? t("loadFailed"), reconnect: body.reason === "reconnect" });
       else setView({ cart: body.cart, delivery: body.delivery ?? null, slots: body.slots ?? [] });
     } catch {
-      setError({ text: "Няма връзка. Провери интернета.", reconnect: false });
+      setError({ text: t("offline"), reconnect: false });
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     void load();
@@ -53,9 +65,9 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
       const res = await fetch("/api/ebag/cart", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
       const out = (await res.json().catch(() => ({}))) as { cart?: CartView; warning?: string | null; error?: string };
       if (out.cart) setView((v) => (v ? { ...v, cart: out.cart! } : v));
-      setWarning(out.warning ?? (res.ok ? null : (out.error ?? "Промяната не мина. Опитай пак.")));
+      setWarning(out.warning ?? (res.ok ? null : (out.error ?? t("changeFailed"))));
     } catch {
-      setWarning("Няма връзка. Промяната не е запазена.");
+      setWarning(t("changeOffline"));
     } finally {
       setBusy((b) => {
         const n = new Set(b);
@@ -73,7 +85,7 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
 
   if (loading && !view)
     return (
-      <section className="flex flex-col gap-2" aria-busy="true" aria-label="Зареждаме количката">
+      <section className="flex flex-col gap-2" aria-busy="true" aria-label={t("loadingCart")}>
         {[0, 1, 2].map((i) => (
           <div key={i} className="card h-20 animate-pulse" />
         ))}
@@ -85,11 +97,11 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
         <p className="error">{error.text}</p>
         {error.reconnect ? (
           <a href="/api/ebag/connect" className="btn-secondary">
-            Свържи eBag отново
+            {t("reconnect")}
           </a>
         ) : (
           <button type="button" className="btn-secondary" onClick={() => void load()}>
-            Опитай пак
+            {common("retry")}
           </button>
         )}
       </div>
@@ -104,15 +116,15 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
     <section className="flex flex-col gap-3" aria-labelledby="cart-title">
       <div className="flex items-baseline justify-between">
         <h2 id="cart-title" className="text-lg font-semibold">
-          Количката ти в eBag
+          {t("cartTitle")}
         </h2>
         <button type="button" className="text-sm underline opacity-70" onClick={() => void load()} disabled={loading}>
-          {loading ? "Обновяваме…" : "Обнови"}
+          {loading ? t("refreshing") : t("refresh")}
         </button>
       </div>
 
       {cart.items.length === 0 ? (
-        <p className="card text-sm opacity-80">Количката ти е празна.</p>
+        <p className="card text-sm opacity-80">{t("empty")}</p>
       ) : (
         <ul className="flex flex-col gap-2">
           {cart.items.map((it) => {
@@ -131,35 +143,35 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
                     {it.name}
                   </a>
                   <span className="text-xs opacity-70">
-                    {it.packSize && `${it.packSize} · `}
-                    {it.price != null && `${eur(it.price)}${it.unit === "kg" ? "/кг" : ""}`}
+                    {it.packSize && `${packUnits(it.packSize, locale)} · `}
+                    {it.price != null && `${money(it.price)}${it.unit === "kg" ? t("perKg") : ""}`}
                     {it.regularPrice != null && (
                       <>
                         {" "}
-                        <s>{eur(it.regularPrice)}</s> <span className="badge-promo">Промо</span>
+                        <s>{money(it.regularPrice)}</s> <span className="badge-promo">{t("promo")}</span>
                       </>
                     )}
                   </span>
-                  {!it.available && <span className="text-xs font-semibold text-red-600">Изчерпан — махни го или го смени</span>}
+                  {!it.available && <span className="text-xs font-semibold text-red-600">{t("soldOut")}</span>}
                   <div className="flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-1" role="group" aria-label={`Количество за ${it.name}`}>
+                    <div className="flex items-center gap-1" role="group" aria-label={t("qtyFor", { name: it.name })}>
                       <button
                         type="button"
                         className="btn-secondary size-9 p-0 text-lg"
                         onClick={() => change(it, -1)}
                         disabled={pending}
-                        aria-label={stepQuantity(it, -1) === 0 ? "Махни" : "По-малко"}
+                        aria-label={stepQuantity(it, -1) === 0 ? t("remove") : t("less")}
                       >
                         {stepQuantity(it, -1) === 0 ? "×" : "−"}
                       </button>
                       <span className="min-w-14 text-center text-sm tabular-nums" aria-live="polite">
-                        {qtyLabel(it.quantity, it.unit)}
+                        {qtyLabel(t, locale, it.quantity, it.unit)}
                       </span>
-                      <button type="button" className="btn-secondary size-9 p-0 text-lg" onClick={() => change(it, 1)} disabled={pending} aria-label="Повече">
+                      <button type="button" className="btn-secondary size-9 p-0 text-lg" onClick={() => change(it, 1)} disabled={pending} aria-label={t("more")}>
                         +
                       </button>
                     </div>
-                    <span className="font-semibold tabular-nums">{it.lineTotal != null ? eur(it.lineTotal) : ""}</span>
+                    <span className="font-semibold tabular-nums">{it.lineTotal != null ? money(it.lineTotal) : ""}</span>
                   </div>
                 </div>
               </li>
@@ -176,24 +188,24 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
       {cart.items.length > 0 && (
         <div className="card flex flex-col gap-2">
           <div className="flex justify-between text-sm">
-            <span>Продукти ({cart.count})</span>
-            <span className="tabular-nums">{eur(cart.total)}</span>
+            <span>{t("productsCount", { n: cart.count })}</span>
+            <span className="tabular-nums">{money(cart.total)}</span>
           </div>
           {cart.shipping != null && (
             <div className="flex justify-between text-sm">
-              <span>Доставка</span>
-              <span className="tabular-nums">{cart.shipping === 0 ? "безплатна" : eur(cart.shipping)}</span>
+              <span>{t("delivery")}</span>
+              <span className="tabular-nums">{cart.shipping === 0 ? t("free") : money(cart.shipping)}</span>
             </div>
           )}
           {cart.savings > 0 && (
             <div className="flex justify-between text-sm text-accent">
-              <span>Спестяваш</span>
-              <span className="tabular-nums">−{eur(cart.savings)}</span>
+              <span>{t("savings")}</span>
+              <span className="tabular-nums">−{money(cart.savings)}</span>
             </div>
           )}
           <div className="flex justify-between border-t border-border pt-2 font-bold">
-            <span>Общо</span>
-            <span className="tabular-nums">{eur(cart.total + (cart.shipping ?? 0))}</span>
+            <span>{t("total")}</span>
+            <span className="tabular-nums">{money(cart.total + (cart.shipping ?? 0))}</span>
           </div>
           {hint && delivery?.freeFrom != null && (
             <div className="flex flex-col gap-1">
@@ -201,10 +213,10 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
                 <div className="h-full rounded-full bg-accent" style={{ width: `${Math.min(100, (cart.total / delivery.freeFrom) * 100)}%` }} />
               </div>
               <p className="text-xs">
-                {hint.kind === "below_min" && <span className="font-semibold text-red-600">Още {eur(hint.missing)} до минималната поръчка в eBag.</span>}
-                {hint.kind === "to_cheaper" && `Още ${eur(hint.missing)} до по-евтина доставка (${eur(hint.nextFee ?? 0)}).`}
-                {hint.kind === "to_free" && `Още ${eur(hint.missing)} до безплатна доставка.`}
-                {hint.kind === "free" && "Доставката е безплатна."}
+                {hint.kind === "below_min" && <span className="font-semibold text-red-600">{t("belowMin", { amount: money(hint.missing) })}</span>}
+                {hint.kind === "to_cheaper" && t("toCheaper", { amount: money(hint.missing), fee: money(hint.nextFee ?? 0) })}
+                {hint.kind === "to_free" && t("toFree", { amount: money(hint.missing) })}
+                {hint.kind === "free" && t("freeDelivery")}
               </p>
             </div>
           )}
@@ -214,12 +226,16 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
       {slots.length > 0 && (
         <div className="flex flex-col gap-2">
           <p className="text-sm">
-            Най-ранна доставка{delivery?.area ? ` (${delivery.area})` : ""}: <span className="font-semibold whitespace-nowrap">{slotLabel(slots[0]!, today)}</span>
+            {t.rich(delivery?.area ? "earliestArea" : "earliest", {
+              area: delivery?.area ?? "",
+              slot: slotLabel(t, locale, slots[0]!, today),
+              b: (chunks) => <span className="font-semibold whitespace-nowrap">{chunks}</span>,
+            })}
           </p>
           <div className="flex flex-wrap gap-2">
             {slots.slice(1).map((s) => (
               <span key={`${s.date}${s.time}`} className="rounded-full border border-border px-3 py-1 text-xs">
-                {slotLabel(s, today)}
+                {slotLabel(t, locale, s, today)}
               </span>
             ))}
           </div>
@@ -229,18 +245,18 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
       {cart.items.length > 0 && (
         <>
           <a href={cart.url} target="_blank" rel="noopener noreferrer" className={`btn-primary ${canOrder ? "" : "pointer-events-none opacity-50"}`} aria-disabled={!canOrder}>
-            Поръчай в eBag ↗︎
+            {t("order")}
           </a>
-          <p className="text-center text-xs opacity-70">Часа за доставка и плащането избираш в eBag — ние не можем да поръчваме.</p>
+          <p className="text-center text-xs opacity-70">{t("orderNote")}</p>
           <button
             type="button"
             className="btn-ghost text-sm"
             disabled={busy.size > 0}
             onClick={() => {
-              if (window.confirm("Да изчистим ли цялата количка в eBag?")) void patch("all", { op: "clear" });
+              if (window.confirm(t("clearConfirm"))) void patch("all", { op: "clear" });
             }}
           >
-            Изчисти количката
+            {t("clear")}
           </button>
         </>
       )}

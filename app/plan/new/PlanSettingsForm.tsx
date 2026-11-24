@@ -2,9 +2,10 @@
 
 import { useMemo, useState, useTransition } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { BudgetField, Chips, Choice, NumberField } from "@/components/form/fields";
 import { computeTargets, type Activity, type Goal, type Sex } from "@/lib/planner/targets";
-import { ACTIVITY_OPTIONS, ALLERGEN_OPTIONS, DIET_OPTIONS, EXCLUDE_OPTIONS, GOAL_OPTIONS, PANTRY_OPTIONS, SEX_OPTIONS, type Diet } from "@/lib/profile/options";
+import { ACTIVITY_OPTIONS, ALLERGEN_OPTIONS, DIET_OPTIONS, EXCLUDE_OPTIONS, GOAL_OPTIONS, PANTRY_OPTIONS, SEX_OPTIONS, dietKey, type Diet } from "@/lib/profile/options";
 import { usePlanGenerator } from "../usePlanGenerator";
 import { savePlanSettings } from "./actions";
 
@@ -30,6 +31,14 @@ export interface SettingsValues {
 const toggle = (list: string[], v: string) => (list.includes(v) ? list.filter((x) => x !== v) : [...list, v]);
 
 export function PlanSettingsForm({ initial }: { initial: SettingsValues }) {
+  const tp = useTranslations("plan");
+  const t = useTranslations("plan.settings");
+  const tg = useTranslations("plan.generate");
+  const tc = useTranslations("common");
+  const to = useTranslations("options");
+  /** Option label from the "options" namespace, or the Bulgarian label from lib/profile/options while a key is missing. */
+  const opt = (key: string, fallback: string) => (to.has(key) ? to(key) : fallback);
+  const chips = (group: string, list: { value: string; label: string }[]) => list.map((o) => ({ value: o.value, label: opt(`${group}.${o.value}`, o.label) }));
   const [v, setV] = useState(initial);
   const [saving, startSaving] = useTransition();
   const gen = usePlanGenerator();
@@ -70,34 +79,40 @@ export function PlanSettingsForm({ initial }: { initial: SettingsValues }) {
     <div className="flex flex-col gap-5">
       <header className="flex flex-col gap-2">
         <Link href="/plan" className="btn-ghost -ml-3 self-start">
-          ← Назад
+          {tc("back")}
         </Link>
-        <h1 className="text-2xl font-bold">Нов план</h1>
-        <p className="opacity-80">Провери настройките за седмицата. Запазваме ги и за следващия път.</p>
+        <h1 className="text-2xl font-bold">{tp("newPlan")}</h1>
+        <p className="opacity-80">{t("intro")}</p>
       </header>
 
       <section className="card flex flex-col gap-3" aria-labelledby="s-budget">
         <h2 id="s-budget" className="text-lg font-semibold">
-          Бюджет за седмицата
+          {t("budget")}
         </h2>
         <BudgetField value={v.budget_eur} onChange={(x) => set("budget_eur", x)} />
       </section>
 
       <section className="card flex flex-col gap-3" aria-labelledby="s-goal">
         <h2 id="s-goal" className="text-lg font-semibold">
-          Тегло и цел
+          {t("weightGoal")}
         </h2>
-        <NumberField id="weight" label="Тегло" unit="кг" value={v.weight_kg} onChange={(x) => set("weight_kg", x)} decimal />
-        <div role="radiogroup" aria-label="Цел" className="flex flex-col gap-2">
+        <NumberField id="weight" label={t("weight")} unit={t("kg")} value={v.weight_kg} onChange={(x) => set("weight_kg", x)} decimal />
+        <div role="radiogroup" aria-label={t("goal")} className="flex flex-col gap-2">
           {GOAL_OPTIONS.map((o) => (
-            <Choice key={o.value} checked={v.goal === o.value} onClick={() => set("goal", o.value)} label={o.label} sub={o.hint} />
+            <Choice
+              key={o.value}
+              checked={v.goal === o.value}
+              onClick={() => set("goal", o.value)}
+              label={opt(`goal.${o.value}.label`, o.label)}
+              sub={opt(`goal.${o.value}.hint`, o.hint)}
+            />
           ))}
         </div>
       </section>
 
       <section className="card flex flex-col gap-3" aria-labelledby="s-targets">
         <h2 id="s-targets" className="text-lg font-semibold">
-          Калории и протеин на ден
+          {t("targets")}
         </h2>
         {!v.manual ? (
           <>
@@ -105,13 +120,13 @@ export function PlanSettingsForm({ initial }: { initial: SettingsValues }) {
               {computed ? (
                 <>
                   {computed.kcal_min}–{computed.kcal_max} <span className="text-base font-normal">kcal</span> · ≥ {computed.protein_min}{" "}
-                  <span className="text-base font-normal">г протеин</span>
+                  <span className="text-base font-normal">{t("proteinUnit")}</span>
                 </>
               ) : (
-                <span className="text-base font-normal opacity-70">Попълни възраст, ръст и тегло</span>
+                <span className="text-base font-normal opacity-70">{t("fillBody")}</span>
               )}
             </p>
-            <p className="text-sm opacity-70">Изчисляваме ги от данните ти и се обновяват, докато ги сменяш.</p>
+            <p className="text-sm opacity-70">{t("computedNote")}</p>
             <button
               type="button"
               className="btn-secondary"
@@ -125,18 +140,21 @@ export function PlanSettingsForm({ initial }: { initial: SettingsValues }) {
                 }))
               }
             >
-              Задай ги ръчно
+              {t("setManually")}
             </button>
           </>
         ) : (
           <>
             <div className="grid grid-cols-2 gap-3">
-              <NumberField id="kmin" label="kcal от" unit="" value={v.kcal_min} onChange={(x) => set("kcal_min", x)} />
-              <NumberField id="kmax" label="kcal до" unit="" value={v.kcal_max} onChange={(x) => set("kcal_max", x)} />
+              <NumberField id="kmin" label={t("kcalFrom")} unit="" value={v.kcal_min} onChange={(x) => set("kcal_min", x)} />
+              <NumberField id="kmax" label={t("kcalTo")} unit="" value={v.kcal_max} onChange={(x) => set("kcal_max", x)} />
             </div>
-            <NumberField id="pmin" label="Протеин поне" unit="г на ден" value={v.protein_min} onChange={(x) => set("protein_min", x)} />
+            <NumberField id="pmin" label={t("proteinMin")} unit={t("gPerDay")} value={v.protein_min} onChange={(x) => set("protein_min", x)} />
             <button type="button" className="btn-ghost" onClick={() => set("manual", false)}>
-              Изчислявай ги автоматично{computed ? ` (${computed.kcal_min}–${computed.kcal_max} kcal, ${computed.protein_min} г)` : ""}
+              {t("auto")}
+              {computed
+                ? t("autoValues", { kcalMin: String(computed.kcal_min), kcalMax: String(computed.kcal_max), protein: String(computed.protein_min) })
+                : ""}
             </button>
           </>
         )}
@@ -144,9 +162,9 @@ export function PlanSettingsForm({ initial }: { initial: SettingsValues }) {
 
       <section className="card flex flex-col gap-3" aria-labelledby="s-food">
         <h2 id="s-food" className="text-lg font-semibold">
-          Хранене
+          {t("food")}
         </h2>
-        <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Диета">
+        <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={t("diet")}>
           {DIET_OPTIONS.map((o) => (
             <button
               key={o.label}
@@ -155,39 +173,45 @@ export function PlanSettingsForm({ initial }: { initial: SettingsValues }) {
               aria-checked={v.diet === o.value}
               className="chip disabled:opacity-50"
               disabled={!!o.soon && v.diet !== o.value}
-              title={o.soon}
+              title={o.soon ? to("diet.soon") : undefined}
               onClick={() => set("diet", o.value)}
             >
-              {o.label}
-              {o.soon ? " (скоро)" : ""}
+              {opt(`diet.${dietKey(o.value)}`, o.label)}
+              {o.soon ? t("soon") : ""}
             </button>
           ))}
         </div>
-        <h3 className="font-medium">Не ям</h3>
-        <Chips options={EXCLUDE_OPTIONS} selected={v.exclude_tags} onToggle={(x) => set("exclude_tags", toggle(v.exclude_tags, x))} />
-        <h3 className="font-medium">Алергии</h3>
-        <Chips options={ALLERGEN_OPTIONS} selected={v.allergens} onToggle={(x) => set("allergens", toggle(v.allergens, x))} />
+        <h3 className="font-medium">{t("dontEat")}</h3>
+        <Chips options={chips("exclude", EXCLUDE_OPTIONS)} selected={v.exclude_tags} onToggle={(x) => set("exclude_tags", toggle(v.exclude_tags, x))} />
+        <h3 className="font-medium">{t("allergies")}</h3>
+        <Chips options={chips("allergen", ALLERGEN_OPTIONS)} selected={v.allergens} onToggle={(x) => set("allergens", toggle(v.allergens, x))} />
       </section>
 
       <details className="card flex flex-col gap-3">
-        <summary className="cursor-pointer text-lg font-semibold">Още данни</summary>
+        <summary className="cursor-pointer text-lg font-semibold">{t("more")}</summary>
         <div className="mt-3 flex flex-col gap-3">
-          <div role="radiogroup" aria-label="Пол" className="grid grid-cols-2 gap-2">
+          <div role="radiogroup" aria-label={t("sex")} className="grid grid-cols-2 gap-2">
             {SEX_OPTIONS.map((o) => (
-              <Choice key={o.value} checked={v.sex === o.value} onClick={() => set("sex", o.value)} label={o.label} />
+              <Choice key={o.value} checked={v.sex === o.value} onClick={() => set("sex", o.value)} label={opt(`sex.${o.value}`, o.label)} />
             ))}
           </div>
-          <NumberField id="age" label="Възраст" unit="години" value={v.age} onChange={(x) => set("age", x)} />
-          <NumberField id="height" label="Ръст" unit="см" value={v.height_cm} onChange={(x) => set("height_cm", x)} />
-          <h3 className="font-medium">Колко се движиш?</h3>
-          <div role="radiogroup" aria-label="Активност" className="flex flex-col gap-2">
+          <NumberField id="age" label={t("age")} unit={t("years")} value={v.age} onChange={(x) => set("age", x)} />
+          <NumberField id="height" label={t("height")} unit={t("cm")} value={v.height_cm} onChange={(x) => set("height_cm", x)} />
+          <h3 className="font-medium">{t("activityQ")}</h3>
+          <div role="radiogroup" aria-label={t("activity")} className="flex flex-col gap-2">
             {ACTIVITY_OPTIONS.map((o) => (
-              <Choice key={o.value} checked={v.activity === o.value} onClick={() => set("activity", o.value)} label={o.label} sub={o.example} />
+              <Choice
+                key={o.value}
+                checked={v.activity === o.value}
+                onClick={() => set("activity", o.value)}
+                label={opt(`activity.${o.value}.label`, o.label)}
+                sub={opt(`activity.${o.value}.example`, o.example)}
+              />
             ))}
           </div>
-          <h3 className="font-medium">Какво имаш вкъщи</h3>
-          <p className="text-sm opacity-70">Използват се в рецептите, но не се купуват.</p>
-          <Chips options={PANTRY_OPTIONS} selected={v.pantry} onToggle={(x) => set("pantry", toggle(v.pantry, x))} />
+          <h3 className="font-medium">{t("pantry")}</h3>
+          <p className="text-sm opacity-70">{t("pantryNote")}</p>
+          <Chips options={chips("pantry", PANTRY_OPTIONS)} selected={v.pantry} onToggle={(x) => set("pantry", toggle(v.pantry, x))} />
         </div>
       </details>
 
@@ -203,11 +227,11 @@ export function PlanSettingsForm({ initial }: { initial: SettingsValues }) {
           </p>
         )}
         <button type="button" className="btn-primary" onClick={submit} disabled={busy}>
-          {gen.busy ? "Съставяме плана…" : saving ? "Запазваме…" : "Създай плана"}
+          {gen.busy ? tg("creating") : saving ? tc("saving") : tg("createThe")}
         </button>
         {gen.busy && (
           <p className="text-center text-sm opacity-70" aria-live="polite">
-            {gen.stepText} (до ~30 сек)
+            {tg("upTo30", { step: gen.stepText })}
           </p>
         )}
       </footer>

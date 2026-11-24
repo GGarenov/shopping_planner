@@ -39,7 +39,10 @@ export async function updateSession(request: NextRequest) {
 
   if (!user && !isPublic(pathname)) {
     // API calls get a JSON 401 instead of an HTML redirect.
-    if (pathname.startsWith("/api/")) return NextResponse.json({ error: "Влез отново в профила си." }, { status: 401 });
+    if (pathname.startsWith("/api/")) {
+      const en = request.cookies.get("lang")?.value === "en"; // LOCALE_COOKIE; same text as common.loginAgain
+      return NextResponse.json({ error: en ? "Please log in again." : "Влез отново в профила си." }, { status: 401 });
+    }
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     url.search = "";

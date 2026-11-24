@@ -1,5 +1,7 @@
 // Choices shown during onboarding. Keys match data/ingredients.json (tags, allergens, ingredient ids)
-// and the planner (scripts/plan.mjs). Labels are the Bulgarian UI text.
+// and the planner (scripts/plan.mjs). `label` is only the Bulgarian fallback: render labels via next-intl namespace
+// "options" — options.sex.<v>, options.activity.<v>.label/.example, options.goal.<v>.label/.hint,
+// options.diet.<v | "none"> (+ options.diet.soon), options.exclude.<v>, options.allergen.<v>, options.pantry.<v>.
 import type { Activity, Goal, Sex } from "@/lib/planner/targets";
 
 export type Diet = "vegetarian" | "vegan" | "pescatarian";
@@ -24,10 +26,10 @@ export const GOAL_OPTIONS: { value: Goal; label: string; hint: string }[] = [
 
 /** `null` = no restriction. */
 /** `soon`: shown but not selectable yet — too few recipes for a full week (vegan: no breakfasts yet). */
-export const DIET_OPTIONS: { value: Diet | null; label: string; soon?: string }[] = [
+export const DIET_OPTIONS: { value: Diet | null; label: string; soon?: boolean }[] = [
   { value: null, label: "Без ограничения" },
   { value: "vegetarian", label: "Вегетарианско" },
-  { value: "vegan", label: "Веганско", soon: "Скоро — още нямаме достатъчно веган рецепти" },
+  { value: "vegan", label: "Веганско", soon: true },
   { value: "pescatarian", label: "Пескетарианско (риба, без месо)" },
 ];
 
@@ -79,6 +81,9 @@ export const PANTRY_OPTIONS: { value: string; label: string }[] = [
   { value: "garlic", label: "Чесън" },
   { value: "lemon", label: "Лимон" },
 ];
+
+/** Key under "options.diet" for a diet value (`null` → "none"). */
+export const dietKey = (value: Diet | null): string => value ?? "none";
 
 /** Same defaults as data/profiles/test.json. */
 export const DEFAULT_PANTRY = ["salt", "black_pepper", "paprika", "sunflower_oil", "vinegar", "sugar"];

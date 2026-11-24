@@ -1,0 +1,53 @@
+{
+  "metaTitle": "Profile · Shopping Plan",
+  "title": "Profile",
+  "goalsTitle": "Your goals",
+  "goalsSummary": "{goal} · {min}–{max} kcal · protein ≥ {protein} g",
+  "detailsTitle": "Your details",
+  "detailsSummary": "{weight} kg · {height} cm · budget {budget}/week",
+  "ebagConnected": "Connected",
+  "ebagExpired": "Connection expired",
+  "ebagNotConnected": "Not connected",
+  "plansTitle": "Plans",
+  "noPlans": "No plans yet.",
+  "week": "Week {from} – {to}",
+  "current": "current",
+  "planMeta": "{price} · created {created}",
+  "feedbackTitle": "Feedback",
+  "deleteLink": "Delete my profile",
+  "feedback": {
+    "label": "What doesn’t work, what’s missing, what did you like? Write freely — we read everything.",
+    "placeholder": "E.g. “The recipe for … is too complicated”",
+    "sending": "Sending…",
+    "send": "Send",
+    "thanks": "Thank you! We got your message.",
+    "tooShort": "Please write at least a few words.",
+    "failed": "We couldn’t send your message. Please try again."
+  },
+  "delete": {
+    "metaTitle": "Delete profile · Shopping Plan",
+    "title": "Delete profile",
+    "intro": "We will delete the profile <b>{email}</b> and all its data:",
+    "itemData": "your details (sex, age, height, weight, goals, budget, restrictions)",
+    "itemPlans": "all plans and shopping lists",
+    "itemEbag": "the eBag connection — we also revoke access at eBag",
+    "note": "Your eBag cart and orders stay unchanged. This cannot be undone.",
+    "confirm": "I understand that my profile and data will be deleted forever.",
+    "deleting": "Deleting…",
+    "submit": "Delete my profile",
+    "mustConfirm": "Please confirm that you understand this cannot be undone.",
+    "failed": "We couldn’t delete your profile. Please try again or write to us."
+  },
+  "pages": {
+    "errorTitle": "Something went wrong",
+    "errorText": "Please try again. If it keeps happening, tell us via Profile → Feedback.",
+    "errorCode": "Code: {code}",
+    "retry": "Try again",
+    "home": "Go to start",
+    "globalErrorText": "Please try again in a moment.",
+    "notFoundTitle": "Page not found",
+    "notFoundText": "The link may be old or the plan may have been deleted.",
+    "offlineTitle": "No internet connection",
+    "offlineText": "Check your connection and try again."
+  }
+}

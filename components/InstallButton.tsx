@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { useInstall } from "@/lib/pwa/install";
 
 /**
@@ -9,6 +10,7 @@ import { useInstall } from "@/lib/pwa/install";
  * Renders nothing inside the installed app.
  */
 export function InstallButton({ variant = "primary", className = "" }: { variant?: "primary" | "secondary" | "banner"; className?: string }) {
+  const t = useTranslations("install");
   const { ready, standalone, installed, canPrompt, platform, prompt } = useInstall();
   const [guide, setGuide] = useState(false);
   if (!ready || standalone) return null;
@@ -16,7 +18,7 @@ export function InstallButton({ variant = "primary", className = "" }: { variant
   if (installed)
     return (
       <p className={`rounded-2xl bg-accent-soft px-4 py-3 text-sm font-semibold ${className}`} role="status">
-        Готово! Отвори „Пазарен план“ от началния екран на телефона.
+        {t("installed")}
       </p>
     );
 
@@ -30,8 +32,8 @@ export function InstallButton({ variant = "primary", className = "" }: { variant
       <button type="button" onClick={onClick} className={`flex w-full items-center gap-3 rounded-2xl border-2 border-accent bg-muted p-3 text-left ${className}`}>
         <PhoneIcon className="size-9 shrink-0 text-accent" />
         <span className="flex flex-1 flex-col">
-          <span className="font-extrabold">Добави в телефона</span>
-          <span className="text-sm opacity-70">Отваря се с едно докосване, на цял екран</span>
+          <span className="font-extrabold">{t("addToPhone")}</span>
+          <span className="text-sm opacity-70">{t("bannerSub")}</span>
         </span>
         <span aria-hidden className="text-xl text-accent">
           ›
@@ -40,7 +42,7 @@ export function InstallButton({ variant = "primary", className = "" }: { variant
     ) : (
       <button type="button" onClick={onClick} className={`${variant === "primary" ? "btn-primary" : "btn-secondary"} gap-2 ${className}`}>
         <PhoneIcon className="size-6" />
-        Добави в телефона
+        {t("addToPhone")}
       </button>
     );
 
@@ -53,6 +55,7 @@ export function InstallButton({ variant = "primary", className = "" }: { variant
 }
 
 function InstallGuide({ platform, onClose }: { platform: string; onClose: () => void }) {
+  const t = useTranslations("install");
   const ios = platform === "ios";
   return (
     <div className="fixed inset-0 z-50 flex flex-col justify-end bg-black/50" role="dialog" aria-modal="true" aria-labelledby="install-guide-title" onClick={onClose}>
@@ -62,7 +65,7 @@ function InstallGuide({ platform, onClose }: { platform: string; onClose: () => 
         onClick={(e) => e.stopPropagation()}
       >
         <h2 id="install-guide-title" className="text-xl font-extrabold">
-          {ios ? "Добави в iPhone с 2 докосвания" : "Добави в телефона"}
+          {ios ? t("iosTitle") : t("addToPhone")}
         </h2>
         {ios ? (
           <>
@@ -70,17 +73,17 @@ function InstallGuide({ platform, onClose }: { platform: string; onClose: () => 
               <li className="card flex items-center gap-3">
                 <Step n={1} />
                 <span>
-                  Натисни <strong>Сподели</strong> <ShareIcon /> в Safari (долу в средата или в менюто <strong>⋯</strong>)
+                  {t.rich("iosStep1", { strong, share: () => <ShareIcon label={t("share")} /> })}
                 </span>
               </li>
               <li className="card flex items-center gap-3">
                 <Step n={2} />
                 <span>
-                  Избери <strong>„Добави към началния екран“</strong> и после <strong>„Добави“</strong>
+                  {t.rich("iosStep2", { strong })}
                 </span>
               </li>
             </ol>
-            <p className="text-sm opacity-70">Apple не позволява на сайтовете да се инсталират сами — затова е с тези две стъпки. Работи само в Safari.</p>
+            <p className="text-sm opacity-70">{t("iosNote")}</p>
             <span aria-hidden className="animate-bounce self-center text-3xl text-accent">
               ↓
             </span>
@@ -90,24 +93,26 @@ function InstallGuide({ platform, onClose }: { platform: string; onClose: () => 
             <li className="card flex items-center gap-3">
               <Step n={1} />
               <span>
-                Отвори менюто на браузъра <strong>⋮</strong> (горе или долу вдясно)
+                {t.rich("androidStep1", { strong })}
               </span>
             </li>
             <li className="card flex items-center gap-3">
               <Step n={2} />
               <span>
-                Избери <strong>„Инсталиране на приложението“</strong> или <strong>„Добавяне към началния екран“</strong>
+                {t.rich("androidStep2", { strong })}
               </span>
             </li>
           </ol>
         )}
         <button type="button" className="btn-secondary" onClick={onClose}>
-          Разбрах
+          {t("gotIt")}
         </button>
       </div>
     </div>
   );
 }
+
+const strong = (c: React.ReactNode) => <strong>{c}</strong>;
 
 function Step({ n }: { n: number }) {
   return <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent font-extrabold text-accent-fg">{n}</span>;
@@ -122,9 +127,9 @@ function PhoneIcon({ className }: { className?: string }) {
   );
 }
 
-function ShareIcon() {
+function ShareIcon({ label }: { label: string }) {
   return (
-    <svg aria-label="Сподели" viewBox="0 0 24 24" className="inline size-5 align-text-bottom text-accent" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg aria-label={label}viewBox="0 0 24 24" className="inline size-5 align-text-bottom text-accent" fill="none" stroke="currentColor" strokeWidth="2">
       <path d="M12 3v12M7 8l5-5 5 5M5 12v8h14v-8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );

@@ -1,10 +1,13 @@
 "use client";
 
 import { useActionState, useState } from "react";
+import { useTranslations } from "next-intl";
 import type { Targets } from "@/lib/planner/targets";
 import { resetTargetsOverride, saveTargetsOverride, type OverrideState } from "./actions";
 
 export function TargetsEditor({ targets, computed }: { targets: Targets; computed: Targets }) {
+  const t = useTranslations("targets");
+  const tc = useTranslations("common");
   const [open, setOpen] = useState(false);
   const [state, action, pending] = useActionState(async (prev: OverrideState, fd: FormData) => {
     const res = await saveTargetsOverride(prev, fd);
@@ -16,12 +19,12 @@ export function TargetsEditor({ targets, computed }: { targets: Targets; compute
     return (
       <div className="flex flex-col gap-2">
         <button type="button" className="btn-secondary" onClick={() => setOpen(true)}>
-          Промени целите ръчно
+          {t("editManually")}
         </button>
         {targets.source === "manual" && (
           <form action={resetTargetsOverride}>
             <button type="submit" className="btn-ghost w-full">
-              Върни изчислените ({computed.kcal_min}–{computed.kcal_max} kcal, {computed.protein_min} г протеин)
+              {t("resetComputed", { kcalMin: String(computed.kcal_min), kcalMax: String(computed.kcal_max), protein: String(computed.protein_min) })}
             </button>
           </form>
         )}
@@ -32,16 +35,16 @@ export function TargetsEditor({ targets, computed }: { targets: Targets; compute
   return (
     <form action={action} className="card flex flex-col gap-3">
       <div className="grid grid-cols-2 gap-3">
-        <Field name="kcal_min" label="kcal от" defaultValue={state.values?.kcal_min ?? targets.kcal_min} />
-        <Field name="kcal_max" label="kcal до" defaultValue={state.values?.kcal_max ?? targets.kcal_max} />
+        <Field name="kcal_min" label={t("kcalFrom")} defaultValue={state.values?.kcal_min ?? targets.kcal_min} />
+        <Field name="kcal_max" label={t("kcalTo")} defaultValue={state.values?.kcal_max ?? targets.kcal_max} />
       </div>
-      <Field name="protein_min" label="Протеин минимум (г)" defaultValue={state.values?.protein_min ?? targets.protein_min} />
+      <Field name="protein_min" label={t("proteinMin")} defaultValue={state.values?.protein_min ?? targets.protein_min} />
       {state.error && <p className="error">{state.error}</p>}
       <button type="submit" className="btn-primary" disabled={pending}>
-        {pending ? "Запазваме…" : "Запази"}
+        {pending ? tc("saving") : tc("save")}
       </button>
       <button type="button" className="btn-ghost" onClick={() => setOpen(false)}>
-        Отказ
+        {tc("cancel")}
       </button>
     </form>
   );

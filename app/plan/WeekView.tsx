@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import type { PlanDay } from "@/lib/planner/plan";
-import { DAY_SHORT_BG as DAY_SHORT, SLOT_BG } from "@/lib/planner/labels";
+import { dayLongKey, dayShortKey, slotKey } from "@/lib/planner/labels";
+import { recipeName } from "@/lib/i18n/content";
 
 
 export function WeekView({
@@ -26,6 +28,9 @@ export function WeekView({
   /** recipe id → small photo URL */
   photos?: Record<string, string>;
 }) {
+  const t = useTranslations("plan");
+  const tc = useTranslations("common");
+  const locale = useLocale();
   const [active, setActive] = useState(Math.min(initialDay, days.length - 1));
   const day = days[active]!;
   const kcalOk = day.kcal >= kcalMin && day.kcal <= kcalMax;
@@ -33,32 +38,32 @@ export function WeekView({
 
   return (
     <div className="flex flex-col gap-4">
-      <div role="tablist" aria-label="Дни" className="grid grid-cols-7 gap-1">
+      <div role="tablist" aria-label={t("week.days")} className="grid grid-cols-7 gap-1">
         {days.map((d, i) => (
           <button
             key={d.day}
             type="button"
             role="tab"
             aria-selected={i === active}
-            aria-label={`${d.day} ${dates[i]}`}
+            aria-label={`${t(dayLongKey(i))} ${dates[i]}`}
             onClick={() => setActive(i)}
             className={`flex min-h-14 flex-col items-center justify-center rounded-xl text-sm ${
               i === active ? "bg-accent font-extrabold text-accent-fg shadow-sm" : "border border-border bg-muted"
             }`}
           >
-            <span>{DAY_SHORT[i]}</span>
+            <span>{t(dayShortKey(i))}</span>
             <span className="text-xs opacity-80">{dates[i]}</span>
           </button>
         ))}
       </div>
 
-      <section className="card flex flex-col gap-2" aria-label="Общо за деня">
-        <h2 className="font-semibold">{day.day}</h2>
+      <section className="card flex flex-col gap-2" aria-label={t("week.dayTotals")}>
+        <h2 className="font-semibold">{t(dayLongKey(active))}</h2>
         <div className="grid grid-cols-4 gap-2 text-center text-sm">
-          <Stat label="kcal" value={day.kcal} ok={kcalOk} />
-          <Stat label="протеин" value={`${day.protein_g} г`} ok={proteinOk} />
-          <Stat label="мазнини" value={`${day.fat_g} г`} />
-          <Stat label="въглех." value={`${day.carbs_g} г`} />
+          <Stat label={tc("kcal")} value={day.kcal} ok={kcalOk} />
+          <Stat label={tc("protein")} value={tc("grams", { n: String(day.protein_g) })} ok={proteinOk} />
+          <Stat label={tc("fat")} value={tc("grams", { n: String(day.fat_g) })} />
+          <Stat label={tc("carbs")} value={tc("grams", { n: String(day.carbs_g) })} />
         </div>
       </section>
 
@@ -69,11 +74,11 @@ export function WeekView({
               <MealThumb src={photos[m.recipe_id]} slot={m.slot} />
               <div className="flex min-w-0 flex-1 flex-col gap-0.5">
                 <span className="slot-tag" style={{ background: `var(--slot-${m.slot})`, color: `var(--slot-${m.slot}-fg)` }}>
-                  {SLOT_BG[m.slot]}
+                  {t(slotKey(m.slot))}
                 </span>
-                <span className="font-bold leading-snug">{m.recipe}</span>
+                <span className="font-bold leading-snug">{recipeName(m.recipe_id, m.recipe, locale)}</span>
                 <span className="text-sm opacity-70">
-                  {Math.round(m.kcal)} kcal · {Math.round(m.protein_g)} г протеин
+                  {t("week.mealLine", { kcal: String(Math.round(m.kcal)), protein: String(Math.round(m.protein_g)) })}
                 </span>
               </div>
               <span aria-hidden className="text-xl opacity-40">

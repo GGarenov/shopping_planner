@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useTransition } from "react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { Activity, Goal, Sex } from "@/lib/planner/targets";
@@ -12,9 +13,10 @@ import {
   GOAL_OPTIONS,
   PANTRY_OPTIONS,
   SEX_OPTIONS,
+  dietKey,
   type Diet,
 } from "@/lib/profile/options";
-import { profileInputSchema } from "@/lib/profile/schema";
+import { errorKey, profileInputSchema, type ErrorKey } from "@/lib/profile/schema";
 import { shouldShowInstallHint } from "@/app/install/hint";
 import { BudgetField, Chips, Choice, NumberField } from "@/components/form/fields";
 import { saveProfile } from "./actions";
@@ -37,32 +39,37 @@ export interface WizardValues {
 type Field = keyof WizardValues;
 
 interface Step {
-  title: string;
-  hint?: string;
+  /** Key under onboarding.steps (title, optional hint). */
+  key: string;
+  hint?: boolean;
   fields: Field[];
 }
 
 const STEPS: Step[] = [
-  { title: "Пол", hint: "Нужен е за формулата за калориите.", fields: ["sex"] },
-  { title: "Възраст, ръст и тегло", fields: ["age", "height_cm", "weight_kg"] },
-  { title: "Колко се движиш?", fields: ["activity"] },
-  { title: "Каква е целта ти?", fields: ["goal"] },
-  { title: "Бюджет за седмицата", hint: "Колко искаш да харчиш за храна в eBag на седмица.", fields: ["budget_eur"] },
-  { title: "Хранене", fields: ["diet"] },
-  { title: "Изключения и алергии", hint: "Рецепти с тези продукти няма да влизат в плана.", fields: ["exclude_tags", "allergens"] },
-  { title: "Какво имаш вкъщи?", hint: "Тези продукти се използват в рецептите, но не се купуват.", fields: ["pantry"] },
-  { title: "Съгласие", fields: ["consent"] },
+  { key: "sex", hint: true, fields: ["sex"] },
+  { key: "body", fields: ["age", "height_cm", "weight_kg"] },
+  { key: "activity", fields: ["activity"] },
+  { key: "goal", fields: ["goal"] },
+  { key: "budget", hint: true, fields: ["budget_eur"] },
+  { key: "diet", fields: ["diet"] },
+  { key: "exclude", hint: true, fields: ["exclude_tags", "allergens"] },
+  { key: "pantry", hint: true, fields: ["pantry"] },
+  { key: "consent", fields: ["consent"] },
 ];
 
 const toggle = (list: string[], v: string) => (list.includes(v) ? list.filter((x) => x !== v) : [...list, v]);
 
-function validate(values: WizardValues, fields: Field[]): string | null {
+/** Error key ("errors" namespace) of the first invalid field, or null. */
+function validate(values: WizardValues, fields: Field[]): ErrorKey | null {
   const mask = Object.fromEntries(fields.map((f) => [f, true])) as Partial<Record<Field, true>>;
   const r = profileInputSchema.pick(mask).safeParse(values);
-  return r.success ? null : (r.error.issues[0]?.message ?? "Невалидни данни");
+  return r.success ? null : errorKey(r.error.issues[0]?.message);
 }
 
 export function OnboardingWizard({ initial, editing }: { initial: WizardValues; editing: boolean }) {
+  const t = useTranslations("onboarding");
+  const tc = useTranslations("common");
+  const te = useTranslations("errors");
   const router = useRouter();
   const [values, setValues] = useState<WizardValues>(initial);
   const [stepIndex, setStepIndex] = useState(0);
@@ -83,7 +90,7 @@ export function OnboardingWizard({ initial, editing }: { initial: WizardValues; 
 
   const next = () => {
     const err = validate(values, step.fields);
-    if (err) return setError(err);
+    if (err) return setError(te(err));
     if (!last) {
       setStepIndex((i) => i + 1);
       window.scrollTo({ top: 0 });
@@ -101,16 +108,16 @@ export function OnboardingWizard({ initial, editing }: { initial: WizardValues; 
         <div className="flex items-center justify-between text-sm opacity-70">
           {stepIndex > 0 ? (
             <button type="button" className="btn-ghost -ml-3" onClick={() => setStepIndex((i) => i - 1)}>
-              ← Назад
+              {tc("back")}
             </button>
           ) : editing ? (
             <Link href="/targets" className="btn-ghost -ml-3">
-              ← Отказ
+              {t("cancel")}
             </Link>
           ) : (
             <form action="/auth/signout" method="post">
               <button type="submit" className="btn-ghost -ml-3">
-                Изход
+                {tc("logout")}
               </button>
             </form>
           )}
@@ -121,8 +128,8 @@ export function OnboardingWizard({ initial, editing }: { initial: WizardValues; 
         <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted" aria-hidden>
           <div className="h-full bg-accent transition-all" style={{ width: `${((stepIndex + 1) / STEPS.length) * 100}%` }} />
         </div>
-        <h1 className="text-2xl font-bold">{step.title}</h1>
-        {step.hint && <p className="opacity-75">{step.hint}</p>}
+        <h1 className="text-2xl font-bold">{t(`steps.${step.key}.title`)}</h1>
+        {step.hint && <p className="opacity-75">{t(`steps.${step.key}.hint`)}</p>}
       </header>
 
       <section className="flex flex-col gap-3">
@@ -136,7 +143,7 @@ export function OnboardingWizard({ initial, editing }: { initial: WizardValues; 
           </p>
         )}
         <button type="button" className="btn-primary" onClick={next} disabled={saving}>
-          {last ? (saving ? "Запазваме…" : editing ? "Запази" : "Готово — покажи целите ми") : "Напред"}
+          {last ? (saving ? tc("saving") : editing ? tc("save") : t("finish")) : t("next")}
         </button>
       </footer>
     </div>
@@ -152,21 +159,25 @@ function StepBody({
   values: WizardValues;
   set: <K extends Field>(k: K, v: WizardValues[K]) => void;
 }) {
+  const t = useTranslations("onboarding");
+  const to = useTranslations("options");
+  const chips = (opts: { value: string }[], group: "exclude" | "allergen" | "pantry") =>
+    opts.map((o) => ({ value: o.value, label: to(`${group}.${o.value}`) }));
   switch (stepIndex) {
     case 0:
       return (
         <div role="radiogroup" className="grid grid-cols-2 gap-3">
           {SEX_OPTIONS.map((o) => (
-            <Choice key={o.value} checked={values.sex === o.value} onClick={() => set("sex", o.value)} label={o.label} />
+            <Choice key={o.value} checked={values.sex === o.value} onClick={() => set("sex", o.value)} label={to(`sex.${o.value}`)} />
           ))}
         </div>
       );
     case 1:
       return (
         <>
-          <NumberField label="Възраст" unit="години" value={values.age} onChange={(v) => set("age", v)} />
-          <NumberField label="Ръст" unit="см" value={values.height_cm} onChange={(v) => set("height_cm", v)} />
-          <NumberField label="Тегло" unit="кг" value={values.weight_kg} onChange={(v) => set("weight_kg", v)} decimal />
+          <NumberField label={t("age")} unit={t("years")} value={values.age} onChange={(v) => set("age", v)} />
+          <NumberField label={t("height")} unit={t("cm")} value={values.height_cm} onChange={(v) => set("height_cm", v)} />
+          <NumberField label={t("weight")} unit={t("kg")} value={values.weight_kg} onChange={(v) => set("weight_kg", v)} decimal />
         </>
       );
     case 2:
@@ -177,8 +188,8 @@ function StepBody({
               key={o.value}
               checked={values.activity === o.value}
               onClick={() => set("activity", o.value)}
-              label={o.label}
-              sub={o.example}
+              label={to(`activity.${o.value}.label`)}
+              sub={to(`activity.${o.value}.example`)}
             />
           ))}
         </div>
@@ -187,7 +198,7 @@ function StepBody({
       return (
         <div role="radiogroup" className="flex flex-col gap-3">
           {GOAL_OPTIONS.map((o) => (
-            <Choice key={o.value} checked={values.goal === o.value} onClick={() => set("goal", o.value)} label={o.label} sub={o.hint} />
+            <Choice key={o.value} checked={values.goal === o.value} onClick={() => set("goal", o.value)} label={to(`goal.${o.value}.label`)} sub={to(`goal.${o.value}.hint`)} />
           ))}
         </div>
       );
@@ -202,11 +213,11 @@ function StepBody({
         <div role="radiogroup" className="flex flex-col gap-3">
           {DIET_OPTIONS.map((o) => (
             <Choice
-              key={o.label}
+              key={dietKey(o.value)}
               checked={values.diet === o.value}
               onClick={() => set("diet", o.value)}
-              label={o.label}
-              sub={o.soon}
+              label={to(`diet.${dietKey(o.value)}`)}
+              sub={o.soon ? to("diet.soon") : undefined}
               disabled={!!o.soon && values.diet !== o.value}
             />
           ))}
@@ -215,24 +226,21 @@ function StepBody({
     case 6:
       return (
         <>
-          <h2 className="font-semibold">Не ям</h2>
-          <Chips options={EXCLUDE_OPTIONS} selected={values.exclude_tags} onToggle={(v) => set("exclude_tags", toggle(values.exclude_tags, v))} />
-          <h2 className="mt-2 font-semibold">Алергии</h2>
-          <Chips options={ALLERGEN_OPTIONS} selected={values.allergens} onToggle={(v) => set("allergens", toggle(values.allergens, v))} />
-          <p className="text-sm opacity-70">Провери етикета на продуктите при сериозна алергия — данните идват от eBag.</p>
+          <h2 className="font-semibold">{t("dontEat")}</h2>
+          <Chips options={chips(EXCLUDE_OPTIONS, "exclude")} selected={values.exclude_tags} onToggle={(v) => set("exclude_tags", toggle(values.exclude_tags, v))} />
+          <h2 className="mt-2 font-semibold">{t("allergies")}</h2>
+          <Chips options={chips(ALLERGEN_OPTIONS, "allergen")} selected={values.allergens} onToggle={(v) => set("allergens", toggle(values.allergens, v))} />
+          <p className="text-sm opacity-70">{t("allergyNote")}</p>
         </>
       );
     case 7:
-      return <Chips options={PANTRY_OPTIONS} selected={values.pantry} onToggle={(v) => set("pantry", toggle(values.pantry, v))} />;
+      return <Chips options={chips(PANTRY_OPTIONS, "pantry")} selected={values.pantry} onToggle={(v) => set("pantry", toggle(values.pantry, v))} />;
     case 8:
       return (
         <>
           <div className="card flex flex-col gap-2 text-sm">
-            <p>
-              За да изчислим целите ти, пазим пола, възрастта, ръста, теглото, активността, целта, бюджета и
-              хранителните ти предпочитания. Това са лични данни.
-            </p>
-            <p>Използваме ги само за твоя план. Не ги споделяме. Можеш да изтриеш профила си с всички данни по всяко време.</p>
+            <p>{t("consentText1")}</p>
+            <p>{t("consentText2")}</p>
           </div>
           <label className="choice">
             <input
@@ -241,7 +249,7 @@ function StepBody({
               checked={values.consent}
               onChange={(e) => set("consent", e.target.checked)}
             />
-            <span>Съгласен/на съм данните ми да се обработват за изготвяне на плана.</span>
+            <span>{t("consentCheckbox")}</span>
           </label>
         </>
       );

@@ -1,14 +1,16 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { getUserAndProfile } from "@/lib/profile/load";
-import { profileInputSchema } from "@/lib/profile/schema";
+import { errorKey, profileInputSchema } from "@/lib/profile/schema";
 
 export type SaveProfileResult = { error: string } | undefined;
 
 export async function saveProfile(input: unknown): Promise<SaveProfileResult> {
+  const t = await getTranslations("errors");
   const parsed = profileInputSchema.safeParse(input);
-  if (!parsed.success) return { error: parsed.error.issues[0]?.message ?? "Невалидни данни" };
+  if (!parsed.success) return { error: t(errorKey(parsed.error.issues[0]?.message)) };
 
   const { supabase, user, profile } = await getUserAndProfile();
   const fields: Omit<typeof parsed.data, "consent"> & { consent?: true } = { ...parsed.data };
@@ -20,7 +22,7 @@ export async function saveProfile(input: unknown): Promise<SaveProfileResult> {
     .upsert({ user_id: user.id, ...fields, options }, { onConflict: "user_id" });
   if (error) {
     console.error("profiles upsert failed", error.code, error.message);
-    return { error: "Не успяхме да запазим данните. Опитай отново." };
+    return { error: t("saveProfileFailed") };
   }
   redirect("/targets");
 }
