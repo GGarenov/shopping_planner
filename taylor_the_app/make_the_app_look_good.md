@@ -58,7 +58,7 @@ Order: things a reviewer notices first come first. Times are rough working days.
 
 ### Phase 2: Tests that matter (2–3 days)
 
-- [ ] **Component tests (RTL):** ShoppingList (tick and untick, saving failure reverts), EbagCart (+/−, remove, delivery hint, error/reconnect state), PlanSettingsForm (live targets, validation messages, manual targets), LanguageToggle, InstallButton (Android prompt vs iPhone guide), WeekView (day tabs, photos and placeholders).
+- [x] **Component tests (RTL)** — done (30 tests in 6 files; shared `test/render.tsx` with the real bg/en messages, `test/fixtures.ts`): ShoppingList (tick and untick, saving failure reverts), EbagCart (+/−, remove, delivery hint, error/reconnect state), PlanSettingsForm (live targets, validation messages, manual targets), LanguageToggle, InstallButton (Android prompt vs iPhone guide), WeekView (day tabs, photos and placeholders).
 - [ ] **API route tests:** `/api/plan` (401, incomplete profile, budget too low → 422 with the message, success saves a plan, the "new plan" fallback), `/api/ebag/cart` (GET/PATCH/POST, reconnect 409, eBag down 502), OAuth callback (bad state, iss check, success). Supabase and eBag mocked with MSW or test doubles.
 - [ ] **RLS tests** against a local Supabase: two users, every table, read and write attempts. This is the strongest proof of "each user sees only their own data".
 - [ ] **Playwright E2E** (mobile viewport, Chromium + WebKit):

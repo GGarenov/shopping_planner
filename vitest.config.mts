@@ -5,10 +5,14 @@ import { defineConfig } from "vitest/config";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
+  // Next.js compiles JSX itself (tsconfig "jsx": "preserve"); for tests use the automatic React runtime.
+  oxc: { jsx: { runtime: "automatic" } },
   resolve: { alias: { "@": path.resolve(__dirname) } },
   test: {
-    include: ["lib/**/*.test.ts", "app/**/*.test.ts", "scripts/**/*.test.ts"],
+    // Unit tests run in Node; component tests (*.test.tsx) opt into jsdom with a `// @vitest-environment jsdom` comment.
+    include: ["lib/**/*.test.ts", "app/**/*.test.{ts,tsx}", "components/**/*.test.tsx", "scripts/**/*.test.ts"],
     environment: "node",
+    setupFiles: ["./test/setup.ts"],
     coverage: {
       provider: "v8",
       // Unit-test coverage of the domain logic. Code that only talks to Supabase / eBag / the browser is excluded

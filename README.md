@@ -29,15 +29,15 @@ On Windows, run `npm test` from a terminal whose path starts with `C:\` (capital
 
 ## Quality checks
 
-| What                                              | Command                                         | Where it runs                                    |
-| ------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------ |
-| Formatting (Prettier, incl. Tailwind class order) | `npm run format` / `npm run format:check`       | pre-commit (changed files), CI                   |
-| Lint (ESLint, Next.js + TypeScript rules)         | `npm run lint`                                  | pre-commit (changed files), CI                   |
-| Types (`tsc --noEmit`, strict)                    | `npm run typecheck`                             | CI                                               |
-| Unit tests (Vitest)                               | `npm test`                                      | CI                                               |
-| Coverage of `lib/` with minimum thresholds        | `npm run test:coverage` → `coverage/index.html` | CI (summary on the run page, report as artifact) |
-| Dependency audit (critical)                       | `npm audit --audit-level=critical`              | CI; Dependabot opens weekly update PRs           |
-| Code scanning                                     | CodeQL (`security-and-quality`)                 | push, PR, weekly                                 |
+| What                                                          | Command                                         | Where it runs                                    |
+| ------------------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------ |
+| Formatting (Prettier, incl. Tailwind class order)             | `npm run format` / `npm run format:check`       | pre-commit (changed files), CI                   |
+| Lint (ESLint, Next.js + TypeScript rules)                     | `npm run lint`                                  | pre-commit (changed files), CI                   |
+| Types (`tsc --noEmit`, strict)                                | `npm run typecheck`                             | CI                                               |
+| Unit + component tests (Vitest, React Testing Library, jsdom) | `npm test`                                      | CI                                               |
+| Coverage of `lib/` with minimum thresholds                    | `npm run test:coverage` → `coverage/index.html` | CI (summary on the run page, report as artifact) |
+| Dependency audit (critical)                                   | `npm audit --audit-level=critical`              | CI; Dependabot opens weekly update PRs           |
+| Code scanning                                                 | CodeQL (`security-and-quality`)                 | push, PR, weekly                                 |
 
 The pre-commit hook (Husky + lint-staged) formats and lints only the staged files. The coverage thresholds in
 `vitest.config.mts` sit just below the current numbers, so coverage can only go up.
