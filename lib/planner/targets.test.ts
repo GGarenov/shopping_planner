@@ -53,7 +53,15 @@ describe("computeTargets", () => {
   });
 
   it("maintain: kcal = TDEE, custom tolerance", () => {
-    const t = computeTargets({ sex: "male", age: 40, height_cm: 180, weight_kg: 80, activity: "moderate", goal: "maintain", kcal_tolerance: 150 });
+    const t = computeTargets({
+      sex: "male",
+      age: 40,
+      height_cm: 180,
+      weight_kg: 80,
+      activity: "moderate",
+      goal: "maintain",
+      kcal_tolerance: 150,
+    });
     expect(t.kcal).toBe(t.tdee);
     expect(t.kcal_max - t.kcal_min).toBe(300);
   });

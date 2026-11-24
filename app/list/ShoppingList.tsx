@@ -71,7 +71,12 @@ export function ShoppingList({
           <button
             type="button"
             className="btn-ghost text-sm"
-            onClick={() => save(ids.filter((id) => checked.has(id)), false)}
+            onClick={() =>
+              save(
+                ids.filter((id) => checked.has(id)),
+                false,
+              )
+            }
           >
             {t("uncheckAll")}
           </button>

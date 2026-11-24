@@ -347,14 +347,30 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
     const pool = usable.filter((r) => r.meal_types.some((m) => SLOT_TYPES[s].includes(m))).sort((a, b) => a._score! - b._score!);
     const pick = new Set(pool.filter((r) => !r.treat).slice(0, K));
     if (s === "lunch" || s === "dinner") {
-      pool.filter((r) => FISH.has(r.protein ?? "")).slice(0, 3).forEach((r) => pick.add(r));
-      for (const g of MAIN_PROTEINS) pool.filter((r) => r.protein === g).slice(0, 2).forEach((r) => pick.add(r));
+      pool
+        .filter((r) => FISH.has(r.protein ?? ""))
+        .slice(0, 3)
+        .forEach((r) => pick.add(r));
+      for (const g of MAIN_PROTEINS)
+        pool
+          .filter((r) => r.protein === g)
+          .slice(0, 2)
+          .forEach((r) => pick.add(r));
     }
-    if (s === "snack") pool.filter((r) => r.treat).slice(0, 4).forEach((r) => pick.add(r));
+    if (s === "snack")
+      pool
+        .filter((r) => r.treat)
+        .slice(0, 4)
+        .forEach((r) => pick.add(r));
     candidates[s] = [...pick];
   }
   if (slots.some((s) => !candidates[s].length)) {
-    return { ok: false, reason: "no_recipes", message: NO_RECIPES_MESSAGE_BG, log: [`no recipes for some slot; dropped: ${dropped.length}`] };
+    return {
+      ok: false,
+      reason: "no_recipes",
+      message: NO_RECIPES_MESSAGE_BG,
+      log: [`no recipes for some slot; dropped: ${dropped.length}`],
+    };
   }
 
   // Adds recipe/quantity variables for the given slot options. Returns X list and per-day grams per ingredient.
@@ -396,7 +412,11 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
             dayUse[d]!.get(it.id)!.push(...gTerms);
           });
         }
-        m.add(X.filter((v) => v.d === d && v.s === s).map((v) => term(1, v.name)), "=", 1);
+        m.add(
+          X.filter((v) => v.d === d && v.s === s).map((v) => term(1, v.name)),
+          "=",
+          1,
+        );
       }
     return { X, dayUse };
   }
@@ -440,7 +460,9 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
   }
 
   log.push(`Targets: ${T.kcal_min}-${T.kcal_max} kcal/day, protein >= ${T.protein_min} g/day, budget ${profile.budget_eur} EUR`);
-  log.push(`Recipes: ${usable.length} usable (${dropped.length} dropped); candidates: ${slots.map((s) => `${s} ${candidates[s].length}`).join(", ")}`);
+  log.push(
+    `Recipes: ${usable.length} usable (${dropped.length} dropped); candidates: ${slots.map((s) => `${s} ${candidates[s].length}`).join(", ")}`,
+  );
 
   // ---------- 5. stage 1: choose meals ----------
   function buildStage1(costPerG: Map<string, number>, pools: Record<Slot, UsableRecipe[]>, budgetFactor = 1) {
@@ -474,10 +496,23 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
     for (const [, list] of uses) {
       // Up to 4 uses a week (never twice a day): fewer distinct recipes = fewer half-used packs. With 2, most
       // realistic budgets got no plan (2026-11-23: male €98 → €68 checkout for the same targets).
-      m1.add(list.map((v) => term(1, v.name)), "<=", profile.max_repeats ?? 4);
-      for (let d = 0; d < days; d++) m1.add(list.filter((v) => v.d === d).map((v) => term(1, v.name)), "<=", 1);
+      m1.add(
+        list.map((v) => term(1, v.name)),
+        "<=",
+        profile.max_repeats ?? 4,
+      );
+      for (let d = 0; d < days; d++)
+        m1.add(
+          list.filter((v) => v.d === d).map((v) => term(1, v.name)),
+          "<=",
+          1,
+        );
     }
-    m1.add(s1.X.filter((v) => v.r.treat).map((v) => term(1, v.name)), "<=", profile.max_desserts_per_week ?? 2);
+    m1.add(
+      s1.X.filter((v) => v.r.treat).map((v) => term(1, v.name)),
+      "<=",
+      profile.max_desserts_per_week ?? 2,
+    );
     if (profile.no_same_protein_per_day !== false)
       for (let d = 0; d < days; d++)
         for (const g of MAIN_PROTEINS)
@@ -491,7 +526,11 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
     if (avoid.size) for (const v of s1.X) if (avoid.has(v.r.id)) m1.obj.push(term(profile.avoid_penalty_eur ?? 0.4, v.name));
     const minFish = profile.min_fish_per_week ?? 1;
     if (minFish > 0)
-      m1.add(s1.X.filter((v) => FISH.has(v.r.protein ?? "") && (v.s === "lunch" || v.s === "dinner")).map((v) => term(1, v.name)), ">=", minFish);
+      m1.add(
+        s1.X.filter((v) => FISH.has(v.r.protein ?? "") && (v.s === "lunch" || v.s === "dinner")).map((v) => term(1, v.name)),
+        ">=",
+        minFish,
+      );
     return { m1, s1, weekly };
   }
 
@@ -517,8 +556,17 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
     // than days off target for a few cents); then a slightly wider kcal window. Without a budget: just the window.
     const slack = Number.isFinite(budget) ? budget * (1 + (profile.budget_slack ?? 0.05)) : budget;
     const attempts: [number, number][] = Number.isFinite(budget)
-      ? [[0, budget], [0, slack], [50, slack], [100, slack]]
-      : [[0, budget], [50, budget], [100, budget]];
+      ? [
+          [0, budget],
+          [0, slack],
+          [50, slack],
+          [100, slack],
+        ]
+      : [
+          [0, budget],
+          [50, budget],
+          [100, budget],
+        ];
     for ([tol, cap] of attempts) {
       // if real label macros make a day miss the window, widen it a little
       for (const r of usable) for (const it of r.items) delete it._vars;
@@ -576,7 +624,12 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
           }
           m2.add([...usesT, term(-o.usable_g, b)], "<=", 0);
         });
-      if (Number.isFinite(cap)) m2.add(B.map((b) => term(b.offer.price, b.name)), "<=", cap);
+      if (Number.isFinite(cap))
+        m2.add(
+          B.map((b) => term(b.offer.price, b.name)),
+          "<=",
+          cap,
+        );
       r2 = solve(m2, { time_limit: timeLimit, mip_rel_gap: 0.005 });
       if (r2.ok) break;
       log.push(`  stage 2 attempt tol=${tol} budget=${cap.toFixed(2)}: ${r2.status}`);
@@ -669,7 +722,10 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
     const K2 = profile.refine_candidates_per_slot ?? 5;
     const score = (r: UsableRecipe) =>
       r.items.reduce((a, it) => a + (it.g ?? (it.min_g! + it.max_g!) / 2) * (pantry.has(it.id) ? 0 : costPerG.get(it.id)!), 0) /
-      Math.max(5, r.items.reduce((a, it) => a + (it.g ?? (it.min_g! + it.max_g!) / 2) * est(it.id).macros.protein_g, 0));
+      Math.max(
+        5,
+        r.items.reduce((a, it) => a + (it.g ?? (it.min_g! + it.max_g!) / 2) * est(it.id).macros.protein_g, 0),
+      );
     const pools = {} as Record<Slot, UsableRecipe[]>;
     for (const s of slots) {
       const keep = new Set([...bestChosen!.entries()].filter(([k]) => k.endsWith(`_${s}`)).map(([, r]) => r));
@@ -698,7 +754,11 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
     for (const v of s1.X) if (r1.val(v.name) > 0.5) chosen.set(`${v.d}_${v.s}`, v.r);
     const key = [...chosen.values()].map((r) => r.id).join(",");
     const grams = new Map<string, number>();
-    for (const [iid, terms] of weekly) grams.set(iid, terms.reduce((a, [c, v]) => a + c * r1.val(v), 0));
+    for (const [iid, terms] of weekly)
+      grams.set(
+        iid,
+        terms.reduce((a, [c, v]) => a + c * r1.val(v), 0),
+      );
     if (seen.has(key)) {
       log.push(`Round ${round}: same meals as before (${r1.s.toFixed(1)} s) — stopping`);
       break;

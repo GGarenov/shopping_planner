@@ -18,7 +18,6 @@ declare global {
   }
 }
 
-
 export type Platform = "ios" | "android" | "other";
 
 export function detectPlatform(): Platform {

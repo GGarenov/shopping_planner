@@ -17,7 +17,15 @@ export function FeedbackForm() {
       <label htmlFor="feedback" className="text-sm opacity-80">
         {t("label")}
       </label>
-      <textarea id="feedback" name="message" rows={4} maxLength={4000} required className="input min-h-28 py-3" placeholder={t("placeholder")} />
+      <textarea
+        id="feedback"
+        name="message"
+        rows={4}
+        maxLength={4000}
+        required
+        className="input min-h-28 py-3"
+        placeholder={t("placeholder")}
+      />
       <input type="hidden" name="page" value="/profile" />
       <button type="submit" className="btn-secondary" disabled={pending}>
         {pending ? t("sending") : t("send")}

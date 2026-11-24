@@ -34,7 +34,13 @@ export async function loadPlannerData(supabase: SupabaseClient): Promise<Planner
     selectAll<Ingredient>(supabase, "ingredients"),
     selectAll<Recipe>(supabase, "recipes"),
     selectAll<Product>(supabase, "products"), // available products only
-    supabase.from("sync_runs").select("finished_at, stats").eq("status", "success").order("finished_at", { ascending: false }).limit(1).maybeSingle(),
+    supabase
+      .from("sync_runs")
+      .select("finished_at, stats")
+      .eq("status", "success")
+      .order("finished_at", { ascending: false })
+      .limit(1)
+      .maybeSingle(),
   ]);
   const stats = (run.data?.stats ?? {}) as { prices_date?: string };
   const data: PlannerData = {

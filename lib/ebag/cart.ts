@@ -65,13 +65,27 @@ export async function fillCartItem(api: CartApi, item: ShoppingItem): Promise<Ca
   const options: (() => Promise<CartLine | null>)[] = [
     async () => {
       const p = await inStock(api, item.ebag_id);
-      return p ? { ebag_id: item.ebag_id, name: item.product, qty: item.packs, unit: p.unit ?? item.unit, price: num(p.prices?.promo_unit_delta ?? p.prices?.unit_delta) } : null;
+      return p
+        ? {
+            ebag_id: item.ebag_id,
+            name: item.product,
+            qty: item.packs,
+            unit: p.unit ?? item.unit,
+            price: num(p.prices?.promo_unit_delta ?? p.prices?.unit_delta),
+          }
+        : null;
     },
     ...(item.alternatives ?? []).map((alt) => async () => {
       const p = await inStock(api, alt.ebag_id);
       if (!p) return null;
       const qty = Math.max(1, Math.ceil(item.used_edible_g / Math.max(alt.usable_g, 1)));
-      return { ebag_id: alt.ebag_id, name: alt.name, qty, unit: p.unit ?? alt.unit, price: num(p.prices?.promo_unit_delta ?? p.prices?.unit_delta) };
+      return {
+        ebag_id: alt.ebag_id,
+        name: alt.name,
+        qty,
+        unit: p.unit ?? alt.unit,
+        price: num(p.prices?.promo_unit_delta ?? p.prices?.unit_delta),
+      };
     }),
   ];
   for (const [i, option] of options.entries()) {
@@ -82,7 +96,9 @@ export async function fillCartItem(api: CartApi, item: ShoppingItem): Promise<Ca
 }
 
 export async function getCartSummary(api: CartApi): Promise<CartSummary> {
-  const cart = await api.call<{ total_items?: number; url?: string; totals?: { total?: unknown; shipping_price?: unknown } }>("get_cart", { page_size: 50 });
+  const cart = await api.call<{ total_items?: number; url?: string; totals?: { total?: unknown; shipping_price?: unknown } }>("get_cart", {
+    page_size: 50,
+  });
   return {
     items: num(cart.total_items),
     total: num(cart.totals?.total),

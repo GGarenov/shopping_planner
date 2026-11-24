@@ -85,7 +85,11 @@ export function resolveTargets(p: BodyData, override?: TargetsOverride | null): 
 
 /** Number format without thousands separator: bg decimal comma (77,4 · 2,0 · 1,375), en decimal point (77.4 · 2.0). */
 const fmt = (locale: string, n: number, minFraction = 0) =>
-  n.toLocaleString(locale === "en" ? "en-GB" : "bg-BG", { useGrouping: false, minimumFractionDigits: minFraction, maximumFractionDigits: 3 });
+  n.toLocaleString(locale === "en" ? "en-GB" : "bg-BG", {
+    useGrouping: false,
+    minimumFractionDigits: minFraction,
+    maximumFractionDigits: 3,
+  });
 
 export interface FormulaStep {
   label: string;

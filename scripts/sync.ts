@@ -64,7 +64,11 @@ const writeJson = (rel: string, data: unknown, pretty = true) => {
 async function selectAll<T>(db: SupabaseClient, table: string, columns: string, order: string): Promise<T[]> {
   const rows: T[] = [];
   for (let from = 0; ; from += 1000) {
-    const { data, error } = await db.from(table).select(columns).order(order).range(from, from + 999);
+    const { data, error } = await db
+      .from(table)
+      .select(columns)
+      .order(order)
+      .range(from, from + 999);
     if (error) throw new Error(`${table} select failed: ${error.message}`);
     rows.push(...(data as T[]));
     if (data.length < 1000) return rows;
@@ -86,7 +90,11 @@ const db = createClient(url, key, { auth: { persistSession: false, autoRefreshTo
 const started = Date.now();
 let runId: number | null = null;
 if (!DRY) {
-  const { data, error } = await db.from("sync_runs").insert({ status: "running", stats: { source: "sync" } }).select("id").single();
+  const { data, error } = await db
+    .from("sync_runs")
+    .insert({ status: "running", stats: { source: "sync" } })
+    .select("id")
+    .single();
   if (error) throw new Error(`sync_runs insert failed: ${error.message}`);
   runId = data.id as number;
 }
@@ -121,7 +129,19 @@ async function run() {
   const catalog = new Map<number, CatalogItem>();
   let pricesDate = TODAY;
   if (RELINK) {
-    type Saved = { id: number; name: string; brand: string | null; url: string; categories: number[]; pack_size: string; sold_by: string; price: number | null; promo: number | null; available: boolean; stock: number | null };
+    type Saved = {
+      id: number;
+      name: string;
+      brand: string | null;
+      url: string;
+      categories: number[];
+      pack_size: string;
+      sold_by: string;
+      price: number | null;
+      promo: number | null;
+      available: boolean;
+      stock: number | null;
+    };
     const saved = readJson<{ _about?: { fetched?: string }; products: Saved[] }>("data/ebag_catalog.json");
     pricesDate = saved._about?.fetched ?? TODAY;
     for (const p of saved.products)
@@ -153,7 +173,8 @@ async function run() {
     }
   }
   log(`catalogue: ${catalog.size} unique products`);
-  if (catalog.size < SYNC.minCatalog) throw new Error(`only ${catalog.size} products crawled — aborting so existing data is not overwritten`);
+  if (catalog.size < SYNC.minCatalog)
+    throw new Error(`only ${catalog.size} products crawled — aborting so existing data is not overwritten`);
 
   // ---------- 2. link ----------
   const ingredients = (await selectAll<{ data: SyncIngredient }>(db, "ingredients", "data", "id")).map((r) => r.data);
@@ -164,7 +185,8 @@ async function run() {
 
   // ---------- 3. product details ----------
   const cache: Record<string, ProductDetails> = {};
-  for (const r of await selectAll<{ ebag_id: number; data: ProductDetails }>(db, "ebag_details", "ebag_id, data", "ebag_id")) cache[r.ebag_id] = r.data;
+  for (const r of await selectAll<{ ebag_id: number; data: ProductDetails }>(db, "ebag_details", "ebag_id, data", "ebag_id"))
+    cache[r.ebag_id] = r.data;
   const seedCache = Object.keys(cache).length === 0; // first run: start from the repo's cache file
   if (seedCache) Object.assign(cache, readJson<Record<string, ProductDetails>>("data/ebag_nutrition_cache.json", {}));
   const fetched = new Set<string>(seedCache ? Object.keys(cache) : []);
@@ -214,7 +236,10 @@ async function run() {
     const listed = new Set(products.map((p) => p.ebag_id));
     const stale = oldProducts.filter((p) => !listed.has(p.ebag_id)).map((p) => p.ebag_id);
     for (let i = 0; i < stale.length; i += BATCH) {
-      const { error } = await db.from("products").update({ available: false }).in("ebag_id", stale.slice(i, i + BATCH));
+      const { error } = await db
+        .from("products")
+        .update({ available: false })
+        .in("ebag_id", stale.slice(i, i + BATCH));
       if (error) throw new Error(`marking stale products failed: ${error.message}`);
     }
     markedUnavailable = stale.length;
@@ -237,15 +262,40 @@ async function run() {
         const pack = parsePack(p.pack_size, p.unit, p.quantity_step);
         const price = parsePrices(p.prices, pack.grams || (pack.ml ?? null));
         return {
-          id: p.id, name: p.name, brand: p.brand, url: p.url, categories: p.categories, pack_size: p.pack_size,
-          sold_by: p.unit === "kg" ? "kg" : "piece", price: price.regular, promo: price.promo,
+          id: p.id,
+          name: p.name,
+          brand: p.brand,
+          url: p.url,
+          categories: p.categories,
+          pack_size: p.pack_size,
+          sold_by: p.unit === "kg" ? "kg" : "piece",
+          price: price.regular,
+          promo: price.promo,
           ...(price.bundle_note ? { bundle_note: price.bundle_note } : {}),
-          available: inStock(p), stock: p.stock, ingredient_id: links.get(p.id)?.ingredient_id ?? null,
+          available: inStock(p),
+          stock: p.stock,
+          ingredient_id: links.get(p.id)?.ingredient_id ?? null,
         };
       })
       .sort((a, b) => a.id - b.id);
-    writeJson("data/ebag_catalog.json", { _about: { description: "All eBag food products from the crawled categories, with today's prices.", fetched: TODAY, count: catalogOut.length, categories: CRAWL_CATEGORIES }, products: catalogOut });
-    writeJson(`data/price_history/${TODAY}.json`, { date: TODAY, columns: ["id", "price", "promo", "available"], rows: catalogOut.map((p) => [p.id, p.price, p.promo, p.available ? 1 : 0]) }, false);
+    writeJson("data/ebag_catalog.json", {
+      _about: {
+        description: "All eBag food products from the crawled categories, with today's prices.",
+        fetched: TODAY,
+        count: catalogOut.length,
+        categories: CRAWL_CATEGORIES,
+      },
+      products: catalogOut,
+    });
+    writeJson(
+      `data/price_history/${TODAY}.json`,
+      {
+        date: TODAY,
+        columns: ["id", "price", "promo", "available"],
+        rows: catalogOut.map((p) => [p.id, p.price, p.promo, p.available ? 1 : 0]),
+      },
+      false,
+    );
     log("exported data/ebag_products.json, ebag_catalog.json, ebag_nutrition_cache.json, price_history");
   }
 

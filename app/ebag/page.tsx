@@ -37,8 +37,16 @@ export default async function EbagPage({ searchParams }: { searchParams: Promise
           <p className="text-white/90">{t("heroText")}</p>
         </Hero>
 
-        {q.connected && <p className="rounded-xl bg-accent-soft px-4 py-3 text-sm" role="status">{t("connectedNotice")}</p>}
-        {q.disconnected && <p className="rounded-xl border border-border px-4 py-3 text-sm" role="status">{t("disconnectedNotice")}</p>}
+        {q.connected && (
+          <p className="rounded-xl bg-accent-soft px-4 py-3 text-sm" role="status">
+            {t("connectedNotice")}
+          </p>
+        )}
+        {q.disconnected && (
+          <p className="rounded-xl border border-border px-4 py-3 text-sm" role="status">
+            {t("disconnectedNotice")}
+          </p>
+        )}
         {q.error && (
           <p className="error" role="alert">
             {t(`errors.${errorKey}`)}
@@ -48,9 +56,7 @@ export default async function EbagPage({ searchParams }: { searchParams: Promise
         {!connected && (
           <section className="card flex flex-col gap-3">
             <h2 className="text-lg font-semibold">{expired ? t("expiredTitle") : t("connectTitle")}</h2>
-            <p className="text-sm opacity-80">
-              {t("connectText")}
-            </p>
+            <p className="text-sm opacity-80">{t("connectText")}</p>
             <a href="/api/ebag/connect" className="btn-primary">
               {expired ? t("reconnectShort") : t("connect")}
             </a>
@@ -75,7 +81,9 @@ export default async function EbagPage({ searchParams }: { searchParams: Promise
                   ? {
                       id: plan.id,
                       ebagIds: plan.shopping.map((it) => it.ebag_id),
-                      ingredients: Object.fromEntries(plan.shopping.map((it) => [it.ebag_id, ingredientName(it.ingredient_id, it.ingredient, locale)])),
+                      ingredients: Object.fromEntries(
+                        plan.shopping.map((it) => [it.ebag_id, ingredientName(it.ingredient_id, it.ingredient, locale)]),
+                      ),
                       summary: t("summary", {
                         n: plan.shopping.length,
                         amount: eur(plan.checkout_eur, locale),

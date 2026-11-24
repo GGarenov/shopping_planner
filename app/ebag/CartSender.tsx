@@ -43,7 +43,12 @@ export function CartSender({
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ planId, ebagIds: batch }),
         });
-        const body = (await res.json().catch(() => ({}))) as { results?: CartItemResult[]; pending?: number[]; error?: string; reason?: string };
+        const body = (await res.json().catch(() => ({}))) as {
+          results?: CartItemResult[];
+          pending?: number[];
+          error?: string;
+          reason?: string;
+        };
         if (!res.ok || !body.results) {
           setError({ text: body.error ?? common("somethingWrong"), reconnect: body.reason === "reconnect" });
           return;
@@ -99,21 +104,24 @@ export function CartSender({
             {t("resultSummary", { added: added.length, replaced: replaced.length, missing: missing.length })}
           </summary>
           <ul className="mt-2 flex flex-col gap-2" aria-label={t("resultLabel")}>
-          {[...missing, ...replaced, ...added].map((r) => (
-            <li key={r.ebag_id} className="card flex items-start gap-3 text-sm">
-              <span aria-hidden className={`text-lg leading-none ${r.status === "missing" ? "text-red-600" : r.status === "replaced" ? "text-amber-600" : "text-accent"}`}>
-                {r.status === "added" ? "✓" : r.status === "replaced" ? "↻" : "✗"}
-              </span>
-              <span className="flex min-w-0 flex-col">
-                <span className="font-medium break-words">{r.line?.name ?? r.product}</span>
-                <span className="opacity-70">
-                  {r.status === "added" && qty(r.line!.qty, r.line!.unit)}
-                  {r.status === "replaced" && t("replacedLine", { qty: qty(r.line!.qty, r.line!.unit), product: r.product })}
-                  {r.status === "missing" && t("missingLine", { ingredient: ingredients?.[r.ebag_id] ?? r.ingredient })}
+            {[...missing, ...replaced, ...added].map((r) => (
+              <li key={r.ebag_id} className="card flex items-start gap-3 text-sm">
+                <span
+                  aria-hidden
+                  className={`text-lg leading-none ${r.status === "missing" ? "text-red-600" : r.status === "replaced" ? "text-amber-600" : "text-accent"}`}
+                >
+                  {r.status === "added" ? "✓" : r.status === "replaced" ? "↻" : "✗"}
                 </span>
-              </span>
-            </li>
-          ))}
+                <span className="flex min-w-0 flex-col">
+                  <span className="font-medium break-words">{r.line?.name ?? r.product}</span>
+                  <span className="opacity-70">
+                    {r.status === "added" && qty(r.line!.qty, r.line!.unit)}
+                    {r.status === "replaced" && t("replacedLine", { qty: qty(r.line!.qty, r.line!.unit), product: r.product })}
+                    {r.status === "missing" && t("missingLine", { ingredient: ingredients?.[r.ebag_id] ?? r.ingredient })}
+                  </span>
+                </span>
+              </li>
+            ))}
           </ul>
         </details>
       )}

@@ -1,0 +1,12 @@
+# Generated, vendored or large data — not formatted
+.next/
+node_modules/
+coverage/
+public/
+data/
+supabase/.temp/
+package-lock.json
+next-env.d.ts
+.secrets/
+logs/
+things_to_improve/

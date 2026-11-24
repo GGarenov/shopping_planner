@@ -31,12 +31,14 @@
      the sync and the cart script now treat stock 0 as sold out.
 
 ## Next ideas
+
 - Limit each protein per week (the cheap pork loin appears up to 6× a week).
 - Batch cooking: count leftovers of мусака / кюфтета / брауни as later meals.
 - Schedule the daily sync (Windows Task Scheduler) — not set up yet.
 - Turkey breast, mackerel and rice cakes currently have no eBag product.
 
 ## Commands
+
 - `npm run ebag:sync` — daily: prices, promos, stock, new products (`npm run ebag:relink` = re-link only, seconds)
 - `npm run plan -- data/profiles/test.json` — make a week plan (saved in `data/plans/`)
 - `npm run cart` — check the latest plan against live stock; add `-- --apply` to fill the eBag cart

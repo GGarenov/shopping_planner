@@ -25,13 +25,19 @@ function fakeEbag(stock: Record<number, number | null | "off">, refuse: number[]
       if (name === "get_product") {
         const s = stock[id];
         if (s === undefined) throw new Error("not found");
-        return { is_available: s !== "off", available_quantity: s === "off" ? 0 : s, unit: "pcs", prices: { unit_delta: "1.50", promo_unit_delta: null } } as T;
+        return {
+          is_available: s !== "off",
+          available_quantity: s === "off" ? 0 : s,
+          unit: "pcs",
+          prices: { unit_delta: "1.50", promo_unit_delta: null },
+        } as T;
       }
       if (name === "update_cart_item") {
         if (refuse.includes(id)) throw new Error("refused");
         return {} as T;
       }
-      if (name === "get_cart") return { total_items: 3, url: "https://ebag.bg/cart/", totals: { total: "12.30", shipping_price: "4.99" } } as T;
+      if (name === "get_cart")
+        return { total_items: 3, url: "https://ebag.bg/cart/", totals: { total: "12.30", shipping_price: "4.99" } } as T;
       throw new Error(name);
     },
   };

@@ -5,7 +5,17 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { BudgetField, Chips, Choice, NumberField } from "@/components/form/fields";
 import { computeTargets, type Activity, type Goal, type Sex } from "@/lib/planner/targets";
-import { ACTIVITY_OPTIONS, ALLERGEN_OPTIONS, DIET_OPTIONS, EXCLUDE_OPTIONS, GOAL_OPTIONS, PANTRY_OPTIONS, SEX_OPTIONS, dietKey, type Diet } from "@/lib/profile/options";
+import {
+  ACTIVITY_OPTIONS,
+  ALLERGEN_OPTIONS,
+  DIET_OPTIONS,
+  EXCLUDE_OPTIONS,
+  GOAL_OPTIONS,
+  PANTRY_OPTIONS,
+  SEX_OPTIONS,
+  dietKey,
+  type Diet,
+} from "@/lib/profile/options";
 import { usePlanGenerator } from "../usePlanGenerator";
 import { savePlanSettings } from "./actions";
 
@@ -38,7 +48,8 @@ export function PlanSettingsForm({ initial }: { initial: SettingsValues }) {
   const to = useTranslations("options");
   /** Option label from the "options" namespace, or the Bulgarian label from lib/profile/options while a key is missing. */
   const opt = (key: string, fallback: string) => (to.has(key) ? to(key) : fallback);
-  const chips = (group: string, list: { value: string; label: string }[]) => list.map((o) => ({ value: o.value, label: opt(`${group}.${o.value}`, o.label) }));
+  const chips = (group: string, list: { value: string; label: string }[]) =>
+    list.map((o) => ({ value: o.value, label: opt(`${group}.${o.value}`, o.label) }));
   const [v, setV] = useState(initial);
   const [saving, startSaving] = useTransition();
   const gen = usePlanGenerator();
@@ -149,11 +160,21 @@ export function PlanSettingsForm({ initial }: { initial: SettingsValues }) {
               <NumberField id="kmin" label={t("kcalFrom")} unit="" value={v.kcal_min} onChange={(x) => set("kcal_min", x)} />
               <NumberField id="kmax" label={t("kcalTo")} unit="" value={v.kcal_max} onChange={(x) => set("kcal_max", x)} />
             </div>
-            <NumberField id="pmin" label={t("proteinMin")} unit={t("gPerDay")} value={v.protein_min} onChange={(x) => set("protein_min", x)} />
+            <NumberField
+              id="pmin"
+              label={t("proteinMin")}
+              unit={t("gPerDay")}
+              value={v.protein_min}
+              onChange={(x) => set("protein_min", x)}
+            />
             <button type="button" className="btn-ghost" onClick={() => set("manual", false)}>
               {t("auto")}
               {computed
-                ? t("autoValues", { kcalMin: String(computed.kcal_min), kcalMax: String(computed.kcal_max), protein: String(computed.protein_min) })
+                ? t("autoValues", {
+                    kcalMin: String(computed.kcal_min),
+                    kcalMax: String(computed.kcal_max),
+                    protein: String(computed.protein_min),
+                  })
                 : ""}
             </button>
           </>
@@ -182,9 +203,17 @@ export function PlanSettingsForm({ initial }: { initial: SettingsValues }) {
           ))}
         </div>
         <h3 className="font-medium">{t("dontEat")}</h3>
-        <Chips options={chips("exclude", EXCLUDE_OPTIONS)} selected={v.exclude_tags} onToggle={(x) => set("exclude_tags", toggle(v.exclude_tags, x))} />
+        <Chips
+          options={chips("exclude", EXCLUDE_OPTIONS)}
+          selected={v.exclude_tags}
+          onToggle={(x) => set("exclude_tags", toggle(v.exclude_tags, x))}
+        />
         <h3 className="font-medium">{t("allergies")}</h3>
-        <Chips options={chips("allergen", ALLERGEN_OPTIONS)} selected={v.allergens} onToggle={(x) => set("allergens", toggle(v.allergens, x))} />
+        <Chips
+          options={chips("allergen", ALLERGEN_OPTIONS)}
+          selected={v.allergens}
+          onToggle={(x) => set("allergens", toggle(v.allergens, x))}
+        />
       </section>
 
       <details className="card flex flex-col gap-3">
@@ -192,7 +221,12 @@ export function PlanSettingsForm({ initial }: { initial: SettingsValues }) {
         <div className="mt-3 flex flex-col gap-3">
           <div role="radiogroup" aria-label={t("sex")} className="grid grid-cols-2 gap-2">
             {SEX_OPTIONS.map((o) => (
-              <Choice key={o.value} checked={v.sex === o.value} onClick={() => set("sex", o.value)} label={opt(`sex.${o.value}`, o.label)} />
+              <Choice
+                key={o.value}
+                checked={v.sex === o.value}
+                onClick={() => set("sex", o.value)}
+                label={opt(`sex.${o.value}`, o.label)}
+              />
             ))}
           </div>
           <NumberField id="age" label={t("age")} unit={t("years")} value={v.age} onChange={(x) => set("age", x)} />
@@ -215,7 +249,10 @@ export function PlanSettingsForm({ initial }: { initial: SettingsValues }) {
         </div>
       </details>
 
-      <footer className="sticky bottom-0 -mx-4 flex flex-col gap-2 border-t border-border bg-background/95 px-4 pt-3 pb-4 backdrop-blur" style={{ paddingBottom: "max(1rem, env(safe-area-inset-bottom))" }}>
+      <footer
+        className="sticky bottom-0 -mx-4 flex flex-col gap-2 border-t border-border bg-background/95 px-4 pt-3 pb-4 backdrop-blur"
+        style={{ paddingBottom: "max(1rem, env(safe-area-inset-bottom))" }}
+      >
         {gen.error && (
           <p className="error" role="alert">
             {gen.error}

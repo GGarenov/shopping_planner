@@ -32,12 +32,14 @@ export function shortDay(weekStart: string, offset: number, locale: Locale | str
 /** eBag pack labels are Bulgarian ("500 г", "~ 700 г / бр", "1 кг", "10 бр.", "1 л"); in English show the units in English. */
 export function packUnits(label: string, locale: Locale | string = "bg"): string {
   if (locale !== "en") return label;
-  return label
-    // (?![а-я]) instead of \b: JavaScript's \b doesn't treat Cyrillic letters as word characters
-    .replace(/(\d)\s*кг(?![а-я])/g, "$1 kg")
-    .replace(/(\d)\s*мл(?![а-я])/g, "$1 ml")
-    .replace(/(\d)\s*г(?![а-я])/g, "$1 g")
-    .replace(/(\d)\s*л(?![а-я])/g, "$1 l")
-    .replace(/\/\s*бр\.?/g, "/ pc")
-    .replace(/(\d)\s*бр\.?/g, (_m, d: string) => `${d} ${d === "1" ? "pc" : "pcs"}`);
+  return (
+    label
+      // (?![а-я]) instead of \b: JavaScript's \b doesn't treat Cyrillic letters as word characters
+      .replace(/(\d)\s*кг(?![а-я])/g, "$1 kg")
+      .replace(/(\d)\s*мл(?![а-я])/g, "$1 ml")
+      .replace(/(\d)\s*г(?![а-я])/g, "$1 g")
+      .replace(/(\d)\s*л(?![а-я])/g, "$1 l")
+      .replace(/\/\s*бр\.?/g, "/ pc")
+      .replace(/(\d)\s*бр\.?/g, (_m, d: string) => `${d} ${d === "1" ? "pc" : "pcs"}`)
+  );
 }

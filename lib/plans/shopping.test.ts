@@ -5,7 +5,10 @@ import type { PlanOutput, ShoppingItem } from "@/lib/planner/plan";
 import { AISLES, eur, groupByAisle, packLabel, shoppingTotals } from "./shopping";
 
 const plansDir = path.resolve(__dirname, "../../data/plans");
-const file = readdirSync(plansDir).filter((f) => f.startsWith("test-")).sort().pop()!;
+const file = readdirSync(plansDir)
+  .filter((f) => f.startsWith("test-"))
+  .sort()
+  .pop()!;
 const plan = JSON.parse(readFileSync(path.join(plansDir, file), "utf8")) as PlanOutput;
 
 describe("shopping list", () => {

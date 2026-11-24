@@ -49,7 +49,9 @@ export default async function ListPage({ searchParams }: { searchParams: Promise
   const checked = (checks ?? []).filter((c) => c.checked).map((c) => Number(c.ebag_id));
 
   const totals = shoppingTotals(plan.shopping);
-  const pantryLabels = (plan.solver.pantry ?? []).map((id) => ingredientName(id, PANTRY_OPTIONS.find((p) => p.value === id)?.label ?? id, locale));
+  const pantryLabels = (plan.solver.pantry ?? []).map((id) =>
+    ingredientName(id, PANTRY_OPTIONS.find((p) => p.value === id)?.label ?? id, locale),
+  );
   const days = plan.plan.length;
 
   return (

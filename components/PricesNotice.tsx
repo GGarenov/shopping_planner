@@ -6,7 +6,15 @@ import { daysBetween, STALE_AFTER_DAYS } from "@/lib/sync/status";
  * Notice about price freshness: newer prices than the plan was made with ("make a new plan"), or no successful
  * sync for a few days ("prices may be outdated"). Renders nothing when everything is current.
  */
-export function PricesNotice({ planPricesDate, latestPricesDate, today }: { planPricesDate: string | null | undefined; latestPricesDate: string | null; today: string }) {
+export function PricesNotice({
+  planPricesDate,
+  latestPricesDate,
+  today,
+}: {
+  planPricesDate: string | null | undefined;
+  latestPricesDate: string | null;
+  today: string;
+}) {
   const t = useTranslations("plan.prices");
   const locale = useLocale();
   if (latestPricesDate && planPricesDate && latestPricesDate > planPricesDate) {

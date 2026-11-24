@@ -4,7 +4,12 @@
 import "server-only";
 import type { OAuthClientProvider } from "@modelcontextprotocol/sdk/client/auth.js";
 import { discoverAuthorizationServerMetadata, registerClient } from "@modelcontextprotocol/sdk/client/auth.js";
-import type { AuthorizationServerMetadata, OAuthClientInformationMixed, OAuthClientMetadata, OAuthTokens } from "@modelcontextprotocol/sdk/shared/auth.js";
+import type {
+  AuthorizationServerMetadata,
+  OAuthClientInformationMixed,
+  OAuthClientMetadata,
+  OAuthTokens,
+} from "@modelcontextprotocol/sdk/shared/auth.js";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { decryptJson, encryptJson } from "@/lib/crypto/secret";
 import { MCP_URL } from "./api";
@@ -61,7 +66,11 @@ export interface UserConnection {
 export type ConnectionStatus = "connected" | "expired" | "revoked";
 
 export async function getConnectionRow(admin: SupabaseClient, userId: string) {
-  const { data, error } = await admin.from("ebag_connections").select("tokens_encrypted, connected_at, last_used_at, status").eq("user_id", userId).maybeSingle();
+  const { data, error } = await admin
+    .from("ebag_connections")
+    .select("tokens_encrypted, connected_at, last_used_at, status")
+    .eq("user_id", userId)
+    .maybeSingle();
   if (error) throw new Error(`ebag_connections read failed: ${error.message}`);
   return data as { tokens_encrypted: string; connected_at: string; last_used_at: string | null; status: ConnectionStatus } | null;
 }
@@ -103,7 +112,13 @@ export class UserTokens implements OAuthClientProvider {
     return this.conn.redirect;
   }
   get clientMetadata(): OAuthClientMetadata {
-    return { redirect_uris: [this.conn.redirect], token_endpoint_auth_method: "none", grant_types: ["authorization_code", "refresh_token"], response_types: ["code"], scope: SCOPE };
+    return {
+      redirect_uris: [this.conn.redirect],
+      token_endpoint_auth_method: "none",
+      grant_types: ["authorization_code", "refresh_token"],
+      response_types: ["code"],
+      scope: SCOPE,
+    };
   }
   clientInformation() {
     return this.conn.clientInformation;
@@ -142,7 +157,11 @@ export async function revokeAtEbag(conn: UserConnection): Promise<void> {
   await fetch(endpoint, {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({ token, token_type_hint: conn.tokens.refresh_token ? "refresh_token" : "access_token", client_id: conn.clientInformation.client_id }),
+    body: new URLSearchParams({
+      token,
+      token_type_hint: conn.tokens.refresh_token ? "refresh_token" : "access_token",
+      client_id: conn.clientInformation.client_id,
+    }),
     signal: AbortSignal.timeout(5000),
   }).catch(() => {});
 }

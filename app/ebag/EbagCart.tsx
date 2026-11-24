@@ -22,9 +22,14 @@ function slotLabel(t: T, locale: string, s: Slot, today: string): string {
   const days = Math.round((Date.parse(s.date) - Date.parse(today)) / 86_400_000);
   const [, m, d] = s.date.split("-");
   const date = new Date(`${s.date}T12:00:00Z`);
-  const dayMonth = locale === "en" ? new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", timeZone: "UTC" }).format(date) : `${d}.${m}`;
+  const dayMonth =
+    locale === "en" ? new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", timeZone: "UTC" }).format(date) : `${d}.${m}`;
   const day =
-    days === 0 ? t("slotToday") : days === 1 ? t("slotTomorrow") : t("slotDay", { weekday: t("weekdays").split(",")[date.getUTCDay()] ?? "", date: dayMonth });
+    days === 0
+      ? t("slotToday")
+      : days === 1
+        ? t("slotTomorrow")
+        : t("slotDay", { weekday: t("weekdays").split(",")[date.getUTCDay()] ?? "", date: dayMonth });
   return `${day} ${s.time.replace("-", "–")}`;
 }
 
@@ -62,7 +67,11 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
     setBusy((b) => new Set(b).add(key));
     setWarning(null);
     try {
-      const res = await fetch("/api/ebag/cart", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+      const res = await fetch("/api/ebag/cart", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
       const out = (await res.json().catch(() => ({}))) as { cart?: CartView; warning?: string | null; error?: string };
       if (out.cart) setView((v) => (v ? { ...v, cart: out.cart! } : v));
       setWarning(out.warning ?? (res.ok ? null : (out.error ?? t("changeFailed"))));
@@ -80,7 +89,10 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
   const change = (it: CartViewItem, dir: 1 | -1) => {
     const q = stepQuantity(it, dir);
     if (q === it.quantity) return;
-    void patch(it.id, q === 0 ? { op: "remove", productId: it.id, unit: it.unit } : { op: "set", productId: it.id, quantity: q, unit: it.unit });
+    void patch(
+      it.id,
+      q === 0 ? { op: "remove", productId: it.id, unit: it.unit } : { op: "set", productId: it.id, quantity: q, unit: it.unit },
+    );
   };
 
   if (loading && !view)
@@ -134,7 +146,14 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
                 {it.image ? (
                   // eBag's own product photo, already sized by eBag — no Next image optimisation needed.
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={it.image} alt="" width={64} height={64} loading="lazy" className="size-16 shrink-0 rounded-lg bg-white object-contain" />
+                  <img
+                    src={it.image}
+                    alt=""
+                    width={64}
+                    height={64}
+                    loading="lazy"
+                    className="size-16 shrink-0 rounded-lg bg-white object-contain"
+                  />
                 ) : (
                   <div className="size-16 shrink-0 rounded-lg bg-border" aria-hidden />
                 )}
@@ -167,7 +186,13 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
                       <span className="min-w-14 text-center text-sm tabular-nums" aria-live="polite">
                         {qtyLabel(t, locale, it.quantity, it.unit)}
                       </span>
-                      <button type="button" className="btn-secondary size-9 p-0 text-lg" onClick={() => change(it, 1)} disabled={pending} aria-label={t("more")}>
+                      <button
+                        type="button"
+                        className="btn-secondary size-9 p-0 text-lg"
+                        onClick={() => change(it, 1)}
+                        disabled={pending}
+                        aria-label={t("more")}
+                      >
                         +
                       </button>
                     </div>
@@ -210,10 +235,15 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
           {hint && delivery?.freeFrom != null && (
             <div className="flex flex-col gap-1">
               <div className="h-2 overflow-hidden rounded-full bg-border" aria-hidden>
-                <div className="h-full rounded-full bg-accent" style={{ width: `${Math.min(100, (cart.total / delivery.freeFrom) * 100)}%` }} />
+                <div
+                  className="h-full rounded-full bg-accent"
+                  style={{ width: `${Math.min(100, (cart.total / delivery.freeFrom) * 100)}%` }}
+                />
               </div>
               <p className="text-xs">
-                {hint.kind === "below_min" && <span className="font-semibold text-red-600">{t("belowMin", { amount: money(hint.missing) })}</span>}
+                {hint.kind === "below_min" && (
+                  <span className="font-semibold text-red-600">{t("belowMin", { amount: money(hint.missing) })}</span>
+                )}
                 {hint.kind === "to_cheaper" && t("toCheaper", { amount: money(hint.missing), fee: money(hint.nextFee ?? 0) })}
                 {hint.kind === "to_free" && t("toFree", { amount: money(hint.missing) })}
                 {hint.kind === "free" && t("freeDelivery")}
@@ -244,7 +274,13 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
 
       {cart.items.length > 0 && (
         <>
-          <a href={cart.url} target="_blank" rel="noopener noreferrer" className={`btn-primary ${canOrder ? "" : "pointer-events-none opacity-50"}`} aria-disabled={!canOrder}>
+          <a
+            href={cart.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`btn-primary ${canOrder ? "" : "pointer-events-none opacity-50"}`}
+            aria-disabled={!canOrder}
+          >
             {t("order")}
           </a>
           <p className="text-center text-xs opacity-70">{t("orderNote")}</p>

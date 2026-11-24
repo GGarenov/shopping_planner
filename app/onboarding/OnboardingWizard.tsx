@@ -198,7 +198,13 @@ function StepBody({
       return (
         <div role="radiogroup" className="flex flex-col gap-3">
           {GOAL_OPTIONS.map((o) => (
-            <Choice key={o.value} checked={values.goal === o.value} onClick={() => set("goal", o.value)} label={to(`goal.${o.value}.label`)} sub={to(`goal.${o.value}.hint`)} />
+            <Choice
+              key={o.value}
+              checked={values.goal === o.value}
+              onClick={() => set("goal", o.value)}
+              label={to(`goal.${o.value}.label`)}
+              sub={to(`goal.${o.value}.hint`)}
+            />
           ))}
         </div>
       );
@@ -227,14 +233,28 @@ function StepBody({
       return (
         <>
           <h2 className="font-semibold">{t("dontEat")}</h2>
-          <Chips options={chips(EXCLUDE_OPTIONS, "exclude")} selected={values.exclude_tags} onToggle={(v) => set("exclude_tags", toggle(values.exclude_tags, v))} />
+          <Chips
+            options={chips(EXCLUDE_OPTIONS, "exclude")}
+            selected={values.exclude_tags}
+            onToggle={(v) => set("exclude_tags", toggle(values.exclude_tags, v))}
+          />
           <h2 className="mt-2 font-semibold">{t("allergies")}</h2>
-          <Chips options={chips(ALLERGEN_OPTIONS, "allergen")} selected={values.allergens} onToggle={(v) => set("allergens", toggle(values.allergens, v))} />
+          <Chips
+            options={chips(ALLERGEN_OPTIONS, "allergen")}
+            selected={values.allergens}
+            onToggle={(v) => set("allergens", toggle(values.allergens, v))}
+          />
           <p className="text-sm opacity-70">{t("allergyNote")}</p>
         </>
       );
     case 7:
-      return <Chips options={chips(PANTRY_OPTIONS, "pantry")} selected={values.pantry} onToggle={(v) => set("pantry", toggle(values.pantry, v))} />;
+      return (
+        <Chips
+          options={chips(PANTRY_OPTIONS, "pantry")}
+          selected={values.pantry}
+          onToggle={(v) => set("pantry", toggle(values.pantry, v))}
+        />
+      );
     case 8:
       return (
         <>

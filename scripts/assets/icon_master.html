@@ -2,22 +2,44 @@
 <!-- Source drawing for the app icons («Pazarko» bag). Open in Chrome at 1024×1024 and screenshot:
      ?v=full → scripts/assets/icon-master-full.png, ?v=pad → icon-master-pad.png (maskable: art in the 80 % safe zone).
      Then: npm run icons. Rendered in a browser so the "Pazarko" text uses the real Nunito Black. -->
-<html><head><meta charset="utf-8">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=block">
-<style>html,body{margin:0;width:1024px;height:1024px;overflow:hidden;background:#0b8a91}svg{display:block;width:1024px;height:1024px}</style>
-</head><body>
-<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-  <rect width="64" height="64" fill="#0b8a91"/>
-  <g id="art">
-    <path d="M23 20 Q23 10 32 10 Q41 10 41 20" fill="none" stroke="#ffd166" stroke-width="3.6" stroke-linecap="round"/>
-    <path d="M12 21 H52 L49.5 55 Q49.2 58 46 58 H18 Q14.8 58 14.5 55 Z" fill="#ffd166"/>
-    <path d="M12 21 H52 L51.7 25 H12.3 Z" fill="#f0a800"/>
-    <circle cx="23" cy="23" r="1.6" fill="#0c3b40"/><circle cx="41" cy="23" r="1.6" fill="#0c3b40"/>
-    <text x="32" y="44" text-anchor="middle" font-family="Nunito" font-weight="900" font-size="8.6" fill="#0b7d86" letter-spacing="-.2">Pazarko</text>
-    <path d="M24 49 Q32 53 40 49" fill="none" stroke="#ff7a6b" stroke-width="2.2" stroke-linecap="round"/>
-  </g>
-</svg>
-<script>
-  if (new URLSearchParams(location.search).get("v") === "pad") document.getElementById("art").setAttribute("transform", "translate(6.4 6.4) scale(0.8)");
-</script>
-</body></html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=block" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 1024px;
+        height: 1024px;
+        overflow: hidden;
+        background: #0b8a91;
+      }
+      svg {
+        display: block;
+        width: 1024px;
+        height: 1024px;
+      }
+    </style>
+  </head>
+  <body>
+    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <rect width="64" height="64" fill="#0b8a91" />
+      <g id="art">
+        <path d="M23 20 Q23 10 32 10 Q41 10 41 20" fill="none" stroke="#ffd166" stroke-width="3.6" stroke-linecap="round" />
+        <path d="M12 21 H52 L49.5 55 Q49.2 58 46 58 H18 Q14.8 58 14.5 55 Z" fill="#ffd166" />
+        <path d="M12 21 H52 L51.7 25 H12.3 Z" fill="#f0a800" />
+        <circle cx="23" cy="23" r="1.6" fill="#0c3b40" />
+        <circle cx="41" cy="23" r="1.6" fill="#0c3b40" />
+        <text x="32" y="44" text-anchor="middle" font-family="Nunito" font-weight="900" font-size="8.6" fill="#0b7d86" letter-spacing="-.2">
+          Pazarko
+        </text>
+        <path d="M24 49 Q32 53 40 49" fill="none" stroke="#ff7a6b" stroke-width="2.2" stroke-linecap="round" />
+      </g>
+    </svg>
+    <script>
+      if (new URLSearchParams(location.search).get("v") === "pad")
+        document.getElementById("art").setAttribute("transform", "translate(6.4 6.4) scale(0.8)");
+    </script>
+  </body>
+</html>

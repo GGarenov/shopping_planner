@@ -7,23 +7,28 @@ import { INSTALL_CAPTURE_SCRIPT } from "@/lib/pwa/captureScript";
 import "./globals.css";
 
 // Rounded, friendly face with full Cyrillic; self-hosted by Next at build time.
-const nunito = Nunito({ subsets: ["latin", "cyrillic"], weight: ["500", "600", "700", "800", "900"], variable: "--font-nunito", display: "swap" });
+const nunito = Nunito({
+  subsets: ["latin", "cyrillic"],
+  weight: ["500", "600", "700", "800", "900"],
+  variable: "--font-nunito",
+  display: "swap",
+});
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("common");
   return {
-  title: t("appName"),
-  description: t("appDescription"),
-  applicationName: t("appName"),
-  appleWebApp: { capable: true, title: t("appName"), statusBarStyle: "default" },
-  formatDetection: { telephone: false },
-  icons: {
-    icon: [
-      { url: "/icons/favicon-32.png", sizes: "32x32", type: "image/png" },
-      { url: "/icons/icon.svg", type: "image/svg+xml" },
-    ],
-    apple: { url: "/icons/apple-touch-icon.png", sizes: "180x180" },
-  },
+    title: t("appName"),
+    description: t("appDescription"),
+    applicationName: t("appName"),
+    appleWebApp: { capable: true, title: t("appName"), statusBarStyle: "default" },
+    formatDetection: { telephone: false },
+    icons: {
+      icon: [
+        { url: "/icons/favicon-32.png", sizes: "32x32", type: "image/png" },
+        { url: "/icons/icon.svg", type: "image/svg+xml" },
+      ],
+      apple: { url: "/icons/apple-touch-icon.png", sizes: "180x180" },
+    },
   };
 }
 

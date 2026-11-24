@@ -14,7 +14,16 @@ export function LogoMark({ size = 40, rounded = true, className }: { size?: numb
       <path d="M12 21 H52 L51.7 25 H12.3 Z" fill="#f0a800" />
       <circle cx="23" cy="23" r="1.6" fill="#0c3b40" />
       <circle cx="41" cy="23" r="1.6" fill="#0c3b40" />
-      <text x="32" y="44" textAnchor="middle" fontWeight="900" fontSize="8.6" fill="#0b7d86" letterSpacing="-.2" style={{ fontFamily: "var(--font-nunito), ui-rounded, system-ui, sans-serif" }}>
+      <text
+        x="32"
+        y="44"
+        textAnchor="middle"
+        fontWeight="900"
+        fontSize="8.6"
+        fill="#0b7d86"
+        letterSpacing="-.2"
+        style={{ fontFamily: "var(--font-nunito), ui-rounded, system-ui, sans-serif" }}
+      >
         {BRAND}
       </text>
       <path d="M24 49 Q32 53 40 49" fill="none" stroke="#ff7a6b" strokeWidth="2.2" strokeLinecap="round" />

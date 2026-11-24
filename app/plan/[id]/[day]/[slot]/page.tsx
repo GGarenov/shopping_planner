@@ -26,7 +26,12 @@ interface RecipeData extends Recipe {
 export default async function MealPage({ params }: { params: Promise<{ id: string; day: string; slot: string }> }) {
   const { id, day, slot } = await params;
   await requireCompleteProfile();
-  const [t, tp, tc, locale] = await Promise.all([getTranslations("recipe"), getTranslations("plan"), getTranslations("common"), getLocale()]);
+  const [t, tp, tc, locale] = await Promise.all([
+    getTranslations("recipe"),
+    getTranslations("plan"),
+    getTranslations("common"),
+    getLocale(),
+  ]);
   const supabase = await createClient();
 
   const plan = await getPlan(supabase, id);
@@ -53,7 +58,7 @@ export default async function MealPage({ params }: { params: Promise<{ id: strin
         <p className="text-sm opacity-70">
           {tp(dayLongKey(dayIndex))} · {tp(slotKey(meal.slot))}
         </p>
-        <h1 className="text-2xl font-bold leading-tight">{name}</h1>
+        <h1 className="text-2xl leading-tight font-bold">{name}</h1>
         {time ? (
           <p className="text-sm opacity-70">
             {recipe?.prep_min != null && t("prep", { n: String(recipe.prep_min) })}
@@ -106,7 +111,9 @@ export default async function MealPage({ params }: { params: Promise<{ id: strin
           <ol className="flex flex-col gap-3">
             {steps.map((s, i) => (
               <li key={i} className="flex gap-3">
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-accent-soft text-sm font-semibold">{i + 1}</span>
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-accent-soft text-sm font-semibold">
+                  {i + 1}
+                </span>
                 <span className="pt-0.5">{s}</span>
               </li>
             ))}

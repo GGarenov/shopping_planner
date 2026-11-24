@@ -3,12 +3,33 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { addBrowseItem, buildProducts, inStock, linkProducts, pickDetailsTodo, type CatalogItem, type LinkedProduct, type SyncIngredient } from "./catalog";
+import {
+  addBrowseItem,
+  buildProducts,
+  inStock,
+  linkProducts,
+  pickDetailsTodo,
+  type CatalogItem,
+  type LinkedProduct,
+  type SyncIngredient,
+} from "./catalog";
 import type { ProductDetails } from "./parse";
 
 const read = (f: string) => JSON.parse(readFileSync(path.resolve(__dirname, "../../data", f), "utf8"));
 
-type Saved = { id: number; name: string; brand: string | null; url: string; categories: number[]; pack_size: string; sold_by: string; price: number | null; promo: number | null; available: boolean; stock: number | null };
+type Saved = {
+  id: number;
+  name: string;
+  brand: string | null;
+  url: string;
+  categories: number[];
+  pack_size: string;
+  sold_by: string;
+  price: number | null;
+  promo: number | null;
+  available: boolean;
+  stock: number | null;
+};
 const saved = read("ebag_catalog.json") as { products: Saved[] };
 const productsDoc = read("ebag_products.json") as { _about: { fetched: string }; products: LinkedProduct[] };
 const cache = read("ebag_nutrition_cache.json") as Record<string, ProductDetails>;
@@ -17,7 +38,13 @@ const ingredients = read("ingredients.json").ingredients as SyncIngredient[];
 
 const catalog = new Map<number, CatalogItem>();
 for (const p of saved.products)
-  catalog.set(p.id, { ...p, unit: p.sold_by === "kg" ? "kg" : "pcs", quantity_step: 1, prices: { unit_delta: p.price, promo_unit_delta: p.promo }, is_available: p.available });
+  catalog.set(p.id, {
+    ...p,
+    unit: p.sold_by === "kg" ? "kg" : "pcs",
+    quantity_step: 1,
+    prices: { unit_delta: p.price, promo_unit_delta: p.promo },
+    is_available: p.available,
+  });
 
 describe("eBag sync steps", () => {
   it("relinking the saved catalogue reproduces data/ebag_products.json", () => {
@@ -48,7 +75,18 @@ describe("eBag sync steps", () => {
 
   it("a product seen in two categories is kept once with both", () => {
     const c = new Map<number, CatalogItem>();
-    const item = { id: 1, name: "Мляко", brand: { name: "X" }, url: "u", pack_size: "1 л", unit: "pcs", quantity_step: "1", prices: {}, is_available: true, available_quantity: "3" };
+    const item = {
+      id: 1,
+      name: "Мляко",
+      brand: { name: "X" },
+      url: "u",
+      pack_size: "1 л",
+      unit: "pcs",
+      quantity_step: "1",
+      prices: {},
+      is_available: true,
+      available_quantity: "3",
+    };
     addBrowseItem(c, item, 2);
     addBrowseItem(c, item, 1897);
     expect(c.size).toBe(1);

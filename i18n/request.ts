@@ -6,7 +6,9 @@ import { DEFAULT_LOCALE, isLocale, LOCALE_COOKIE, NAMESPACES, type Locale } from
 type Messages = Record<string, unknown>;
 
 async function load(locale: Locale): Promise<Messages> {
-  const parts = await Promise.all(NAMESPACES.map((ns) => import(`../messages/${locale}/${ns}.json`).then((m) => [ns, m.default as Messages] as const)));
+  const parts = await Promise.all(
+    NAMESPACES.map((ns) => import(`../messages/${locale}/${ns}.json`).then((m) => [ns, m.default as Messages] as const)),
+  );
   return Object.fromEntries(parts);
 }
 

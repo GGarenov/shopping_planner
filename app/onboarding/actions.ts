@@ -17,9 +17,7 @@ export async function saveProfile(input: unknown): Promise<SaveProfileResult> {
   delete fields.consent; // consent is stored as options.consent_at, not a column
   const options = { ...(profile?.options ?? {}), consent_at: profile?.options?.consent_at ?? new Date().toISOString() };
 
-  const { error } = await supabase
-    .from("profiles")
-    .upsert({ user_id: user.id, ...fields, options }, { onConflict: "user_id" });
+  const { error } = await supabase.from("profiles").upsert({ user_id: user.id, ...fields, options }, { onConflict: "user_id" });
   if (error) {
     console.error("profiles upsert failed", error.code, error.message);
     return { error: t("saveProfileFailed") };

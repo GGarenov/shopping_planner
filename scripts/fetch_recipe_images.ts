@@ -58,7 +58,14 @@ async function get(url: string): Promise<Response> {
 }
 const abs = (u: string) => (u.startsWith("//") ? `https:${u}` : u.startsWith("/") ? SITE + u : u);
 const decode = (s: string) =>
-  s.replace(/&quot;/g, '"').replace(/&amp;/g, "&").replace(/&#39;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/\s+/g, " ").trim();
+  s
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, "&")
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/\s+/g, " ")
+    .trim();
 
 // ---------- matching ----------
 const STOP = new Set(["с", "със", "и", "от", "на", "за", "в", "във", "по", "без", "или", "лека", "версия", "чаша", "чаши"]);
@@ -77,7 +84,10 @@ export function matchScore(ours: string, theirs: string): number {
 }
 /** Search queries: full name, the part before " с/със ", the first two words. */
 export function queries(name: string): string[] {
-  const clean = name.replace(/[„“"()]/g, " ").replace(/\s+/g, " ").trim();
+  const clean = name
+    .replace(/[„“"()]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
   const head = clean.split(/\s(?:с|със|от)\s/)[0]!;
   return [...new Set([clean, head, clean.split(" ").slice(0, 2).join(" ")])].filter((q) => q.length >= 3);
 }
@@ -107,12 +117,15 @@ async function saveImage(imageUrl: string, id: string) {
   const buf = Buffer.from(await (await get(imageUrl)).arrayBuffer());
   fs.mkdirSync(OUT_DIR, { recursive: true });
   for (const size of [800, 400])
-    await sharp(buf).resize(size, size, { fit: "cover", position: "attention" }).webp({ quality: size === 800 ? 74 : 70 }).toFile(path.join(OUT_DIR, `${id}-${size}.webp`));
+    await sharp(buf)
+      .resize(size, size, { fit: "cover", position: "attention" })
+      .webp({ quality: size === 800 ? 74 : 70 })
+      .toFile(path.join(OUT_DIR, `${id}-${size}.webp`));
 }
 
 // ---------- main ----------
 async function main() {
-  const recipes = (readJson<{ recipes: { id: string; name: string }[] }>(path.join(ROOT, "data", "recipes.json"), { recipes: [] })).recipes;
+  const recipes = readJson<{ recipes: { id: string; name: string }[] }>(path.join(ROOT, "data", "recipes.json"), { recipes: [] }).recipes;
   const db = readJson<Record<string, RecipeImage>>(DB, {});
   const overrides = readJson<Record<string, string | null>>(OVERRIDES, {});
   const todo = recipes.filter((r) => (ONLY ? r.id === ONLY : FORCE || !db[r.id]));
@@ -157,7 +170,14 @@ async function main() {
       console.log(`${flag} ${r.id} (${chosen.score}): ${r.name}  →  ${chosen.title}`);
       if (DRY) continue;
       await saveImage(photo.image, r.id);
-      db[r.id] = { file: `/recipes/${r.id}-400.webp`, source_url: chosen.url, source_title: chosen.title, site: "1001recepti.com", score: chosen.score, fetched: today };
+      db[r.id] = {
+        file: `/recipes/${r.id}-400.webp`,
+        source_url: chosen.url,
+        source_title: chosen.title,
+        site: "1001recepti.com",
+        score: chosen.score,
+        fetched: today,
+      };
       fs.writeFileSync(DB, JSON.stringify(db, null, 2) + "\n");
     } catch (e) {
       console.log(`! ${r.id}: ${(e as Error).message}`);

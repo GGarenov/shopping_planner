@@ -17,7 +17,11 @@ export function LanguageToggle({ tone = "dark" }: { tone?: "light" | "dark" }) {
   const base = tone === "light" ? "bg-white/15 text-white" : "bg-muted text-foreground border border-border";
   const on = tone === "light" ? "bg-white text-accent" : "bg-accent text-accent-fg";
   return (
-    <div role="group" aria-label="Език / Language" className={`inline-flex shrink-0 rounded-full p-0.5 text-xs font-extrabold ${base} ${pending ? "opacity-60" : ""}`}>
+    <div
+      role="group"
+      aria-label="Език / Language"
+      className={`inline-flex shrink-0 rounded-full p-0.5 text-xs font-extrabold ${base} ${pending ? "opacity-60" : ""}`}
+    >
       {LOCALES.map((l) => (
         <button
           key={l}

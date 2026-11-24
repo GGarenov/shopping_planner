@@ -96,12 +96,12 @@ describe("parseEnergyValues", () => {
   it("reads a structured eBag label (kJ/kcal, Bulgarian keys)", () => {
     const l = parseEnergyValues({
       "Енергийна стойност kJ/kcal": "2703/646",
-      "Мазнини": "50 г",
+      Мазнини: "50 г",
       "от които наситени мастни киселини": "4 г",
-      "Въглехидрати": "22 г",
+      Въглехидрати: "22 г",
       "от които захари": "4 г",
-      "Белтъчини": "21 г",
-      "Сол": "2 г",
+      Белтъчини: "21 г",
+      Сол: "2 г",
     });
     expect(l).toEqual({
       source: "energy_values",
@@ -116,7 +116,7 @@ describe("parseEnergyValues", () => {
     });
   });
   it("reads '… kcal' inside the value and decimal commas", () => {
-    expect(parseEnergyValues({ "Енергия": "1046 kJ / 250 kcal", "Мазнини": "<0,5", "Въглехидрати": "61,5", "Белтъци": "1,2" })).toMatchObject({
+    expect(parseEnergyValues({ Енергия: "1046 kJ / 250 kcal", Мазнини: "<0,5", Въглехидрати: "61,5", Белтъци: "1,2" })).toMatchObject({
       kcal: 250,
       fat_g: 0.5,
       carbs_g: 61.5,
@@ -124,10 +124,10 @@ describe("parseEnergyValues", () => {
     });
   });
   it("ranges are unusable", () => {
-    expect(parseEnergyValues({ "Енергийна стойност": "100 kcal", "Мазнини": "3-5" })?.fat_g).toBeNull();
+    expect(parseEnergyValues({ "Енергийна стойност": "100 kcal", Мазнини: "3-5" })?.fat_g).toBeNull();
   });
   it("no energy → null", () => {
-    expect(parseEnergyValues({ "Мазнини": "3" })).toBeNull();
+    expect(parseEnergyValues({ Мазнини: "3" })).toBeNull();
     expect(parseEnergyValues({})).toBeNull();
   });
 });
@@ -156,7 +156,10 @@ describe("parseDescriptionNutrition / parseProductDetails", () => {
   it("extracts drained weight, country and prefers structured labels", () => {
     const d = parseProductDetails({ description: desc, energy_values: null, country_of_origin: "Тайланд" });
     expect(d).toMatchObject({ drained_grams: 112, country: "Тайланд", label: { source: "description_text" } });
-    const d2 = parseProductDetails({ description: desc, energy_values: { "Енергийна стойност": "120 kcal", "Белтъчини": "27", "Мазнини": "1", "Въглехидрати": "0" } });
+    const d2 = parseProductDetails({
+      description: desc,
+      energy_values: { "Енергийна стойност": "120 kcal", Белтъчини: "27", Мазнини: "1", Въглехидрати: "0" },
+    });
     expect(d2.label?.source).toBe("energy_values");
   });
 });

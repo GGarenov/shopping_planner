@@ -64,7 +64,12 @@ type RawCartItem = {
   available?: boolean;
 };
 
-export type RawCart = { items?: RawCartItem[]; totals?: { total?: unknown; savings?: unknown; shipping_price?: unknown }; total_items?: unknown; url?: string };
+export type RawCart = {
+  items?: RawCartItem[];
+  totals?: { total?: unknown; savings?: unknown; shipping_price?: unknown };
+  total_items?: unknown;
+  url?: string;
+};
 
 export function parseCart(pages: RawCart[]): CartView {
   const first = pages[0] ?? {};
@@ -137,7 +142,8 @@ export function deliveryHint(total: number, d: DeliveryInfo | null): DeliveryHin
   if (!d) return null;
   const r = (x: number) => Math.round(x * 100) / 100;
   if (d.minOrder != null && total < d.minOrder) return { kind: "below_min", missing: r(d.minOrder - total) };
-  if (d.cheaperFrom != null && total < d.cheaperFrom) return { kind: "to_cheaper", missing: r(d.cheaperFrom - total), fee: d.highFee, nextFee: d.lowFee };
+  if (d.cheaperFrom != null && total < d.cheaperFrom)
+    return { kind: "to_cheaper", missing: r(d.cheaperFrom - total), fee: d.highFee, nextFee: d.lowFee };
   if (d.freeFrom != null && total < d.freeFrom) return { kind: "to_free", missing: r(d.freeFrom - total), fee: d.lowFee };
   if (d.freeFrom != null) return { kind: "free" };
   return null;

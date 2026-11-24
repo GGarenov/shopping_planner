@@ -33,7 +33,10 @@ describe("planSettingsSchema (Нов план → настройки)", () => {
   it("manual targets are validated (range ≥ 100 kcal)", () => {
     const ok = planSettingsSchema.parse({ ...base, targets: { mode: "manual", kcal_min: "1500", kcal_max: "1700", protein_min: "120" } });
     expect(ok.targets).toEqual({ mode: "manual", kcal_min: 1500, kcal_max: 1700, protein_min: 120 });
-    const bad = planSettingsSchema.safeParse({ ...base, targets: { mode: "manual", kcal_min: "1500", kcal_max: "1550", protein_min: "120" } });
+    const bad = planSettingsSchema.safeParse({
+      ...base,
+      targets: { mode: "manual", kcal_min: "1500", kcal_max: "1550", protein_min: "120" },
+    });
     expect(bad.success).toBe(false);
     if (!bad.success) expect(bad.error.issues[0]?.message).toBe("kcalSpan"); // errors.kcalSpan: "…поне 100 kcal"
   });

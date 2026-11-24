@@ -52,11 +52,19 @@ assertUnique(recipes, (r) => r.id, "recipes");
 assertUnique(products, (p) => p.ebag_id, "products");
 const ingredientIds = new Set(ingredients.map((i) => i.id));
 const orphans = products.filter((p) => !ingredientIds.has(p.ingredient_id));
-if (orphans.length) throw new Error(`products linked to unknown ingredients: ${orphans.slice(0, 5).map((p) => `${p.ebag_id}→${p.ingredient_id}`).join(", ")}`);
+if (orphans.length)
+  throw new Error(
+    `products linked to unknown ingredients: ${orphans
+      .slice(0, 5)
+      .map((p) => `${p.ebag_id}→${p.ingredient_id}`)
+      .join(", ")}`,
+  );
 if (products.length < 1000) throw new Error(`only ${products.length} products — refusing to seed a partial file (SPEC §7.3)`);
 
 const pricesDate = products.reduce((d, p) => (p.last_seen && p.last_seen > d ? p.last_seen : d), "");
-console.log(`ingredients ${ingredients.length} · recipes ${recipes.length} · products ${products.length} (${products.filter((p) => p.available).length} available, prices from ${pricesDate || "?"})`);
+console.log(
+  `ingredients ${ingredients.length} · recipes ${recipes.length} · products ${products.length} (${products.filter((p) => p.available).length} available, prices from ${pricesDate || "?"})`,
+);
 if (DRY) {
   console.log("dry run — nothing written");
   process.exit(0);
@@ -79,8 +87,16 @@ async function upsert(table: string, rows: Record<string, unknown>[], onConflict
 const t0 = Date.now();
 const startedAt = new Date().toISOString();
 
-await upsert("ingredients", ingredients.map((i) => ({ id: i.id, data: i })), "id");
-await upsert("recipes", recipes.map((r) => ({ id: r.id, data: r })), "id");
+await upsert(
+  "ingredients",
+  ingredients.map((i) => ({ id: i.id, data: i })),
+  "id",
+);
+await upsert(
+  "recipes",
+  recipes.map((r) => ({ id: r.id, data: r })),
+  "id",
+);
 if (RECIPES_ONLY) {
   console.log(`done in ${((Date.now() - t0) / 1000).toFixed(1)} s (recipes only; products untouched)`);
   process.exit(0);
@@ -102,14 +118,21 @@ await upsert(
 const inFile = new Set(products.map((p) => p.ebag_id));
 const existing: number[] = [];
 for (let from = 0; ; from += 1000) {
-  const { data, error } = await db.from("products").select("ebag_id").eq("available", true).range(from, from + 999);
+  const { data, error } = await db
+    .from("products")
+    .select("ebag_id")
+    .eq("available", true)
+    .range(from, from + 999);
   if (error) throw new Error(`products select failed: ${error.message}`);
   existing.push(...data.map((r) => Number(r.ebag_id)));
   if (data.length < 1000) break;
 }
 const stale = existing.filter((id) => !inFile.has(id));
 for (let i = 0; i < stale.length; i += BATCH) {
-  const { error } = await db.from("products").update({ available: false }).in("ebag_id", stale.slice(i, i + BATCH));
+  const { error } = await db
+    .from("products")
+    .update({ available: false })
+    .in("ebag_id", stale.slice(i, i + BATCH));
   if (error) throw new Error(`marking stale products failed: ${error.message}`);
 }
 console.log(`  products no longer listed → unavailable: ${stale.length}`);

@@ -24,7 +24,11 @@ export function TargetsEditor({ targets, computed }: { targets: Targets; compute
         {targets.source === "manual" && (
           <form action={resetTargetsOverride}>
             <button type="submit" className="btn-ghost w-full">
-              {t("resetComputed", { kcalMin: String(computed.kcal_min), kcalMax: String(computed.kcal_max), protein: String(computed.protein_min) })}
+              {t("resetComputed", {
+                kcalMin: String(computed.kcal_min),
+                kcalMax: String(computed.kcal_max),
+                protein: String(computed.protein_min),
+              })}
             </button>
           </form>
         )}

@@ -34,13 +34,21 @@ export async function GET() {
     const cart = await readCart(api);
     // Delivery data is a nice-to-have: the cart still shows if eBag can't answer these (e.g. no saved address).
     const delivery = await api.call<Record<string, unknown>>("get_delivery_info", {}).then(parseDelivery, () => null);
-    const slots = await api.call<{ slots?: Record<string, string[]> }>("get_delivery_slots", {}).then((s) => firstSlots(s, 4), () => []);
+    const slots = await api.call<{ slots?: Record<string, string[]> }>("get_delivery_slots", {}).then(
+      (s) => firstSlots(s, 4),
+      () => [],
+    );
     return NextResponse.json({ cart, delivery, slots });
   });
 }
 
 const patchBody = z.discriminatedUnion("op", [
-  z.object({ op: z.literal("set"), productId: z.number().int().positive(), quantity: z.number().positive().max(1000), unit: z.enum(["pcs", "kg"]) }),
+  z.object({
+    op: z.literal("set"),
+    productId: z.number().int().positive(),
+    quantity: z.number().positive().max(1000),
+    unit: z.enum(["pcs", "kg"]),
+  }),
   z.object({ op: z.literal("remove"), productId: z.number().int().positive(), unit: z.enum(["pcs", "kg"]) }),
   z.object({ op: z.literal("clear") }),
 ]);

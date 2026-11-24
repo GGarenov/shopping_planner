@@ -14,7 +14,12 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function TargetsPage() {
   const { profile } = await requireCompleteProfile();
-  const [t, tc, to, locale] = await Promise.all([getTranslations("targets"), getTranslations("common"), getTranslations("options"), getLocale()]);
+  const [t, tc, to, locale] = await Promise.all([
+    getTranslations("targets"),
+    getTranslations("common"),
+    getTranslations("options"),
+    getLocale(),
+  ]);
   const body: BodyData = {
     sex: profile.sex,
     age: profile.age,
@@ -31,60 +36,56 @@ export default async function TargetsPage() {
 
   return (
     <>
-    <main className="page pb-24">
-      <Hero title={t("heading")} kicker={t("goal", { goal })} />
+      <main className="page pb-24">
+        <Hero title={t("heading")} kicker={t("goal", { goal })} />
 
-      <section className="grid grid-cols-2 gap-3">
-        <div className="card flex flex-col gap-1">
-          <span className="text-sm opacity-70">{t("kcalPerDay")}</span>
-          <span className="text-2xl font-bold tabular-nums">
-            {targets.kcal_min}–{targets.kcal_max}
-          </span>
-          <span className="text-sm opacity-70">kcal</span>
-        </div>
-        <div className="card flex flex-col gap-1">
-          <span className="text-sm opacity-70">{t("proteinPerDay")}</span>
-          <span className="text-2xl font-bold tabular-nums">≥ {targets.protein_min}</span>
-          <span className="text-sm opacity-70">{t("grams")}</span>
-        </div>
-      </section>
+        <section className="grid grid-cols-2 gap-3">
+          <div className="card flex flex-col gap-1">
+            <span className="text-sm opacity-70">{t("kcalPerDay")}</span>
+            <span className="text-2xl font-bold tabular-nums">
+              {targets.kcal_min}–{targets.kcal_max}
+            </span>
+            <span className="text-sm opacity-70">kcal</span>
+          </div>
+          <div className="card flex flex-col gap-1">
+            <span className="text-sm opacity-70">{t("proteinPerDay")}</span>
+            <span className="text-2xl font-bold tabular-nums">≥ {targets.protein_min}</span>
+            <span className="text-sm opacity-70">{t("grams")}</span>
+          </div>
+        </section>
 
-      {targets.source === "manual" && (
-        <p className="rounded-xl bg-accent-soft px-4 py-3 text-sm">{t("manual")}</p>
-      )}
+        {targets.source === "manual" && <p className="rounded-xl bg-accent-soft px-4 py-3 text-sm">{t("manual")}</p>}
 
-      <section className="flex flex-col gap-3">
-        <h2 className="text-lg font-semibold">{t("howCalculated")}</h2>
-        <ol className="flex flex-col gap-2">
-          {steps.map((s) => (
-            <li key={s.label} className="card flex flex-col gap-1">
-              <div className="flex items-baseline justify-between gap-3">
-                <span className="font-medium">{s.label}</span>
-                <span className="shrink-0 font-semibold tabular-nums">{s.value}</span>
-              </div>
-              <span className="text-sm break-words opacity-70">{s.expression}</span>
-            </li>
-          ))}
-        </ol>
-        <p className="text-sm opacity-70">
-          {t("everyDay")}
-        </p>
-      </section>
+        <section className="flex flex-col gap-3">
+          <h2 className="text-lg font-semibold">{t("howCalculated")}</h2>
+          <ol className="flex flex-col gap-2">
+            {steps.map((s) => (
+              <li key={s.label} className="card flex flex-col gap-1">
+                <div className="flex items-baseline justify-between gap-3">
+                  <span className="font-medium">{s.label}</span>
+                  <span className="shrink-0 font-semibold tabular-nums">{s.value}</span>
+                </div>
+                <span className="text-sm break-words opacity-70">{s.expression}</span>
+              </li>
+            ))}
+          </ol>
+          <p className="text-sm opacity-70">{t("everyDay")}</p>
+        </section>
 
-      <TargetsEditor targets={targets} computed={computed} />
+        <TargetsEditor targets={targets} computed={computed} />
 
-      <nav className="mt-auto flex flex-col gap-2 border-t border-border pt-4">
-        <Link href="/onboarding" className="btn-secondary">
-          {t("editData")}
-        </Link>
-        <form action="/auth/signout" method="post">
-          <button type="submit" className="btn-ghost w-full">
-            {tc("logout")}
-          </button>
-        </form>
-      </nav>
-    </main>
-    <BottomNav />
+        <nav className="mt-auto flex flex-col gap-2 border-t border-border pt-4">
+          <Link href="/onboarding" className="btn-secondary">
+            {t("editData")}
+          </Link>
+          <form action="/auth/signout" method="post">
+            <button type="submit" className="btn-ghost w-full">
+              {tc("logout")}
+            </button>
+          </form>
+        </nav>
+      </main>
+      <BottomNav />
     </>
   );
 }

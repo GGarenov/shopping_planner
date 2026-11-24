@@ -10,7 +10,10 @@ import { createAdminClient, createClient } from "@/lib/supabase/server";
 
 const feedbackInput = z.object({ message: z.string().trim().min(3).max(4000), page: z.string().max(200).optional() });
 
-export async function sendFeedback(_prev: { ok?: boolean; error?: string } | null, form: FormData): Promise<{ ok?: boolean; error?: string }> {
+export async function sendFeedback(
+  _prev: { ok?: boolean; error?: string } | null,
+  form: FormData,
+): Promise<{ ok?: boolean; error?: string }> {
   const parsed = feedbackInput.safeParse({ message: form.get("message"), page: form.get("page") ?? undefined });
   const t = await getTranslations("profile.feedback");
   if (!parsed.success) return { error: t("tooShort") };

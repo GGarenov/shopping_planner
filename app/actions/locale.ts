@@ -15,7 +15,11 @@ export async function setLocale(locale: string): Promise<void> {
   } = await supabase.auth.getUser();
   if (user) {
     const { data } = await supabase.from("profiles").select("options").eq("user_id", user.id).maybeSingle();
-    if (data) await supabase.from("profiles").update({ options: { ...(data.options ?? {}), lang: locale } }).eq("user_id", user.id);
+    if (data)
+      await supabase
+        .from("profiles")
+        .update({ options: { ...(data.options ?? {}), lang: locale } })
+        .eq("user_id", user.id);
   }
   revalidatePath("/", "layout");
 }

@@ -3,6 +3,7 @@
 Handoff notes from the first research conversation (2026-11-16). Read this first.
 
 ## The idea
+
 A mobile app like **Mealbird** (https://mealbird.app), but for **Bulgaria** and tied to real
 Bulgarian supermarkets. The user picks a store, and the app builds a week of meals that hits
 daily protein/calorie targets, fits a grocery budget, and outputs a shopping list for that store.
@@ -11,6 +12,7 @@ Long-term store targets: Kaufland, Lidl, Billa. **Current focus: Lidl** (best fr
 **eBag** being evaluated as a richer alternative.
 
 ## Mealbird features to copy
+
 - Weekly plan; **every day** checked against protein minimum + calorie range (not a weekly average).
 - Recipes with grams per ingredient, macros per meal, visible "how we compute this" math.
 - Targets: user-entered or computed by a shown formula; editable.
@@ -32,16 +34,17 @@ never taken from LLM output.
 
 ## Data sources investigated
 
-| Source | Verdict |
-|---|---|
-| Kaufland Seller API (sellerapi.kaufland.com) | ❌ For the Kaufland online *marketplace* (sellers, mostly non-food). No supermarket shelf prices. Requires seller/partner account. |
-| kaufland.bg website | ⚠️ Only prices for **weekly offers** (`/aktualni-predlozheniya/...`). The `asortiment` pages are brand/encyclopedia pages without prices. Kaufland BG has no online grocery shop. |
-| sofia-supermarkets-api (github.com/StefanBratanov/sofia-supermarkets-api) | ✅ for **promos**. Kotlin/Spring Boot, Apache-2.0, last commit May 2026. Scrapes Kaufland, Lidl, Billa, Fantastico, T-Market offers. Fields: name, quantity, price, oldPrice, category, picUrl, validFrom, validUntil. Needs JDK 21 + Postgres. Not run yet. |
-| **kolkostruva.bg** (government, КЗП) | ✅ **Free daily open data**, no scraping needed: `https://kolkostruva.bg/opendata_files/YYYY-MM-DD.zip` (~17 MB, one CSV per chain, ~65 chains). Real regular + promo prices **per store**. Covers the "large consumer basket" (staples), not the full range. **Kaufland is NOT in it** (checked 3, 10, 14, 15 Nov 2026). Lidl, Billa, Fantastico, Metro, T Market, eBag are. |
-| Pepesto (pepesto.com) | 💰 Paid API with eBag's catalog (1–2k cooking SKUs, daily). Has cart-link feature. Kaufland/Lidl/Billa not confirmed. |
-| **eBag.bg** | ✅ Full online grocery shop, ~21,057 products, live € prices. See below. |
+| Source                                                                    | Verdict                                                                                                                                                                                                                                                                                                                                                                       |
+| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Kaufland Seller API (sellerapi.kaufland.com)                              | ❌ For the Kaufland online _marketplace_ (sellers, mostly non-food). No supermarket shelf prices. Requires seller/partner account.                                                                                                                                                                                                                                            |
+| kaufland.bg website                                                       | ⚠️ Only prices for **weekly offers** (`/aktualni-predlozheniya/...`). The `asortiment` pages are brand/encyclopedia pages without prices. Kaufland BG has no online grocery shop.                                                                                                                                                                                             |
+| sofia-supermarkets-api (github.com/StefanBratanov/sofia-supermarkets-api) | ✅ for **promos**. Kotlin/Spring Boot, Apache-2.0, last commit May 2026. Scrapes Kaufland, Lidl, Billa, Fantastico, T-Market offers. Fields: name, quantity, price, oldPrice, category, picUrl, validFrom, validUntil. Needs JDK 21 + Postgres. Not run yet.                                                                                                                  |
+| **kolkostruva.bg** (government, КЗП)                                      | ✅ **Free daily open data**, no scraping needed: `https://kolkostruva.bg/opendata_files/YYYY-MM-DD.zip` (~17 MB, one CSV per chain, ~65 chains). Real regular + promo prices **per store**. Covers the "large consumer basket" (staples), not the full range. **Kaufland is NOT in it** (checked 3, 10, 14, 15 Nov 2026). Lidl, Billa, Fantastico, Metro, T Market, eBag are. |
+| Pepesto (pepesto.com)                                                     | 💰 Paid API with eBag's catalog (1–2k cooking SKUs, daily). Has cart-link feature. Kaufland/Lidl/Billa not confirmed.                                                                                                                                                                                                                                                         |
+| **eBag.bg**                                                               | ✅ Full online grocery shop, ~21,057 products, live € prices. See below.                                                                                                                                                                                                                                                                                                      |
 
 ### kolkostruva CSV format
+
 Columns: `Населено място` (city code, 68134 = Sofia), `Търговски обект` (store no. + address),
 `Наименование на продукта`, `Код на продукта` (chain's internal code, **not EAN**),
 `Категория` (number only, ~80 categories, no names), `Цена на дребно` (€), `Цена в промоция` (€, empty if none).
@@ -59,6 +62,7 @@ Generated file: [lidl_products_2026-11-15.csv](lidl_products_2026-11-15.csv) —
 product: category, name, code, min/max price, stores, stores on promo, lowest promo price.
 
 ### eBag details
+
 - Sitemaps: `https://ebag.bg/sitemap_products_bg.xml` (21k product URLs),
   `sitemap_promo_products_bg.xml`, `sitemap_categories_bg.xml`. robots.txt does not block product pages.
 - Each product page has a JSON-LD block: name, sku, category path, price (EUR), availability, brand.
@@ -72,7 +76,9 @@ product: category, name, code, min/max price, stores, stores on promo, lowest pr
   (each user connects their own account). Not a bulk data feed.
 
 ### eBag MCP test results (2026-11-16, authenticated)
+
 Tested: chicken fillet, oats, yogurt, eggs, rice, promo collection.
+
 - **Search** (`search_products`): id, name, brand, **pack_size string** ("650 г", "2 x 500 г",
   "10 бр.", "~ 670 г / бр" for variable weight), price, **price per kg/piece**, promo price,
   discount %, multi-pack bundle discount, stock, quantity step/min/max. Sort by `unit_price_asc`
@@ -88,6 +94,7 @@ Tested: chicken fillet, oats, yogurt, eggs, rice, promo collection.
   building our ingredient table by hand/semi-automatically; not a licensed bulk feed.
 
 ## Nutrition data
+
 No supermarket source has usable macros (except possibly eBag via MCP). Plan: map each store
 product to a **generic ingredient** (~100–150 needed) and take macros from **USDA FoodData Central**
 (free; downloadable database). **Open Food Facts** as a secondary source for branded items
@@ -95,11 +102,13 @@ product to a **generic ingredient** (~100–150 needed) and take macros from **U
 no runtime dependency on an external API.
 
 ## Status update (2026-11-23)
+
 Decisions: **no AI in the app**; main data source **eBag**; macros from **USDA** (+ eBag labels when valid);
 app language **Bulgarian**; recipes written by us (gotvach.bg forbids scraping in its terms §2(9) and
 robots.txt — used only as inspiration for dish ideas).
 
 Built so far (Node.js, `package.json` in the root):
+
 - `data/ingredients.json` — 122 generic ingredients: USDA macros (`npm run usda:fill`), diets, allergens,
   Bulgarian match rules for linking eBag products.
 - `data/recipes_src/*.json` → `node scripts/build_recipes.mjs` → `data/recipes.json` — 76 recipes in Bulgarian
@@ -113,6 +122,7 @@ Next: run login + first sync and review auto-links → schedule it daily → bui
 (targets formula → recipe/quantity selection → shopping list in whole packs).
 
 ## Status at project start (2026-11-16)
+
 - Project folder contains only this file and the Lidl product CSV. No code yet.
 - **Python is not installed** on this machine (Node.js status unknown). Python is preferred for
   the planner (solver libraries).
@@ -120,6 +130,7 @@ Next: run login + first sync and review auto-links → schedule it daily → bui
   **authenticated and working** as of 2026-11-16 (step 1 below is done).
 
 ## Next steps
+
 1. In a new session, authenticate the eBag MCP, then call `get_product` / `search_products` for
    chicken fillet, oats, yogurt, eggs, rice to see what nutrition, pack-size and price data it returns.
 2. Decide the main data source: **Lidl (kolkostruva)** vs **eBag** (richer, full range, nutrition).

@@ -48,7 +48,10 @@ export interface RawPrices {
 
 const num = (s: unknown): number | null => {
   if (s == null) return null;
-  const t = String(s).replace(",", ".").replace(/^[<~≈]\s*/, "").trim();
+  const t = String(s)
+    .replace(",", ".")
+    .replace(/^[<~≈]\s*/, "")
+    .trim();
   if (/\d\s*-\s*\d/.test(t)) return null; // ranges like 305-395 are not usable
   const m = t.match(/-?\d+(\.\d+)?/);
   return m ? Number(m[0]) : null;
@@ -167,8 +170,7 @@ export function parseDescriptionNutrition(desc = ""): NutritionLabel | null {
     const m = d.match(re);
     return m ? num(m[1]) : null;
   };
-  const after = (word: string) =>
-    new RegExp(word + "[^\\d\\-]{0,25}?(\\d+(?:[.,]\\d+)?(?:\\s*-\\s*\\d+(?:[.,]\\d+)?)?)", "i");
+  const after = (word: string) => new RegExp(word + "[^\\d\\-]{0,25}?(\\d+(?:[.,]\\d+)?(?:\\s*-\\s*\\d+(?:[.,]\\d+)?)?)", "i");
   const label: NutritionLabel = {
     source: "description_text",
     kcal: grab(/(\d+(?:[.,]\d+)?)\s*(?:kcal|ккал|кcal|кal)/i) ?? grab(/\((?:kcal|ккал)\)\s*(\d+(?:[.,]\d+)?)/i),
@@ -268,8 +270,7 @@ export function buildMatchers(
     return {
       ingredient_id: top.id,
       edible_fraction: fraction,
-      ambiguous:
-        hits.length > 1 && hits[1]!.score === top.score ? hits.filter((h) => h.score === top.score).map((h) => h.id) : null,
+      ambiguous: hits.length > 1 && hits[1]!.score === top.score ? hits.filter((h) => h.score === top.score).map((h) => h.id) : null,
     };
   };
 }

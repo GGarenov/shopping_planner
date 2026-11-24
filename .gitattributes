@@ -1,0 +1,6 @@
+# Normalise line endings in the repo (Windows checkouts get LF too, so Prettier and CI agree).
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.webp binary
+*.wasm binary

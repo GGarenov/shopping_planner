@@ -40,7 +40,12 @@ export async function GET(req: NextRequest) {
       redirectUri: flow.redirect,
       resource: new URL(EBAG_RESOURCE),
     });
-    await saveConnection(admin, user.id, { clientInformation, redirect: flow.redirect, tokens: { ...tokens, saved_at: new Date().toISOString() } }, true);
+    await saveConnection(
+      admin,
+      user.id,
+      { clientInformation, redirect: flow.redirect, tokens: { ...tokens, saved_at: new Date().toISOString() } },
+      true,
+    );
     return done("connected=1");
   } catch (e) {
     console.error("ebag callback failed", e);

@@ -61,7 +61,9 @@ describe("generatePlan (data/profiles/test.json)", () => {
     expect(Math.max(...counts.values())).toBeLessThanOrEqual(testProfile.max_repeats ?? 4);
     for (const day of out.plan) expect(new Set(day.meals.map((m) => m.recipe_id)).size).toBe(day.meals.length); // never twice a day
     const recipes = new Map(data.recipes.map((r) => [r.id, r]));
-    const fish = meals.filter((m) => (m.slot === "lunch" || m.slot === "dinner") && ["fish", "seafood"].includes(recipes.get(m.recipe_id)?.protein ?? ""));
+    const fish = meals.filter(
+      (m) => (m.slot === "lunch" || m.slot === "dinner") && ["fish", "seafood"].includes(recipes.get(m.recipe_id)?.protein ?? ""),
+    );
     expect(fish.length).toBeGreaterThanOrEqual(1);
     expect(meals.filter((m) => recipes.get(m.recipe_id)?.treat).length).toBeLessThanOrEqual(2);
   });

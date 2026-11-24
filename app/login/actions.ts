@@ -21,10 +21,13 @@ const newAccount = credentials.extend({
 
 const LOGIN_KEYS = ["invalidEmail", "enterPassword", "passwordMin", "passwordTooLong"] as const;
 type LoginKey = (typeof LOGIN_KEYS)[number];
-const validationKey = (m: string | undefined): LoginKey => ((LOGIN_KEYS as readonly string[]).includes(m ?? "") ? (m as LoginKey) : "invalidEmail");
+const validationKey = (m: string | undefined): LoginKey =>
+  (LOGIN_KEYS as readonly string[]).includes(m ?? "") ? (m as LoginKey) : "invalidEmail";
 
 const read = (fd: FormData) => ({
-  email: String(fd.get("email") ?? "").trim().toLowerCase(),
+  email: String(fd.get("email") ?? "")
+    .trim()
+    .toLowerCase(),
   password: String(fd.get("password") ?? ""),
 });
 

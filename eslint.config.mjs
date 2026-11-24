@@ -1,6 +1,7 @@
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
+import prettier from "eslint-config-prettier/flat";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const compat = new FlatCompat({ baseDirectory: __dirname });
@@ -8,6 +9,9 @@ const compat = new FlatCompat({ baseDirectory: __dirname });
 const eslintConfig = [
   { ignores: [".next/**", "node_modules/**", "scripts/**", "data/**", "public/**", "next-env.d.ts"] },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  { ignores: ["coverage/**"] },
+  // Formatting is Prettier's job: turn off ESLint rules that would fight it (keep this last).
+  prettier,
 ];
 
 export default eslintConfig;

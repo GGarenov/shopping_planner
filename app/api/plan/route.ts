@@ -21,7 +21,8 @@ type Translator = Awaited<ReturnType<typeof getTranslations>>;
 function failureMessage(res: Extract<PlanResult, { ok: false }>, budget: number, t: Translator, locale: string): string {
   // Same rounding as budgetMessageBg: bg "80,5 €", en "€80.5".
   const money = (n: number) => (locale === "en" ? `€${num(n, locale, 2)}` : `${num(n, locale, 2)} €`);
-  if (res.reason === "budget_too_low" && res.min_budget_eur != null) return t("budgetTooLow", { budget: money(budget), min: money(res.min_budget_eur) });
+  if (res.reason === "budget_too_low" && res.min_budget_eur != null)
+    return t("budgetTooLow", { budget: money(budget), min: money(res.min_budget_eur) });
   if (res.reason === "timeout") return t("timeout");
   if (res.reason === "no_recipes" || res.message === NO_RECIPES_MESSAGE_BG) return t("noRecipes");
   return t("noPlan");
@@ -41,7 +42,9 @@ export async function POST() {
     console.error("plan: profile select failed", profileError.message);
     return fail(500, tc("somethingWrong"));
   }
-  const profile = row ? ({ ...row, weight_kg: Number(row.weight_kg), budget_eur: Number(row.budget_eur), options: row.options ?? {} } as ProfileRow) : null;
+  const profile = row
+    ? ({ ...row, weight_kg: Number(row.weight_kg), budget_eur: Number(row.budget_eur), options: row.options ?? {} } as ProfileRow)
+    : null;
   if (!isComplete(profile)) return fail(400, t("profileIncomplete"));
 
   let data;
@@ -65,7 +68,13 @@ export async function POST() {
   const targets = resolveTargets(body, profile.targets_override);
 
   // "Нов план" should give a different week: steer away from the recipes of the latest plan.
-  const { data: last } = await supabase.from("plans").select("plan").eq("user_id", user.id).order("created_at", { ascending: false }).limit(1).maybeSingle();
+  const { data: last } = await supabase
+    .from("plans")
+    .select("plan")
+    .eq("user_id", user.id)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
   const avoid = [...new Set(((last?.plan ?? []) as PlanDay[]).flatMap((d) => d.meals.map((m) => m.recipe_id)))];
 
   const planProfile = {
@@ -93,7 +102,10 @@ export async function POST() {
 
   if (!res.ok) {
     console.warn("plan: no feasible plan", { user: user.id, reason: res.reason, log: res.log });
-    return NextResponse.json({ error: failureMessage(res, profile.budget_eur, t, locale), reason: res.reason, min_budget_eur: res.min_budget_eur }, { status: 422 });
+    return NextResponse.json(
+      { error: failureMessage(res, profile.budget_eur, t, locale), reason: res.reason, min_budget_eur: res.min_budget_eur },
+      { status: 422 },
+    );
   }
 
   const out = res.output;

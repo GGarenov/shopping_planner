@@ -31,7 +31,8 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - run: npm ci --omit=dev --no-audit --no-fund # runtime deps only; Node strips the TS types itself
+      # runtime deps only (Node strips the TS types itself); --ignore-scripts skips the husky "prepare" hook (a dev tool)
+      - run: npm ci --omit=dev --ignore-scripts --no-audit --no-fund
       - name: Sync
         run: node scripts/sync.ts ${{ inputs.details == false && '--no-details' || '' }}
         env:

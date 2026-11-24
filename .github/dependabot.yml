@@ -1,0 +1,35 @@
+# Weekly dependency updates, grouped so they arrive as a few reviewable PRs (each one runs CI).
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      next-react:
+        patterns: ["next", "react", "react-dom", "@types/react*", "eslint-config-next"]
+      supabase:
+        patterns: ["@supabase/*", "supabase"]
+      testing:
+        patterns: ["vitest", "@vitest/*"]
+      tooling:
+        patterns:
+          [
+            "eslint*",
+            "@eslint/*",
+            "prettier*",
+            "typescript",
+            "husky",
+            "lint-staged",
+            "@types/node",
+            "tailwindcss",
+            "@tailwindcss/*",
+            "postcss",
+          ]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday

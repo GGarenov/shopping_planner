@@ -21,7 +21,9 @@ export async function readOwnerStore(db: SupabaseClient): Promise<OAuthStore | n
 }
 
 export async function writeOwnerStore(db: SupabaseClient, store: OAuthStore): Promise<void> {
-  const { error } = await db.from("system_secrets").upsert({ key: OWNER_TOKENS_KEY, value_encrypted: encryptJson(store) }, { onConflict: "key" });
+  const { error } = await db
+    .from("system_secrets")
+    .upsert({ key: OWNER_TOKENS_KEY, value_encrypted: encryptJson(store) }, { onConflict: "key" });
   if (error) throw new Error(`system_secrets write failed: ${error.message}`);
 }
 
@@ -36,12 +38,15 @@ export class SupabaseOwnerTokens implements OAuthClientProvider {
 
   static async load(db: SupabaseClient): Promise<SupabaseOwnerTokens> {
     const store = await readOwnerStore(db);
-    if (!store?.tokens?.refresh_token) throw new Error("No eBag tokens in system_secrets. Run locally: npm run ebag:login && npm run ebag:bootstrap");
+    if (!store?.tokens?.refresh_token)
+      throw new Error("No eBag tokens in system_secrets. Run locally: npm run ebag:login && npm run ebag:bootstrap");
     return new SupabaseOwnerTokens(db, store);
   }
 
   get redirectUrl() {
-    return (this.store.clientInformation as { redirect_uris?: string[] } | undefined)?.redirect_uris?.[0] ?? "http://127.0.0.1:53682/callback";
+    return (
+      (this.store.clientInformation as { redirect_uris?: string[] } | undefined)?.redirect_uris?.[0] ?? "http://127.0.0.1:53682/callback"
+    );
   }
   get clientMetadata(): OAuthClientMetadata {
     return {

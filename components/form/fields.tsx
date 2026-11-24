@@ -28,7 +28,15 @@ export function Choice({
   );
 }
 
-export function Chips({ options, selected, onToggle }: { options: { value: string; label: string }[]; selected: string[]; onToggle: (v: string) => void }) {
+export function Chips({
+  options,
+  selected,
+  onToggle,
+}: {
+  options: { value: string; label: string }[];
+  selected: string[];
+  onToggle: (v: string) => void;
+}) {
   return (
     <div className="flex flex-wrap gap-2">
       {options.map((o) => (
@@ -62,7 +70,13 @@ export function NumberField({
         {label}
       </label>
       <div className="flex items-center gap-3">
-        <input id={inputId} className="input" inputMode={decimal ? "decimal" : "numeric"} value={value} onChange={(e) => onChange(e.target.value.replace(",", "."))} />
+        <input
+          id={inputId}
+          className="input"
+          inputMode={decimal ? "decimal" : "numeric"}
+          value={value}
+          onChange={(e) => onChange(e.target.value.replace(",", "."))}
+        />
         <span className="w-28 shrink-0 text-sm opacity-70">{unit}</span>
       </div>
     </div>
@@ -79,7 +93,14 @@ export function BudgetField({ value, onChange }: { value: string; onChange: (v: 
     <div className="flex flex-col gap-3">
       <div className="grid grid-cols-3 gap-2" role="radiogroup" aria-label={t("budgetAria")}>
         {BUDGET_PRESETS.map((b) => (
-          <button key={b} type="button" role="radio" aria-checked={value === String(b)} className="choice justify-center py-3 text-lg font-semibold" onClick={() => onChange(String(b))}>
+          <button
+            key={b}
+            type="button"
+            role="radio"
+            aria-checked={value === String(b)}
+            className="choice justify-center py-3 text-lg font-semibold"
+            onClick={() => onChange(String(b))}
+          >
             {b} €
           </button>
         ))}

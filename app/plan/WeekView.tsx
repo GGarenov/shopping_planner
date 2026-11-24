@@ -7,7 +7,6 @@ import type { PlanDay } from "@/lib/planner/plan";
 import { dayLongKey, dayShortKey, slotKey } from "@/lib/planner/labels";
 import { recipeName } from "@/lib/i18n/content";
 
-
 export function WeekView({
   planId,
   days,
@@ -76,7 +75,7 @@ export function WeekView({
                 <span className="slot-tag" style={{ background: `var(--slot-${m.slot})`, color: `var(--slot-${m.slot}-fg)` }}>
                   {t(slotKey(m.slot))}
                 </span>
-                <span className="font-bold leading-snug">{recipeName(m.recipe_id, m.recipe, locale)}</span>
+                <span className="leading-snug font-bold">{recipeName(m.recipe_id, m.recipe, locale)}</span>
                 <span className="text-sm opacity-70">
                   {t("week.mealLine", { kcal: String(Math.round(m.kcal)), protein: String(Math.round(m.protein_g)) })}
                 </span>
@@ -113,7 +112,11 @@ function MealThumb({ src, slot }: { src?: string; slot: string }) {
       <img src={src} alt="" width={72} height={72} loading="lazy" className="size-[72px] shrink-0 rounded-xl object-cover" />
     );
   return (
-    <span aria-hidden className="flex size-[72px] shrink-0 items-center justify-center rounded-xl" style={{ background: `var(--slot-${slot})`, color: `var(--slot-${slot}-fg)` }}>
+    <span
+      aria-hidden
+      className="flex size-[72px] shrink-0 items-center justify-center rounded-xl"
+      style={{ background: `var(--slot-${slot})`, color: `var(--slot-${slot}-fg)` }}
+    >
       <svg viewBox="0 0 24 24" className="size-8" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
         <circle cx="12" cy="13" r="6.5" />
         <path d="M3 4v6M5.5 4v6M3 7h2.5M21 4c-1.5 1-2 2.5-2 5h2V4Z" />

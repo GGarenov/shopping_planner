@@ -29,7 +29,12 @@ const created = (iso: string, locale: string) =>
 
 export default async function ProfilePage() {
   const { user, profile } = await requireCompleteProfile();
-  const [t, tc, to, locale] = await Promise.all([getTranslations("profile"), getTranslations("common"), getTranslations("options"), getLocale()]);
+  const [t, tc, to, locale] = await Promise.all([
+    getTranslations("profile"),
+    getTranslations("common"),
+    getTranslations("options"),
+    getLocale(),
+  ]);
   const supabase = await createClient();
   const [plans, ebag] = await Promise.all([listPlans(supabase, 20), getConnectionRow(createAdminClient(), user.id)]);
   const targets = resolveTargets(
@@ -60,7 +65,12 @@ export default async function ProfilePage() {
             <span className="flex flex-col">
               <span className="font-semibold">{t("goalsTitle")}</span>
               <span className="text-sm opacity-70">
-                {t("goalsSummary", { goal, min: String(targets.kcal_min), max: String(targets.kcal_max), protein: String(targets.protein_min) })}
+                {t("goalsSummary", {
+                  goal,
+                  min: String(targets.kcal_min),
+                  max: String(targets.kcal_max),
+                  protein: String(targets.protein_min),
+                })}
               </span>
             </span>
             <span aria-hidden>›</span>
@@ -69,7 +79,11 @@ export default async function ProfilePage() {
             <span className="flex flex-col">
               <span className="font-semibold">{t("detailsTitle")}</span>
               <span className="text-sm opacity-70">
-                {t("detailsSummary", { weight: String(profile.weight_kg), height: String(profile.height_cm), budget: eur(profile.budget_eur, locale) })}
+                {t("detailsSummary", {
+                  weight: String(profile.weight_kg),
+                  height: String(profile.height_cm),
+                  budget: eur(profile.budget_eur, locale),
+                })}
               </span>
             </span>
             <span aria-hidden>›</span>
@@ -77,7 +91,9 @@ export default async function ProfilePage() {
           <Link href="/ebag" className="card flex items-center justify-between gap-3">
             <span className="flex flex-col">
               <span className="font-semibold">eBag</span>
-              <span className="text-sm opacity-70">{ebag?.status === "connected" ? t("ebagConnected") : ebag ? t("ebagExpired") : t("ebagNotConnected")}</span>
+              <span className="text-sm opacity-70">
+                {ebag?.status === "connected" ? t("ebagConnected") : ebag ? t("ebagExpired") : t("ebagNotConnected")}
+              </span>
             </span>
             <span aria-hidden>›</span>
           </Link>
@@ -97,7 +113,9 @@ export default async function ProfilePage() {
                     <span className="flex flex-col">
                       <span className="font-medium">
                         {t("week", { from: shortDay(p.week_start, 0, locale), to: shortDay(p.week_start, 6, locale) })}
-                        {i === 0 && <span className="ml-2 rounded-full bg-accent-soft px-2 py-0.5 text-xs font-semibold">{t("current")}</span>}
+                        {i === 0 && (
+                          <span className="ml-2 rounded-full bg-accent-soft px-2 py-0.5 text-xs font-semibold">{t("current")}</span>
+                        )}
                       </span>
                       <span className="text-sm opacity-70">
                         {t("planMeta", { price: eur(p.checkout_eur, locale), created: created(p.created_at, locale) })}

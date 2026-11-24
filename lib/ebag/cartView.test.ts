@@ -24,7 +24,15 @@ const cart: RawCart = {
       available: true,
     },
     {
-      product: { id: 1, name: "Банани", unit: "kg", prices: { unit_delta: "2.00", promo_unit_delta: "1.50" }, quantity_step: "0.5000", minimum_quantity: "0.5000", available_quantity: "0" },
+      product: {
+        id: 1,
+        name: "Банани",
+        unit: "kg",
+        prices: { unit_delta: "2.00", promo_unit_delta: "1.50" },
+        quantity_step: "0.5000",
+        minimum_quantity: "0.5000",
+        available_quantity: "0",
+      },
       quantity: "1.000",
       line_total: "1.50",
     },
@@ -33,23 +41,47 @@ const cart: RawCart = {
   total_items: 2,
   url: "https://ebag.bg/cart/",
 };
-const delivery = { area: "Дианабад", city: "София", low_shipping_price: "1.53", high_shipping_price: "2.55", order_min_price: "15.34", cheaper_shipping_price_threshold: "35.79", free_shipping_price_threshold: "51.13" };
+const delivery = {
+  area: "Дианабад",
+  city: "София",
+  low_shipping_price: "1.53",
+  high_shipping_price: "2.55",
+  order_min_price: "15.34",
+  cheaper_shipping_price_threshold: "35.79",
+  free_shipping_price_threshold: "51.13",
+};
 
 describe("parseCart", () => {
   it("reads items, promo prices, steps, totals", () => {
     const v = parseCart([cart]);
     expect(v).toMatchObject({ count: 2, total: 4.7, savings: 0.5, shipping: 2.55, url: "https://ebag.bg/cart/" });
-    expect(v.items[0]).toMatchObject({ id: 635268, quantity: 2, step: 1, min: 1, max: 126, price: 1.6, regularPrice: null, lineTotal: 3.2, unit: "pcs", available: true });
+    expect(v.items[0]).toMatchObject({
+      id: 635268,
+      quantity: 2,
+      step: 1,
+      min: 1,
+      max: 126,
+      price: 1.6,
+      regularPrice: null,
+      lineTotal: 3.2,
+      unit: "pcs",
+      available: true,
+    });
     expect(v.items[1]).toMatchObject({ unit: "kg", step: 0.5, price: 1.5, regularPrice: 2, available: false });
   });
   it("handles an empty cart", () => {
-    expect(parseCart([{ items: [], totals: { total: "0", savings: "0", shipping_price: "2.55" }, total_items: 0 }])).toMatchObject({ items: [], count: 0, total: 0 });
+    expect(parseCart([{ items: [], totals: { total: "0", savings: "0", shipping_price: "2.55" }, total_items: 0 }])).toMatchObject({
+      items: [],
+      count: 0,
+      total: 0,
+    });
   });
 });
 
 describe("delivery", () => {
   const d = parseDelivery(delivery)!;
-  it("parses fees and thresholds", () => expect(d).toEqual({ area: "Дианабад, София", minOrder: 15.34, highFee: 2.55, lowFee: 1.53, cheaperFrom: 35.79, freeFrom: 51.13 }));
+  it("parses fees and thresholds", () =>
+    expect(d).toEqual({ area: "Дианабад, София", minOrder: 15.34, highFee: 2.55, lowFee: 1.53, cheaperFrom: 35.79, freeFrom: 51.13 }));
   it("explains what is missing for each fee step", () => {
     expect(deliveryHint(10, d)).toEqual({ kind: "below_min", missing: 5.34 });
     expect(deliveryHint(30, d)).toEqual({ kind: "to_cheaper", missing: 5.79, fee: 2.55, nextFee: 1.53 });
