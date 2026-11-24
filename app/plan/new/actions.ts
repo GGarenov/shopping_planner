@@ -3,6 +3,7 @@
 import { getTranslations } from "next-intl/server";
 import { getUserAndProfile } from "@/lib/profile/load";
 import { errorKey, planSettingsSchema } from "@/lib/profile/schema";
+import { requestLog } from "@/lib/requestLog";
 
 /** Saves the "new plan" settings into the profile (they stay for next time). The client then generates the plan. */
 export async function savePlanSettings(input: unknown): Promise<{ error?: string }> {
@@ -18,7 +19,10 @@ export async function savePlanSettings(input: unknown): Promise<{ error?: string
     .update({ ...fields, targets_override })
     .eq("user_id", user.id);
   if (error) {
-    console.error("plan settings update failed", error.code, error.message);
+    (await requestLog({ action: "savePlanSettings" })).error("plan_settings.save_failed", {
+      code: error.code,
+      err: new Error(error.message),
+    });
     return { error: t("saveSettingsFailed") };
   }
   return {};

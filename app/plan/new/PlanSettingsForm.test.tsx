@@ -2,7 +2,7 @@
 import { screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { computeTargets } from "@/lib/planner/targets";
-import { json, renderWithIntl } from "@/test/render";
+import { apiError, json, renderWithIntl } from "@/test/render";
 import { router } from "@/test/setup";
 import { PlanSettingsForm, type SettingsValues } from "./PlanSettingsForm";
 
@@ -70,7 +70,8 @@ describe("PlanSettingsForm («Нов план»)", () => {
     expect(savePlanSettings).toHaveBeenCalledWith(
       expect.objectContaining({ budget_eur: "100", weight_kg: "52", exclude_tags: ["pork"], targets: { mode: "auto" } }),
     );
-    expect(fetchMock).toHaveBeenCalledWith("/api/plan", { method: "POST" });
+    expect(fetchMock).toHaveBeenCalledTimes(1); // making a plan is never retried automatically
+    expect(fetchMock).toHaveBeenCalledWith("/api/plan", expect.objectContaining({ method: "POST" }));
   });
 
   it("manual targets start from the computed values and are sent as manual", async () => {
@@ -101,10 +102,18 @@ describe("PlanSettingsForm («Нов план»)", () => {
   });
 
   it("the planner's own message is shown when no plan fits (e.g. budget too low)", async () => {
-    fetchMock.mockResolvedValueOnce(json({ error: "С бюджет 20 € не успяхме…", reason: "budget_too_low", min_budget_eur: 51 }, 422));
+    fetchMock.mockResolvedValueOnce(apiError(422, "budget_too_low", "С бюджет 20 € не успяхме…", { min_budget_eur: 51 }));
     const { user } = renderWithIntl(<PlanSettingsForm initial={initial} />);
     await user.click(submit());
     expect(await screen.findByRole("alert")).toHaveTextContent("С бюджет 20 € не успяхме…");
     expect(router.push).not.toHaveBeenCalled();
+  });
+
+  it("no connection while making the plan: says so, and does not retry by itself", async () => {
+    fetchMock.mockRejectedValueOnce(new TypeError("Failed to fetch"));
+    const { user } = renderWithIntl(<PlanSettingsForm initial={initial} />);
+    await user.click(submit());
+    expect(await screen.findByRole("alert")).toHaveTextContent("Няма връзка. Провери интернета и опитай отново.");
+    expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 });

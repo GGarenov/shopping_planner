@@ -1,13 +1,17 @@
 "use client";
 
+import * as Sentry from "@sentry/nextjs";
 import { useEffect, useState } from "react";
 import bg from "@/messages/bg/profile.json";
 import en from "@/messages/en/profile.json";
 
 /** Last-resort error page (the root layout itself failed) — must render its own <html>. No intl provider here:
  *  the language comes straight from the `lang` cookie (read after mount to keep hydration stable). */
-export default function GlobalError({ reset }: { error: Error & { digest?: string }; reset: () => void }) {
+export default function GlobalError({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   const [locale, setLocale] = useState<"bg" | "en">("bg");
+  useEffect(() => {
+    Sentry.captureException(error);
+  }, [error]);
   useEffect(() => {
     if (/(?:^|;\s*)lang=en(?:;|$)/.test(document.cookie)) setLocale("en");
   }, []);

@@ -9,7 +9,9 @@ import { z } from "zod";
 import type { EbagApi } from "@/lib/ebag/api";
 import { fillCartItem, getCartSummary, type CartItemResult } from "@/lib/ebag/cart";
 import { firstSlots, parseCart, parseDelivery, type RawCart } from "@/lib/ebag/cartView";
-import { fail, withUserEbag } from "@/lib/ebag/session";
+import { withUserEbag } from "@/lib/ebag/session";
+import { AppError } from "@/lib/api/errors";
+import { apiHandler } from "@/lib/api/handler";
 import { getPlan } from "@/lib/plans/load";
 
 export const runtime = "nodejs";
@@ -29,8 +31,8 @@ async function readCart(api: EbagApi) {
   return parseCart(pages);
 }
 
-export async function GET() {
-  return withUserEbag(async ({ api }) => {
+export const GET = apiHandler("GET /api/ebag/cart", async ({ log }) =>
+  withUserEbag(log, async ({ api }) => {
     const cart = await readCart(api);
     // Delivery data is a nice-to-have: the cart still shows if eBag can't answer these (e.g. no saved address).
     const delivery = await api.call<Record<string, unknown>>("get_delivery_info", {}).then(parseDelivery, () => null);
@@ -39,8 +41,8 @@ export async function GET() {
       () => [],
     );
     return NextResponse.json({ cart, delivery, slots });
-  });
-}
+  }),
+);
 
 const patchBody = z.discriminatedUnion("op", [
   z.object({
@@ -53,12 +55,12 @@ const patchBody = z.discriminatedUnion("op", [
   z.object({ op: z.literal("clear") }),
 ]);
 
-export async function PATCH(req: NextRequest) {
+export const PATCH = apiHandler("PATCH /api/ebag/cart", async ({ log }, req: NextRequest) => {
   const t = await getTranslations("ebag.api");
   const parsed = patchBody.safeParse(await req.json().catch(() => null));
-  if (!parsed.success) return fail(400, t("invalidRequest"));
+  if (!parsed.success) throw new AppError(400, "invalid_request", t("invalidRequest"));
   const b = parsed.data;
-  return withUserEbag(async ({ api }) => {
+  return withUserEbag(log, async ({ api }) => {
     let warning: string | null = null;
     try {
       if (b.op === "clear") await api.call("clear_cart", {});
@@ -71,23 +73,24 @@ export async function PATCH(req: NextRequest) {
         });
         if (res.warnings?.length) warning = t("qtyAdjusted");
       }
-    } catch {
+    } catch (e) {
+      log.warn("ebag.change_rejected", { op: b.op, err: String(e) });
       warning = t("changeRejected");
     }
     return NextResponse.json({ cart: await readCart(api), warning });
   });
-}
+});
 
 const postBody = z.object({ planId: z.uuid(), ebagIds: z.array(z.number().int().positive()).max(10), summary: z.boolean().optional() });
 
-export async function POST(req: NextRequest) {
+export const POST = apiHandler("POST /api/ebag/cart", async ({ log }, req: NextRequest) => {
   const t0 = Date.now();
   const t = await getTranslations("ebag.api");
   const parsed = postBody.safeParse(await req.json().catch(() => null));
-  if (!parsed.success) return fail(400, t("invalidRequest"));
-  return withUserEbag(async ({ api, supabase }) => {
+  if (!parsed.success) throw new AppError(400, "invalid_request", t("invalidRequest"));
+  return withUserEbag(log, async ({ api, supabase }) => {
     const plan = await getPlan(supabase, parsed.data.planId); // RLS: only the user's own plans
-    if (!plan) return fail(404, t("planNotFound"));
+    if (!plan) throw new AppError(404, "not_found", t("planNotFound"));
     const wanted = new Set(parsed.data.ebagIds);
     const results: CartItemResult[] = [];
     const pending: number[] = [];
@@ -96,6 +99,7 @@ export async function POST(req: NextRequest) {
       else results.push(await fillCartItem(api, it));
     }
     const summary = parsed.data.summary && !pending.length ? await getCartSummary(api) : null;
+    log.info("ebag.cart_filled", { items: results.length, pending: pending.length, ms: Date.now() - t0 });
     return NextResponse.json({ results, pending, summary });
   });
-}
+});

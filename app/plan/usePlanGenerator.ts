@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { ApiError, apiFetch, errorText } from "@/lib/api/client";
 
 /** Progress steps shown while the plan is being made: keys plan.generate.steps.<index>. */
 export const PLAN_STEPS = ["0", "1", "2", "3"];
@@ -32,19 +33,16 @@ export function usePlanGenerator() {
     setInfo(null);
     setFixable(false);
     try {
-      const res = await fetch("/api/plan", { method: "POST" });
-      const body = (await res.json().catch(() => ({}))) as { id?: string; error?: string; reason?: string; varied?: boolean | null };
-      if (!res.ok || !body.id) {
-        setError(body.error ?? tc("somethingWrong"));
-        setFixable(res.status === 422 && body.reason !== "timeout"); // a timeout is not about the settings
-        return false;
-      }
+      // The route may take up to its 60 s limit (two planner attempts); never retried: it saves a plan.
+      const body = await apiFetch<{ id: string; varied: boolean | null }>("/api/plan", { method: "POST", timeoutMs: 75_000 });
       if (body.varied === false) setInfo(t("notVaried"));
       router.push("/plan");
       router.refresh();
       return true;
-    } catch {
-      setError(tc("noConnection"));
+    } catch (e) {
+      setError(errorText(e, { offline: tc("noConnection"), timeout: tc("timedOut"), other: tc("somethingWrong") }));
+      // Budget, diet, exclusions: the user can fix these in the settings. A timeout is not about the settings.
+      setFixable(e instanceof ApiError && e.status === 422 && e.code !== "timeout");
       return false;
     } finally {
       setBusy(false);

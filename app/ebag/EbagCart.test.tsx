@@ -2,7 +2,7 @@
 import { screen, waitFor, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { CartView, CartViewItem } from "@/lib/ebag/cartView";
-import { json, renderWithIntl } from "@/test/render";
+import { apiError, json, renderWithIntl } from "@/test/render";
 import { EbagCart } from "./EbagCart";
 
 const item = (o: Partial<CartViewItem> & Pick<CartViewItem, "id" | "name">): CartViewItem => ({
@@ -41,8 +41,8 @@ const twoItems = cart([
 let fetchMock: ReturnType<typeof vi.fn>;
 beforeEach(() => {
   fetchMock = vi.fn(async (_url: string, init?: RequestInit) => {
-    if (!init?.method) return json({ cart: twoItems, delivery, slots });
-    const body = JSON.parse(String(init.body));
+    if ((init?.method ?? "GET") === "GET") return json({ cart: twoItems, delivery, slots });
+    const body = JSON.parse(String(init!.body));
     if (body.op === "set") {
       const items = twoItems.items.map((i) =>
         i.id === body.productId ? { ...i, quantity: body.quantity, lineTotal: (i.price ?? 0) * body.quantity } : i,
@@ -101,18 +101,33 @@ describe("EbagCart", () => {
   });
 
   it("expired eBag connection: shows the reason and a «connect again» link", async () => {
-    fetchMock.mockResolvedValueOnce(json({ error: "Връзката с eBag е изтекла.", reason: "reconnect" }, 409));
+    fetchMock.mockResolvedValueOnce(apiError(409, "reconnect", "Връзката с eBag е изтекла."));
     renderWithIntl(<EbagCart today="2026-11-24" refreshKey={0} />);
     const alert = await screen.findByRole("alert");
     expect(alert).toHaveTextContent("Връзката с eBag е изтекла.");
     expect(within(alert).getByRole("link", { name: "Свържи eBag отново" })).toHaveAttribute("href", "/api/ebag/connect");
   });
 
-  it("eBag down: «Опитай пак» loads the cart again", async () => {
-    fetchMock.mockResolvedValueOnce(json({ error: "eBag не отговаря в момента." }, 502));
+  it("eBag hiccups once: the cart still loads (reading is retried quietly)", async () => {
+    fetchMock.mockResolvedValueOnce(apiError(502, "ebag_down", "eBag не отговаря в момента."));
+    renderWithIntl(<EbagCart today="2026-11-24" refreshKey={0} />);
+    expect(await screen.findByText("Пилешко филе", {}, { timeout: 3000 })).toBeInTheDocument();
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+  });
+
+  it("eBag down on every try: the message, and «Опитай пак» loads the cart again", async () => {
+    const down = () => apiError(502, "ebag_down", "eBag не отговаря в момента.");
+    fetchMock.mockResolvedValueOnce(down()).mockResolvedValueOnce(down()).mockResolvedValueOnce(down());
     const { user } = renderWithIntl(<EbagCart today="2026-11-24" refreshKey={0} />);
-    await user.click(await screen.findByRole("button", { name: "Опитай пак" }));
+    expect(await screen.findByText("eBag не отговаря в момента.", {}, { timeout: 4000 })).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Опитай пак" }));
     expect(await screen.findByText("Пилешко филе")).toBeInTheDocument();
+  });
+
+  it("no connection: says so (not a generic error)", async () => {
+    fetchMock.mockRejectedValue(new TypeError("Failed to fetch"));
+    renderWithIntl(<EbagCart today="2026-11-24" refreshKey={0} />);
+    expect(await screen.findByRole("alert", {}, { timeout: 4000 })).toHaveTextContent(/интернет|връзка/i);
   });
 
   it("below eBag's minimum order: the order button is disabled and says what is missing", async () => {

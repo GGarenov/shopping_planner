@@ -2,12 +2,13 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { decryptJson } from "@/lib/crypto/secret";
 import { getConnectionRow, revokeAtEbag, type UserConnection } from "@/lib/ebag/oauth";
+import { apiHandler } from "@/lib/api/handler";
 import { createAdminClient, createClient } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-export async function POST(req: NextRequest) {
+export const POST = apiHandler("POST /api/ebag/disconnect", async ({ log }, req: NextRequest) => {
   const supabase = await createClient();
   const {
     data: { user },
@@ -20,13 +21,14 @@ export async function POST(req: NextRequest) {
     try {
       await revokeAtEbag(decryptJson<UserConnection>(row.tokens_encrypted));
     } catch (e) {
-      console.warn("ebag revoke failed", e);
+      log.warn("ebag.revoke_failed", { err: String(e) });
     }
     const { error } = await admin.from("ebag_connections").delete().eq("user_id", user.id);
     if (error) {
-      console.error("ebag disconnect failed", error.message);
+      log.error("ebag.disconnect_failed", { err: new Error(error.message) });
       return NextResponse.redirect(new URL("/ebag?error=disconnect", req.url), 303);
     }
   }
+  log.info("ebag.disconnected", { user: user.id });
   return NextResponse.redirect(new URL("/ebag?disconnected=1", req.url), 303);
-}
+});

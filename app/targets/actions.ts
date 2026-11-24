@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { getUserAndProfile } from "@/lib/profile/load";
 import { errorKey, targetsOverrideSchema } from "@/lib/profile/schema";
+import { requestLog } from "@/lib/requestLog";
 
 export type OverrideState = {
   error?: string;
@@ -25,7 +26,7 @@ export async function saveTargetsOverride(_prev: OverrideState, formData: FormDa
   const { supabase, user } = await getUserAndProfile();
   const { error } = await supabase.from("profiles").update({ targets_override: parsed.data }).eq("user_id", user.id);
   if (error) {
-    console.error("targets_override update failed", error.code, error.message);
+    (await requestLog({ action: "saveTargetsOverride" })).error("targets.save_failed", { code: error.code, err: new Error(error.message) });
     return { error: t("saveFailed"), values };
   }
   revalidatePath("/targets");
@@ -35,6 +36,10 @@ export async function saveTargetsOverride(_prev: OverrideState, formData: FormDa
 export async function resetTargetsOverride(): Promise<void> {
   const { supabase, user } = await getUserAndProfile();
   const { error } = await supabase.from("profiles").update({ targets_override: null }).eq("user_id", user.id);
-  if (error) console.error("targets_override reset failed", error.code, error.message);
+  if (error)
+    (await requestLog({ action: "resetTargetsOverride" })).error("targets.reset_failed", {
+      code: error.code,
+      err: new Error(error.message),
+    });
   revalidatePath("/targets");
 }

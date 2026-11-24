@@ -3,13 +3,15 @@ import { NextResponse, type NextRequest } from "next/server";
 import { exchangeAuthorization } from "@modelcontextprotocol/sdk/client/auth.js";
 import { EBAG_ISSUER, EBAG_RESOURCE, getAppClient, getMetadata, saveConnection } from "@/lib/ebag/oauth";
 import { FLOW_COOKIE, flowCookieOptions, openFlow } from "@/lib/ebag/flowCookie";
+import { apiHandler } from "@/lib/api/handler";
 import { createAdminClient, createClient } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-export async function GET(req: NextRequest) {
+export const GET = apiHandler("GET /api/ebag/callback", async ({ log }, req: NextRequest) => {
   const done = (q: string) => {
+    if (q !== "connected=1") log.warn("ebag.connect_rejected", { result: q });
     const res = NextResponse.redirect(new URL(`/ebag?${q}`, req.url), 303);
     res.cookies.set(FLOW_COOKIE, "", { ...flowCookieOptions, maxAge: 0 });
     return res;
@@ -46,9 +48,10 @@ export async function GET(req: NextRequest) {
       { clientInformation, redirect: flow.redirect, tokens: { ...tokens, saved_at: new Date().toISOString() } },
       true,
     );
+    log.info("ebag.connected", { user: user.id });
     return done("connected=1");
   } catch (e) {
-    console.error("ebag callback failed", e);
+    log.error("ebag.exchange_failed", { err: e });
     return done("error=exchange");
   }
-}
+});

@@ -1,6 +1,8 @@
 // POST /api/plan — generates the user's weekly plan and saves it to `plans` (SPEC §7.2).
 import { NextResponse } from "next/server";
 import { getLocale, getTranslations } from "next-intl/server";
+import { AppError, type ErrorCode } from "@/lib/api/errors";
+import { apiHandler } from "@/lib/api/handler";
 import { num } from "@/lib/i18n/format";
 import { resolveTargets } from "@/lib/planner/targets";
 import { generatePlan, NO_RECIPES_MESSAGE_BG, type PlanDay, type PlanResult } from "@/lib/planner/plan";
@@ -13,46 +15,44 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 60; // the planner targets ≤ 15 s; headroom for cold starts and fallback attempts
 
-const fail = (status: number, error: string) => NextResponse.json({ error }, { status });
-
 type Translator = Awaited<ReturnType<typeof getTranslations>>;
 
-/** The user-facing "no plan" message in the user's language, built from the planner's reason (its `message` is Bulgarian). */
-function failureMessage(res: Extract<PlanResult, { ok: false }>, budget: number, t: Translator, locale: string): string {
+/** The user-facing "no plan" error in the user's language, built from the planner's reason (its `message` is Bulgarian). */
+function failure(res: Extract<PlanResult, { ok: false }>, budget: number, t: Translator, locale: string): AppError {
   // Same rounding as budgetMessageBg: bg "80,5 €", en "€80.5".
   const money = (n: number) => (locale === "en" ? `€${num(n, locale, 2)}` : `${num(n, locale, 2)} €`);
+  const no = (code: ErrorCode, message: string, details?: Record<string, unknown>) => new AppError(422, code, message, details);
   if (res.reason === "budget_too_low" && res.min_budget_eur != null)
-    return t("budgetTooLow", { budget: money(budget), min: money(res.min_budget_eur) });
-  if (res.reason === "timeout") return t("timeout");
-  if (res.reason === "no_recipes" || res.message === NO_RECIPES_MESSAGE_BG) return t("noRecipes");
-  return t("noPlan");
+    return no("budget_too_low", t("budgetTooLow", { budget: money(budget), min: money(res.min_budget_eur) }), {
+      min_budget_eur: res.min_budget_eur,
+    });
+  if (res.reason === "timeout") return no("timeout", t("timeout"));
+  if (res.reason === "no_recipes" || res.message === NO_RECIPES_MESSAGE_BG) return no("no_recipes", t("noRecipes"));
+  return no("no_plan", t("noPlan"), { reason: res.reason });
 }
 
-export async function POST() {
+export const POST = apiHandler("POST /api/plan", async ({ log }) => {
   const t0 = Date.now();
   const [t, tc, locale] = await Promise.all([getTranslations("planner"), getTranslations("common"), getLocale()]);
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return fail(401, tc("loginAgain"));
+  if (!user) throw new AppError(401, "unauthorized", tc("loginAgain"));
 
   const { data: row, error: profileError } = await supabase.from("profiles").select("*").eq("user_id", user.id).maybeSingle();
-  if (profileError) {
-    console.error("plan: profile select failed", profileError.message);
-    return fail(500, tc("somethingWrong"));
-  }
+  if (profileError) throw new Error(`profile select failed: ${profileError.message}`, { cause: profileError });
   const profile = row
     ? ({ ...row, weight_kg: Number(row.weight_kg), budget_eur: Number(row.budget_eur), options: row.options ?? {} } as ProfileRow)
     : null;
-  if (!isComplete(profile)) return fail(400, t("profileIncomplete"));
+  if (!isComplete(profile)) throw new AppError(400, "profile_incomplete", t("profileIncomplete"));
 
   let data;
   try {
     data = await loadPlannerData(supabase);
   } catch (e) {
-    console.error("plan: loading reference data failed", e);
-    return fail(500, t("loadFailed"));
+    log.error("plan.load_failed", { err: e });
+    throw new AppError(500, "load_failed", t("loadFailed"));
   }
   const tLoaded = Date.now();
 
@@ -101,11 +101,8 @@ export async function POST() {
   const tSolved = Date.now();
 
   if (!res.ok) {
-    console.warn("plan: no feasible plan", { user: user.id, reason: res.reason, log: res.log });
-    return NextResponse.json(
-      { error: failureMessage(res, profile.budget_eur, t, locale), reason: res.reason, min_budget_eur: res.min_budget_eur },
-      { status: 422 },
-    );
+    log.warn("plan.infeasible", { user: user.id, reason: res.reason, solver_log: res.log });
+    throw failure(res, profile.budget_eur, t, locale);
   }
 
   const out = res.output;
@@ -131,15 +128,16 @@ export async function POST() {
     .select("id")
     .single();
   if (saveError) {
-    console.error("plan: insert failed", saveError.message);
-    return fail(500, t("saveFailed"));
+    log.error("plan.save_failed", { err: new Error(saveError.message) });
+    throw new AppError(500, "save_failed", t("saveFailed"));
   }
 
-  console.log("plan: ok", {
+  log.info("plan.created", {
+    user: user.id,
     load_s: (tLoaded - t0) / 1000,
     solve_s: (tSolved - tLoaded) / 1000,
     total_s: (Date.now() - t0) / 1000,
     checkout: out.checkout_eur,
   });
   return NextResponse.json({ id: saved.id, seconds: (Date.now() - t0) / 1000, varied: avoid.length ? varied : null });
-}
+});

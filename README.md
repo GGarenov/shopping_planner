@@ -67,6 +67,58 @@ The pre-commit hook (Husky + lint-staged) formats and lints only the staged file
 Shared logic lives in `lib/` (TypeScript). `scripts/ebag_parse.mjs` re-exports `lib/ebag/parse.ts`, so the
 Node scripts and the app use the same code.
 
+## Errors, logs and monitoring
+
+**One error shape for every API route** (`lib/api/errors.ts`). A failed call returns an HTTP 4xx or 5xx status
+and this body:
+
+```json
+{ "error": { "code": "budget_too_low", "message": "С бюджет 50 € …", "requestId": "…", "details": { "min_budget_eur": 79 } } }
+```
+
+- `message` is already in the user's language and safe to show.
+- `code` is for the client's logic: `unauthorized`, `reconnect`, `budget_too_low`, `ebag_down`, … .
+- Routes are wrapped in `apiHandler()` (`lib/api/handler.ts`). An expected failure is thrown as an `AppError`.
+  Anything else becomes a 500 «something went wrong», logged once and reported to Sentry; internal details never
+  reach the browser.
+
+**The browser calls the API only through `apiFetch()`** (`lib/api/client.ts`):
+
+- Every attempt has a timeout.
+- Reads (GET) are retried twice on network errors, timeouts and 429/502/503/504, with backoff.
+- Writes are never retried automatically. A second «add to cart» would add the products twice.
+
+**Logs are JSON lines** (`lib/log.ts`), e.g. `{"level":"info","msg":"plan.created","requestId":"…","route":"POST /api/plan","total_s":3.1}`,
+so the Vercel log viewer can filter them by field.
+
+- Middleware gives every request an ID (`x-request-id`; Vercel's own ID when there is one). Route handlers and
+  server actions log with it, and it is sent back in the response, so a user's report can be matched to the logs.
+- No personal data: emails, passwords, tokens and cookies are redacted, and user IDs appear only as a one-way
+  reference (`u_1a2b3c4d`).
+- `LOG_LEVEL` sets the level; tests are silent.
+
+**Error tracking with Sentry** (`instrumentation*.ts`, `lib/sentry.ts`) is off until a DSN is set. To turn it on:
+
+1. Create a free Sentry project (platform: Next.js).
+2. In Vercel, set `NEXT_PUBLIC_SENTRY_DSN`.
+3. For readable stack traces (source maps uploaded at build time, then deleted from the deployment), also set
+   `SENTRY_ORG`, `SENTRY_PROJECT` and `SENTRY_AUTH_TOKEN`.
+
+It reports server errors (pages, routes, server actions), browser errors and the error pages. Events are scrubbed
+before sending: no IP, cookies, request bodies or query strings, and the user only as the same reference as in the
+logs. Session replay is off because it would record what people type.
+
+**Health check:** `GET /api/health` needs no login and is meant for an uptime monitor (e.g. UptimeRobot or Better
+Stack, every 5 min). It returns only operational facts, never user data:
+
+| Answer                      | Meaning                                             |
+| --------------------------- | --------------------------------------------------- |
+| `200 {"status":"ok"}`       | Database reachable; prices synced within 36 h       |
+| `200 {"status":"degraded"}` | Database reachable, but the daily eBag sync is late |
+| `503 {"status":"down"}`     | The database does not answer                        |
+
+The response also includes the database latency, the age of the last sync and the deployed commit.
+
 ## Database
 
 Migrations live in `supabase/migrations/`. To apply them to the hosted project:

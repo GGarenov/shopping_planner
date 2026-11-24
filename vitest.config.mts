@@ -26,7 +26,9 @@ export default defineConfig({
       include: ["lib/**/*.ts"],
       exclude: [
         "lib/**/*.test.ts",
-        "lib/supabase/**", // Supabase clients and middleware wiring
+        "lib/supabase/client.ts", // Supabase client factories
+        "lib/supabase/server.ts",
+        "lib/requestLog.ts", // next/headers glue
         "lib/**/load.ts", // DB reads (planner data, plans, profile)
         "lib/sync/status.ts", // DB read
         "lib/ebag/api.ts", // MCP network client
@@ -41,7 +43,7 @@ export default defineConfig({
       reporter: ["text-summary", "text", "html", "json-summary", "lcov"],
       reportsDirectory: "coverage",
       // Ratchet: set just below today's numbers so coverage can only go up. Raise them as tests are added.
-      thresholds: { lines: 93, functions: 89, branches: 79, statements: 92 },
+      thresholds: { lines: 95, functions: 92, branches: 82, statements: 94 },
     },
   },
 });

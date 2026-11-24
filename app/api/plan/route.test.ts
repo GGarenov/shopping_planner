@@ -64,14 +64,17 @@ describe("POST /api/plan", () => {
     setup({ user: null });
     const res = await POST();
     expect(res.status).toBe(401);
-    expect(await res.json()).toEqual({ error: "Влез отново в профила си." });
+    expect(await res.json()).toEqual({
+      error: { code: "unauthorized", message: "Влез отново в профила си.", requestId: expect.any(String) },
+    });
+    expect(res.headers.get("x-request-id")).toEqual(expect.any(String));
   });
 
   it("400 when the profile is not complete yet", async () => {
     setup({ profileRow: { ...profile, options: {} } }); // no consent
     const res = await POST();
     expect(res.status).toBe(400);
-    expect((await res.json()).error).toBe("Първо попълни данните си.");
+    expect((await res.json()).error).toMatchObject({ code: "profile_incomplete", message: "Първо попълни данните си." });
     expect(generatePlan).not.toHaveBeenCalled();
   });
 
@@ -80,7 +83,10 @@ describe("POST /api/plan", () => {
     loadPlannerData.mockRejectedValueOnce(new Error("db down"));
     const res = await POST();
     expect(res.status).toBe(500);
-    expect((await res.json()).error).toBe("Не успяхме да заредим продуктите. Опитай отново след малко.");
+    expect((await res.json()).error).toMatchObject({
+      code: "load_failed",
+      message: "Не успяхме да заредим продуктите. Опитай отново след малко.",
+    });
   });
 
   it("first plan: one planner run with diagnosis, saved for the user", async () => {
@@ -129,16 +135,19 @@ describe("POST /api/plan", () => {
     const res = await POST();
     expect(res.status).toBe(422);
     const body = await res.json();
-    expect(body).toMatchObject({ reason: "budget_too_low", min_budget_eur: 79 });
-    expect(body.error).toContain(expected);
-    if (locale === "en") expect(body.error).toContain("€79");
+    expect(body.error).toMatchObject({ code: "budget_too_low", details: { min_budget_eur: 79 } });
+    expect(body.error.message).toContain(expected);
+    if (locale === "en") expect(body.error.message).toContain("€79");
   });
 
   it("422 timeout is reported as «try again», not as missing recipes", async () => {
     setup();
     generatePlan.mockResolvedValueOnce({ ok: false, reason: "timeout", message: "x", log: [] });
     const body = await (await POST()).json();
-    expect(body.error).toBe("Не успяхме да съставим плана навреме. Опитай отново — обикновено вторият опит минава.");
+    expect(body.error).toMatchObject({
+      code: "timeout",
+      message: "Не успяхме да съставим плана навреме. Опитай отново — обикновено вторият опит минава.",
+    });
   });
 
   it("500 when the finished plan can't be saved", async () => {
@@ -146,6 +155,19 @@ describe("POST /api/plan", () => {
     generatePlan.mockResolvedValueOnce(ok());
     const res = await POST();
     expect(res.status).toBe(500);
-    expect((await res.json()).error).toBe("Планът е готов, но не успяхме да го запазим. Опитай отново.");
+    expect((await res.json()).error).toMatchObject({
+      code: "save_failed",
+      message: "Планът е готов, но не успяхме да го запазим. Опитай отново.",
+    });
+  });
+
+  it("500 «something went wrong» for an unexpected failure, never the internal error text", async () => {
+    setup();
+    generatePlan.mockRejectedValueOnce(new Error("solver exploded: secret internals"));
+    const res = await POST();
+    expect(res.status).toBe(500);
+    const body = await res.json();
+    expect(body.error).toMatchObject({ code: "internal", message: "Нещо се обърка. Опитай отново." });
+    expect(JSON.stringify(body)).not.toContain("secret internals");
   });
 });

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { deliveryHint, stepQuantity, type CartView, type CartViewItem, type DeliveryInfo, type Slot } from "@/lib/ebag/cartView";
+import { ApiError, apiFetch, errorText } from "@/lib/api/client";
 import { packUnits } from "@/lib/i18n/format";
 import { eur } from "@/lib/plans/shopping";
 
@@ -48,16 +49,18 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/ebag/cart", { cache: "no-store" });
-      const body = (await res.json().catch(() => ({}))) as Partial<View> & { error?: string; reason?: string };
-      if (!res.ok || !body.cart) setError({ text: body.error ?? t("loadFailed"), reconnect: body.reason === "reconnect" });
-      else setView({ cart: body.cart, delivery: body.delivery ?? null, slots: body.slots ?? [] });
-    } catch {
-      setError({ text: t("offline"), reconnect: false });
+      // eBag can be slow: a long timeout, and two quiet retries if it hiccups (reading the cart is safe to repeat).
+      const body = await apiFetch<View>("/api/ebag/cart", { timeoutMs: 45_000 });
+      setView({ cart: body.cart, delivery: body.delivery ?? null, slots: body.slots ?? [] });
+    } catch (e) {
+      setError({
+        text: errorText(e, { offline: t("offline"), timeout: common("timedOut"), other: t("loadFailed") }),
+        reconnect: e instanceof ApiError && e.code === "reconnect",
+      });
     } finally {
       setLoading(false);
     }
-  }, [t]);
+  }, [t, common]);
 
   useEffect(() => {
     void load();
@@ -67,16 +70,15 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
     setBusy((b) => new Set(b).add(key));
     setWarning(null);
     try {
-      const res = await fetch("/api/ebag/cart", {
+      const out = await apiFetch<{ cart: CartView; warning: string | null }>("/api/ebag/cart", {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
+        body,
+        timeoutMs: 45_000,
       });
-      const out = (await res.json().catch(() => ({}))) as { cart?: CartView; warning?: string | null; error?: string };
-      if (out.cart) setView((v) => (v ? { ...v, cart: out.cart! } : v));
-      setWarning(out.warning ?? (res.ok ? null : (out.error ?? t("changeFailed"))));
-    } catch {
-      setWarning(t("changeOffline"));
+      setView((v) => (v ? { ...v, cart: out.cart } : v));
+      setWarning(out.warning);
+    } catch (e) {
+      setWarning(errorText(e, { offline: t("changeOffline"), timeout: common("timedOut"), other: t("changeFailed") }));
     } finally {
       setBusy((b) => {
         const n = new Set(b);

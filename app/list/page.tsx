@@ -14,6 +14,7 @@ import { PANTRY_OPTIONS } from "@/lib/profile/options";
 import { requireCompleteProfile } from "@/lib/profile/load";
 import { createClient } from "@/lib/supabase/server";
 import { ShoppingList } from "./ShoppingList";
+import { requestLog } from "@/lib/requestLog";
 
 export async function generateMetadata(): Promise<Metadata> {
   const [t, common] = await Promise.all([getTranslations("list"), getTranslations("common")]);
@@ -45,7 +46,7 @@ export default async function ListPage({ searchParams }: { searchParams: Promise
   }
 
   const { data: checks, error } = await supabase.from("shopping_checks").select("ebag_id, checked").eq("plan_id", plan.id);
-  if (error) console.error("list: loading checks failed", error.message);
+  if (error) (await requestLog({ page: "/list" })).error("list.load_checks_failed", { err: new Error(error.message) });
   const checked = (checks ?? []).filter((c) => c.checked).map((c) => Number(c.ebag_id));
 
   const totals = shoppingTotals(plan.shopping);

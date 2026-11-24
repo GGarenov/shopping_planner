@@ -6,6 +6,7 @@ import { getTranslations } from "next-intl/server";
 import { z } from "zod";
 import { isLocale, LOCALE_COOKIE } from "@/lib/i18n/config";
 import { createClient } from "@/lib/supabase/server";
+import { requestLog } from "@/lib/requestLog";
 
 export type AuthState = { error?: string; email?: string };
 
@@ -40,7 +41,7 @@ export async function signIn(_prev: AuthState, formData: FormData): Promise<Auth
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signInWithPassword(parsed.data);
   if (error) {
-    console.error("signInWithPassword failed", error.status, error.code);
+    (await requestLog({ action: "signIn" })).warn("auth.sign_in_failed", { status: error.status, code: error.code });
     const msg =
       error.code === "invalid_credentials"
         ? t("invalidCredentials")
@@ -69,7 +70,7 @@ export async function signUp(_prev: AuthState, formData: FormData): Promise<Auth
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signUp(parsed.data);
   if (error) {
-    console.error("signUp failed", error.status, error.code);
+    (await requestLog({ action: "signUp" })).warn("auth.sign_up_failed", { status: error.status, code: error.code });
     const msg =
       error.code === "user_already_exists"
         ? t("userExists")
@@ -82,7 +83,9 @@ export async function signUp(_prev: AuthState, formData: FormData): Promise<Auth
   }
   if (!data.session) {
     // "Confirm email" is still on in Supabase → no session until the email is confirmed.
-    console.error("signUp returned no session — disable 'Confirm email' in Supabase Auth settings");
+    (await requestLog({ action: "signUp" })).error("auth.sign_up_no_session", {
+      err: new Error("signUp returned no session — disable 'Confirm email' in Supabase Auth settings"),
+    });
     return { error: t("awaitingConfirmation"), email: input.email };
   }
   redirect("/");

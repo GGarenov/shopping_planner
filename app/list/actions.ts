@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
+import { requestLog } from "@/lib/requestLog";
 
 const input = z.object({
   planId: z.uuid(),
@@ -16,6 +17,6 @@ export async function setChecked(planId: string, ebagIds: number[], checked: boo
   const supabase = await createClient();
   const rows = parsed.data.ebagIds.map((ebag_id) => ({ plan_id: parsed.data.planId, ebag_id, checked: parsed.data.checked }));
   const { error } = await supabase.from("shopping_checks").upsert(rows, { onConflict: "plan_id,ebag_id" });
-  if (error) console.error("list: saving checks failed", error.message);
+  if (error) (await requestLog({ action: "setChecked" })).error("list.save_checks_failed", { err: new Error(error.message) });
   return { ok: !error };
 }

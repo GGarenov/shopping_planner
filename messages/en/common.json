@@ -18,5 +18,6 @@
   "pricesFrom": "Prices from {date}",
   "noConnection": "No connection. Check your internet and try again.",
   "somethingWrong": "Something went wrong. Please try again.",
-  "loginAgain": "Please log in again."
+  "loginAgain": "Please log in again.",
+  "timedOut": "The server took too long to answer. Please try again."
 }

@@ -25,3 +25,7 @@ export function renderWithIntl(
 /** A fetch Response with a JSON body. */
 export const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json" } });
+
+/** An API error response in the app's error contract (lib/api/errors.ts). */
+export const apiError = (status: number, code: string, message: string, details?: Record<string, unknown>) =>
+  json({ error: { code, message, ...(details ? { details } : {}) } }, status);

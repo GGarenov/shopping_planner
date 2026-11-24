@@ -91,7 +91,7 @@ describe("/api/ebag/cart", () => {
       conn.tokens = false;
       const res = await GET();
       expect(res.status).toBe(409);
-      expect(await res.json()).toEqual({ error: "Свържи eBag профила си отново.", reason: "reconnect" });
+      expect((await res.json()).error).toMatchObject({ code: "reconnect", message: "Свържи eBag профила си отново." });
     });
 
     it("returns the cart, delivery fees and the earliest slots", async () => {
@@ -116,14 +116,17 @@ describe("/api/ebag/cart", () => {
       conn.status = "expired";
       const res = await GET();
       expect(res.status).toBe(409);
-      expect((await res.json()).reason).toBe("reconnect");
+      expect((await res.json()).error.code).toBe("reconnect");
     });
 
     it("502 «eBag is down» when the connection is fine but eBag fails", async () => {
       ebag.connectFails = true;
       const res = await GET();
       expect(res.status).toBe(502);
-      expect((await res.json()).error).toBe("eBag не отговаря в момента. Опитай отново след малко.");
+      expect((await res.json()).error).toMatchObject({
+        code: "ebag_down",
+        message: "eBag не отговаря в момента. Опитай отново след малко.",
+      });
     });
   });
 
@@ -189,7 +192,7 @@ describe("/api/ebag/cart", () => {
     it("404 when the plan is not the user's own (RLS returns nothing)", async () => {
       const res = await POST(req("POST", { planId: PLAN_ID, ebagIds: [1] }));
       expect(res.status).toBe(404);
-      expect((await res.json()).error).toBe("Планът не е намерен.");
+      expect((await res.json()).error).toMatchObject({ code: "not_found", message: "Планът не е намерен." });
     });
 
     it("adds in-stock items, replaces sold-out ones, reports the rest", async () => {

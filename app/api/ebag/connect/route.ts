@@ -4,12 +4,13 @@ import { NextResponse, type NextRequest } from "next/server";
 import { startAuthorization } from "@modelcontextprotocol/sdk/client/auth.js";
 import { EBAG_ISSUER, EBAG_RESOURCE, getAppClient, getMetadata, redirectUri, SCOPE } from "@/lib/ebag/oauth";
 import { FLOW_COOKIE, flowCookieOptions, sealFlow } from "@/lib/ebag/flowCookie";
+import { apiHandler } from "@/lib/api/handler";
 import { createAdminClient, createClient } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-export async function GET(req: NextRequest) {
+export const GET = apiHandler("GET /api/ebag/connect", async ({ log }, req: NextRequest) => {
   const back = (q: string) => NextResponse.redirect(new URL(`/ebag?${q}`, req.url), 303);
   const supabase = await createClient();
   const {
@@ -33,7 +34,7 @@ export async function GET(req: NextRequest) {
     res.cookies.set(FLOW_COOKIE, sealFlow({ state, verifier: codeVerifier, userId: user.id, redirect }), flowCookieOptions);
     return res;
   } catch (e) {
-    console.error("ebag connect failed", e);
+    log.error("ebag.connect_start_failed", { err: e });
     return back("error=start");
   }
-}
+});

@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { getUserAndProfile } from "@/lib/profile/load";
 import { errorKey, profileInputSchema } from "@/lib/profile/schema";
+import { requestLog } from "@/lib/requestLog";
 
 export type SaveProfileResult = { error: string } | undefined;
 
@@ -19,7 +20,7 @@ export async function saveProfile(input: unknown): Promise<SaveProfileResult> {
 
   const { error } = await supabase.from("profiles").upsert({ user_id: user.id, ...fields, options }, { onConflict: "user_id" });
   if (error) {
-    console.error("profiles upsert failed", error.code, error.message);
+    (await requestLog({ action: "saveProfile" })).error("profile.save_failed", { code: error.code, err: new Error(error.message) });
     return { error: t("saveProfileFailed") };
   }
   redirect("/targets");

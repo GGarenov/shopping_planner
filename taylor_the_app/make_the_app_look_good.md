@@ -67,11 +67,11 @@ Order: things a reviewer notices first come first. Times are rough working days.
 
 ### Phase 3: Error handling and observability (1 day)
 
-- [ ] **One error contract** for all API routes: `{ error: { code, message } }` + HTTP status; a small `AppError` class and an `apiHandler()` wrapper that turns thrown errors into that shape and logs them once.
-- [ ] **Structured logging** (`pino` or a tiny JSON logger) instead of `console.*`, with a request ID per request and no personal data in logs.
-- [ ] **Error tracking** with Sentry (free tier) for client and server, with source maps; `error.tsx` reports to it.
-- [ ] Client fetches with **timeouts and retries** where safe (AbortController); one shared `apiFetch()`.
-- [ ] `/api/health` (DB reachable, last sync age) for uptime checks.
+- [x] **One error contract** — done: `{ error: { code, message, requestId, details? } }` + status (`lib/api/errors.ts`); `AppError` for expected failures and `apiHandler()` (`lib/api/handler.ts`) around every route: an AppError is answered with its code (logged as a warning), anything else becomes a 500 «something went wrong» in the user's language, logged once and sent to Sentry, internals never reach the browser. Middleware's 401 uses the same shape.
+- [x] **Structured logging** — done: a tiny dependency-free JSON logger (`lib/log.ts`) replaces every `console.*` in routes, server actions and pages. Request ID from middleware (`x-request-id`, Vercel's ID when present) on every line and in the response; emails/passwords/tokens/cookies redacted, user IDs only as a one-way `u_xxxxxxxx` reference; `LOG_LEVEL`, silent in tests.
+- [x] **Error tracking with Sentry** — done, **off until `NEXT_PUBLIC_SENTRY_DSN` is set** (user: create the Sentry project, add the env vars in Vercel — see README). Server via `instrumentation.ts` (+ `onRequestError`), browser via `instrumentation-client.ts`, `error.tsx` and `global-error.tsx` report; source maps uploaded only with `SENTRY_AUTH_TOKEN`/`ORG`/`PROJECT`. Events scrubbed (no IP, cookies, bodies, query strings; user as the same reference); no session replay.
+- [x] **Client fetches with timeouts and retries** — done: `apiFetch()` (`lib/api/client.ts`) with a per-attempt timeout, quiet retries for GETs only (network, timeout, 429/502/503/504, backoff); writes (plan, add to cart) never retried. Used by the plan generator, the eBag cart and «send to cart»; `common.timedOut` message added.
+- [x] **`/api/health`** — done: public; 200 ok / 200 degraded (sync older than 36 h) / 503 down (DB unreachable), with DB latency, last sync age and commit; no user data. Unit tests + an E2E check against the real server.
 
 ### Phase 4: Security hardening (1 day)
 

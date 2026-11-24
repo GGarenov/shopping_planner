@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import type { CartItemResult } from "@/lib/ebag/cart";
+import { ApiError, apiFetch, errorText } from "@/lib/api/client";
 
 const BATCH = 6;
 
@@ -38,29 +39,23 @@ export function CartSender({
     try {
       while (queue.length) {
         const batch = queue.slice(0, BATCH);
-        const res = await fetch("/api/ebag/cart", {
+        // Adds to the real cart: never retried automatically (a retry could add the same items twice).
+        const body = await apiFetch<{ results: CartItemResult[]; pending?: number[] }>("/api/ebag/cart", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ planId, ebagIds: batch }),
+          body: { planId, ebagIds: batch },
+          timeoutMs: 75_000,
         });
-        const body = (await res.json().catch(() => ({}))) as {
-          results?: CartItemResult[];
-          pending?: number[];
-          error?: string;
-          reason?: string;
-        };
-        if (!res.ok || !body.results) {
-          setError({ text: body.error ?? common("somethingWrong"), reconnect: body.reason === "reconnect" });
-          return;
-        }
         all.push(...body.results);
         setResults([...all]);
         setDone(all.length);
         queue = [...(body.pending ?? []), ...queue.slice(BATCH)];
       }
       setFinished(true);
-    } catch {
-      setError({ text: t("sendOffline"), reconnect: false });
+    } catch (e) {
+      setError({
+        text: errorText(e, { offline: t("sendOffline"), timeout: common("timedOut"), other: common("somethingWrong") }),
+        reconnect: e instanceof ApiError && e.code === "reconnect",
+      });
     } finally {
       setBusy(false);
       onDone?.(); // refresh the cart view, also after a partial run

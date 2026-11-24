@@ -7,6 +7,7 @@ import { z } from "zod";
 import { decryptJson } from "@/lib/crypto/secret";
 import { getConnectionRow, revokeAtEbag, type UserConnection } from "@/lib/ebag/oauth";
 import { createAdminClient, createClient } from "@/lib/supabase/server";
+import { requestLog } from "@/lib/requestLog";
 
 const feedbackInput = z.object({ message: z.string().trim().min(3).max(4000), page: z.string().max(200).optional() });
 
@@ -29,7 +30,7 @@ export async function sendFeedback(
     user_agent: (await headers()).get("user-agent")?.slice(0, 300) ?? null,
   });
   if (error) {
-    console.error("feedback insert failed", error.message);
+    (await requestLog({ action: "sendFeedback" })).error("feedback.save_failed", { err: new Error(error.message) });
     return { error: t("failed") };
   }
   return { ok: true };
@@ -53,14 +54,14 @@ export async function deleteAccount(_prev: { error?: string } | null, form: Form
     const row = await getConnectionRow(admin, user.id);
     if (row) await revokeAtEbag(decryptJson<UserConnection>(row.tokens_encrypted));
   } catch (e) {
-    console.warn("delete account: eBag revoke failed (continuing)", e);
+    (await requestLog({ action: "deleteAccount" })).warn("account.ebag_revoke_failed", { err: String(e) });
   }
   await supabase.auth.signOut({ scope: "local" }); // clear this browser's session cookies first
   const { error } = await admin.auth.admin.deleteUser(user.id);
   if (error) {
-    console.error("delete account failed", error.message);
+    (await requestLog({ action: "deleteAccount" })).error("account.delete_failed", { err: new Error(error.message) });
     return { error: t("failed") };
   }
-  console.log("account deleted", { user: user.id });
+  (await requestLog({ action: "deleteAccount" })).info("account.deleted", { user: user.id });
   redirect("/login?deleted=1");
 }

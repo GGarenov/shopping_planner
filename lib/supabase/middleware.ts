@@ -1,17 +1,33 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-/** Paths reachable without logging in. */
-const PUBLIC_PATHS = ["/login", "/auth", "/offline"];
+/** Paths reachable without logging in. /api/health is for uptime monitors. */
+const PUBLIC_PATHS = ["/login", "/auth", "/offline", "/api/health"];
+
+/** Same header name as lib/api/handler.ts (kept literal: middleware runs on the edge, without server-only code). */
+const REQUEST_ID = "x-request-id";
 
 const isPublic = (pathname: string) => PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`));
 
 /**
  * Refreshes the Supabase session cookie on every request and redirects
- * logged-out users to /login (and logged-in users away from it).
+ * logged-out users to /login (and logged-in users away from it). Every request gets an ID (x-request-id: Vercel's
+ * own ID when there is one), passed on to route handlers and server actions for their logs and sent back to the
+ * browser, so a user's error report can be matched to the log lines.
  */
 export async function updateSession(request: NextRequest) {
-  let response = NextResponse.next({ request });
+  const requestId = request.headers.get("x-vercel-id") ?? crypto.randomUUID();
+  // Rebuilt after every cookie change, so the forwarded headers include the refreshed session cookies.
+  const next = () => {
+    const headers = new Headers(request.headers);
+    headers.set(REQUEST_ID, requestId);
+    return NextResponse.next({ request: { headers } });
+  };
+  const withId = <R extends NextResponse>(res: R) => {
+    res.headers.set(REQUEST_ID, requestId);
+    return res;
+  };
+  let response = next();
 
   const supabase = createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
     cookies: {
@@ -20,7 +36,7 @@ export async function updateSession(request: NextRequest) {
       },
       setAll(cookiesToSet) {
         for (const { name, value } of cookiesToSet) request.cookies.set(name, value);
-        response = NextResponse.next({ request });
+        response = next();
         for (const { name, value, options } of cookiesToSet) response.cookies.set(name, value, options);
       },
     },
@@ -37,20 +53,21 @@ export async function updateSession(request: NextRequest) {
     // API calls get a JSON 401 instead of an HTML redirect.
     if (pathname.startsWith("/api/")) {
       const en = request.cookies.get("lang")?.value === "en"; // LOCALE_COOKIE; same text as common.loginAgain
-      return NextResponse.json({ error: en ? "Please log in again." : "Влез отново в профила си." }, { status: 401 });
+      const message = en ? "Please log in again." : "Влез отново в профила си.";
+      return withId(NextResponse.json({ error: { code: "unauthorized", message, requestId } }, { status: 401 }));
     }
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     url.search = "";
-    return NextResponse.redirect(url);
+    return withId(NextResponse.redirect(url));
   }
 
   if (user && pathname === "/login") {
     const url = request.nextUrl.clone();
     url.pathname = "/";
     url.search = "";
-    return NextResponse.redirect(url);
+    return withId(NextResponse.redirect(url));
   }
 
-  return response;
+  return withId(response);
 }

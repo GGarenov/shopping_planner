@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { withSentryConfig } from "@sentry/nextjs/config";
 import createNextIntlPlugin from "next-intl/plugin";
 
 // Language from the `lang` cookie, messages from messages/<locale>/*.json (see i18n/request.ts).
@@ -15,4 +16,16 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withNextIntl(nextConfig);
+// Sentry (see instrumentation*.ts): uploads source maps at build time only when SENTRY_AUTH_TOKEN, SENTRY_ORG and
+// SENTRY_PROJECT are set (Vercel), so stack traces show the real code. Without them the build is unchanged.
+const uploadSourceMaps = !!(process.env.SENTRY_AUTH_TOKEN && process.env.SENTRY_ORG && process.env.SENTRY_PROJECT);
+
+export default withSentryConfig(withNextIntl(nextConfig), {
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  silent: !process.env.CI,
+  telemetry: false,
+  sourcemaps: { disable: !uploadSourceMaps, deleteSourcemapsAfterUpload: true },
+  widenClientFileUpload: uploadSourceMaps,
+});
