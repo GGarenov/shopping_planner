@@ -64,7 +64,7 @@ export default async function ProfilePage() {
           <Link href="/targets" className="card flex items-center justify-between gap-3">
             <span className="flex flex-col">
               <span className="font-semibold">{t("goalsTitle")}</span>
-              <span className="text-sm opacity-70">
+              <span className="text-sm text-subtle">
                 {t("goalsSummary", {
                   goal,
                   min: String(targets.kcal_min),
@@ -78,7 +78,7 @@ export default async function ProfilePage() {
           <Link href="/onboarding" className="card flex items-center justify-between gap-3">
             <span className="flex flex-col">
               <span className="font-semibold">{t("detailsTitle")}</span>
-              <span className="text-sm opacity-70">
+              <span className="text-sm text-subtle">
                 {t("detailsSummary", {
                   weight: String(profile.weight_kg),
                   height: String(profile.height_cm),
@@ -91,7 +91,7 @@ export default async function ProfilePage() {
           <Link href="/ebag" className="card flex items-center justify-between gap-3">
             <span className="flex flex-col">
               <span className="font-semibold">eBag</span>
-              <span className="text-sm opacity-70">
+              <span className="text-sm text-subtle">
                 {ebag?.status === "connected" ? t("ebagConnected") : ebag ? t("ebagExpired") : t("ebagNotConnected")}
               </span>
             </span>
@@ -104,7 +104,7 @@ export default async function ProfilePage() {
             {t("plansTitle")}
           </h2>
           {plans.length === 0 ? (
-            <p className="text-sm opacity-70">{t("noPlans")}</p>
+            <p className="text-sm text-subtle">{t("noPlans")}</p>
           ) : (
             <ul className="flex flex-col gap-2">
               {plans.map((p, i) => (
@@ -117,7 +117,7 @@ export default async function ProfilePage() {
                           <span className="ml-2 rounded-full bg-accent-soft px-2 py-0.5 text-xs font-semibold">{t("current")}</span>
                         )}
                       </span>
-                      <span className="text-sm opacity-70">
+                      <span className="text-sm text-subtle">
                         {t("planMeta", { price: eur(p.checkout_eur, locale), created: created(p.created_at, locale) })}
                       </span>
                     </span>
@@ -142,7 +142,7 @@ export default async function ProfilePage() {
               {tc("logout")}
             </button>
           </form>
-          <Link href="/profile/delete" className="btn-ghost text-red-600">
+          <Link href="/profile/delete" className="btn-ghost text-danger">
             {t("deleteLink")}
           </Link>
         </nav>

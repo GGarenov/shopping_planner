@@ -21,8 +21,8 @@ export function EbagConnected({
         <section className="flex flex-col gap-3">
           <div className="card flex flex-col gap-1">
             <span className="font-semibold">{t("weekList")}</span>
-            <span className="text-sm opacity-80">{plan.summary}</span>
-            <span className="text-sm opacity-70">{t("weekListNote")}</span>
+            <span className="text-sm text-subtle">{plan.summary}</span>
+            <span className="text-sm text-subtle">{t("weekListNote")}</span>
           </div>
           <CartSender planId={plan.id} ebagIds={plan.ebagIds} ingredients={plan.ingredients} onDone={() => setRefreshKey((k) => k + 1)} />
         </section>

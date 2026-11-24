@@ -55,12 +55,12 @@ export default async function MealPage({ params }: { params: Promise<{ id: strin
         <Link href={`/plan?id=${plan.id}`} className="btn-ghost -ml-3 self-start">
           {t("backToPlan")}
         </Link>
-        <p className="text-sm opacity-70">
+        <p className="text-sm text-subtle">
           {tp(dayLongKey(dayIndex))} · {tp(slotKey(meal.slot))}
         </p>
         <h1 className="text-2xl leading-tight font-bold">{name}</h1>
         {time ? (
-          <p className="text-sm opacity-70">
+          <p className="text-sm text-subtle">
             {recipe?.prep_min != null && t("prep", { n: String(recipe.prep_min) })}
             {recipe?.prep_min != null && recipe?.cook_min ? " · " : ""}
             {recipe?.cook_min ? t("cook", { n: String(recipe.cook_min) }) : ""}
@@ -73,7 +73,7 @@ export default async function MealPage({ params }: { params: Promise<{ id: strin
         <figure className="-mt-2 flex flex-col gap-1">
           {/* eslint-disable-next-line @next/next/no-img-element -- pre-sized 800 px WebP from public/recipes */}
           <img src={photo.large} alt={name} width={800} height={800} className="aspect-square w-full rounded-3xl object-cover shadow-sm" />
-          <figcaption className="text-right text-xs opacity-60">
+          <figcaption className="text-right text-xs text-subtle">
             {t("photoNote")}{" "}
             <a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline">
               {photo.site}
@@ -96,13 +96,13 @@ export default async function MealPage({ params }: { params: Promise<{ id: strin
             <li key={it.id} className="flex items-baseline justify-between gap-3 px-4 py-3">
               <span>
                 {ingredientName(it.id, it.name, locale)}
-                {pantry.has(it.id) && <span className="ml-2 text-xs opacity-60">{t("atHome")}</span>}
+                {pantry.has(it.id) && <span className="ml-2 text-xs text-subtle">{t("atHome")}</span>}
               </span>
               <span className="shrink-0 font-semibold tabular-nums">{tc("grams", { n: String(it.grams) })}</span>
             </li>
           ))}
         </ul>
-        <p className="text-xs opacity-60">{t("gramsNote")}</p>
+        <p className="text-xs text-subtle">{t("gramsNote")}</p>
       </section>
 
       {steps ? (
@@ -128,7 +128,7 @@ function Macro({ label, value }: { label: string; value: string }) {
   return (
     <div className="card flex flex-col p-3">
       <span className="font-semibold tabular-nums">{value}</span>
-      <span className="text-xs opacity-60">{label}</span>
+      <span className="text-xs text-subtle">{label}</span>
     </div>
   );
 }

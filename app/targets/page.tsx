@@ -41,16 +41,16 @@ export default async function TargetsPage() {
 
         <section className="grid grid-cols-2 gap-3">
           <div className="card flex flex-col gap-1">
-            <span className="text-sm opacity-70">{t("kcalPerDay")}</span>
+            <span className="text-sm text-subtle">{t("kcalPerDay")}</span>
             <span className="text-2xl font-bold tabular-nums">
               {targets.kcal_min}–{targets.kcal_max}
             </span>
-            <span className="text-sm opacity-70">kcal</span>
+            <span className="text-sm text-subtle">kcal</span>
           </div>
           <div className="card flex flex-col gap-1">
-            <span className="text-sm opacity-70">{t("proteinPerDay")}</span>
+            <span className="text-sm text-subtle">{t("proteinPerDay")}</span>
             <span className="text-2xl font-bold tabular-nums">≥ {targets.protein_min}</span>
-            <span className="text-sm opacity-70">{t("grams")}</span>
+            <span className="text-sm text-subtle">{t("grams")}</span>
           </div>
         </section>
 
@@ -65,11 +65,11 @@ export default async function TargetsPage() {
                   <span className="font-medium">{s.label}</span>
                   <span className="shrink-0 font-semibold tabular-nums">{s.value}</span>
                 </div>
-                <span className="text-sm break-words opacity-70">{s.expression}</span>
+                <span className="text-sm break-words text-subtle">{s.expression}</span>
               </li>
             ))}
           </ol>
-          <p className="text-sm opacity-70">{t("everyDay")}</p>
+          <p className="text-sm text-subtle">{t("everyDay")}</p>
         </section>
 
         <TargetsEditor targets={targets} computed={computed} />

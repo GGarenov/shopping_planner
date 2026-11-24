@@ -28,7 +28,7 @@ export function BottomNav() {
               <Link
                 href={it.href}
                 aria-current={active ? "page" : undefined}
-                className={`flex min-h-14 flex-col items-center justify-center gap-0.5 text-xs ${active ? "font-extrabold text-accent" : "opacity-60"}`}
+                className={`flex min-h-14 flex-col items-center justify-center gap-0.5 text-xs ${active ? "font-extrabold text-accent" : "text-subtle"}`}
               >
                 <svg
                   viewBox="0 0 24 24"

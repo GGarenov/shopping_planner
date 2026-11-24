@@ -77,7 +77,7 @@ export function CartSender({
         {busy ? t("adding", { done, total: ebagIds.length }) : results.length ? t("resend") : t("send")}
       </button>
       {busy && (
-        <p className="text-center text-sm opacity-70" aria-live="polite">
+        <p className="text-center text-sm text-subtle" aria-live="polite">
           {t("checking")}
         </p>
       )}
@@ -100,7 +100,7 @@ export function CartSender({
 
       {results.length > 0 && (
         <details className="flex flex-col gap-2" open={missing.length + replaced.length > 0}>
-          <summary className="cursor-pointer text-sm opacity-80">
+          <summary className="cursor-pointer text-sm text-subtle">
             {t("resultSummary", { added: added.length, replaced: replaced.length, missing: missing.length })}
           </summary>
           <ul className="mt-2 flex flex-col gap-2" aria-label={t("resultLabel")}>
@@ -108,13 +108,13 @@ export function CartSender({
               <li key={r.ebag_id} className="card flex items-start gap-3 text-sm">
                 <span
                   aria-hidden
-                  className={`text-lg leading-none ${r.status === "missing" ? "text-red-600" : r.status === "replaced" ? "text-amber-600" : "text-accent"}`}
+                  className={`text-lg leading-none ${r.status === "missing" ? "text-danger" : r.status === "replaced" ? "text-amber-600" : "text-accent"}`}
                 >
                   {r.status === "added" ? "✓" : r.status === "replaced" ? "↻" : "✗"}
                 </span>
                 <span className="flex min-w-0 flex-col">
                   <span className="font-medium break-words">{r.line?.name ?? r.product}</span>
-                  <span className="opacity-70">
+                  <span className="text-subtle">
                     {r.status === "added" && qty(r.line!.qty, r.line!.unit)}
                     {r.status === "replaced" && t("replacedLine", { qty: qty(r.line!.qty, r.line!.unit), product: r.product })}
                     {r.status === "missing" && t("missingLine", { ingredient: ingredients?.[r.ebag_id] ?? r.ingredient })}

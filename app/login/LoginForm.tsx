@@ -32,7 +32,7 @@ function Tab({ active, onClick, children }: { active: boolean; onClick: () => vo
       role="tab"
       aria-selected={active}
       onClick={onClick}
-      className={`min-h-11 rounded-lg text-base font-medium ${active ? "bg-background shadow-sm" : "opacity-70"}`}
+      className={`min-h-11 rounded-lg text-base font-medium ${active ? "bg-background shadow-sm" : "text-subtle"}`}
     >
       {children}
     </button>
@@ -78,7 +78,7 @@ function CredentialsForm({ mode }: { mode: Mode }) {
         <input type="checkbox" className="size-5 accent-[var(--accent)]" checked={show} onChange={(e) => setShow(e.target.checked)} />
         {t("showPassword")}
       </label>
-      {signup && <p className="text-sm opacity-70">{t("passwordHint")}</p>}
+      {signup && <p className="text-sm text-subtle">{t("passwordHint")}</p>}
       {state.error && (
         <p className="error" role="alert">
           {state.error}

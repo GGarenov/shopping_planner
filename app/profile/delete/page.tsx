@@ -29,7 +29,7 @@ export default async function DeletePage() {
         <li>{t("itemPlans")}</li>
         <li>{t("itemEbag")}</li>
       </ul>
-      <p className="text-sm opacity-80">{t("note")}</p>
+      <p className="text-sm text-subtle">{t("note")}</p>
       <DeleteForm />
     </main>
   );

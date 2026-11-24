@@ -37,3 +37,7 @@ Thumbs.db
 things_to_improve
 # test coverage reports
 coverage/
+# Playwright (E2E) build, reports and traces
+.next-e2e/
+playwright-report/
+test-results/

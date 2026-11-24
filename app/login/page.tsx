@@ -20,7 +20,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
       <div className="flex flex-col gap-2">
         <h1 className="sr-only">{tc("appName")}</h1>
         <Logo size={56} tagline />
-        <p className="opacity-80">{t("intro")}</p>
+        <p className="text-subtle">{t("intro")}</p>
       </div>
       {deleted && (
         <p className="rounded-xl bg-accent-soft px-4 py-3 text-sm" role="status">

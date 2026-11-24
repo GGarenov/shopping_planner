@@ -14,7 +14,7 @@ export function GeneratePlanButton({ label }: { label?: string }) {
         {busy ? t("creating") : (label ?? t("create"))}
       </button>
       {busy && (
-        <p className="text-center text-sm opacity-70" aria-live="polite">
+        <p className="text-center text-sm text-subtle" aria-live="polite">
           {t("upTo15", { step: stepText })}
         </p>
       )}

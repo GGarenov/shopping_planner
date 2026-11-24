@@ -114,3 +114,57 @@ jobs:
       - name: Skipped (no RLS_* secrets)
         if: env.RLS_DB_URL == ''
         run: echo "::notice::RLS tests skipped — set RLS_SUPABASE_URL, RLS_SUPABASE_ANON_KEY, RLS_SUPABASE_SERVICE_ROLE_KEY and RLS_DB_URL secrets to run them."
+
+  e2e:
+    name: End-to-end + accessibility (Playwright)
+    # A production build in Chromium (Pixel 7) and WebKit (iPhone 15) against the same test project, after the RLS
+    # job has brought its schema up to date. eBag is never contacted. Skipped without the RLS_* secrets.
+    needs: rls
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    concurrency:
+      group: rls-test-db
+      cancel-in-progress: false
+    env:
+      RLS_SUPABASE_URL: ${{ secrets.RLS_SUPABASE_URL }}
+      RLS_SUPABASE_ANON_KEY: ${{ secrets.RLS_SUPABASE_ANON_KEY }}
+      RLS_SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.RLS_SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        if: env.RLS_SUPABASE_URL != ''
+
+      - uses: actions/setup-node@v4
+        if: env.RLS_SUPABASE_URL != ''
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci --no-audit --no-fund
+        if: env.RLS_SUPABASE_URL != ''
+
+      - name: Reference data (recipes, products) into the test project
+        if: env.RLS_SUPABASE_URL != ''
+        run: node scripts/seed.ts
+        env:
+          SUPABASE_URL: ${{ secrets.RLS_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.RLS_SUPABASE_SERVICE_ROLE_KEY }}
+
+      - name: Install browsers
+        if: env.RLS_SUPABASE_URL != ''
+        run: npx playwright install --with-deps chromium webkit
+
+      - name: E2E tests
+        if: env.RLS_SUPABASE_URL != ''
+        run: npx playwright test
+
+      - name: Upload the Playwright report
+        if: failure() && env.RLS_SUPABASE_URL != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14
+
+      - name: Skipped (no RLS_* secrets)
+        if: env.RLS_SUPABASE_URL == ''
+        run: echo "::notice::E2E tests skipped — set the RLS_* secrets (test Supabase project) to run them."

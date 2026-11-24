@@ -22,7 +22,7 @@ export function Choice({
       <span aria-hidden className={`size-5 shrink-0 rounded-full border-2 ${checked ? "border-accent bg-accent" : "border-border"}`} />
       <span className="flex flex-col">
         <span className="text-lg font-medium">{label}</span>
-        {sub && <span className="text-sm opacity-70">{sub}</span>}
+        {sub && <span className="text-sm text-subtle">{sub}</span>}
       </span>
     </button>
   );
@@ -77,7 +77,7 @@ export function NumberField({
           value={value}
           onChange={(e) => onChange(e.target.value.replace(",", "."))}
         />
-        <span className="w-28 shrink-0 text-sm opacity-70">{unit}</span>
+        <span className="w-28 shrink-0 text-sm text-subtle">{unit}</span>
       </div>
     </div>
   );
@@ -117,9 +117,9 @@ export function BudgetField({ value, onChange }: { value: string; onChange: (v: 
           value={value}
           onChange={(e) => onChange(e.target.value.replace(",", ".").replace(/[^\d.]/g, ""))}
         />
-        <span className="w-28 shrink-0 text-sm opacity-70">{t("perWeek")}</span>
+        <span className="w-28 shrink-0 text-sm text-subtle">{t("perWeek")}</span>
       </div>
-      <p className="text-xs opacity-70">{t("budgetHint")}</p>
+      <p className="text-xs text-subtle">{t("budgetHint")}</p>
     </div>
   );
 }

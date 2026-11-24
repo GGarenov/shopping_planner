@@ -28,7 +28,6 @@ export function LanguageToggle({ tone = "dark" }: { tone?: "light" | "dark" }) {
           type="button"
           lang={l}
           aria-pressed={locale === l}
-          aria-label={NAME[l]}
           disabled={pending}
           onClick={() =>
             locale !== l &&
@@ -39,7 +38,8 @@ export function LanguageToggle({ tone = "dark" }: { tone?: "light" | "dark" }) {
           }
           className={`min-h-8 min-w-10 rounded-full px-2.5 ${locale === l ? on : ""}`}
         >
-          {LABEL[l]}
+          {/* Accessible name «EN English»: starts with the visible text, so voice control («click EN») works too. */}
+          {LABEL[l]} <span className="sr-only">{NAME[l]}</span>
         </button>
       ))}
     </div>

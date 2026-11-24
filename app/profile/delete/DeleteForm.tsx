@@ -13,7 +13,7 @@ export function DeleteForm() {
         <input type="checkbox" name="confirm" value="yes" required className="mt-1 size-5 shrink-0" />
         <span>{t("confirm")}</span>
       </label>
-      <button type="submit" className="btn-primary bg-red-600" disabled={pending}>
+      <button type="submit" className="btn-primary bg-danger text-white" disabled={pending}>
         {pending ? t("deleting") : t("submit")}
       </button>
       {state?.error && (

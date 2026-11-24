@@ -54,12 +54,12 @@ export function ShoppingList({
         <div className="flex flex-col rounded-2xl bg-sun p-4 text-sun-fg">
           <span className="text-sm">{t("youPay")}</span>
           <span className="text-xl font-bold tabular-nums">{eur(totals.checkout, locale)}</span>
-          <span className="text-xs opacity-60">{t("products", { n: ids.length })}</span>
+          <span className="text-xs">{t("products", { n: ids.length })}</span>
         </div>
         <div className="card flex flex-col">
-          <span className="text-sm opacity-70">{t("youEat")}</span>
+          <span className="text-sm text-subtle">{t("youEat")}</span>
           <span className="text-xl font-bold tabular-nums">{eur(totals.eaten, locale)}</span>
-          <span className="text-xs opacity-60">{t("leftover")}</span>
+          <span className="text-xs text-subtle">{t("leftover")}</span>
         </div>
       </section>
 
@@ -92,14 +92,14 @@ export function ShoppingList({
         <section key={g.key} className="flex flex-col gap-2" aria-labelledby={`aisle-${g.key}`}>
           <h2 id={`aisle-${g.key}`} className="flex items-baseline justify-between text-lg font-semibold">
             <span>{g.known ? t(`aisle.${g.key}`) : g.key}</span>
-            <span className="text-sm font-normal tabular-nums opacity-70">{eur(g.cost, locale)}</span>
+            <span className="text-sm font-normal text-subtle tabular-nums">{eur(g.cost, locale)}</span>
           </h2>
           <ul className="flex flex-col gap-2">
             {g.items.map((it) => {
               const on = checked.has(it.ebag_id);
               const inputId = `item-${it.ebag_id}`;
               return (
-                <li key={`${it.ingredient_id}-${it.ebag_id}`} className={`card flex items-start gap-3 ${on ? "opacity-60" : ""}`}>
+                <li key={`${it.ingredient_id}-${it.ebag_id}`} className={`card flex items-start gap-3 ${on ? "bg-accent-soft" : ""}`}>
                   <input
                     id={inputId}
                     type="checkbox"
@@ -109,10 +109,10 @@ export function ShoppingList({
                   />
                   <label htmlFor={inputId} className="flex min-w-0 flex-1 flex-col gap-0.5">
                     <span className={`font-medium break-words ${on ? "line-through" : ""}`}>{it.product}</span>
-                    <span className="text-sm opacity-70">
+                    <span className="text-sm text-subtle">
                       {packUnits(packLabel(it), locale)} · {ingredientName(it.ingredient_id, it.ingredient, locale)}
                     </span>
-                    <span className="text-xs opacity-60">
+                    <span className="text-xs text-subtle">
                       {t("forRecipes", { used: String(it.used_edible_g), usable: String(it.usable_g) })}
                     </span>
                   </label>
@@ -123,7 +123,7 @@ export function ShoppingList({
                       href={it.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs underline opacity-70"
+                      className="text-xs text-subtle underline"
                       aria-label={t("ebagLink", { product: it.product })}
                     >
                       eBag ↗

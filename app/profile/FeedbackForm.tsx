@@ -14,7 +14,7 @@ export function FeedbackForm() {
 
   return (
     <form ref={form} action={action} className="flex flex-col gap-2">
-      <label htmlFor="feedback" className="text-sm opacity-80">
+      <label htmlFor="feedback" className="text-sm text-subtle">
         {t("label")}
       </label>
       <textarea

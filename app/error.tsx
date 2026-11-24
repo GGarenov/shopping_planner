@@ -12,8 +12,8 @@ export default function ErrorPage({ error, reset }: { error: Error & { digest?: 
   return (
     <main className="page justify-center">
       <h1 className="text-2xl font-bold">{t("errorTitle")}</h1>
-      <p className="opacity-80">{t("errorText")}</p>
-      {error.digest && <p className="text-xs opacity-50">{t("errorCode", { code: error.digest })}</p>}
+      <p className="text-subtle">{t("errorText")}</p>
+      {error.digest && <p className="text-xs text-subtle">{t("errorCode", { code: error.digest })}</p>}
       <button type="button" className="btn-primary" onClick={reset}>
         {t("retry")}
       </button>

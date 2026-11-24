@@ -34,7 +34,7 @@ export default async function ListPage({ searchParams }: { searchParams: Promise
       <>
         <main className="page pb-24">
           <Hero title={t("title")} />
-          <p className="opacity-80">{t("emptyText")}</p>
+          <p className="text-subtle">{t("emptyText")}</p>
           <Link href="/plan" className="btn-primary">
             {t("toPlan")}
           </Link>
@@ -77,7 +77,7 @@ export default async function ListPage({ searchParams }: { searchParams: Promise
 
         <ShoppingList planId={plan.id} groups={groupByAisle(plan.shopping)} totals={totals} initialChecked={checked} />
 
-        <footer className="flex flex-col gap-2 border-t border-border pt-4 text-sm opacity-70">
+        <footer className="flex flex-col gap-2 border-t border-border pt-4 text-sm text-subtle">
           {pantryLabels.length > 0 && <p>{t("pantryNote", { items: pantryLabels.join(", ") })}</p>}
           <p>{t("packsNote")}</p>
           {plan.solver.prices_date && <p>{t("pricesNote", { date: longDate(plan.solver.prices_date, locale) })}</p>}

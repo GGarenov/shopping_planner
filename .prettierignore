@@ -1,5 +1,8 @@
 # Generated, vendored or large data — not formatted
 .next/
+.next-e2e/
+playwright-report/
+test-results/
 node_modules/
 coverage/
 public/

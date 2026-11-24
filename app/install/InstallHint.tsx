@@ -28,7 +28,7 @@ export function InstallHint({ next }: { next: string }) {
       <header className="flex flex-col items-center gap-4 pt-6 text-center">
         <LogoMark size={88} className="rounded-[22%] shadow-md" />
         <h1 className="text-2xl font-extrabold">{t("heading")}</h1>
-        <p className="opacity-80">{t("intro")}</p>
+        <p className="text-subtle">{t("intro")}</p>
       </header>
       <InstallButton />
       <footer className="mt-auto flex flex-col gap-2">

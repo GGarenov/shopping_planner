@@ -130,13 +130,13 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
         <h2 id="cart-title" className="text-lg font-semibold">
           {t("cartTitle")}
         </h2>
-        <button type="button" className="text-sm underline opacity-70" onClick={() => void load()} disabled={loading}>
+        <button type="button" className="text-sm text-subtle underline" onClick={() => void load()} disabled={loading}>
           {loading ? t("refreshing") : t("refresh")}
         </button>
       </div>
 
       {cart.items.length === 0 ? (
-        <p className="card text-sm opacity-80">{t("empty")}</p>
+        <p className="card text-sm text-subtle">{t("empty")}</p>
       ) : (
         <ul className="flex flex-col gap-2">
           {cart.items.map((it) => {
@@ -161,7 +161,7 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
                   <a href={it.url} target="_blank" rel="noopener noreferrer" className="text-sm font-medium break-words">
                     {it.name}
                   </a>
-                  <span className="text-xs opacity-70">
+                  <span className="text-xs text-subtle">
                     {it.packSize && `${packUnits(it.packSize, locale)} · `}
                     {it.price != null && `${money(it.price)}${it.unit === "kg" ? t("perKg") : ""}`}
                     {it.regularPrice != null && (
@@ -171,7 +171,7 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
                       </>
                     )}
                   </span>
-                  {!it.available && <span className="text-xs font-semibold text-red-600">{t("soldOut")}</span>}
+                  {!it.available && <span className="text-xs font-semibold text-danger">{t("soldOut")}</span>}
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-1" role="group" aria-label={t("qtyFor", { name: it.name })}>
                       <button
@@ -205,7 +205,7 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
         </ul>
       )}
       {warning && (
-        <p className="text-sm text-red-600" role="alert">
+        <p className="text-sm text-danger" role="alert">
           {warning}
         </p>
       )}
@@ -242,7 +242,7 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
               </div>
               <p className="text-xs">
                 {hint.kind === "below_min" && (
-                  <span className="font-semibold text-red-600">{t("belowMin", { amount: money(hint.missing) })}</span>
+                  <span className="font-semibold text-danger">{t("belowMin", { amount: money(hint.missing) })}</span>
                 )}
                 {hint.kind === "to_cheaper" && t("toCheaper", { amount: money(hint.missing), fee: money(hint.nextFee ?? 0) })}
                 {hint.kind === "to_free" && t("toFree", { amount: money(hint.missing) })}
@@ -283,7 +283,7 @@ export function EbagCart({ today, refreshKey }: { today: string; refreshKey: num
           >
             {t("order")}
           </a>
-          <p className="text-center text-xs opacity-70">{t("orderNote")}</p>
+          <p className="text-center text-xs text-subtle">{t("orderNote")}</p>
           <button
             type="button"
             className="btn-ghost text-sm"

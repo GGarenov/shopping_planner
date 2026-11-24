@@ -105,7 +105,7 @@ export default async function PlanPage({ searchParams }: { searchParams: Promise
             </Link>
           )}
           {plan.solver.prices_date && (
-            <p className="text-center text-xs opacity-60">{tc("pricesFrom", { date: longDate(plan.solver.prices_date, locale) })}</p>
+            <p className="text-center text-xs text-subtle">{tc("pricesFrom", { date: longDate(plan.solver.prices_date, locale) })}</p>
           )}
         </footer>
       </main>

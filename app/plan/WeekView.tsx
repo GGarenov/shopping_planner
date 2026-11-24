@@ -44,14 +44,14 @@ export function WeekView({
             type="button"
             role="tab"
             aria-selected={i === active}
-            aria-label={`${t(dayLongKey(i))} ${dates[i]}`}
             onClick={() => setActive(i)}
             className={`flex min-h-14 flex-col items-center justify-center rounded-xl text-sm ${
               i === active ? "bg-accent font-extrabold text-accent-fg shadow-sm" : "border border-border bg-muted"
             }`}
           >
-            <span>{t(dayShortKey(i))}</span>
-            <span className="text-xs opacity-80">{dates[i]}</span>
+            {/* Seen: «Пн 23.11»; heard: «Понеделник 23.11» (no aria-label that would hide the visible text). */}
+            <span aria-hidden>{t(dayShortKey(i))}</span>
+            <span className="sr-only">{t(dayLongKey(i))}</span> <span className="text-xs">{dates[i]}</span>
           </button>
         ))}
       </div>
@@ -76,7 +76,7 @@ export function WeekView({
                   {t(slotKey(m.slot))}
                 </span>
                 <span className="leading-snug font-bold">{recipeName(m.recipe_id, m.recipe, locale)}</span>
-                <span className="text-sm opacity-70">
+                <span className="text-sm text-subtle">
                   {t("week.mealLine", { kcal: String(Math.round(m.kcal)), protein: String(Math.round(m.protein_g)) })}
                 </span>
               </div>
@@ -98,7 +98,7 @@ function Stat({ label, value, ok }: { label: string; value: string | number; ok?
         {value}
         {ok !== undefined && <span className={ok ? "text-accent" : "text-danger"}>{ok ? " ✓" : " !"}</span>}
       </span>
-      <span className="text-xs opacity-60">{label}</span>
+      <span className="text-xs text-subtle">{label}</span>
     </div>
   );
 }

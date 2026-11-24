@@ -93,7 +93,7 @@ export function PlanSettingsForm({ initial }: { initial: SettingsValues }) {
           {tc("back")}
         </Link>
         <h1 className="text-2xl font-bold">{tp("newPlan")}</h1>
-        <p className="opacity-80">{t("intro")}</p>
+        <p className="text-subtle">{t("intro")}</p>
       </header>
 
       <section className="card flex flex-col gap-3" aria-labelledby="s-budget">
@@ -134,10 +134,10 @@ export function PlanSettingsForm({ initial }: { initial: SettingsValues }) {
                   <span className="text-base font-normal">{t("proteinUnit")}</span>
                 </>
               ) : (
-                <span className="text-base font-normal opacity-70">{t("fillBody")}</span>
+                <span className="text-base font-normal text-subtle">{t("fillBody")}</span>
               )}
             </p>
-            <p className="text-sm opacity-70">{t("computedNote")}</p>
+            <p className="text-sm text-subtle">{t("computedNote")}</p>
             <button
               type="button"
               className="btn-secondary"
@@ -244,7 +244,7 @@ export function PlanSettingsForm({ initial }: { initial: SettingsValues }) {
             ))}
           </div>
           <h3 className="font-medium">{t("pantry")}</h3>
-          <p className="text-sm opacity-70">{t("pantryNote")}</p>
+          <p className="text-sm text-subtle">{t("pantryNote")}</p>
           <Chips options={chips("pantry", PANTRY_OPTIONS)} selected={v.pantry} onToggle={(x) => set("pantry", toggle(v.pantry, x))} />
         </div>
       </details>
@@ -267,7 +267,7 @@ export function PlanSettingsForm({ initial }: { initial: SettingsValues }) {
           {gen.busy ? tg("creating") : saving ? tc("saving") : tg("createThe")}
         </button>
         {gen.busy && (
-          <p className="text-center text-sm opacity-70" aria-live="polite">
+          <p className="text-center text-sm text-subtle" aria-live="polite">
             {tg("upTo30", { step: gen.stepText })}
           </p>
         )}

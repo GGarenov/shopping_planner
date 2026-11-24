@@ -43,7 +43,7 @@ export function InstallButton({
         <PhoneIcon className="size-9 shrink-0 text-accent" />
         <span className="flex flex-1 flex-col">
           <span className="font-extrabold">{t("addToPhone")}</span>
-          <span className="text-sm opacity-70">{t("bannerSub")}</span>
+          <span className="text-sm text-subtle">{t("bannerSub")}</span>
         </span>
         <span aria-hidden className="text-xl text-accent">
           ›
@@ -95,7 +95,7 @@ function InstallGuide({ platform, onClose }: { platform: string; onClose: () => 
                 <span>{t.rich("iosStep2", { strong })}</span>
               </li>
             </ol>
-            <p className="text-sm opacity-70">{t("iosNote")}</p>
+            <p className="text-sm text-subtle">{t("iosNote")}</p>
             <span aria-hidden className="animate-bounce self-center text-3xl text-accent">
               ↓
             </span>

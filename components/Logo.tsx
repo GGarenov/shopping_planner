@@ -39,11 +39,16 @@ export function Logo({ size = 40, tone = "dark", tagline = false }: { size?: num
     <span className="inline-flex items-center gap-2.5">
       <LogoMark size={size} className={`shrink-0 rounded-[22%] shadow-sm ${light ? "ring-2 ring-white/70" : ""}`} />
       <span className="flex flex-col leading-none">
-        <span className="font-black tracking-tight" style={{ fontSize: size * 0.56 }} aria-label={BRAND}>
-          <span className={light ? "text-white" : "text-accent"}>Pazar</span>
-          <span className={light ? "text-sun" : "text-[#f0a800]"}>ko</span>
+        {/* The wordmark is a logo (WCAG 1.4.3 exempts logotypes from contrast): one image named «Pazarko». */}
+        <span role="img" aria-label={BRAND} data-logo className="font-black tracking-tight" style={{ fontSize: size * 0.56 }}>
+          <span aria-hidden className={light ? "text-white" : "text-accent"}>
+            Pazar
+          </span>
+          <span aria-hidden className={light ? "text-sun" : "text-[#f0a800]"}>
+            ko
+          </span>
         </span>
-        {tagline && <span className={`mt-1 text-xs ${light ? "text-white/80" : "opacity-70"}`}>{t("tagline")}</span>}
+        {tagline && <span className={`mt-1 text-xs ${light ? "text-white/80" : "text-subtle"}`}>{t("tagline")}</span>}
       </span>
     </span>
   );

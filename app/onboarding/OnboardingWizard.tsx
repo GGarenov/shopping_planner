@@ -105,7 +105,7 @@ export function OnboardingWizard({ initial, editing }: { initial: WizardValues; 
   return (
     <div className="flex flex-1 flex-col gap-6">
       <header className="flex flex-col gap-3">
-        <div className="flex items-center justify-between text-sm opacity-70">
+        <div className="flex items-center justify-between text-sm text-subtle">
           {stepIndex > 0 ? (
             <button type="button" className="btn-ghost -ml-3" onClick={() => setStepIndex((i) => i - 1)}>
               {tc("back")}
@@ -129,7 +129,7 @@ export function OnboardingWizard({ initial, editing }: { initial: WizardValues; 
           <div className="h-full bg-accent transition-all" style={{ width: `${((stepIndex + 1) / STEPS.length) * 100}%` }} />
         </div>
         <h1 className="text-2xl font-bold">{t(`steps.${step.key}.title`)}</h1>
-        {step.hint && <p className="opacity-75">{t(`steps.${step.key}.hint`)}</p>}
+        {step.hint && <p className="text-subtle">{t(`steps.${step.key}.hint`)}</p>}
       </header>
 
       <section className="flex flex-col gap-3">
@@ -244,7 +244,7 @@ function StepBody({
             selected={values.allergens}
             onToggle={(v) => set("allergens", toggle(values.allergens, v))}
           />
-          <p className="text-sm opacity-70">{t("allergyNote")}</p>
+          <p className="text-sm text-subtle">{t("allergyNote")}</p>
         </>
       );
     case 7:

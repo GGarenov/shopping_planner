@@ -5,6 +5,8 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 const nextConfig: NextConfig = {
+  // E2E tests build into their own folder (with the test project's keys), so they never replace the normal build.
+  distDir: process.env.NEXT_DIST_DIR || ".next",
   // The planner uses the `highs` WASM solver; keep it out of the bundler so the
   // .wasm file is traced and shipped with the serverless function (SPEC §7.2).
   serverExternalPackages: ["highs"],

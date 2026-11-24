@@ -9,7 +9,7 @@ const compat = new FlatCompat({ baseDirectory: __dirname });
 const eslintConfig = [
   { ignores: [".next/**", "node_modules/**", "scripts/**", "data/**", "public/**", "next-env.d.ts"] },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
-  { ignores: ["coverage/**"] },
+  { ignores: ["coverage/**", ".next-e2e/**", "playwright-report/**", "test-results/**"] },
   // Formatting is Prettier's job: turn off ESLint rules that would fight it (keep this last).
   prettier,
 ];

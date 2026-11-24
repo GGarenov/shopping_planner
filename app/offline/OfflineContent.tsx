@@ -14,7 +14,7 @@ export function OfflineContent() {
   return (
     <>
       <h1 className="text-2xl font-bold">{t.offlineTitle}</h1>
-      <p className="opacity-80">{t.offlineText}</p>
+      <p className="text-subtle">{t.offlineText}</p>
       {/* Full page load on purpose: retries the network instead of client-side routing. */}
       {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
       <a href="/" className="btn-primary">

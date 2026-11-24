@@ -35,6 +35,7 @@ On Windows, run `npm test` from a terminal whose path starts with `C:\` (capital
 | Lint (ESLint, Next.js + TypeScript rules)                                  | `npm run lint`                                  | pre-commit (changed files), CI                   |
 | Types (`tsc --noEmit`, strict)                                             | `npm run typecheck`                             | CI                                               |
 | Unit, component and API-route tests (Vitest, React Testing Library, jsdom) | `npm test`                                      | CI                                               |
+| End-to-end + accessibility (Playwright, axe; phone viewports)              | `npm run test:e2e`                              | CI (with the test-project secrets)               |
 | Coverage of `lib/` with minimum thresholds                                 | `npm run test:coverage` → `coverage/index.html` | CI (summary on the run page, report as artifact) |
 | Dependency audit (critical)                                                | `npm audit --audit-level=critical`              | CI; Dependabot opens weekly update PRs           |
 | Code scanning                                                              | CodeQL (`security-and-quality`)                 | push, PR, weekly                                 |
@@ -44,6 +45,21 @@ throwaway users try to read and change each other's profile, plans, shopping tic
 token tables. Locally: put `RLS_SUPABASE_URL`, `RLS_SUPABASE_ANON_KEY`, `RLS_SUPABASE_SERVICE_ROLE_KEY` (and `RLS_DB_URL`
 for migrations) in `.env.test.local`, then `npm run test:rls`. In CI the `rls` job applies the migrations to that
 project first and skips itself when the secrets are missing. Without the variables, `npm test` skips the suite.
+
+**End-to-end tests** (`e2e/`, Playwright) drive a production build in a phone-sized Chromium (Pixel 7) and WebKit
+(iPhone 15). A new user signs up, goes through onboarding, gets a plan from the real planner and opens a recipe.
+Then they tick an item on the shopping list, reload (the tick stays), switch to English and back, open the eBag
+screen and delete their account. The login error messages have their own tests. Every main screen is also checked
+with **axe** (WCAG 2.1 A/AA): serious or critical problems fail the run. The tests use the same test Supabase
+project, and the browser is blocked from ebag.bg, so the real shop is never contacted. Throwaway accounts
+(`@pazarko.test`) are deleted at the end.
+
+Locally (with `.env.test.local` as above):
+
+1. Once, seed the test project: `SUPABASE_URL=<RLS_SUPABASE_URL> SUPABASE_SERVICE_ROLE_KEY=<RLS_SUPABASE_SERVICE_ROLE_KEY> node scripts/seed.ts`.
+2. Run `npm run test:e2e`. It builds into `.next-e2e/` with the test keys, and `.env.local` is never used. `npm run test:e2e:ui` opens the interactive runner.
+
+In CI the `e2e` job runs after `rls`, seeds the test project, and uploads the HTML report when a test fails.
 
 The pre-commit hook (Husky + lint-staged) formats and lints only the staged files. The coverage thresholds in
 `vitest.config.mts` sit just below the current numbers, so coverage can only go up.

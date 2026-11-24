@@ -56,7 +56,7 @@ export default async function EbagPage({ searchParams }: { searchParams: Promise
         {!connected && (
           <section className="card flex flex-col gap-3">
             <h2 className="text-lg font-semibold">{expired ? t("expiredTitle") : t("connectTitle")}</h2>
-            <p className="text-sm opacity-80">{t("connectText")}</p>
+            <p className="text-sm text-subtle">{t("connectText")}</p>
             <a href="/api/ebag/connect" className="btn-primary">
               {expired ? t("reconnectShort") : t("connect")}
             </a>
@@ -65,10 +65,10 @@ export default async function EbagPage({ searchParams }: { searchParams: Promise
 
         {connected && (
           <>
-            <p className="text-sm opacity-70">{t("connectedSince", { date: longDate(row.connected_at, locale) })}</p>
+            <p className="text-sm text-subtle">{t("connectedSince", { date: longDate(row.connected_at, locale) })}</p>
             {!plan && (
               <section className="flex flex-col gap-3">
-                <p className="opacity-80">{t("noPlan")}</p>
+                <p className="text-subtle">{t("noPlan")}</p>
                 <Link href="/plan" className="btn-primary">
                   {t("toPlan")}
                 </Link>
