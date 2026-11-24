@@ -12,7 +12,14 @@ const data: Omit<PlanInput, "profile"> = {
   recipes: read("data/recipes.json").recipes,
   products: read("data/ebag_products.json").products,
 };
-const testProfile = read("data/profiles/test.json") as PlanProfile;
+// Generous solver time limits: alone the planner finishes in 2–3 s (Optimal), but next to ~170 other tests on a busy
+// CI runner the default limits (tuned for production) can cut a solve short and make these tests flaky.
+const testProfile: PlanProfile = {
+  ...(read("data/profiles/test.json") as PlanProfile),
+  stage1_time_limit_s: 30,
+  stage2_time_limit_s: 30,
+  deadline_s: 150,
+};
 
 describe("generatePlan (data/profiles/test.json)", () => {
   let out: PlanOutput;
@@ -21,7 +28,7 @@ describe("generatePlan (data/profiles/test.json)", () => {
     const res = await generatePlan({ ...data, profile: testProfile });
     if (!res.ok) throw new Error(`no plan: ${res.reason} — ${res.log.join(" | ")}`);
     out = res.output;
-  }, 60_000);
+  }, 180_000);
 
   it("has 7 days × breakfast, lunch, dinner, snack", () => {
     expect(out.plan).toHaveLength(7);
@@ -85,7 +92,7 @@ describe("generatePlan — no plan possible", () => {
     expect(res.min_budget_eur).toBeGreaterThan(15);
     expect(res.message).toBe(budgetMessageBg(15, res.min_budget_eur!));
     expect(res.message).toMatch(/^С бюджет 15 € .* около \d+ €/);
-  }, 60_000);
+  }, 180_000);
 
   it("not enough recipes for the diet: says so (vegan has no breakfasts yet)", async () => {
     const res = await generatePlan({ ...data, profile: { ...testProfile, diet: "vegan" } });
@@ -103,9 +110,10 @@ describe("generatePlan — new plan", () => {
     const first = await generatePlan({ ...data, profile: testProfile });
     if (!first.ok) throw new Error(first.reason);
     const prev = ids(first.output);
-    const second = await generatePlan({ ...data, profile: { ...testProfile, avoid_recipes: [...prev] } });
+    // Variety is what is checked here, not the budget: give it room so the result does not depend on timing.
+    const second = await generatePlan({ ...data, profile: { ...testProfile, budget_eur: 150, avoid_recipes: [...prev] } });
     if (!second.ok) throw new Error(second.reason);
     const shared = [...ids(second.output)].filter((id) => prev.has(id)).length;
     expect(shared).toBeLessThan(prev.size);
-  }, 60_000);
+  }, 180_000);
 });
