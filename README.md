@@ -39,6 +39,12 @@ On Windows, run `npm test` from a terminal whose path starts with `C:\` (capital
 | Dependency audit (critical)                                                | `npm audit --audit-level=critical`              | CI; Dependabot opens weekly update PRs           |
 | Code scanning                                                              | CodeQL (`security-and-quality`)                 | push, PR, weekly                                 |
 
+**Row Level Security tests** (`test/rls/`) run against a separate test Supabase project, never production: two
+throwaway users try to read and change each other's profile, plans, shopping ticks and feedback, and to reach the
+token tables. Locally: put `RLS_SUPABASE_URL`, `RLS_SUPABASE_ANON_KEY`, `RLS_SUPABASE_SERVICE_ROLE_KEY` (and `RLS_DB_URL`
+for migrations) in `.env.test.local`, then `npm run test:rls`. In CI the `rls` job applies the migrations to that
+project first and skips itself when the secrets are missing. Without the variables, `npm test` skips the suite.
+
 The pre-commit hook (Husky + lint-staged) formats and lints only the staged files. The coverage thresholds in
 `vitest.config.mts` sit just below the current numbers, so coverage can only go up.
 

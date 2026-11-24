@@ -16,7 +16,7 @@ export default defineConfig({
   },
   test: {
     // Unit tests run in Node; component tests (*.test.tsx) opt into jsdom with a `// @vitest-environment jsdom` comment.
-    include: ["lib/**/*.test.ts", "app/**/*.test.{ts,tsx}", "components/**/*.test.tsx", "scripts/**/*.test.ts"],
+    include: ["lib/**/*.test.ts", "app/**/*.test.{ts,tsx}", "components/**/*.test.tsx", "scripts/**/*.test.ts", "test/rls/**/*.test.ts"],
     environment: "node",
     setupFiles: ["./test/setup.ts"],
     coverage: {
