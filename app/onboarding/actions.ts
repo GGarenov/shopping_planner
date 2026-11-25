@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { getUserAndProfile } from "@/lib/profile/load";
-import { errorKey, profileInputSchema } from "@/lib/profile/schema";
+import { errorKey, isComplete, profileInputSchema } from "@/lib/profile/schema";
 import { requestLog } from "@/lib/requestLog";
 
 export type SaveProfileResult = { error: string } | undefined;
@@ -23,5 +23,6 @@ export async function saveProfile(input: unknown): Promise<SaveProfileResult> {
     (await requestLog({ action: "saveProfile" })).error("profile.save_failed", { code: error.code, err: new Error(error.message) });
     return { error: t("saveProfileFailed") };
   }
-  redirect("/targets");
+  // First time: the wizard goes on to make the plan itself (one tap from data to plan). Editing: back to the targets.
+  if (profile && isComplete(profile)) redirect("/targets");
 }

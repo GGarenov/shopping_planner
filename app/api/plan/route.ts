@@ -87,6 +87,9 @@ export const POST = apiHandler("POST /api/plan", async ({ log }) => {
     pantry: profile.pantry,
     targets_override: targets,
     avoid_recipes: avoid,
+    // Stage 1 (choosing meals) needs ~6 s on a laptop and found no plan in time on the server (2026-11-24): the
+    // budgeted run failed, and the user was told "budget too low". The deadlines below still cap the whole run.
+    stage1_time_limit_s: 12,
     stage2_time_limit_s: 8,
   };
   const input = { ingredients: data.ingredients, recipes: data.recipes, products: data.products };

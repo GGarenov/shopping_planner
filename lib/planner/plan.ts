@@ -717,6 +717,7 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
   let bestChosen: Map<string, UsableRecipe> | null = null;
   let stage1Failed = false;
   let firstChosen: Map<string, UsableRecipe> | null = null;
+  let firstStage1: { status: string; seconds: number } | null = null;
   const seen = new Set<string>();
   function refinedPools() {
     const K2 = profile.refine_candidates_per_slot ?? 5;
@@ -764,7 +765,10 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
       break;
     }
     seen.add(key);
-    firstChosen ??= chosen;
+    if (!firstChosen) {
+      firstChosen = chosen;
+      firstStage1 = { status: r1.status, seconds: r1.s };
+    }
     const r2 = stage2(chosen);
     log.push(
       `Round ${round}: stage 1 ${r1.status} ${r1.s.toFixed(1)} s, stage 2 ${r2.ok ? `${r2.status} ${r2.seconds.toFixed(1)} s — checkout ${r2.checkout.toFixed(2)} EUR` : "no purchase plan"}`,
@@ -786,9 +790,11 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
   if (!best) {
     // Find out why, so the user gets an actionable message: is it the recipes (diet/exclusions vs targets) or money?
     let chosen = firstChosen;
+    let diagnoseStage1: { status: string; seconds: number } | null = firstStage1;
     if (stage1Failed) {
       const { m1, s1 } = buildStage1(costPerG, candidates, Infinity); // same, without the budget estimate
       const r1 = solve(m1, stage1Opts);
+      diagnoseStage1 = { status: r1.status, seconds: r1.s };
       log.push(`Diagnose: stage 1 without budget ${r1.status} ${r1.s.toFixed(1)} s`);
       // Only a proven "infeasible" means the recipes can't do it; running out of time is not the user's problem.
       if (!r1.ok)
@@ -800,11 +806,17 @@ export async function generatePlan(input: PlanInput, now: () => number = Date.no
     }
     const free = chosen ? stage2(chosen, Infinity, Math.min(6, profile.stage2_time_limit_s ?? 10)) : null;
     if (free?.ok) {
-      const min = Math.ceil(free.checkout);
       log.push(`Diagnose: cheapest plan found without the budget: ${free.checkout.toFixed(2)} EUR`);
-      return { ok: false, reason: "budget_too_low", message: budgetMessageBg(profile.budget_eur, min), min_budget_eur: min, log };
+      // The budgeted solves can fail by running out of time (slow server), not only by money. If the plan found
+      // here fits the budget, it is a valid plan — never tell the user "budget too low" with a cheaper figure.
+      if (free.checkout <= profile.budget_eur * (1 + (profile.budget_slack ?? 0.05))) {
+        best = { ...free, round: 0, stage1: diagnoseStage1 ?? { status: "unknown", seconds: 0 } };
+      } else {
+        const min = Math.ceil(free.checkout);
+        return { ok: false, reason: "budget_too_low", message: budgetMessageBg(profile.budget_eur, min), min_budget_eur: min, log };
+      }
     }
-    return { ok: false, reason: "no_purchase_plan", message: NO_PLAN_MESSAGE_BG, log };
+    if (!best) return { ok: false, reason: "no_purchase_plan", message: NO_PLAN_MESSAGE_BG, log };
   }
 
   // ---------- 8. result ----------

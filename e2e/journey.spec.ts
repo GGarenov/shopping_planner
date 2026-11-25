@@ -1,4 +1,4 @@
-// The whole first week of a new user, in a real browser on a phone: sign up → onboarding → targets → first plan →
+// The whole first week of a new user, in a real browser on a phone: sign up → onboarding → first plan (one tap) → targets →
 // a recipe → the shopping list (tick, reload, still ticked) → English and back → eBag screen → delete the account.
 // Every main screen is also checked for accessibility problems (axe).
 import { expect, test } from "@playwright/test";
@@ -76,20 +76,19 @@ test("a new user goes from sign-up to a shopping list, then deletes the account"
     await page.getByRole("button", { name: bg.onboarding.finish }).click();
   });
 
-  await test.step("targets: calories and protein, explained", async () => {
-    await expect(page).toHaveURL(/\/targets$/);
-    await expect(page.getByRole("heading", { level: 1, name: bg.targets.heading })).toBeVisible();
-    await expectAccessible(page, "targets");
-  });
-
-  await test.step("the first plan: 7 days made by the real planner", async () => {
-    await nav("plan");
-    await expect(page.getByText(bg.plan.empty)).toBeVisible();
-    await page.getByRole("button", { name: bg.plan.generate.create }).click();
+  await test.step("the first plan straight from onboarding: 7 days made by the real planner", async () => {
     const days = page.getByRole("tablist", { name: bg.plan.week.days });
     await expect(days).toBeVisible({ timeout: 60_000 });
+    await expect(page).toHaveURL(/\/plan$/);
     await expect(days.getByRole("tab")).toHaveCount(7);
     await expectAccessible(page, "plan");
+  });
+
+  await test.step("targets: calories and protein, explained (under Profile)", async () => {
+    await page.goto("/targets");
+    await expect(page.getByRole("heading", { level: 1, name: bg.targets.heading })).toBeVisible();
+    await expectAccessible(page, "targets");
+    await nav("plan");
   });
 
   await test.step("a recipe from the plan", async () => {

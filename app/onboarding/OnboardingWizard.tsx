@@ -19,6 +19,7 @@ import {
 import { errorKey, profileInputSchema, type ErrorKey } from "@/lib/profile/schema";
 import { shouldShowInstallHint } from "@/app/install/hint";
 import { BudgetField, Chips, Choice, NumberField } from "@/components/form/fields";
+import { usePlanGenerator } from "@/app/plan/usePlanGenerator";
 import { saveProfile } from "./actions";
 
 export interface WizardValues {
@@ -75,6 +76,8 @@ export function OnboardingWizard({ initial, editing }: { initial: WizardValues; 
   const [stepIndex, setStepIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [saving, startSaving] = useTransition();
+  const { generate, busy: planning, error: planError, fixable, stepText } = usePlanGenerator();
+  const tp = useTranslations("plan.generate");
 
   // First visit in the browser (not the installed app): offer the install hint once.
   useEffect(() => {
@@ -97,10 +100,13 @@ export function OnboardingWizard({ initial, editing }: { initial: WizardValues; 
       return;
     }
     startSaving(async () => {
-      const res = await saveProfile(values);
-      if (res?.error) setError(res.error);
+      const res = await saveProfile(values); // editing: redirects back to /targets
+      if (res?.error) return setError(res.error);
+      // First time: straight on to the plan — no detour via the targets screen (it stays under Profile).
+      await generate();
     });
   };
+  const busy = saving || planning;
 
   return (
     <div className="flex flex-1 flex-col gap-6">
@@ -142,9 +148,24 @@ export function OnboardingWizard({ initial, editing }: { initial: WizardValues; 
             {error}
           </p>
         )}
-        <button type="button" className="btn-primary" onClick={next} disabled={saving}>
-          {last ? (saving ? tc("saving") : editing ? tc("save") : t("finish")) : t("next")}
+        {planError && (
+          <div className="flex flex-col gap-2" role="alert">
+            <p className="error">{planError}</p>
+            {fixable && (
+              <Link href="/plan/new" className="btn-secondary">
+                {tp("fixSettings")}
+              </Link>
+            )}
+          </div>
+        )}
+        <button type="button" className="btn-primary" onClick={next} disabled={busy}>
+          {last ? (planning ? tp("creating") : saving ? tc("saving") : editing ? tc("save") : t("finish")) : t("next")}
         </button>
+        {planning && (
+          <p className="text-center text-sm text-subtle" aria-live="polite">
+            {tp("upTo15", { step: stepText })}
+          </p>
+        )}
       </footer>
     </div>
   );
