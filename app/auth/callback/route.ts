@@ -43,7 +43,8 @@ export async function GET(req: NextRequest) {
       }
     }
     // access_denied: the user pressed "Cancel" at Google — not an error worth more than a warning.
-    log.warn("auth.callback_error", { code: errorCode });
+    // Supabase explains the cause here (e.g. "Unable to exchange external code" = wrong Google client secret).
+    log.warn("auth.callback_error", { code: errorCode, description: url.searchParams.get("error_description") });
     return back("failed");
   }
 
@@ -51,7 +52,7 @@ export async function GET(req: NextRequest) {
   if (!code) return back("failed");
   const { data, error } = await supabase.auth.exchangeCodeForSession(code);
   if (error || !data.user) {
-    log.warn("auth.exchange_failed", { code: error?.code, status: error?.status });
+    log.warn("auth.exchange_failed", { code: error?.code, status: error?.status, message: error?.message });
     return back("failed");
   }
 

@@ -24,6 +24,8 @@ export function SocialButtons({ mode, next, failed = false }: { mode: "link" | "
     // Navigates away to the provider on success; only an error comes back here.
     const { error } = mode === "link" ? await auth.linkIdentity({ provider, options }) : await auth.signInWithOAuth({ provider, options });
     if (error) {
+      // Before any redirect: e.g. "Manual linking is disabled" (Supabase setting) for a guest.
+      console.error("social sign-in failed to start", error.message);
       setBusy(false);
       setError(true);
     }
