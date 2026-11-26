@@ -159,7 +159,7 @@ header sets a `lang` cookie (and `profiles.options.lang`, so it follows the user
 
 ## README screenshots
 
-The phone screenshots in `docs/screenshots/` come from the real app: a guest goes through the questions, gets a
+The phone screenshots in `docs/screenshots/` come from the real app, in English: a guest goes through the questions, gets a
 plan and opens the list and the eBag screen, against the test Supabase project (same setup as the E2E tests).
 The guest is deleted at the end.
 
