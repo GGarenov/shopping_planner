@@ -5,7 +5,6 @@ import "server-only";
 import { getTranslations } from "next-intl/server";
 import type { User } from "@supabase/supabase-js";
 import { AppError } from "@/lib/api/errors";
-import { isGuest } from "@/lib/auth/guest";
 import type { Logger } from "@/lib/log";
 import { connectEbag, type EbagApi } from "./api";
 import { getConnectionRow, UserTokens } from "./oauth";
@@ -21,7 +20,6 @@ export async function withUserEbag(
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) throw new AppError(401, "unauthorized", common("loginAgain"));
-  if (isGuest(user)) throw new AppError(403, "guest", t("guest"));
 
   const admin = createAdminClient();
   const tokens = await UserTokens.load(admin, user.id);

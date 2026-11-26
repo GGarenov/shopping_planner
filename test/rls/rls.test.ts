@@ -184,6 +184,8 @@ describe.skipIf(!configured)("Row Level Security (test Supabase project)", () =>
     it("the cleanup deletes idle guests (with their data) and never an account", async () => {
       const G = await guest();
       await G.db.from("profiles").insert(profile(G.id));
+      // Guests may connect eBag too (taylor_the_app/issues.md, 2): the connection must go with them.
+      expect((await admin.from("ebag_connections").insert({ user_id: G.id, tokens_encrypted: "rls-test" })).error).toBeNull();
       // A guest active in the last hour stays.
       expect((await admin.rpc("delete_stale_guests", { max_idle: "1 hour" })).error).toBeNull();
       expect((await admin.auth.admin.getUserById(G.id)).data.user).not.toBeNull();
@@ -194,6 +196,7 @@ describe.skipIf(!configured)("Row Level Security (test Supabase project)", () =>
       expect(n).toBeGreaterThanOrEqual(1);
       expect((await admin.auth.admin.getUserById(G.id)).data.user).toBeNull();
       expect((await admin.from("profiles").select("user_id").eq("user_id", G.id)).data).toEqual([]);
+      expect((await admin.from("ebag_connections").select("user_id").eq("user_id", G.id)).data).toEqual([]);
       for (const u of [A, B]) expect((await admin.auth.admin.getUserById(u.id)).data.user).not.toBeNull();
     }, 30_000);
   });

@@ -7,15 +7,22 @@ vi.mock("server-only", () => ({}));
 
 type Row = Record<string, unknown>;
 
-/** In-memory admin client: profiles and plans by user_id, auth users by id. */
-function fakeAdmin(users: Record<string, { is_anonymous?: boolean }>, data: { profiles: Row[]; plans: Row[] }) {
+/** In-memory admin client: profiles, plans and eBag connections by user_id, auth users by id. */
+function fakeAdmin(users: Record<string, { is_anonymous?: boolean }>, given: { profiles: Row[]; plans: Row[]; ebag_connections?: Row[] }) {
+  const data = { ebag_connections: [] as Row[], ...given };
   const deleted: string[] = [];
-  const from = (table: "profiles" | "plans") => {
+  const from = (table: keyof typeof data) => {
+    let patch: Row | null = null;
     let filter: [string, unknown] | null = null;
     const rows = () => data[table].filter((r) => !filter || r[filter[0]] === filter[1]);
     const builder = {
       select: () => builder,
-      eq: (c: string, v: unknown) => ((filter = [c, v]), builder),
+      eq: (c: string, v: unknown) => {
+        filter = [c, v];
+        if (patch) for (const r of rows()) Object.assign(r, patch);
+        return patch ? Promise.resolve({ error: null }) : builder;
+      },
+      update: (p: Row) => ((patch = p), builder),
       order: () => builder,
       limit: () => builder,
       maybeSingle: async () => ({ data: rows().at(-1) ?? null, error: null }),
@@ -60,6 +67,29 @@ describe("mergeGuestInto", () => {
     expect(await mergeGuestInto(f.admin, "g", "u")).toBe("skipped");
     expect(f.data.profiles).toHaveLength(1);
     expect(f.deleted).toEqual([]);
+  });
+
+  it("the guest's eBag connection moves to an account that has none, and never over the account's own", async () => {
+    const f = fakeAdmin(
+      { g: { is_anonymous: true } },
+      { profiles: [], plans: [], ebag_connections: [{ user_id: "g", tokens_encrypted: "gt" }] },
+    );
+    await mergeGuestInto(f.admin, "g", "u");
+    expect(f.data.ebag_connections).toEqual([{ user_id: "u", tokens_encrypted: "gt" }]);
+
+    const own = fakeAdmin(
+      { g: { is_anonymous: true } },
+      {
+        profiles: [],
+        plans: [],
+        ebag_connections: [
+          { user_id: "u", tokens_encrypted: "ut" },
+          { user_id: "g", tokens_encrypted: "gt" },
+        ],
+      },
+    );
+    await mergeGuestInto(own.admin, "g", "u");
+    expect(own.data.ebag_connections.find((c) => c.user_id === "u")).toEqual({ user_id: "u", tokens_encrypted: "ut" });
   });
 
   it("does nothing when the guest is the account itself", async () => {

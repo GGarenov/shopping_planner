@@ -9,6 +9,8 @@ const bg = {
   options: messages("bg", "options"),
   nav: messages("bg", "nav"),
   plan: messages("bg", "plan"),
+  list: messages("bg", "list"),
+  ebag: messages("bg", "ebag"),
   profile: messages("bg", "profile"),
 };
 
@@ -55,6 +57,14 @@ test("a guest goes from the start page to a plan without an account, then delete
     await expect(days).toBeVisible({ timeout: 60_000 });
     await expect(page).toHaveURL(/\/plan$/);
     await expect(days.getByRole("tab")).toHaveCount(7);
+  });
+
+  await test.step("the list → «send to eBag»: a guest can connect eBag too (the login to eBag itself is not tested)", async () => {
+    await page.getByRole("navigation").getByRole("link", { name: bg.nav.list, exact: true }).click();
+    await page.getByRole("link", { name: bg.list.sendToEbag }).click();
+    await expect(page).toHaveURL(/\/ebag$/);
+    await expect(page.getByRole("link", { name: bg.ebag.connect, exact: true })).toHaveAttribute("href", "/api/ebag/connect");
+    await expectAccessible(page, "eBag (guest)");
   });
 
   await test.step("clean up: the guest deletes their data", async () => {

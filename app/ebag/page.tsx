@@ -30,6 +30,7 @@ export default async function EbagPage({ searchParams }: { searchParams: Promise
   const supabase = await createClient();
   const [row, plan] = await Promise.all([getConnectionRow(createAdminClient(), user.id), getLatestPlan(supabase)]);
   const guest = isGuest(user);
+  const account = accountStatus(q.account);
   const connected = row?.status === "connected";
   const expired = !!row && !connected;
 
@@ -56,10 +57,10 @@ export default async function EbagPage({ searchParams }: { searchParams: Promise
           </p>
         )}
 
-        {/* Guests can't connect eBag: the card asks them to log in first (their plan stays). */}
-        <SaveAccount guest={guest} next="/ebag" variant="ebag" status={accountStatus(q.account)} />
+        {/* Only the "logged in, plan saved" notice up here; for a guest the save card comes after eBag. */}
+        <SaveAccount guest={false} next="/ebag" variant="ebag" status={account} />
 
-        {!connected && !guest && (
+        {!connected && (
           <section className="card flex flex-col gap-3">
             <h2 className="text-lg font-semibold">{expired ? t("expiredTitle") : t("connectTitle")}</h2>
             <p className="text-sm text-subtle">{t("connectText")}</p>
@@ -101,6 +102,9 @@ export default async function EbagPage({ searchParams }: { searchParams: Promise
             />
           </>
         )}
+
+        {/* Guests can use eBag too (taylor_the_app/issues.md, 2), but without a login it all goes after 3 days. */}
+        <SaveAccount guest={guest} next="/ebag" variant="ebag" status={account === "failed" ? "failed" : null} />
 
         {row && (
           <form action="/api/ebag/disconnect" method="post" className="mt-auto border-t border-border pt-4">

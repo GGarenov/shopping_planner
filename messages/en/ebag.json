@@ -77,7 +77,6 @@
     "planNotFound": "Plan not found.",
     "qtyAdjusted": "eBag adjusted the quantity to what's in stock.",
     "changeRejected": "eBag didn't accept the change — see the current cart.",
-    "guest": "Continue with Google to connect eBag.",
     "reconnect": "Connect your eBag account again.",
     "expired": "Your eBag connection has expired. Connect your account again.",
     "down": "eBag isn't responding right now. Try again in a moment."

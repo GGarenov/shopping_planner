@@ -5,7 +5,6 @@ import { startAuthorization } from "@modelcontextprotocol/sdk/client/auth.js";
 import { EBAG_ISSUER, EBAG_RESOURCE, getAppClient, getMetadata, redirectUri, SCOPE } from "@/lib/ebag/oauth";
 import { FLOW_COOKIE, flowCookieOptions, sealFlow } from "@/lib/ebag/flowCookie";
 import { apiHandler } from "@/lib/api/handler";
-import { isGuest } from "@/lib/auth/guest";
 import { createAdminClient, createClient } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
@@ -18,7 +17,7 @@ export const GET = apiHandler("GET /api/ebag/connect", async ({ log }, req: Next
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) return NextResponse.redirect(new URL("/login", req.url), 303);
-  if (isGuest(user)) return NextResponse.redirect(new URL("/ebag", req.url), 303); // the page asks them to log in first
+  // Guests too (taylor_the_app/issues.md, 2): the connection is deleted with the guest after 3 days.
 
   try {
     const redirect = redirectUri(req.nextUrl.origin);
