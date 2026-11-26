@@ -10,7 +10,6 @@ export const NAMESPACES = [
   "common",
   "nav",
   "login",
-  "install",
   "onboarding",
   "options",
   "targets",

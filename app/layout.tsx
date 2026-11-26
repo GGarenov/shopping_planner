@@ -3,7 +3,6 @@ import { Nunito } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
-import { INSTALL_CAPTURE_SCRIPT } from "@/lib/pwa/captureScript";
 import "./globals.css";
 
 // Rounded, friendly face with full Cyrillic; self-hosted by Next at build time.
@@ -44,10 +43,6 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const locale = await getLocale();
   return (
     <html lang={locale} className={nunito.variable}>
-      <head>
-        {/* Keep the browser's install event from the very first moment, for the «Добави в телефона» button. */}
-        <script dangerouslySetInnerHTML={{ __html: INSTALL_CAPTURE_SCRIPT }} />
-      </head>
       <body className="min-h-dvh font-sans antialiased">
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
         <ServiceWorkerRegister />

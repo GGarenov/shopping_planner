@@ -42,7 +42,7 @@ describe("middleware (updateSession)", () => {
   it("logged out: the start page is the welcome page; it and the questions need no account", async () => {
     const home = await updateSession(request("/"));
     expect(home.headers.get("location")).toBe("http://localhost/welcome");
-    for (const path of ["/welcome", "/onboarding", "/install"]) {
+    for (const path of ["/welcome", "/onboarding"]) {
       const res = await updateSession(request(path));
       expect(res.status, path).toBe(200);
       expect(res.headers.get("location"), path).toBeNull();

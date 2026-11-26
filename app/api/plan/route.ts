@@ -15,7 +15,7 @@ import { createClient } from "@/lib/supabase/server";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 60; // the planner targets ≤ 15 s; headroom for cold starts and fallback attempts
-/** Plans a guest may make in 24 hours (taylor_the_app/loginless.md, part 6). Accounts have no limit. */
+/** Plans a guest may make in 24 hours (docs/notes/loginless.md, part 6). Accounts have no limit. */
 const GUEST_PLANS_PER_DAY = 10;
 
 type Translator = Awaited<ReturnType<typeof getTranslations>>;

@@ -296,7 +296,7 @@ function StepBody({
     case 8:
       return (
         <>
-          {/* Just the checkbox (taylor_the_app/issues.md, 3); what we keep and why stays one tap away (GDPR). */}
+          {/* Just the checkbox (docs/notes/issues.md, 3); what we keep and why stays one tap away (GDPR). */}
           <label className="choice">
             <input
               type="checkbox"

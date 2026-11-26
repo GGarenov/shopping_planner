@@ -3,7 +3,7 @@ import type { AccountStatus } from "@/lib/auth/guest";
 import { SocialButtons } from "./SocialButtons";
 
 /**
- * "Save your plan — continue with Google" for guests (taylor_the_app/loginless.md, part 3). Also shows the result
+ * "Save your plan — continue with Google" for guests (docs/notes/loginless.md, part 3). Also shows the result
  * once (?account=saved|failed) — to everyone, since after saving the user is no longer a guest.
  */
 export function SaveAccount({

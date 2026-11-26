@@ -6,7 +6,7 @@ import type { SocialProvider } from "@/lib/auth/guest";
 import { createClient } from "@/lib/supabase/client";
 
 /**
- * "Continue with Google" (taylor_the_app/loginless.md). Both modes return through /auth/callback:
+ * "Continue with Google" (docs/notes/loginless.md). Both modes return through /auth/callback:
  *  - link:   a guest's own user gets the provider, so the account becomes permanent and the plan stays
  *            (an account that already exists is signed in to instead, with the guest's data — see the callback);
  *  - signIn: no session yet — a plain sign-in (or sign-up) with the provider.

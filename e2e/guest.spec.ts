@@ -1,5 +1,5 @@
 // A guest: opens the app, answers the questions and gets a plan without ever typing an email
-// (taylor_the_app/loginless.md, part 2). Needs "Allow anonymous sign-ins" on in the test Supabase project.
+// (docs/notes/loginless.md, part 2). Needs "Allow anonymous sign-ins" on in the test Supabase project.
 import { expect, test } from "@playwright/test";
 import { blockEbag, expectAccessible, messages } from "./support";
 
@@ -16,7 +16,6 @@ const bg = {
 
 test("a guest goes from the start page to a plan without an account, then deletes it", async ({ page }) => {
   const ebagCalls = await blockEbag(page);
-  await page.addInitScript(() => localStorage.setItem("install_hint_seen", "1"));
   const next = () => page.getByRole("button", { name: bg.onboarding.next }).click();
 
   await test.step("the start page says what the app does; one tap to the questions", async () => {

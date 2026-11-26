@@ -1,4 +1,4 @@
-// Guests: Supabase anonymous users (taylor_the_app/loginless.md). Safe on the client and the server.
+// Guests: Supabase anonymous users (docs/notes/loginless.md). Safe on the client and the server.
 
 /** Social sign-in: Google only (decided 2026-11-26 — no Facebook). */
 export type SocialProvider = "google";

@@ -1,4 +1,4 @@
-// GET /auth/callback — where Google sign-in returns (taylor_the_app/loginless.md, part 3).
+// GET /auth/callback — where Google sign-in returns (docs/notes/loginless.md, part 3).
 //   ?code=…                              → session; a guest's link makes the same user permanent (plan stays).
 //   ?error_code=identity_already_exists → this Google account already has a user here, or
 //   ?error_code=email_exists            → its email does (an older email + password account):

@@ -30,7 +30,6 @@ test("a new user goes from sign-up to a shopping list, then deletes the account"
   const ebagCalls = await blockEbag(page);
   page.on("pageerror", (e) => browserErrors.push(`${page.url()}: ${e.stack ?? e.message}`));
   page.on("console", (m) => void (m.type() === "error" && browserErrors.push(`${page.url()} console: ${m.text()}`)));
-  await page.addInitScript(() => localStorage.setItem("install_hint_seen", "1")); // the install screen has its own tests
   const account = newAccount();
   const next = () => page.getByRole("button", { name: bg.onboarding.next }).click();
   const nav = (key: "plan" | "list" | "ebag" | "profile") =>

@@ -17,7 +17,7 @@ export const GET = apiHandler("GET /api/ebag/connect", async ({ log }, req: Next
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) return NextResponse.redirect(new URL("/login", req.url), 303);
-  // Guests too (taylor_the_app/issues.md, 2): the connection is deleted with the guest after 3 days.
+  // Guests too (docs/notes/issues.md, 2): the connection is deleted with the guest after 3 days.
 
   try {
     const redirect = redirectUri(req.nextUrl.origin);

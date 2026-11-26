@@ -22,7 +22,7 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       // Unit-test coverage of the domain logic. Code that only talks to Supabase / eBag / the browser is excluded
-      // here and is covered by the API-route, RLS and end-to-end tests instead (taylor_the_app plan, Phase 2).
+      // here and is covered by the API-route, RLS and end-to-end tests instead (docs/notes plan, Phase 2).
       include: ["lib/**/*.ts"],
       exclude: [
         "lib/**/*.test.ts",
@@ -35,7 +35,6 @@ export default defineConfig({
         "lib/ebag/oauth.ts", // OAuth + DB
         "lib/ebag/session.ts", // route wrapper (auth + DB + network)
         "lib/ebag/ownerTokens.ts", // DB-backed token store
-        "lib/pwa/**", // browser-only install hooks
         "lib/i18n/content.ts", // JSON lookups
         "lib/recipes/images.ts", // JSON lookups
         "lib/ebag/flowCookie.ts", // server-only cookie wiring (OAuth route tests)

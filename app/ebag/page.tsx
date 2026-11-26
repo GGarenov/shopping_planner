@@ -103,7 +103,7 @@ export default async function EbagPage({ searchParams }: { searchParams: Promise
           </>
         )}
 
-        {/* Guests can use eBag too (taylor_the_app/issues.md, 2), but without a login it all goes after 3 days. */}
+        {/* Guests can use eBag too (docs/notes/issues.md, 2), but without a login it all goes after 3 days. */}
         <SaveAccount guest={guest} next="/ebag" variant="ebag" status={account === "failed" ? "failed" : null} />
 
         {row && (

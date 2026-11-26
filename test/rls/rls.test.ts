@@ -184,7 +184,7 @@ describe.skipIf(!configured)("Row Level Security (test Supabase project)", () =>
     it("the cleanup deletes idle guests (with their data) and never an account", async () => {
       const G = await guest();
       await G.db.from("profiles").insert(profile(G.id));
-      // Guests may connect eBag too (taylor_the_app/issues.md, 2): the connection must go with them.
+      // Guests may connect eBag too (docs/notes/issues.md, 2): the connection must go with them.
       expect((await admin.from("ebag_connections").insert({ user_id: G.id, tokens_encrypted: "rls-test" })).error).toBeNull();
       // A guest active in the last hour stays.
       expect((await admin.rpc("delete_stale_guests", { max_idle: "1 hour" })).error).toBeNull();

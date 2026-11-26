@@ -2,7 +2,7 @@
 
 **Version:** 1.0 · **Date:** 2026-11-23 · **Status:** ready for implementation
 **Audience:** the developer (human or AI) who builds the app from this repository.
-Read this whole document first, then `key_notes.md` and `idea.md` for history.
+Read this whole document first. Working notes on later features are in `docs/notes/`.
 
 ---
 

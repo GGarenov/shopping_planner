@@ -2,10 +2,10 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 /**
- * Paths reachable without logging in. /api/health is for uptime monitors. /welcome is the start page; /onboarding
- * (and /install): the questions come before any account — a guest account is made only when the plan is created.
+ * Paths reachable without logging in. /api/health is for uptime monitors. /welcome is the start page; /onboarding:
+ * the questions come before any account — a guest account is made only when the plan is created.
  */
-const PUBLIC_PATHS = ["/login", "/auth", "/offline", "/api/health", "/welcome", "/onboarding", "/install"];
+const PUBLIC_PATHS = ["/login", "/auth", "/offline", "/api/health", "/welcome", "/onboarding"];
 
 /** Same header name as lib/api/handler.ts (kept literal: middleware runs on the edge, without server-only code). */
 const REQUEST_ID = "x-request-id";

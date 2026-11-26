@@ -64,7 +64,7 @@ export async function mergeGuestInto(admin: SupabaseClient, guestId: string, use
       if (error) throw new Error(`guest merge: plan insert failed: ${error.message}`);
     }
   }
-  // A guest may have connected eBag (taylor_the_app/issues.md, 2): the account takes it over if it has none.
+  // A guest may have connected eBag (docs/notes/issues.md, 2): the account takes it over if it has none.
   const { data: ownEbag } = await admin.from("ebag_connections").select("user_id").eq("user_id", userId).maybeSingle();
   if (!ownEbag) {
     const { error } = await admin.from("ebag_connections").update({ user_id: userId }).eq("user_id", guestId);

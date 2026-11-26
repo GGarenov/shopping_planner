@@ -73,7 +73,7 @@ export interface ProfileRow {
   exclude_tags: string[];
   allergens: string[];
   pantry: string[];
-  options: { consent_at?: string; kcal_tolerance?: number; install_hint_seen?: boolean } & Record<string, unknown>;
+  options: { consent_at?: string; kcal_tolerance?: number } & Record<string, unknown>;
   targets_override: { kcal_min: number; kcal_max: number; protein_min: number } | null;
 }
 

@@ -1,4 +1,4 @@
--- Guests (Supabase anonymous users, taylor_the_app/loginless.md part 5) are deleted after 3 days without activity.
+-- Guests (Supabase anonymous users, docs/notes/loginless.md part 5) are deleted after 3 days without activity.
 -- Activity = the latest of: account made, last sign-in, last session refresh (an open app refreshes its session
 -- every hour, so "3 days without activity" means "3 days without opening the app").
 -- Deleting the auth user cascades to everything of theirs (profile, plans, ticks); feedback keeps user_id = null.

@@ -10,7 +10,7 @@ const STEP_MS = 1700;
 const MONDAY = Date.UTC(2026, 10, 23); // any Monday: only the weekday names are used
 
 /**
- * Full screen while a plan is being made (taylor_the_app/issues.md, 3; variant C of loading-options): seven empty
+ * Full screen while a plan is being made (docs/notes/issues.md, 3): seven empty
  * days fill one by one with a dish photo, the step text changes, and a bar fills. With «reduce motion» on, the
  * tiles still fill but nothing moves or pulses.
  */
