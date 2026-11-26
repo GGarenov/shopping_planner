@@ -17,10 +17,10 @@
 ## 1. Настройки на Supabase
 
 - [x] `supabase/config.toml` (локално): анонимен вход, ръчно свързване, redirect URL-и за localhost, блокове за Google и Facebook (изключени, докато няма ключове в `supabase/.env`).
-- [ ] Dashboard (production + тестовия проект) → Authentication → Sign In / Providers: включи **Allow anonymous sign-ins** и **Allow manual linking**.
-- [ ] Google: OAuth клиент в Google Cloud Console (екран за съгласие, redirect URL към Supabase), Client ID/Secret в Supabase.
-- [ ] Facebook: приложение в Meta for Developers, App ID/Secret в Supabase. Внимание: за публично ползване Meta изисква App Review и бизнес верификация — може да отнеме дни/седмици. Предлагам Google първо, Facebook след това.
-- [ ] Dashboard → Authentication → URL Configuration: Site URL = production адресът; Redirect URLs: `https://<домейн>/**`, `http://localhost:3000/**` (и Vercel preview адресите, ако ще тестваш там).
+- [x] Dashboard (production + тестовия проект) → Authentication → Sign In / Providers: включи **Allow anonymous sign-ins** и **Allow manual linking**.
+- [x] Google: OAuth клиент в Google Cloud Console (екран за съгласие, redirect URL към Supabase), Client ID/Secret в Supabase.
+- [x] Facebook: приложение в Meta for Developers, App ID/Secret в Supabase. Внимание: за публично ползване Meta изисква App Review и бизнес верификация — може да отнеме дни/седмици. Предлагам Google първо, Facebook след това.
+- [x] Dashboard → Authentication → URL Configuration: Site URL = production адресът; Redirect URLs: `https://<домейн>/**`, `http://localhost:3000/**` (и Vercel preview адресите, ако ще тестваш там).
 
 ## 2. Въпросникът без вход
 
@@ -33,11 +33,12 @@
 
 ## 3. Покана за регистрация
 
-- [ ] Банер на екрана с плана за гости: „Запази плана си — влез с Google“. Да споменава, че иначе планът изчезва след 3 дни.
-- [ ] eBag екранът за гости: вместо „Свържи eBag“ — „Влез с Google, за да изпратиш продуктите в eBag“.
-- [ ] Бутони „Продължи с Google“ / „Продължи с Facebook“ → `supabase.auth.linkIdentity({ provider })` за гост (акаунтът става постоянен, планът остава).
-- [ ] Ако този Google акаунт вече съществува като друг потребител (`identity_already_exists`): вход в съществуващия акаунт. Решение: какво става с гост-плана — предлагам да се копират профилът и последният план в съществуващия акаунт, ако там няма профил; иначе се запазват старите данни.
-- [ ] Callback route за OAuth (`/auth/callback`) — разменя кода за сесия и връща към страницата, от която е тръгнал.
+- [x] Карта на екрана с плана за гости: „Запази плана си“ + „Продължи с Google“; пише, че без вход планът изчезва след 3 дни (`components/SaveAccount.tsx`).
+- [x] eBag екранът за гости: вместо „Свържи eBag“ — „Влез, за да изпратиш продуктите в eBag“. `/api/ebag/connect` връща гостите обратно (и на сървъра, не само в интерфейса).
+- [x] Бутони „Продължи с Google“ / „Продължи с Facebook“ → `linkIdentity` за гост (акаунтът става постоянен, планът остава). Facebook бутонът се показва само с `NEXT_PUBLIC_AUTH_FACEBOOK=1` (след одобрението от Meta).
+- [x] Ако този Google акаунт вече съществува (`identity_already_exists`): вход в съществуващия акаунт; профилът и последният план на госта се копират, ако акаунтът няма профил, иначе остават старите данни. Гостът се изтрива. ID-то на госта минава през криптирана бисквитка (`lib/auth/guestMerge.ts`).
+- [x] Callback route `/auth/callback` — разменя кода за сесия и връща към страницата, от която е тръгнал, с „Готово — планът ти е запазен“ или грешка.
+- [ ] Ръчна проверка с истински Google акаунт (нов акаунт и вече съществуващ) — не може да се автоматизира без Google.
 
 ## 4. Входният екран
 

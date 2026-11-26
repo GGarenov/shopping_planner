@@ -34,7 +34,10 @@ export async function getOptionalUserAndProfile() {
 }
 
 /** For pages that need a finished onboarding; sends the user to /onboarding otherwise. */
-export async function requireCompleteProfile(): Promise<{ user: { id: string; email?: string }; profile: CompleteProfile }> {
+export async function requireCompleteProfile(): Promise<{
+  user: { id: string; email?: string; is_anonymous?: boolean };
+  profile: CompleteProfile;
+}> {
   const { user, profile } = await getUserAndProfile();
   if (!isComplete(profile)) redirect("/onboarding");
   return { user, profile };

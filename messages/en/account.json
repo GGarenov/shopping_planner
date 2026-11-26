@@ -1,0 +1,15 @@
+{
+  "plan": {
+    "title": "Save your plan",
+    "text": "Without logging in, your plan is kept for 3 days and then deleted. Continue with Google and we keep it for good — no email or password."
+  },
+  "ebag": {
+    "title": "Log in to send the products to eBag",
+    "text": "Connecting eBag needs a login. Continue with Google — your plan and list stay."
+  },
+  "google": "Continue with Google",
+  "facebook": "Continue with Facebook",
+  "redirecting": "Redirecting…",
+  "saved": "Done — you’re logged in and your plan is saved.",
+  "failed": "Logging in didn’t work. Please try again."
+}

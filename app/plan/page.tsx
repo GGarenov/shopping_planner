@@ -12,6 +12,8 @@ import { getSyncStatus } from "@/lib/sync/status";
 import { getLatestPlan, getPlan } from "@/lib/plans/load";
 import { requireCompleteProfile } from "@/lib/profile/load";
 import { createClient } from "@/lib/supabase/server";
+import { SaveAccount } from "@/components/SaveAccount";
+import { accountStatus, isGuest } from "@/lib/auth/guest";
 import { GeneratePlanButton } from "./GeneratePlanButton";
 import { WeekView } from "./WeekView";
 
@@ -20,10 +22,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: `${t("title")} · ${tc("appName")}` };
 }
 
-export default async function PlanPage({ searchParams }: { searchParams: Promise<{ id?: string }> }) {
-  const { id } = await searchParams;
+export default async function PlanPage({ searchParams }: { searchParams: Promise<{ id?: string; account?: string }> }) {
+  const { id, account } = await searchParams;
   const [t, tc, locale] = await Promise.all([getTranslations("plan"), getTranslations("common"), getLocale()]);
-  await requireCompleteProfile();
+  const { user } = await requireCompleteProfile();
+  const saveAccount = <SaveAccount guest={isGuest(user)} next="/plan" variant="plan" status={accountStatus(account)} />;
   const supabase = await createClient();
   const [latest, sync] = await Promise.all([getLatestPlan(supabase), getSyncStatus(supabase)]);
   const plan = (id && id !== latest?.id ? await getPlan(supabase, id) : null) ?? latest;
@@ -37,6 +40,7 @@ export default async function PlanPage({ searchParams }: { searchParams: Promise
             <p className="text-white/90">{t("empty")}</p>
           </Hero>
           <GeneratePlanButton />
+          {saveAccount}
           <InstallButton variant="banner" />
         </main>
         <BottomNav />
@@ -80,6 +84,8 @@ export default async function PlanPage({ searchParams }: { searchParams: Promise
         ) : (
           <PricesNotice planPricesDate={plan.solver.prices_date} latestPricesDate={sync.pricesDate} today={sofiaToday()} />
         )}
+
+        {saveAccount}
 
         <InstallButton variant="banner" />
 

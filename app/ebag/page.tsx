@@ -11,6 +11,8 @@ import { createAdminClient, createClient } from "@/lib/supabase/server";
 import { longDate } from "@/lib/i18n/format";
 import { ingredientName } from "@/lib/i18n/content";
 import { sofiaToday } from "@/lib/planner/week";
+import { SaveAccount } from "@/components/SaveAccount";
+import { accountStatus, isGuest } from "@/lib/auth/guest";
 import { EbagConnected } from "./EbagConnected";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -27,6 +29,7 @@ export default async function EbagPage({ searchParams }: { searchParams: Promise
   const errorKey = ERRORS.find((k) => k === q.error) ?? "ebag";
   const supabase = await createClient();
   const [row, plan] = await Promise.all([getConnectionRow(createAdminClient(), user.id), getLatestPlan(supabase)]);
+  const guest = isGuest(user);
   const connected = row?.status === "connected";
   const expired = !!row && !connected;
 
@@ -53,7 +56,10 @@ export default async function EbagPage({ searchParams }: { searchParams: Promise
           </p>
         )}
 
-        {!connected && (
+        {/* Guests can't connect eBag: the card asks them to log in first (their plan stays). */}
+        <SaveAccount guest={guest} next="/ebag" variant="ebag" status={accountStatus(q.account)} />
+
+        {!connected && !guest && (
           <section className="card flex flex-col gap-3">
             <h2 className="text-lg font-semibold">{expired ? t("expiredTitle") : t("connectTitle")}</h2>
             <p className="text-sm text-subtle">{t("connectText")}</p>
