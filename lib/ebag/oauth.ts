@@ -31,7 +31,9 @@ export function getMetadata(): Promise<AuthorizationServerMetadata> {
 /** Callback URL: APP_BASE_URL in production; the request's own origin as a fallback (local dev). */
 export function redirectUri(requestOrigin: string): string {
   const isLocal = (u: string) => /^https?:\/\/(localhost|127\.0\.0\.1)(:|\/|$)/.test(u);
-  let base = process.env.APP_BASE_URL || requestOrigin;
+  let base = process.env.APP_BASE_URL?.trim() || requestOrigin;
+  // "pazarko-app.vercel.app" typed without the scheme: eBag rejects such a redirect URI (2026-11-26).
+  if (!/^https?:\/\//.test(base)) base = `https://${base}`;
   if (isLocal(base) && !isLocal(requestOrigin)) base = requestOrigin; // a copied .env.example value on the server
   return `${base.replace(/\/$/, "")}/api/ebag/callback`;
 }
