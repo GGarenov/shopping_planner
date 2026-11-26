@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test";
 import { admin, alert, messages, newAccount } from "./support";
 
 const login = messages("bg", "login");
+const account = messages("bg", "account");
 
 test.describe("login screen", () => {
   const existing = newAccount();
@@ -15,6 +16,14 @@ test.describe("login screen", () => {
   });
   test.afterAll(async () => {
     if (userId) await admin().auth.admin.deleteUser(userId);
+  });
+
+  test("Google on top, email below, and a way back to start without an account", async ({ page }) => {
+    await page.goto("/login");
+    await expect(page.getByRole("button", { name: account.google })).toBeVisible();
+    await expect(page.getByLabel(login.email)).toBeVisible();
+    await page.getByRole("link", { name: login.noAccount }).click();
+    await expect(page).toHaveURL(/\/onboarding$/);
   });
 
   test("a wrong password says so and keeps the email", async ({ page }) => {

@@ -23,5 +23,7 @@
   "userExists": "There's already an account with this email. Log in via “Log in”.",
   "weakPassword": "The password is too weak. Choose a longer one.",
   "signUpFailed": "We couldn't create the account. Please try again.",
-  "awaitingConfirmation": "The account was created but is awaiting confirmation. Write to us via “Feedback”."
+  "awaitingConfirmation": "The account was created but is awaiting confirmation. Write to us via “Feedback”.",
+  "orEmail": "or with email and password",
+  "noAccount": "No account? Start without signing up"
 }

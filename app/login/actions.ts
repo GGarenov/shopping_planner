@@ -5,7 +5,9 @@ import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { z } from "zod";
 import { isLocale, LOCALE_COOKIE } from "@/lib/i18n/config";
-import { createClient } from "@/lib/supabase/server";
+import { isGuest } from "@/lib/auth/guest";
+import { mergeGuestInto } from "@/lib/auth/guestMerge";
+import { createAdminClient, createClient } from "@/lib/supabase/server";
 import { requestLog } from "@/lib/requestLog";
 
 export type AuthState = { error?: string; email?: string };
@@ -39,6 +41,7 @@ export async function signIn(_prev: AuthState, formData: FormData): Promise<Auth
   if (!parsed.success) return { error: t(validationKey(parsed.error.issues[0]?.message)), email: input.email };
 
   const supabase = await createClient();
+  const guestId = await currentGuestId(supabase);
   const { data, error } = await supabase.auth.signInWithPassword(parsed.data);
   if (error) {
     (await requestLog({ action: "signIn" })).warn("auth.sign_in_failed", { status: error.status, code: error.code });
@@ -52,6 +55,7 @@ export async function signIn(_prev: AuthState, formData: FormData): Promise<Auth
             : t("signInFailed");
     return { error: msg, email: input.email };
   }
+  if (guestId && data.user) await bringGuestData(guestId, data.user.id, "signIn");
   // The language chosen earlier (profiles.options.lang) follows the user to this device.
   if (data.user) {
     const { data: profile } = await supabase.from("profiles").select("options").eq("user_id", data.user.id).maybeSingle();
@@ -68,6 +72,7 @@ export async function signUp(_prev: AuthState, formData: FormData): Promise<Auth
   if (!parsed.success) return { error: t(validationKey(parsed.error.issues[0]?.message)), email: input.email };
 
   const supabase = await createClient();
+  const guestId = await currentGuestId(supabase);
   const { data, error } = await supabase.auth.signUp(parsed.data);
   if (error) {
     (await requestLog({ action: "signUp" })).warn("auth.sign_up_failed", { status: error.status, code: error.code });
@@ -88,5 +93,26 @@ export async function signUp(_prev: AuthState, formData: FormData): Promise<Auth
     });
     return { error: t("awaitingConfirmation"), email: input.email };
   }
+  if (guestId && data.user) await bringGuestData(guestId, data.user.id, "signUp");
   redirect("/");
+}
+
+type ServerClient = Awaited<ReturnType<typeof createClient>>;
+
+/** The guest signing in or up right now (their session is about to be replaced), or null. */
+async function currentGuestId(supabase: ServerClient): Promise<string | null> {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  return user && isGuest(user) ? user.id : null;
+}
+
+/** A guest who logs in with email keeps their plan, like with Google (lib/auth/guestMerge.ts). Never blocks the login. */
+async function bringGuestData(guestId: string, userId: string, action: string) {
+  const log = await requestLog({ action });
+  try {
+    log.info("auth.guest_merged", { result: await mergeGuestInto(createAdminClient(), guestId, userId) });
+  } catch (e) {
+    log.error("auth.guest_merge_failed", { err: e });
+  }
 }
