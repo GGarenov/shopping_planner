@@ -4,6 +4,7 @@ import { expect, test } from "@playwright/test";
 import { blockEbag, expectAccessible, messages } from "./support";
 
 const bg = {
+  welcome: messages("bg", "welcome"),
   onboarding: messages("bg", "onboarding"),
   options: messages("bg", "options"),
   nav: messages("bg", "nav"),
@@ -16,8 +17,12 @@ test("a guest goes from the start page to a plan without an account, then delete
   await page.addInitScript(() => localStorage.setItem("install_hint_seen", "1"));
   const next = () => page.getByRole("button", { name: bg.onboarding.next }).click();
 
-  await test.step("the start page is the first question, with a way in for people who have an account", async () => {
+  await test.step("the start page says what the app does; one tap to the questions", async () => {
     await page.goto("/");
+    await expect(page).toHaveURL(/\/welcome$/);
+    await expect(page.getByRole("link", { name: bg.welcome.haveAccount })).toHaveAttribute("href", "/login");
+    await expectAccessible(page, "welcome");
+    await page.getByRole("link", { name: bg.welcome.start }).click();
     await expect(page).toHaveURL(/\/onboarding$/);
     await expect(page.getByRole("link", { name: bg.onboarding.haveAccount })).toHaveAttribute("href", "/login");
     await expectAccessible(page, "onboarding (guest)");

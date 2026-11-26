@@ -1,0 +1,14 @@
+{
+  "title": "Welcome",
+  "headline": "We think about <em>what to cook</em>. You just shop.",
+  "points": {
+    "menu": "A menu for the week",
+    "goals": "Fits your goals and budget",
+    "healthy": "Healthy recipes",
+    "list": "A ready shopping list",
+    "delivery": "Delivered to your door by eBag"
+  },
+  "start": "Let's start",
+  "note": "Takes about a minute. No sign-up.",
+  "haveAccount": "I have an account — log in"
+}

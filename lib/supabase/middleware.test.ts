@@ -39,10 +39,10 @@ describe("middleware (updateSession)", () => {
     expect(await api.json()).toEqual({ error: { code: "unauthorized", message: "Please log in again.", requestId: expect.any(String) } });
   });
 
-  it("logged out: the start page goes straight to the questions, which need no account", async () => {
+  it("logged out: the start page is the welcome page; it and the questions need no account", async () => {
     const home = await updateSession(request("/"));
-    expect(home.headers.get("location")).toBe("http://localhost/onboarding");
-    for (const path of ["/onboarding", "/install"]) {
+    expect(home.headers.get("location")).toBe("http://localhost/welcome");
+    for (const path of ["/welcome", "/onboarding", "/install"]) {
       const res = await updateSession(request(path));
       expect(res.status, path).toBe(200);
       expect(res.headers.get("location"), path).toBeNull();
@@ -66,5 +66,13 @@ describe("middleware (updateSession)", () => {
     auth.user = { id: "u1" };
     const res = await updateSession(request("/login"));
     expect(res.headers.get("location")).toBe("http://localhost/");
+  });
+
+  it("signed in (a guest too): the welcome page sends them home", async () => {
+    for (const user of [{ id: "u1" }, { id: "g1", is_anonymous: true }]) {
+      auth.user = user;
+      const res = await updateSession(request("/welcome"));
+      expect(res.headers.get("location")).toBe("http://localhost/");
+    }
   });
 });
