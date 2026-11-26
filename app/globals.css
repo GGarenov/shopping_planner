@@ -100,3 +100,17 @@ body {
     @apply text-sm font-medium text-danger;
   }
 }
+
+/* Plan loading screen (components/PlanLoading.tsx): the bar fills to 92% and waits there for the plan. */
+@keyframes plan-loading-fill {
+  from {
+    width: 3%;
+  }
+  to {
+    width: 92%;
+  }
+}
+.plan-loading-bar {
+  width: 92%;
+  animation: plan-loading-fill 15s cubic-bezier(0.2, 0.7, 0.4, 1) both;
+}

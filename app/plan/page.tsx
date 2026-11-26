@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Hero } from "@/components/Hero";
 import { smallPhotos } from "@/lib/recipes/images";
+import { teaserRecipes } from "@/lib/recipes/teaser";
 import Link from "next/link";
 import { BottomNav } from "@/components/BottomNav";
 import { PricesNotice } from "@/components/PricesNotice";
@@ -38,7 +39,7 @@ export default async function PlanPage({ searchParams }: { searchParams: Promise
           <Hero title={t("title")}>
             <p className="text-white/90">{t("empty")}</p>
           </Hero>
-          <GeneratePlanButton />
+          <GeneratePlanButton teaser={teaserRecipes(locale)} />
           {saveAccount}
         </main>
         <BottomNav />

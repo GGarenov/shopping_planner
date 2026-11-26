@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { requireCompleteProfile } from "@/lib/profile/load";
+import { teaserRecipes } from "@/lib/recipes/teaser";
 import { PlanSettingsForm, type SettingsValues } from "./PlanSettingsForm";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -31,7 +32,7 @@ export default async function NewPlanPage() {
   };
   return (
     <main className="page pb-0">
-      <PlanSettingsForm initial={initial} />
+      <PlanSettingsForm initial={initial} teaser={teaserRecipes(await getLocale())} />
     </main>
   );
 }

@@ -9,7 +9,7 @@
     "diet": { "title": "Diet" },
     "exclude": { "title": "Exclusions and allergies", "hint": "Recipes with these products won't be in the plan." },
     "pantry": { "title": "What do you have at home?", "hint": "These products are used in recipes but not bought." },
-    "consent": { "title": "Consent" }
+    "consent": { "title": "Last step" }
   },
   "cancel": "← Cancel",
   "finish": "Create my plan",
@@ -30,6 +30,7 @@
   "consentText1": "To calculate your goals, we store your sex, age, height, weight, activity, goal, budget and food preferences. This is personal data.",
   "consentText2": "We use it only for your plan. We don't share it. You can delete your account with all its data at any time.",
   "consentCheckbox": "I agree to my data being processed to create the plan.",
+  "consentMore": "What we keep and why",
   "fields": {
     "budgetAria": "Weekly budget",
     "otherAmount": "Other amount",

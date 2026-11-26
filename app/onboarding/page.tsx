@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { getOptionalUserAndProfile } from "@/lib/profile/load";
 import { DEFAULT_PANTRY } from "@/lib/profile/options";
 import { isComplete } from "@/lib/profile/schema";
+import { teaserRecipes } from "@/lib/recipes/teaser";
 import { OnboardingWizard, type WizardValues } from "./OnboardingWizard";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -31,7 +32,13 @@ export default async function OnboardingPage() {
 
   return (
     <main className="page">
-      <OnboardingWizard initial={initial} editing={editing} loggedIn={!!user} guest={!user || !!user.is_anonymous} />
+      <OnboardingWizard
+        initial={initial}
+        editing={editing}
+        loggedIn={!!user}
+        guest={!user || !!user.is_anonymous}
+        teaser={teaserRecipes(await getLocale())}
+      />
     </main>
   );
 }

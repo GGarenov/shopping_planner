@@ -18,6 +18,8 @@ import {
 import { errorKey, profileInputSchema, type ErrorKey } from "@/lib/profile/schema";
 import { BudgetField, Chips, Choice, NumberField } from "@/components/form/fields";
 import { usePlanGenerator } from "@/app/plan/usePlanGenerator";
+import { PlanLoading } from "@/components/PlanLoading";
+import type { TeaserRecipe } from "@/lib/recipes/teaser";
 import { createClient } from "@/lib/supabase/client";
 import { saveProfile } from "./actions";
 
@@ -71,6 +73,7 @@ export function OnboardingWizard({
   editing,
   loggedIn,
   guest,
+  teaser = [],
 }: {
   initial: WizardValues;
   editing: boolean;
@@ -78,6 +81,8 @@ export function OnboardingWizard({
   loggedIn: boolean;
   /** No account (logged out, or an anonymous guest): the data is kept only for 3 days. */
   guest: boolean;
+  /** Dish photos for the "putting your week together" screen. */
+  teaser?: TeaserRecipe[];
 }) {
   const t = useTranslations("onboarding");
   const tc = useTranslations("common");
@@ -175,11 +180,7 @@ export function OnboardingWizard({
         <button type="button" className="btn-primary" onClick={next} disabled={busy}>
           {last ? (planning ? tp("creating") : saving ? tc("saving") : editing ? tc("save") : t("finish")) : t("next")}
         </button>
-        {planning && (
-          <p className="text-center text-sm text-subtle" aria-live="polite">
-            {tp("upTo15", { step: stepText })}
-          </p>
-        )}
+        <PlanLoading busy={planning} step={stepText} note={tp("loadingNote15")} recipes={teaser} />
       </footer>
     </div>
   );
@@ -295,11 +296,7 @@ function StepBody({
     case 8:
       return (
         <>
-          <div className="card flex flex-col gap-2 text-sm">
-            <p>{t("consentText1")}</p>
-            <p>{t("consentText2")}</p>
-            {guest && <p className="font-semibold">{t("consentGuest")}</p>}
-          </div>
+          {/* Just the checkbox (taylor_the_app/issues.md, 3); what we keep and why stays one tap away (GDPR). */}
           <label className="choice">
             <input
               type="checkbox"
@@ -309,6 +306,14 @@ function StepBody({
             />
             <span>{t("consentCheckbox")}</span>
           </label>
+          <details className="text-sm">
+            <summary className="btn-ghost cursor-pointer px-0 font-semibold text-accent">{t("consentMore")}</summary>
+            <div className="card mt-2 flex flex-col gap-2">
+              <p>{t("consentText1")}</p>
+              <p>{t("consentText2")}</p>
+              {guest && <p>{t("consentGuest")}</p>}
+            </div>
+          </details>
         </>
       );
     default:

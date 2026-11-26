@@ -16,6 +16,8 @@ import {
   dietKey,
   type Diet,
 } from "@/lib/profile/options";
+import { PlanLoading } from "@/components/PlanLoading";
+import type { TeaserRecipe } from "@/lib/recipes/teaser";
 import { usePlanGenerator } from "../usePlanGenerator";
 import { savePlanSettings } from "./actions";
 
@@ -40,7 +42,7 @@ export interface SettingsValues {
 
 const toggle = (list: string[], v: string) => (list.includes(v) ? list.filter((x) => x !== v) : [...list, v]);
 
-export function PlanSettingsForm({ initial }: { initial: SettingsValues }) {
+export function PlanSettingsForm({ initial, teaser = [] }: { initial: SettingsValues; teaser?: TeaserRecipe[] }) {
   const tp = useTranslations("plan");
   const t = useTranslations("plan.settings");
   const tg = useTranslations("plan.generate");
@@ -266,11 +268,7 @@ export function PlanSettingsForm({ initial }: { initial: SettingsValues }) {
         <button type="button" className="btn-primary" onClick={submit} disabled={busy}>
           {gen.busy ? tg("creating") : saving ? tc("saving") : tg("createThe")}
         </button>
-        {gen.busy && (
-          <p className="text-center text-sm text-subtle" aria-live="polite">
-            {tg("upTo30", { step: gen.stepText })}
-          </p>
-        )}
+        <PlanLoading busy={gen.busy} step={gen.stepText} note={tg("loadingNote30")} recipes={teaser} seconds={30} />
       </footer>
     </div>
   );

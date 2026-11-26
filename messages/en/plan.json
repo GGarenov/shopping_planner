@@ -27,8 +27,9 @@
     "create": "Create plan",
     "createThe": "Create the plan",
     "creating": "Putting your plan together…",
-    "upTo15": "{step} (up to ~15 sec)",
-    "upTo30": "{step} (up to ~30 sec)",
+    "loadingTitle": "Putting your week together",
+    "loadingNote15": "Takes up to ~15 seconds",
+    "loadingNote30": "Takes up to ~30 seconds",
     "fixSettings": "Change the budget or restrictions",
     "notVaried": "We couldn’t find a different week within your budget — this is the best-value option.",
     "steps": {

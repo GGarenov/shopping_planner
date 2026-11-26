@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { PlanLoading } from "@/components/PlanLoading";
+import type { TeaserRecipe } from "@/lib/recipes/teaser";
 import { usePlanGenerator } from "./usePlanGenerator";
 
 /** The first plan (empty state). New plans go through /plan/new, where the settings can be changed first. */
-export function GeneratePlanButton({ label }: { label?: string }) {
+export function GeneratePlanButton({ label, teaser = [] }: { label?: string; teaser?: TeaserRecipe[] }) {
   const t = useTranslations("plan.generate");
   const { generate, busy, error, info, fixable, stepText } = usePlanGenerator();
   return (
@@ -13,11 +15,7 @@ export function GeneratePlanButton({ label }: { label?: string }) {
       <button type="button" className="btn-primary" onClick={() => void generate()} disabled={busy}>
         {busy ? t("creating") : (label ?? t("create"))}
       </button>
-      {busy && (
-        <p className="text-center text-sm text-subtle" aria-live="polite">
-          {t("upTo15", { step: stepText })}
-        </p>
-      )}
+      <PlanLoading busy={busy} step={stepText} note={t("loadingNote15")} recipes={teaser} />
       {info && (
         <p className="rounded-xl border border-border px-4 py-3 text-sm" role="status">
           {info}

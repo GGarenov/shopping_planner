@@ -47,6 +47,9 @@ test("a guest goes from the start page to a plan without an account, then delete
     await next();
     await next(); // exclusions: none
     await next(); // pantry: keep the defaults
+    // Only the checkbox shows; the details (with the 3-day note for guests) open on a tap.
+    await expect(page.getByText(bg.onboarding.consentGuest)).toBeHidden();
+    await page.getByText(bg.onboarding.consentMore).click();
     await expect(page.getByText(bg.onboarding.consentGuest)).toBeVisible();
     await page.getByRole("checkbox", { name: bg.onboarding.consentCheckbox }).check();
     await page.getByRole("button", { name: bg.onboarding.finish }).click();
