@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Hero } from "@/components/Hero";
-import { InstallButton } from "@/components/InstallButton";
 import Link from "next/link";
 import { BottomNav } from "@/components/BottomNav";
 import { getConnectionRow } from "@/lib/ebag/oauth";
@@ -57,8 +56,6 @@ export default async function ProfilePage() {
         <Hero title={t("title")}>
           <p className="text-sm break-all text-white/85">{user.email}</p>
         </Hero>
-
-        <InstallButton variant="banner" />
 
         <section className="flex flex-col gap-2">
           <Link href="/targets" className="card flex items-center justify-between gap-3">

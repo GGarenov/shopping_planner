@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Hero } from "@/components/Hero";
-import { InstallButton } from "@/components/InstallButton";
 import { smallPhotos } from "@/lib/recipes/images";
 import Link from "next/link";
 import { BottomNav } from "@/components/BottomNav";
@@ -41,7 +40,6 @@ export default async function PlanPage({ searchParams }: { searchParams: Promise
           </Hero>
           <GeneratePlanButton />
           {saveAccount}
-          <InstallButton variant="banner" />
         </main>
         <BottomNav />
       </>
@@ -86,8 +84,6 @@ export default async function PlanPage({ searchParams }: { searchParams: Promise
         )}
 
         {saveAccount}
-
-        <InstallButton variant="banner" />
 
         <Link href={isOld ? `/list?id=${plan.id}` : "/list"} className="btn-primary">
           {t("shoppingList")}

@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import type { Activity, Goal, Sex } from "@/lib/planner/targets";
 import {
   ACTIVITY_OPTIONS,
@@ -17,7 +16,6 @@ import {
   type Diet,
 } from "@/lib/profile/options";
 import { errorKey, profileInputSchema, type ErrorKey } from "@/lib/profile/schema";
-import { shouldShowInstallHint } from "@/app/install/hint";
 import { BudgetField, Chips, Choice, NumberField } from "@/components/form/fields";
 import { usePlanGenerator } from "@/app/plan/usePlanGenerator";
 import { createClient } from "@/lib/supabase/client";
@@ -84,18 +82,12 @@ export function OnboardingWizard({
   const t = useTranslations("onboarding");
   const tc = useTranslations("common");
   const te = useTranslations("errors");
-  const router = useRouter();
   const [values, setValues] = useState<WizardValues>(initial);
   const [stepIndex, setStepIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [saving, startSaving] = useTransition();
   const { generate, busy: planning, error: planError, fixable, stepText } = usePlanGenerator();
   const tp = useTranslations("plan.generate");
-
-  // First visit in the browser (not the installed app): offer the install hint once.
-  useEffect(() => {
-    if (!editing && shouldShowInstallHint()) router.replace("/install?next=/onboarding");
-  }, [editing, router]);
 
   const step = STEPS[stepIndex]!;
   const last = stepIndex === STEPS.length - 1;
