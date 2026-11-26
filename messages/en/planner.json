@@ -2,6 +2,7 @@
   "noPlan": "We couldn’t put together a plan with these settings. Try a bigger budget, fewer exclusions or a wider calorie range.",
   "noRecipes": "We don’t have enough recipes that fit your diet and exclusions while also meeting your daily targets. Try fewer exclusions or a wider calorie range.",
   "timeout": "We couldn’t put the plan together in time. Please try again — the second attempt usually works.",
+  "guestLimit": "You’ve made a lot of plans today. Continue with Google to make more, or try again tomorrow.",
   "budgetTooLow": "We couldn’t fit a weekly plan with your targets into a budget of {budget}. The cheapest plan we found is about {min}. Raise the budget and try again.",
   "profileIncomplete": "Please fill in your details first.",
   "loadFailed": "We couldn’t load the products. Please try again in a moment.",

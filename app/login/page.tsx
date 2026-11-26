@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 /**
  * For people who already have an account (new people start with the questions — middleware sends them there).
- * Google/Facebook on top, email and password below for the accounts made before. A guest who comes here keeps
+ * Google on top, email and password below for the accounts made before. A guest who comes here keeps
  * their plan: Google is linked to them, and an email sign-in takes their data along (actions.ts).
  */
 export default async function LoginPage({ searchParams }: { searchParams: Promise<{ deleted?: string; account?: string }> }) {

@@ -15,7 +15,7 @@ export function SaveAccount({
   guest: boolean;
   /** Where to come back to after signing in. */
   next: string;
-  variant: "plan" | "ebag";
+  variant: "plan" | "ebag" | "profile";
   status: AccountStatus | null;
 }) {
   const t = useTranslations("account");

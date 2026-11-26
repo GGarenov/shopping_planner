@@ -1,4 +1,4 @@
-// Google/Facebook sign-in callback: a guest keeps their plan; an existing account takes the guest's data only through
+// Google sign-in callback: a guest keeps their plan; an existing account takes the guest's data only through
 // the encrypted cookie this server set; and the user always lands back inside the app (no open redirects).
 import { randomBytes } from "node:crypto";
 import { NextRequest } from "next/server";

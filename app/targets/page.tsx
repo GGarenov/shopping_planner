@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero";
 import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
 import { computeTargets, explainTargets, resolveTargets, type BodyData } from "@/lib/planner/targets";
+import { isGuest } from "@/lib/auth/guest";
 import { requireCompleteProfile } from "@/lib/profile/load";
 import { BottomNav } from "@/components/BottomNav";
 import { TargetsEditor } from "./TargetsEditor";
@@ -13,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function TargetsPage() {
-  const { profile } = await requireCompleteProfile();
+  const { user, profile } = await requireCompleteProfile();
   const [t, tc, to, locale] = await Promise.all([
     getTranslations("targets"),
     getTranslations("common"),
@@ -78,11 +79,13 @@ export default async function TargetsPage() {
           <Link href="/onboarding" className="btn-secondary">
             {t("editData")}
           </Link>
-          <form action="/auth/signout" method="post">
-            <button type="submit" className="btn-ghost w-full">
-              {tc("logout")}
-            </button>
-          </form>
+          {!isGuest(user) && (
+            <form action="/auth/signout" method="post">
+              <button type="submit" className="btn-ghost w-full">
+                {tc("logout")}
+              </button>
+            </form>
+          )}
         </nav>
       </main>
       <BottomNav />

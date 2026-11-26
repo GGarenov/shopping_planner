@@ -9,6 +9,8 @@ import { listPlans } from "@/lib/plans/load";
 import { eur, shortDay } from "@/lib/i18n/format";
 import { requireCompleteProfile } from "@/lib/profile/load";
 import { createAdminClient, createClient } from "@/lib/supabase/server";
+import { SaveAccount } from "@/components/SaveAccount";
+import { accountStatus, isGuest } from "@/lib/auth/guest";
 import { FeedbackForm } from "./FeedbackForm";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -26,12 +28,14 @@ const created = (iso: string, locale: string) =>
     minute: "2-digit",
   }).format(new Date(iso));
 
-export default async function ProfilePage() {
+export default async function ProfilePage({ searchParams }: { searchParams: Promise<{ account?: string }> }) {
+  const { account } = await searchParams;
   const { user, profile } = await requireCompleteProfile();
-  const [t, tc, to, locale] = await Promise.all([
+  const [t, tc, to, ta, locale] = await Promise.all([
     getTranslations("profile"),
     getTranslations("common"),
     getTranslations("options"),
+    getTranslations("account"),
     getLocale(),
   ]);
   const supabase = await createClient();
@@ -49,13 +53,16 @@ export default async function ProfilePage() {
     profile.targets_override,
   );
   const goal = to(`goal.${profile.goal}.label`);
+  const guest = isGuest(user);
 
   return (
     <>
       <main className="page pb-24">
         <Hero title={t("title")}>
-          <p className="text-sm break-all text-white/85">{user.email}</p>
+          <p className="text-sm break-all text-white/85">{guest ? ta("guestBadge") : user.email}</p>
         </Hero>
+
+        <SaveAccount guest={guest} next="/profile" variant="profile" status={accountStatus(account)} />
 
         <section className="flex flex-col gap-2">
           <Link href="/targets" className="card flex items-center justify-between gap-3">
@@ -134,13 +141,16 @@ export default async function ProfilePage() {
         </section>
 
         <nav className="mt-auto flex flex-col gap-2 border-t border-border pt-4">
-          <form action="/auth/signout" method="post">
-            <button type="submit" className="btn-secondary w-full">
-              {tc("logout")}
-            </button>
-          </form>
+          {/* A guest who logs out can never come back to their data: no "Log out" for guests. */}
+          {!guest && (
+            <form action="/auth/signout" method="post">
+              <button type="submit" className="btn-secondary w-full">
+                {tc("logout")}
+              </button>
+            </form>
+          )}
           <Link href="/profile/delete" className="btn-ghost text-danger">
-            {t("deleteLink")}
+            {guest ? t("deleteGuestLink") : t("deleteLink")}
           </Link>
         </nav>
       </main>

@@ -158,6 +158,46 @@ describe.skipIf(!configured)("Row Level Security (test Supabase project)", () =>
     });
   });
 
+  describe("guests (anonymous sign-in; needs «Allow anonymous sign-ins» on in the test project)", () => {
+    async function guest(): Promise<TestUser> {
+      const db = createClient(URL_!, ANON!, opts);
+      const { data, error } = await db.auth.signInAnonymously();
+      if (error) throw error;
+      created.push(data.user!.id);
+      return { id: data.user!.id, db };
+    }
+
+    it("a guest keeps their own data and sees nobody else's", async () => {
+      const G = await guest();
+      expect((await G.db.from("profiles").insert(profile(G.id))).error).toBeNull();
+      expect((await G.db.from("plans").insert(plan)).error).toBeNull();
+      expect((await G.db.from("profiles").select("user_id")).data).toEqual([{ user_id: G.id }]);
+      expect((await G.db.from("plans").select("id").eq("user_id", A.id)).data).toEqual([]);
+      expect((await G.db.from("profiles").insert(profile(B.id))).error).not.toBeNull();
+    }, 30_000);
+
+    it("only the service role may run the guest cleanup", async () => {
+      const G = await guest();
+      for (const db of [anon, G.db, A.db]) expect((await db.rpc("delete_stale_guests", { max_idle: "0 seconds" })).error).not.toBeNull();
+    }, 30_000);
+
+    it("the cleanup deletes idle guests (with their data) and never an account", async () => {
+      const G = await guest();
+      await G.db.from("profiles").insert(profile(G.id));
+      // A guest active in the last hour stays.
+      expect((await admin.rpc("delete_stale_guests", { max_idle: "1 hour" })).error).toBeNull();
+      expect((await admin.auth.admin.getUserById(G.id)).data.user).not.toBeNull();
+      // Idle for longer than the limit (here: any time at all) → gone, with their profile. Accounts A and B stay.
+      // Note: this also removes any other guests in the TEST project — never run against production (see the top).
+      const { data: n, error } = await admin.rpc("delete_stale_guests", { max_idle: "0 seconds" });
+      expect(error).toBeNull();
+      expect(n).toBeGreaterThanOrEqual(1);
+      expect((await admin.auth.admin.getUserById(G.id)).data.user).toBeNull();
+      expect((await admin.from("profiles").select("user_id").eq("user_id", G.id)).data).toEqual([]);
+      for (const u of [A, B]) expect((await admin.auth.admin.getUserById(u.id)).data.user).not.toBeNull();
+    }, 30_000);
+  });
+
   it("deleting a user removes all their data (GDPR: delete my account)", async () => {
     const C = await signedInUser("c");
     await C.db.from("profiles").insert(profile(C.id));

@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { getLocale, getTranslations } from "next-intl/server";
 import { AppError, type ErrorCode } from "@/lib/api/errors";
 import { apiHandler } from "@/lib/api/handler";
+import { isGuest } from "@/lib/auth/guest";
 import { num } from "@/lib/i18n/format";
 import { resolveTargets } from "@/lib/planner/targets";
 import { generatePlan, NO_RECIPES_MESSAGE_BG, type PlanDay, type PlanResult } from "@/lib/planner/plan";
@@ -14,6 +15,8 @@ import { createClient } from "@/lib/supabase/server";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 60; // the planner targets ≤ 15 s; headroom for cold starts and fallback attempts
+/** Plans a guest may make in 24 hours (taylor_the_app/loginless.md, part 6). Accounts have no limit. */
+const GUEST_PLANS_PER_DAY = 10;
 
 type Translator = Awaited<ReturnType<typeof getTranslations>>;
 
@@ -39,6 +42,12 @@ export const POST = apiHandler("POST /api/plan", async ({ log }) => {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) throw new AppError(401, "unauthorized", tc("loginAgain"));
+  // Every plan is up to a minute of solver time: a guest (no account, made with one tap) gets a daily limit.
+  if (isGuest(user)) {
+    const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+    const { count } = await supabase.from("plans").select("id", { count: "exact", head: true }).gte("created_at", since);
+    if ((count ?? 0) >= GUEST_PLANS_PER_DAY) throw new AppError(429, "too_many", t("guestLimit"));
+  }
 
   const { data: row, error: profileError } = await supabase.from("profiles").select("*").eq("user_id", user.id).maybeSingle();
   if (profileError) throw new Error(`profile select failed: ${profileError.message}`, { cause: profileError });

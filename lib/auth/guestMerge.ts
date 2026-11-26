@@ -1,4 +1,4 @@
-// A guest signs in with a Google/Facebook account that already exists here: Supabase can't link it to the guest
+// A guest signs in with a Google account that already exists here: Supabase can't link it to the guest
 // (identity_already_exists), so the user signs in to that account instead and the guest's data follows them.
 // The guest's ID travels between the two redirects in a short-lived, encrypted (AES-GCM: tamper-proof) cookie.
 import "server-only";

@@ -40,14 +40,18 @@ const ok = (): PlanResult => ({ ok: true, output: output as unknown as PlanOutpu
 const lastPlan = { plan: [{ meals: [{ recipe_id: "musaka" }, { recipe_id: "tarator" }] }, { meals: [{ recipe_id: "musaka" }] }] };
 
 function setup({
-  user = USER as typeof USER | null,
+  user = USER as { id: string; is_anonymous?: boolean } | null,
   profileRow = profile as unknown,
   last = null as unknown,
   insert = { data: { id: "plan-9" }, error: null } as { data: unknown; error: { message: string } | null },
+  plansToday = 0,
 } = {}) {
   const fake = fakeSupabase({
     user,
-    tables: { profiles: { maybeSingle: { data: profileRow, error: null } }, plans: { maybeSingle: { data: last, error: null }, insert } },
+    tables: {
+      profiles: { maybeSingle: { data: profileRow, error: null } },
+      plans: { maybeSingle: { data: last, error: null }, insert, select: { data: null, error: null, count: plansToday } },
+    },
   });
   supabase.current = fake.client;
   return fake;
@@ -68,6 +72,25 @@ describe("POST /api/plan", () => {
       error: { code: "unauthorized", message: "Влез отново в профила си.", requestId: expect.any(String) },
     });
     expect(res.headers.get("x-request-id")).toEqual(expect.any(String));
+  });
+
+  it("a guest gets at most 10 plans in 24 hours (each is up to a minute of solver time)", async () => {
+    const guest = { id: "guest-1", is_anonymous: true };
+    setup({ user: guest, plansToday: 10 });
+    const res = await POST();
+    expect(res.status).toBe(429);
+    expect((await res.json()).error).toMatchObject({ code: "too_many" });
+    expect(generatePlan).not.toHaveBeenCalled();
+
+    setup({ user: guest, plansToday: 9 });
+    generatePlan.mockResolvedValue(ok());
+    expect((await POST()).status).toBe(200);
+  });
+
+  it("accounts have no daily limit", async () => {
+    setup({ plansToday: 50 });
+    generatePlan.mockResolvedValue(ok());
+    expect((await POST()).status).toBe(200);
   });
 
   it("400 when the profile is not complete yet", async () => {

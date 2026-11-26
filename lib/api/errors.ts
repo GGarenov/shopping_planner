@@ -4,6 +4,8 @@
 
 export const ERROR_CODES = [
   "unauthorized", // 401: not logged in (or the session expired)
+  "guest", // 403: needs an account, not a guest (eBag)
+  "too_many", // 429: a guest made too many plans today
   "invalid_request", // 400: the body or parameters are wrong
   "profile_incomplete", // 400: onboarding not finished
   "not_found", // 404

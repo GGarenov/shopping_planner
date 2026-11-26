@@ -165,7 +165,7 @@ site_url = "http://127.0.0.1:3000"
 # The public URL that Auth serves on. Defaults to the API external URL with `/auth/v1` appended.
 # external_url = ""
 # A list of *exact* URLs that auth providers are permitted to redirect to post authentication.
-# Google/Facebook sign-in returns to /auth/callback (taylor_the_app/loginless.md). Production URLs: Dashboard.
+# Google sign-in returns to /auth/callback (taylor_the_app/loginless.md). Production URLs: Dashboard.
 additional_redirect_urls = ["https://127.0.0.1:3000", "http://127.0.0.1:3000/**", "http://localhost:3000/**"]
 # How long tokens are valid for, in seconds. Defaults to 3600 (1 hour), maximum 604,800 (1 week).
 jwt_expiry = 3600
@@ -184,7 +184,7 @@ enable_signup = true
 # On: guests use the app without an account (signInAnonymously); deleted after 3 days without activity.
 enable_anonymous_sign_ins = true
 # Allow/disallow testing manual linking of accounts
-# On: a guest keeps their plan by linking Google/Facebook to the same user (linkIdentity).
+# On: a guest keeps their plan by linking Google to the same user (linkIdentity).
 enable_manual_linking = true
 # Passwords shorter than this value will be rejected as weak. Minimum 6, recommended 8 or more.
 minimum_password_length = 6
@@ -348,7 +348,7 @@ skip_nonce_check = false
 # If enabled, it will allow the user to successfully authenticate when the provider does not return an email address.
 email_optional = false
 
-# Sign in with Google / Facebook (taylor_the_app/loginless.md). Off locally until the keys are in supabase/.env
+# Sign in with Google (taylor_the_app/loginless.md; no Facebook — decided 2026-11-26). Off locally until the keys are in supabase/.env
 # (git-ignored) — `supabase start` refuses an enabled provider without a client_id. Production: Dashboard.
 [auth.external.google]
 enabled = false
@@ -357,12 +357,6 @@ secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"
 redirect_uri = ""
 # Required for local sign in with Google.
 skip_nonce_check = true
-
-[auth.external.facebook]
-enabled = false
-client_id = "env(SUPABASE_AUTH_EXTERNAL_FACEBOOK_CLIENT_ID)"
-secret = "env(SUPABASE_AUTH_EXTERNAL_FACEBOOK_SECRET)"
-redirect_uri = ""
 
 # Allow Solana wallet holders to sign in to your project via the Sign in with Solana (SIWS) standard.
 # You can configure "web3" rate limit in the [auth.rate_limit] section and set up [auth.captcha] if self-hosting.

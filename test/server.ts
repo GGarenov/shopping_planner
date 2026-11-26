@@ -16,7 +16,7 @@ export const intlServer = {
 };
 
 // ---------- Supabase ----------
-type Result = { data: unknown; error: { message: string } | null };
+type Result = { data: unknown; error: { message: string } | null; count?: number | null };
 type Op = "select" | "insert" | "update" | "upsert" | "delete";
 /** Canned answers per table: `maybeSingle` / `single` for reads, or the op name for awaited writes. */
 type TableResults = Partial<Record<"maybeSingle" | "single" | Op, Result>>;
@@ -32,7 +32,7 @@ export function fakeSupabase({
   user,
   tables = {},
 }: {
-  user: { id: string; email?: string } | null;
+  user: { id: string; email?: string; is_anonymous?: boolean } | null;
   tables?: Record<string, TableResults>;
 }) {
   const queries: Query[] = [];
@@ -49,6 +49,7 @@ export function fakeSupabase({
       upsert: (payload: unknown) => ((q.op = "upsert"), (q.payload = payload), builder),
       delete: () => ((q.op = "delete"), builder),
       eq: (col: string, val: unknown) => (q.filters.push([col, val]), builder),
+      gte: (col: string, val: unknown) => (q.filters.push([`${col}>=`, val]), builder),
       order: () => builder,
       limit: () => builder,
       range: () => builder,

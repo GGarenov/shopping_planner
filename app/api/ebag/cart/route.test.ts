@@ -87,6 +87,13 @@ describe("/api/ebag/cart", () => {
       expect((await GET()).status).toBe(401);
     });
 
+    it("403 for a guest: eBag needs an account", async () => {
+      db.client = fakeSupabase({ user: { id: "guest-1", is_anonymous: true } }).client;
+      const res = await GET();
+      expect(res.status).toBe(403);
+      expect((await res.json()).error).toMatchObject({ code: "guest", message: "Влез с Google, за да свържеш eBag." });
+    });
+
     it("409 «connect again» when the user has no eBag connection", async () => {
       conn.tokens = false;
       const res = await GET();

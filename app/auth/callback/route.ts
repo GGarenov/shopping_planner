@@ -1,4 +1,4 @@
-// GET /auth/callback — where Google/Facebook sign-in returns (taylor_the_app/loginless.md, part 3).
+// GET /auth/callback — where Google sign-in returns (taylor_the_app/loginless.md, part 3).
 //   ?code=…                              → session; a guest's link makes the same user permanent (plan stays).
 //   ?error_code=identity_already_exists → this Google account already has a user here: sign in to it instead,
 //                                          and move the guest's data over (lib/auth/guestMerge.ts).
