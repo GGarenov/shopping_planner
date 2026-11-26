@@ -1,167 +1,139 @@
-# Pazarko (shopping planner)
+<div align="center">
 
-[![CI](https://github.com/GGarenov/shopping_planner/actions/workflows/ci.yml/badge.svg)](https://github.com/GGarenov/shopping_planner/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/GGarenov/shopping_planner/actions/workflows/codeql.yml/badge.svg)](https://github.com/GGarenov/shopping_planner/actions/workflows/codeql.yml)
+<img src="public/icons/icon-192.png" alt="Pazarko logo" width="96" height="96" />
 
-Mobile web app (PWA) for Bulgaria: goal + body data + weekly budget → 7-day meal plan and a shopping list of
-real eBag.bg products in whole packs. See [docs/SPEC.md](docs/SPEC.md) for the full specification.
+# Pazarko
 
-## Stack
+**A week of healthy meals that fits your goals and your budget, with the shopping list ready in your eBag cart.**
 
-Next.js 15 (App Router, TypeScript, Tailwind) on Vercel · Supabase (Auth + Postgres + RLS) ·
-HiGHS (WASM) optimizer · GitHub Actions for the daily eBag sync.
+[![Live app](https://img.shields.io/badge/live-pazarko--app.vercel.app-0b7d86?style=flat-square)](https://pazarko-app.vercel.app)
+[![CI](https://img.shields.io/github/actions/workflow/status/GGarenov/shopping_planner/ci.yml?branch=main&label=CI&style=flat-square)](https://github.com/GGarenov/shopping_planner/actions/workflows/ci.yml)
+[![CodeQL](https://img.shields.io/github/actions/workflow/status/GGarenov/shopping_planner/codeql.yml?branch=main&label=CodeQL&style=flat-square)](https://github.com/GGarenov/shopping_planner/actions/workflows/codeql.yml)
+[![Next.js 15](https://img.shields.io/badge/Next.js-15-000000?style=flat-square&logo=nextdotjs)](https://nextjs.org)
+[![Supabase](https://img.shields.io/badge/Supabase-Postgres%20%2B%20Auth-3ecf8e?style=flat-square&logo=supabase&logoColor=white)](https://supabase.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 
-## Local development
+[**Open the app →**](https://pazarko-app.vercel.app) · [Development guide](docs/DEVELOPMENT.md) · [Specification](docs/SPEC.md)
 
-Node ≥ 22.18 (scripts run TypeScript directly via Node's type stripping).
+</div>
+
+---
+
+Pazarko (from _пазар_, "market") answers the two questions behind every grocery run: **what should I eat this week,
+and what do I need to buy?** You answer a few questions (age, goal, weekly budget, what you don't eat). An optimizer
+then picks recipes for seven days that hit your calories and protein. It also chooses the cheapest combination of
+**real products and whole packs from [eBag.bg](https://www.ebag.bg)**, at current prices. One tap sends the list to
+your eBag cart, and you order and pay on eBag as usual.
+
+It is built for Bulgaria, in Bulgarian first (English too), and simple enough for anyone. No sign-up is needed to
+get a plan.
+
+## Screenshots
+
+<table>
+  <tr>
+    <td align="center" width="33%"><img src="docs/screenshots/welcome.png" alt="Welcome screen" width="240" /><br /><b>Start</b><br /><sub>What the app does, one button</sub></td>
+    <td align="center" width="33%"><img src="docs/screenshots/onboarding.png" alt="Onboarding question: what is your goal?" width="240" /><br /><b>A few questions</b><br /><sub>Body data, goal, budget, diet</sub></td>
+    <td align="center" width="33%"><img src="docs/screenshots/loading.png" alt="The week filling with dishes while the plan is made" width="240" /><br /><b>Putting your week together</b><br /><sub>About 10 seconds</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/plan.png" alt="Weekly plan with prices and daily targets" width="240" /><br /><b>Your week</b><br /><sub>Cost, budget, calories and protein per day</sub></td>
+    <td align="center"><img src="docs/screenshots/list.png" alt="Shopping list of real eBag products" width="240" /><br /><b>Shopping list</b><br /><sub>Real eBag products, whole packs</sub></td>
+    <td align="center"><img src="docs/screenshots/ebag.png" alt="Connect eBag to fill the cart" width="240" /><br /><b>Send to eBag</b><br /><sub>Fills your own cart; you check out on eBag</sub></td>
+  </tr>
+</table>
+
+## Features
+
+- 🥗 **7-day meal plan** that meets daily calorie and protein targets (Mifflin–St Jeor, adjusted for your goal).
+- 💶 **Fits your budget.** It counts what you pay at the checkout and what you actually eat this week; leftovers
+  from a pack are kept for later. If the budget is too low, the app says how much is needed.
+- 🛒 **Real products, real prices.** About 1,000 eBag products, prices synced every day, nutrition from the
+  product labels (USDA as a fallback).
+- 📦 **Whole packs, no waste.** The optimizer buys packs, not grams, and reuses what is left across recipes.
+- 🚚 **One tap to the eBag cart** through eBag's OAuth: we never see your eBag password.
+- 🚫 **Diets, allergies and exclusions** (vegetarian, no pork, no fish, nuts, gluten…) and what you already have at home.
+- 👤 **No account needed.** Guests get a full plan; "Continue with Google" keeps it for good. Idle guest data is
+  deleted after 3 days.
+- 🌍 **Bulgarian and English**, mobile first, accessible (WCAG 2.1 AA checked by automated tests).
+
+## How it works
+
+```mermaid
+flowchart LR
+    A[Your answers<br/>age, goal, budget, diet] --> B[Daily targets<br/>kcal + protein]
+    B --> C[Stage 1: choose meals<br/>HiGHS MILP]
+    D[(Recipes)] --> C
+    C --> E[Stage 2: buy packs<br/>cheapest whole packs]
+    F[(eBag products<br/>synced daily)] --> E
+    E --> G[Week plan +<br/>shopping list]
+    G -->|OAuth| H[Your eBag cart]
+```
+
+The planner is a two-stage **mixed-integer linear program** solved with [HiGHS](https://highs.dev) (WebAssembly) in
+a serverless function. Stage 1 picks a varied week of recipes that meets the targets. Stage 2 picks which products
+and how many packs to buy, sharing packs between recipes to keep the bill low. A GitHub Actions job crawls eBag
+every night for prices, stock and nutrition labels.
+
+## Tech stack
+
+| Layer          | What                                                                                      |
+| -------------- | ----------------------------------------------------------------------------------------- |
+| App            | [Next.js 15](https://nextjs.org) (App Router, server actions), React 19, Tailwind CSS 4   |
+| Data & auth    | [Supabase](https://supabase.com): Postgres with Row Level Security, Auth (Google, guests) |
+| Optimizer      | [HiGHS](https://highs.dev) MILP solver (WASM)                                             |
+| Shop           | eBag.bg via MCP + OAuth 2.1 (PKCE)                                                        |
+| Languages      | [next-intl](https://next-intl.dev), Bulgarian and English                                 |
+| Hosting & jobs | Vercel; GitHub Actions for CI, CodeQL and the daily eBag sync                             |
+| Quality        | Vitest + Testing Library, Playwright + axe on phone viewports, RLS tests, Sentry          |
+
+## Quick start
+
+Needs Node ≥ 22.18 and a Supabase project.
 
 ```bash
+git clone https://github.com/GGarenov/shopping_planner.git
+cd shopping_planner
 npm install
-cp .env.example .env.local   # fill in Supabase keys etc.
+cp .env.example .env.local   # Supabase keys, EBAG_TOKEN_KEY, APP_BASE_URL
+npm run db:push              # apply the migrations (after `npx supabase link`)
+npm run seed                 # load ingredients, recipes and products
 npm run dev                  # http://localhost:3000
-npm run check                # format check + lint + typecheck + unit tests (what CI runs, minus the build)
-npm run seed                 # upload ingredients / recipes / products to Supabase (idempotent; --dry-run to check)
-npm run seed -- --recipes    # only ingredients + recipes (after editing recipes; keeps the synced products)
 ```
 
-On Windows, run `npm test` from a terminal whose path starts with `C:\` (capital C) — a lowercase
-`c:\` makes Vitest load itself twice ("failed to find the current suite").
+`npm run check` runs what CI runs: formatting, lint, types and unit tests. See the
+[development guide](docs/DEVELOPMENT.md) for tests, the eBag sync, logs and monitoring.
 
-## Quality checks
+## Project structure
 
-| What                                                                       | Command                                         | Where it runs                                    |
-| -------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------ |
-| Formatting (Prettier, incl. Tailwind class order)                          | `npm run format` / `npm run format:check`       | pre-commit (changed files), CI                   |
-| Lint (ESLint, Next.js + TypeScript rules)                                  | `npm run lint`                                  | pre-commit (changed files), CI                   |
-| Types (`tsc --noEmit`, strict)                                             | `npm run typecheck`                             | CI                                               |
-| Unit, component and API-route tests (Vitest, React Testing Library, jsdom) | `npm test`                                      | CI                                               |
-| End-to-end + accessibility (Playwright, axe; phone viewports)              | `npm run test:e2e`                              | CI (with the test-project secrets)               |
-| Coverage of `lib/` with minimum thresholds                                 | `npm run test:coverage` → `coverage/index.html` | CI (summary on the run page, report as artifact) |
-| Dependency audit (critical)                                                | `npm audit --audit-level=critical`              | CI; Dependabot opens weekly update PRs           |
-| Code scanning                                                              | CodeQL (`security-and-quality`)                 | push, PR, weekly                                 |
-
-**Row Level Security tests** (`test/rls/`) run against a separate test Supabase project, never production: two
-throwaway users try to read and change each other's profile, plans, shopping ticks and feedback, and to reach the
-token tables. Locally: put `RLS_SUPABASE_URL`, `RLS_SUPABASE_ANON_KEY`, `RLS_SUPABASE_SERVICE_ROLE_KEY` (and `RLS_DB_URL`
-for migrations) in `.env.test.local`, then `npm run test:rls`. In CI the `rls` job applies the migrations to that
-project first and skips itself when the secrets are missing. Without the variables, `npm test` skips the suite.
-
-**End-to-end tests** (`e2e/`, Playwright) drive a production build in a phone-sized Chromium (Pixel 7) and WebKit
-(iPhone 15). A new user signs up, goes through onboarding, gets a plan from the real planner and opens a recipe.
-Then they tick an item on the shopping list, reload (the tick stays), switch to English and back, open the eBag
-screen and delete their account. The login error messages have their own tests. Every main screen is also checked
-with **axe** (WCAG 2.1 A/AA): serious or critical problems fail the run. The tests use the same test Supabase
-project, and the browser is blocked from ebag.bg, so the real shop is never contacted. Throwaway accounts
-(`@pazarko.test`) are deleted at the end.
-
-Locally (with `.env.test.local` as above):
-
-1. Once, seed the test project: `SUPABASE_URL=<RLS_SUPABASE_URL> SUPABASE_SERVICE_ROLE_KEY=<RLS_SUPABASE_SERVICE_ROLE_KEY> node scripts/seed.ts`.
-2. Run `npm run test:e2e`. It builds into `.next-e2e/` with the test keys, and `.env.local` is never used. `npm run test:e2e:ui` opens the interactive runner.
-
-In CI the `e2e` job runs after `rls`, seeds the test project, and uploads the HTML report when a test fails.
-
-The pre-commit hook (Husky + lint-staged) formats and lints only the staged files. The coverage thresholds in
-`vitest.config.mts` sit just below the current numbers, so coverage can only go up.
-
-Shared logic lives in `lib/` (TypeScript). `scripts/ebag_parse.mjs` re-exports `lib/ebag/parse.ts`, so the
-Node scripts and the app use the same code.
-
-## Errors, logs and monitoring
-
-**One error shape for every API route** (`lib/api/errors.ts`). A failed call returns an HTTP 4xx or 5xx status
-and this body:
-
-```json
-{ "error": { "code": "budget_too_low", "message": "С бюджет 50 € …", "requestId": "…", "details": { "min_budget_eur": 79 } } }
+```text
+app/            pages and API routes (plan, list, eBag cart, auth callback, health)
+components/     shared UI
+lib/            planner, eBag client, auth, i18n, logging (shared by the app and the scripts)
+messages/       UI text, bg + en
+data/           recipes, ingredients, eBag catalog snapshot
+supabase/       database migrations and config
+scripts/        data jobs: eBag sync, seeding, recipe build, icons
+e2e/, test/     Playwright end-to-end and Row Level Security tests
+docs/           specification, development guide, feature notes, screenshots
 ```
 
-- `message` is already in the user's language and safe to show.
-- `code` is for the client's logic: `unauthorized`, `reconnect`, `budget_too_low`, `ebag_down`, … .
-- Routes are wrapped in `apiHandler()` (`lib/api/handler.ts`). An expected failure is thrown as an `AppError`.
-  Anything else becomes a 500 «something went wrong», logged once and reported to Sentry; internal details never
-  reach the browser.
+## Quality and security
 
-**The browser calls the API only through `apiFetch()`** (`lib/api/client.ts`):
+- **Every user sees only their own data**: Postgres Row Level Security, proven by tests that run against a real
+  database. eBag tokens are encrypted (AES-256-GCM) and readable only by the server.
+- **Tested end to end**: a guest and a new user go from the first screen to a plan, the shopping list and the eBag
+  screen, in Chromium (Pixel 7) and WebKit (iPhone 15). Every screen is checked with axe.
+- **CI on every push**: formatting, lint, strict types, ~230 unit and component tests with coverage thresholds,
+  dependency audit and CodeQL.
+- **GDPR**: data is used only for the plan, with clear consent; users can delete their account and everything in it.
 
-- Every attempt has a timeout.
-- Reads (GET) are retried twice on network errors, timeouts and 429/502/503/504, with backoff.
-- Writes are never retried automatically. A second «add to cart» would add the products twice.
+## Documentation
 
-**Logs are JSON lines** (`lib/log.ts`), e.g. `{"level":"info","msg":"plan.created","requestId":"…","route":"POST /api/plan","total_s":3.1}`,
-so the Vercel log viewer can filter them by field.
+- [Development guide](docs/DEVELOPMENT.md): setup, tests, database, eBag sync, errors and monitoring
+- [Specification](docs/SPEC.md): product, data model, planner and roadmap
+- [Feature notes](docs/notes/): design notes for guest mode and later changes (in Bulgarian)
 
-- Middleware gives every request an ID (`x-request-id`; Vercel's own ID when there is one). Route handlers and
-  server actions log with it, and it is sent back in the response, so a user's report can be matched to the logs.
-- No personal data: emails, passwords, tokens and cookies are redacted, and user IDs appear only as a one-way
-  reference (`u_1a2b3c4d`).
-- `LOG_LEVEL` sets the level; tests are silent.
+---
 
-**Error tracking with Sentry** (`instrumentation*.ts`, `lib/sentry.ts`) is off until a DSN is set. To turn it on:
-
-1. Create a free Sentry project (platform: Next.js).
-2. In Vercel, set `NEXT_PUBLIC_SENTRY_DSN`.
-3. For readable stack traces (source maps uploaded at build time, then deleted from the deployment), also set
-   `SENTRY_ORG`, `SENTRY_PROJECT` and `SENTRY_AUTH_TOKEN`.
-
-It reports server errors (pages, routes, server actions), browser errors and the error pages. Events are scrubbed
-before sending: no IP, cookies, request bodies or query strings, and the user only as the same reference as in the
-logs. Session replay is off because it would record what people type.
-
-**Health check:** `GET /api/health` needs no login and is meant for an uptime monitor (e.g. UptimeRobot or Better
-Stack, every 5 min). It returns only operational facts, never user data:
-
-| Answer                      | Meaning                                             |
-| --------------------------- | --------------------------------------------------- |
-| `200 {"status":"ok"}`       | Database reachable; prices synced within 36 h       |
-| `200 {"status":"degraded"}` | Database reachable, but the daily eBag sync is late |
-| `503 {"status":"down"}`     | The database does not answer                        |
-
-The response also includes the database latency, the age of the last sync and the deployed commit.
-
-## Database
-
-Migrations live in `supabase/migrations/`. To apply them to the hosted project:
-
-```bash
-npx supabase login
-npx supabase link --project-ref <project-ref>
-npm run db:push
-```
-
-## Existing data scripts (Node.js)
-
-| Command                  | What it does                                                                                          |
-| ------------------------ | ----------------------------------------------------------------------------------------------------- |
-| `npm run ebag:login`     | eBag OAuth login in the browser (tokens in `.secrets/ebag_oauth.json`)                                |
-| `npm run ebag:bootstrap` | Move that login into Supabase (encrypted) for the daily sync; removes the local tokens                |
-| `npm run ebag:sync`      | Crawl eBag → link → details → upsert `products` in Supabase (`--dry-run`, `--no-details`, `--export`) |
-| `npm run ebag:relink`    | Re-link from the saved `data/ebag_catalog.json` (no eBag calls)                                       |
-| `npm run recipes:build`  | Build and validate `data/recipes.json` from `data/recipes_src/`                                       |
-| `npm run plan`           | Run the two-stage HiGHS planner for a profile                                                         |
-| `npm run cart`           | Re-check stock and fill the eBag cart                                                                 |
-| `npm run review`         | Local page to review product links                                                                    |
-
-Raw USDA downloads (`data/usda/raw/`, 54 MB) are not committed; `data/usda/usda_macros.csv` is.
-
-## Daily eBag sync (GitHub Actions)
-
-`.github/workflows/sync.yml` runs `scripts/sync.ts` every day (03:17 UTC) and on demand (Actions → eBag sync →
-Run workflow). It uses the owner's eBag login stored encrypted in Supabase (`system_secrets`). eBag may rotate the
-refresh token, so the job writes new tokens back there, and two runs never overlap.
-
-- Repo secrets: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `EBAG_TOKEN_KEY` (same values as in `.env.local`).
-- If a run fails with "eBag login required": run `npm run ebag:login`, then `npm run ebag:bootstrap` locally.
-- Every run is recorded in `sync_runs` (status, stats, log); the app shows the date of the latest successful one.
-- GitHub pauses scheduled workflows after 60 days without commits — re-enable it in the Actions tab if that happens.
-
-## Languages (Bulgarian / English)
-
-The UI is bilingual with [next-intl](https://next-intl.dev); Bulgarian is the default, the «БГ | EN» switch in the
-header sets a `lang` cookie (and `profiles.options.lang`, so it follows the user to another device). URLs don't change.
-
-- UI text: `messages/bg/<area>.json` (source) and `messages/en/<area>.json`; areas are listed in `lib/i18n/config.ts`.
-  A key missing in English shows the Bulgarian text. `lib/i18n/messages.test.ts` fails if keys or `{placeholders}` differ.
-- Recipes and ingredients: Bulgarian in `data/recipes.json` / `data/ingredients.json`, English in
-  `data/i18n/recipes.en.json` (name + steps per recipe id) and `data/i18n/ingredients.en.json`.
-- eBag product names stay as eBag shows them.
+<div align="center"><sub>Made in Bulgaria 🇧🇬 · Prices and products from <a href="https://www.ebag.bg">eBag.bg</a> · Pazarko is not affiliated with eBag</sub></div>
