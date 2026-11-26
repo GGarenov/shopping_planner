@@ -75,6 +75,21 @@ describe("GET /auth/callback", () => {
     expect(res.headers.get("set-cookie")).toContain(`${MERGE_COOKIE}=v1.`);
   });
 
+  it("the same when only the email is taken (an older email + password account)", async () => {
+    auth.user = { id: "g-1", is_anonymous: true };
+    const res = await callback({ error: "server_error", error_code: "email_exists", next: "/plan", provider: "google" });
+    expect(location(res)).toBe("https://accounts.google.com/o/oauth2/auth?x=1");
+    expect(res.headers.get("set-cookie")).toContain(`${MERGE_COOKIE}=v1.`);
+  });
+
+  it("if signing in to that account fails the same way, it stops (no loop) and clears the cookie", async () => {
+    auth.user = { id: "g-1", is_anonymous: true };
+    const res = await callback({ error_code: "email_exists", next: "/plan", provider: "google" }, `${MERGE_COOKIE}=${sealGuest("g-1")}`);
+    expect(location(res)).toBe("https://app.example/plan?account=failed");
+    expect(auth.signInWithOAuth).not.toHaveBeenCalled();
+    expect(res.headers.get("set-cookie")).toMatch(new RegExp(`${MERGE_COOKIE}=;.*Max-Age=0`));
+  });
+
   it("…but not for someone who is not a guest, or with an unknown provider", async () => {
     auth.user = { id: "u-1" };
     expect(location(await callback({ error_code: "identity_already_exists", provider: "google" }))).toMatch(/account=failed$/);
