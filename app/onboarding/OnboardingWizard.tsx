@@ -20,6 +20,7 @@ import { errorKey, profileInputSchema, type ErrorKey } from "@/lib/profile/schem
 import { shouldShowInstallHint } from "@/app/install/hint";
 import { BudgetField, Chips, Choice, NumberField } from "@/components/form/fields";
 import { usePlanGenerator } from "@/app/plan/usePlanGenerator";
+import { createClient } from "@/lib/supabase/client";
 import { saveProfile } from "./actions";
 
 export interface WizardValues {
@@ -67,7 +68,19 @@ function validate(values: WizardValues, fields: Field[]): ErrorKey | null {
   return r.success ? null : errorKey(r.error.issues[0]?.message);
 }
 
-export function OnboardingWizard({ initial, editing }: { initial: WizardValues; editing: boolean }) {
+export function OnboardingWizard({
+  initial,
+  editing,
+  loggedIn,
+  guest,
+}: {
+  initial: WizardValues;
+  editing: boolean;
+  /** There is a session (a guest's or an account's). Without one, a guest account is made at the last step. */
+  loggedIn: boolean;
+  /** No account (logged out, or an anonymous guest): the data is kept only for 3 days. */
+  guest: boolean;
+}) {
   const t = useTranslations("onboarding");
   const tc = useTranslations("common");
   const te = useTranslations("errors");
@@ -100,6 +113,11 @@ export function OnboardingWizard({ initial, editing }: { initial: WizardValues; 
       return;
     }
     startSaving(async () => {
+      if (!loggedIn) {
+        // The guest account is made only now, not on page load: visits that never finish (and bots) leave no users.
+        const { error: authError } = await createClient().auth.signInAnonymously();
+        if (authError) return setError(t(authError.status === 429 ? "guestTooMany" : "guestFailed"));
+      }
       const res = await saveProfile(values); // editing: redirects back to /targets
       if (res?.error) return setError(res.error);
       // First time: straight on to the plan — no detour via the targets screen (it stays under Profile).
@@ -120,6 +138,10 @@ export function OnboardingWizard({ initial, editing }: { initial: WizardValues; 
             <Link href="/targets" className="btn-ghost -ml-3">
               {t("cancel")}
             </Link>
+          ) : !loggedIn ? (
+            <Link href="/login" className="btn-ghost -ml-3">
+              {t("haveAccount")}
+            </Link>
           ) : (
             <form action="/auth/signout" method="post">
               <button type="submit" className="btn-ghost -ml-3">
@@ -139,7 +161,7 @@ export function OnboardingWizard({ initial, editing }: { initial: WizardValues; 
       </header>
 
       <section className="flex flex-col gap-3">
-        <StepBody stepIndex={stepIndex} values={values} set={set} />
+        <StepBody stepIndex={stepIndex} values={values} set={set} guest={guest} />
       </section>
 
       <footer className="mt-auto flex flex-col gap-2 pt-4">
@@ -175,10 +197,12 @@ function StepBody({
   stepIndex,
   values,
   set,
+  guest,
 }: {
   stepIndex: number;
   values: WizardValues;
   set: <K extends Field>(k: K, v: WizardValues[K]) => void;
+  guest: boolean;
 }) {
   const t = useTranslations("onboarding");
   const to = useTranslations("options");
@@ -282,6 +306,7 @@ function StepBody({
           <div className="card flex flex-col gap-2 text-sm">
             <p>{t("consentText1")}</p>
             <p>{t("consentText2")}</p>
+            {guest && <p className="font-semibold">{t("consentGuest")}</p>}
           </div>
           <label className="choice">
             <input

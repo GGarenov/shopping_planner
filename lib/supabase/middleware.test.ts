@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const auth = vi.hoisted(() => ({ user: null as { id: string } | null }));
+const auth = vi.hoisted(() => ({ user: null as { id: string; is_anonymous?: boolean } | null }));
 vi.mock("@supabase/ssr", () => ({
   createServerClient: () => ({ auth: { getUser: async () => ({ data: { user: auth.user } }) } }),
 }));
@@ -37,6 +37,23 @@ describe("middleware (updateSession)", () => {
     const api = await updateSession(request("/api/plan", { cookie: "lang=en" }));
     expect(api.status).toBe(401);
     expect(await api.json()).toEqual({ error: { code: "unauthorized", message: "Please log in again.", requestId: expect.any(String) } });
+  });
+
+  it("logged out: the start page goes straight to the questions, which need no account", async () => {
+    const home = await updateSession(request("/"));
+    expect(home.headers.get("location")).toBe("http://localhost/onboarding");
+    for (const path of ["/onboarding", "/install"]) {
+      const res = await updateSession(request(path));
+      expect(res.status, path).toBe(200);
+      expect(res.headers.get("location"), path).toBeNull();
+    }
+  });
+
+  it("a guest may open /login (to sign in to a real account)", async () => {
+    auth.user = { id: "g1", is_anonymous: true };
+    const res = await updateSession(request("/login"));
+    expect(res.status).toBe(200);
+    expect(res.headers.get("location")).toBeNull();
   });
 
   it("/api/health is public (for uptime monitors)", async () => {

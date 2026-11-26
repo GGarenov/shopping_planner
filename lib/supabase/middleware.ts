@@ -1,8 +1,11 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-/** Paths reachable without logging in. /api/health is for uptime monitors. */
-const PUBLIC_PATHS = ["/login", "/auth", "/offline", "/api/health"];
+/**
+ * Paths reachable without logging in. /api/health is for uptime monitors. /onboarding (and /install, which it may
+ * show first): the questions come before any account — a guest account is made only when the plan is created.
+ */
+const PUBLIC_PATHS = ["/login", "/auth", "/offline", "/api/health", "/onboarding", "/install"];
 
 /** Same header name as lib/api/handler.ts (kept literal: middleware runs on the edge, without server-only code). */
 const REQUEST_ID = "x-request-id";
@@ -57,12 +60,15 @@ export async function updateSession(request: NextRequest) {
       return withId(NextResponse.json({ error: { code: "unauthorized", message, requestId } }, { status: 401 }));
     }
     const url = request.nextUrl.clone();
-    url.pathname = "/login";
+    // The start page (and the installed app's start_url) goes straight to the questions; deeper pages were
+    // bookmarked by someone with an account, so they go to the login screen.
+    url.pathname = pathname === "/" ? "/onboarding" : "/login";
     url.search = "";
     return withId(NextResponse.redirect(url));
   }
 
-  if (user && pathname === "/login") {
+  // A guest may open /login to sign in to a real account; a signed-in user has nothing to do there.
+  if (user && !user.is_anonymous && pathname === "/login") {
     const url = request.nextUrl.clone();
     url.pathname = "/";
     url.search = "";
